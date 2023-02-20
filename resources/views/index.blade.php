@@ -25,7 +25,7 @@
                 <div class="template-wrapper">
 
                     <!-- single template  -->
-                    <a href="create-post.html" class="template-card">
+                    <a href="{{route('posts.create')}}?case=pro_des" class="template-card">
                         <figure class="card-img">
                             <img src="assets/images/icons/box.svg " alt="">
                         </figure>
@@ -36,7 +36,7 @@
                     </a>
 
                     <!-- single template  -->
-                    <a href="create-post.html" class="template-card">
+                    <a href="{{route('posts.create')}}?case=blog" class="template-card">
 
                         <figure class="card-img">
                             <img src="assets/images/icons/writting.svg" alt="blog image ">
@@ -48,7 +48,7 @@
                     </a>
 
                     <!-- single template  -->
-                    <a href="create-post.html" class="template-card">
+                    <a href="{{route('posts.create')}}?case=social" class="template-card">
 
                         <figure class="card-img">
                             <img src="assets/images/icons/social-caption.svg " alt="socila media caption ">
@@ -59,7 +59,7 @@
                     </a>
 
                     <!-- single template  -->
-                    <a href="create-post.html" class="template-card">
+                    <a href="{{route('posts.create')}}?case=mail" class="template-card">
 
                         <figure class="card-img">
                             <img src="assets/images/icons/gmail.svg " alt="">
@@ -71,7 +71,7 @@
                     </a>
 
                     <!-- single template  -->
-                    <a class="template-card" href="create-post.html">
+                    <a class="template-card" href="{{route('posts.create')}}?case=google_seo">
 
                         <figure class="card-img">
                             <img src="assets/images/icons/google.svg " alt="google">

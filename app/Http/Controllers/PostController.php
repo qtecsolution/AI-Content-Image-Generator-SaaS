@@ -9,21 +9,36 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
-    public function create()
+    public function create(Request $request)
     {
 
-        return view('posts.create');
+        $cases = [
+            'pro_des' => 'Product Description',
+            'blog' => 'Blog Writing',
+            'social' => 'Social Media',
+            'mail' => 'Mail Writing',
+            'google_seo' => 'Google SEO',
+        ];
+
+        return view('posts.create', compact('cases', 'request'));
     }
     /* Open AI Content Generate */
     public function openAi(Request $request)
     {
-        $result = OpenAI::completions()->create([
-            'model' => 'text-davinci-003',
-            'prompt' => 'Write me a cover letter for web developer, keywords: laravel, mysql, php',
-            'max_tokens' => 2566
-        ]);
-        $content =  $result['choices'][0]['text'] ?? '';
-        return response()->json($content, 200);
+        return response()->json($request->all(), 200);
+        if (isset($request->prompt)) {
+            $temp = floatval($request->temp ?? 0.7);
+            $result = OpenAI::completions()->create([
+                'model' => 'text-davinci-003',
+                'prompt' => $request->prompt,
+                'temperature' => $temp,
+                'max_tokens' => 2566
+            ]);
+            $content =  $result['choices'][0]['text'] ?? '';
+            return response()->json($content, 200);
+        } else {
+            return response()->json("I don't get any hints.", 200);
+        }
     }
 
     public function imageGenrate(Request $request)
@@ -33,9 +48,9 @@ class PostController extends Controller
 
         // Open Ai Image generate
         $response = OpenAI::images()->create([
-            'prompt' => 'a man who has back pain',
+            'prompt' => 'a man with a cat',
             'n' => 1,
-            'size' => '512x512',
+            'size' => '256x256',
             'response_format' => 'url',
         ]);
         foreach ($response->data as $data) {
@@ -52,6 +67,5 @@ class PostController extends Controller
 
         // Save the image data to a file using Laravel's Storage facade
         Storage::put('public/images/image.jpg', $image_data);
-        
     }
 }

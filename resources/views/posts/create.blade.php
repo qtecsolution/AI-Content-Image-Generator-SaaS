@@ -8,21 +8,28 @@
             <div class="col-lg-5 mt-0">
 
                 <div class="create-post">
-                    <form action=""
-                        class="createpost-form  needs-validation  h-100 d-flex flex-column  justify-content-between"
-                        novalidate>
+                    <form action="" id="input-form"
+                        class="createpost-form  needs-validation  h-100 d-flex flex-column  justify-content-between">
 
                         <div class="form-content">
                             <h3 class="create-post-header">Create Post</h3>
 
                             <div class="row g-4">
 
+                                <!-- Type    -->
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="case" class="form-label">Choose Use Case</label>
+                                        {{ Form::select('case', $cases, $request->case ?? '', ['class' => 'w-100 nice-select', 'required', 'id' => 'useCase']) }}
+                                    </div>
+                                </div>
+
                                 <!-- Title    -->
                                 <div class="col-12">
                                     <div class="form-group">
                                         <label for="title" class="form-label">Title</label>
                                         <input type="text" class="form-control custom-input" id="title" required
-                                            autocomplete="off" placeholder="Enter post title here">
+                                            autocomplete="off" name="title" placeholder="Write here...">
                                         <div class="valid-feedback">
                                             Awesome! You're one step closer to greatness.
                                         </div>
@@ -37,7 +44,7 @@
                                     <div class="form-group">
                                         <label for="keywords" class="form-label">Keywords</label>
                                         <input type="text" class="form-control custom-input" id="keywords" required
-                                            autocomplete="off" placeholder="Enter your keywords">
+                                            autocomplete="off" name="keywords" placeholder="Enter your keywords">
                                         <div class="valid-feedback">
                                             Awesome! You're one step closer to greatness.
                                         </div>
@@ -51,9 +58,9 @@
                                 <div class="col-12">
                                     <!-- description  -->
                                     <div class="form-group">
-                                        <label for="description" class="form-label">Describe your post</label>
-                                        <textarea class="form-control custom-input" id="description" required autocomplete="off"
-                                            placeholder="Describe our post"></textarea>
+                                        <label for="description" class="form-label">Description</label>
+                                        <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
+                                            placeholder="Description"></textarea>
                                         <div class="valid-feedback">
                                             Awesome! You're one step closer to greatness.
                                         </div>
@@ -62,17 +69,15 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <!-- select tone  -->
-                                <div class="col-12">
+                                <div class="col-12" id="selectPriority">
                                     <div class="form-group">
-                                        <label for="keywords" class="form-label">Select Tone</label>
-                                        <select class="nice-select w-100"
-                                            style="opacity: 0; width: 0px; padding: 0px; height: 0px;">
-                                            <option value="danish">Funny</option>
-                                            <option value="dutch">Serious</option>
-                                            <option value="douch">Formal</option>
-                                            <option value="bangla">Respectful </option>
+                                        <label for="priority" class="form-label">Select Tone</label>
+                                        <select class="nice-select w-100" name="priority" id="temp">
+                                            <option value="0">Funny</option>
+                                            <option value="0.7" selected>Serious</option>
+                                            <option value="0.9">Formal</option>
+                                            <option value="1">Respectful </option>
                                         </select>
                                         <div class="valid-feedback">
                                             Awesome! You're one step closer to greatness.
@@ -83,52 +88,11 @@
                                     </div>
                                 </div>
 
-                                <!-- upload box  -->
-                                <div class="col-12">
-                                    <div class="upload-group">
-
-                                        <span class="upoload-label">Upload Image </span>
-                                        <input type="file" name="" id="uploadImage" hidden>
-
-                                        <label for="uploadImage" class="upload-box">
-                                            <i class="fa fa-picture-o" aria-hidden="true"></i>
-                                            <span>Upload an image to specify and elaborate your post details.
-                                                SVG,PNG,JPG or GIF</span>
-
-                                            <span class="browse">Browse</span>
-                                        </label>
-
-                                    </div>
-                                </div>
-
-                                <!-- select platform   -->
-                                <div class="col-lg-6">
-
-                                    <div class="form-group">
-                                        <label for="date" class="form-label">Select Platform</label>
-                                        <select name="" id="" class="form-control custom-input">
-                                            <option value="facebook">Facebook</option>
-                                            <option value="instagram">Instagram</option>
-                                            <option value="linkdin">Linkedin</option>
-                                            <option value="twitter">Twitter</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- select date  -->
-                                <div class="col-lg-6">
-                                    <div class="form-group">
-                                        <label for="date" class="form-label">Created Date</label>
-                                        <input type="date" id="date" class="form-control custom-input">
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
 
-
                         <div class="generate-btn-wrapper">
-                            <button class="generate-btn">Generate post</button>
+                            <button type="submit" class="generate-btn">Generate post</button>
                         </div>
 
 
@@ -141,12 +105,9 @@
 
             <!-- editor column -->
             <div class="col-lg-7 border-start mt-0">
-                <div class="title-box ">
-                    <input type="text" placeholder="Title">
-                </div>
-                <div id="summernote">
+                <textarea id="summernote">
                     <!-- default value -->
-                </div>
+                </textarea>
 
             </div>
 
@@ -177,31 +138,97 @@
     </div>
 @endsection
 @section('script')
-<script>
-    $(document).ready(function () {
+    <script>
+        $(document).ready(function() {
 
-        $('#summernote').summernote({
-            toolbar: [
-                ['style', ['style']],
-                ['font', ['bold', 'italic', 'underline', 'clear']],
-                ['fontsize', ['fontsize']],
-                ['para', ['ul', 'ol', 'paragraph']],
-                ['insert', ['link', 'picture', 'list']],
-                ['color', ['forecolor']],
-                ['height', ['height']]
-            ],
-            colorNames: {
-                'red': '#ff0000',
-                'green': '#00ff00',
-                'blue': '#0000ff'
-            }
+            // Get form data
+            $("form#input-form").submit(function(event) {
+                event.preventDefault();
+
+                let title = $('#title').val();
+                let keywords = $('#keywords').val();
+                let description = $('#description').val();
+                let useCaseVal = $('#useCase option:selected').val();
+                let prompt;
+
+                switch (useCaseVal) {
+                    case 'pro_des':
+                        prompt =
+                            `Write me product description with keywords ${keywords}. The title of product is "${title}"`;
+                        break;
+                    case 'blog':
+                        prompt =
+                            `Write blog description with keywords ${keywords}. The title of blog is "${title}"`;
+                        break;
+                    case 'social':
+                        prompt =
+                            `Write social media post with keywords ${keywords}. The title of post is "${title}"`;
+
+                        break;
+                    case 'mail':
+                        prompt =
+                            `Write me a mail content with keywords ${keywords}. The subject of mail is "${title}"`;
+                        break;
+                    case 'google_seo':
+                        prompt =
+                            `Write social media post with keywords ${keywords}. The title of post is "${title}"`;
+                        prompt =
+                            `Write google search ads with target keywords ${keywords}. The Product title is "${title}"`;
+
+                        break;
+                    default:
+                        prompt = 'Write me a test article';
+                        break;
+                }
+
+                if (description !== '') {
+                    prompt += ` and description ${description}.`;
+                }
+                let temp = $('#temp option:selected').val();
+                console.log(temp)
+                console.log(prompt)
+                $.post("{{ route('content.openai') }}", {
+                        prompt: prompt,
+                        temp: temp
+                    })
+                    .done(function(data) {
+                        console.log(data);
+                    })
+                    .fail(function(error) {
+                        console.log(error.response);
+                        console.log("Error: ", error);
+                    });
+
+            });
+
+
         });
 
-        // these code for fixing some style in editor 
-        var styleEle = $("style#fixed");
-        if (styleEle.length == 0)
-            $("<style id=\"fixed\">.note-editor .dropdown-toggle::after { all: unset; } .note-editor .note-dropdown-menu { box-sizing: content-box; } .note-editor .note-modal-footer { box-sizing: content-box; }</style>")
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'list']],
+                    ['color', ['forecolor']],
+                    ['height', ['height']]
+                ],
+                colorNames: {
+                    'red': '#ff0000',
+                    'green': '#00ff00',
+                    'blue': '#0000ff'
+                }
+            });
+
+            // these code for fixing some style in editor 
+            var styleEle = $("style#fixed");
+            if (styleEle.length == 0)
+                $(
+                    "<style id=\"fixed\">.note-editor .dropdown-toggle::after { all: unset; } .note-editor .note-dropdown-menu { box-sizing: content-box; } .note-editor .note-modal-footer { box-sizing: content-box; }</style>"
+                )
                 .prependTo("body");
-    })
-</script>
+        })
+    </script>
 @endsection

@@ -65,7 +65,7 @@
             <!-- google  -->
             <button class="social-btn" type="button">
                 <span class="icon">
-                    <img src="{{asset('assets/images/icons/google.svg')}}" width="25">
+                    <img src="{{asset('/assets/images/icons/google.svg')}}" width="25">
                 </span>
                 <span class="text">Sign up with Google</span>
             </button>
