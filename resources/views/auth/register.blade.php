@@ -4,73 +4,88 @@
 
 @section('content')
 
-    <form action="" class="authentication-form needs-validation" novalidate>
+<form method="POST" action="{{ route('register') }}" class="authentication-form needs-validation" novalidate>
+    @csrf
 
-        <div class="authentication-form-header align-items-start">
-            <h3 class="logo-name">type.ez</h3>
-            <h3 class="section-title">Sign up</h3>
-            <p class="form-des">Start your 30-day free trial. </p>
+    <div class="authentication-form-header align-items-start">
+        <h3 class="logo-name">type.ez</h3>
+        <h3 class="section-title">Sign up</h3>
+        <p class="form-des">Start your 30-day free trial. </p>
+    </div>
+
+    <div class="authentication-form-body">
+
+        <!-- Name   -->
+        <div class="form-group">
+            <label for="name" class="form-label">Name *</label>
+            <input id="name" type="text" class="form-control custom-input @error('name') is-invalid @enderror"
+                name="name" value="{{ old('name') }}" required placeholder="Enter your name" autocomplete="name"
+                autofocus>
+
+            @error('name')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            <div class="valid-feedback">
+                Awesome! You're one step closer to greatness.
+            </div>
         </div>
 
-        <div class="authentication-form-body">
+        <!-- Email    -->
+        <div class="form-group">
+            <label for="email" class="form-label">Email* </label>
+            <input id="email" type="email" class="form-control custom-input @error('email') is-invalid @enderror"
+                name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="Enter your Email">
 
-            <!-- Name   -->
-            <div class="form-group">
-                <label for="name" class="form-label">Name *</label>
-                <input type="text" class="form-control custom-input" id="name" required autocomplete="off"
-                    placeholder="Enter your name">
-                <div class="valid-feedback">
-                    Awesome! You're one step closer to greatness.
-                </div>
-                <div class="invalid-feedback">
-                    Enter your name! Don't want to call you Nameless
-                </div>
+            @error('email')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            <div class="valid-feedback">
+                Awesome! You're one step closer to greatness.
             </div>
-
-            <!-- Email    -->
-            <div class="form-group">
-                <label for="email" class="form-label">Email* </label>
-                <input type="email" class="form-control custom-input" id="email" required autocomplete="off"
-                    placeholder="Enter your Email">
-                <div class="valid-feedback">
-                    Awesome! You're one step closer to greatness.
-                </div>
-                <div class="invalid-feedback">
-                    Please enter a valid email address
-                </div>
-            </div>
-
-            <!-- password -->
-
-            <div class="form-group">
-                <label for="password" class="form-label">Password* *</label>
-                <input type="password" class="form-control custom-input" id="password" required autocomplete="off"
-                    placeholder="Enter your Password">
-                <p><span class="small">Must be at least 8 characters.</span></p>
-                <div class="valid-feedback">
-                    Awesome! You're one step closer to greatness.
-                </div>
-                <div class="invalid-feedback">
-                    Please enter a valid email address
-                </div>
-            </div>
-
-            <!-- get started  -->
-            <button class="gradient-btn">Create account </button>
-
-
-
-            <!-- google  -->
-            <button class="social-btn" type="button">
-                <span class="icon">
-                    <img src="{{asset('assets/images/icons/google.svg')}}" width="25">
-                </span>
-                <span class="text">Sign up with Google</span>
-            </button>
-
-
-            <p class="authentication-bottom">Already have an account? <a href="{{route('login')}}">Log in </a> </p>
-
         </div>
-    </form>
+
+        <!-- password -->
+
+        <div class="form-group">
+            <label for="password" class="form-label">Password* </label>
+            <input id="password" type="password" class="form-control custom-input @error('password') is-invalid @enderror"
+                name="password" required autocomplete="new-password" placeholder="Enter your Password">
+
+            @error('password')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+            <p><span class="small">Must be at least 8 characters.</span></p>
+            <div class="valid-feedback">
+                Awesome! You're one step closer to greatness.
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password" class="form-label">Confirm Password* </label>
+                <input id="password-confirm" type="password" class="form-control custom-input" name="password_confirmation" required autocomplete="new-password"  placeholder="Retype your Password">
+        </div>
+
+        <!-- get started  -->
+        <button class="gradient-btn" type="submit" >Create account </button>
+
+
+
+        <!-- google  -->
+        <button class="social-btn" type="button">
+            <span class="icon">
+                <img src="{{asset('assets/images/icons/google.svg')}}" width="25">
+            </span>
+            <span class="text">Sign up with Google</span>
+        </button>
+
+
+        <p class="authentication-bottom">Already have an account? <a href="{{route('login')}}">Log in </a> </p>
+
+    </div>
+</form>
 @endsection
