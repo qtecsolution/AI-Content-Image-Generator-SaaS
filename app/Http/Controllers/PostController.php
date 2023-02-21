@@ -68,4 +68,8 @@ class PostController extends Controller
         // Save the image data to a file using Laravel's Storage facade
         Storage::put('public/images/image.jpg', $image_data);
     }
+
+    public function default(){
+        return view('default');
+    }
 }

@@ -49,6 +49,10 @@
 
                 <!-- Admin Menu -->
                 <li>
+                    <a href="{{url('default')}}" data-bs-toggle="tooltip" data-bs-placement="right"
+                        data-bs-title="User Management"> <img src="{{asset('assets/images/menu/user.png')}}"> </a>
+                </li>
+                <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Manage Plan"> <img src="{{asset('assets/images/menu/wallet.png')}}"> </a>
                 </li>
