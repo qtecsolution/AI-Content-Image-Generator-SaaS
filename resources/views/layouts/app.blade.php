@@ -41,48 +41,50 @@
                         data-bs-placement="right" data-bs-title="Generate your Content">+</a>
                 </li>
                 <li>
-                    <a href="{{ route('home') }}" class="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-title="Dashboard">
-                        <img src="{{asset('assets/images/menu/home.png')}}">
+                    <a href="{{ route('home') }}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                        data-bs-title="Dashboard">
+                        <img src="{{ asset('assets/images/menu/home.png') }}">
                     </a>
                 </li>
 
                 <!-- Admin Menu -->
                 <li>
-                    <a href="{{url('default')}}" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="User Management"> <img src="{{asset('assets/images/menu/user.png')}}"> </a>
+                    <a href="{{ url('default') }}" data-bs-toggle="tooltip" data-bs-placement="right"
+                        data-bs-title="User Management"> <img src="{{ asset('assets/images/menu/user.png') }}"> </a>
                 </li>
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage Plan"> <img src="{{asset('assets/images/menu/wallet.png')}}"> </a>
+                        data-bs-title="Manage Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Menu Builder"> <img src="{{asset('assets/images/menu/menu-create.png')}}"> </a>
+                        data-bs-title="Menu Builder"> <img src="{{ asset('assets/images/menu/menu-create.png') }}">
+                    </a>
                 </li>
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Page Builder"> <img src="{{asset('assets/images/menu/new-file.png')}}"> </a>
+                        data-bs-title="Page Builder"> <img src="{{ asset('assets/images/menu/new-file.png') }}"> </a>
                 </li>
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Payment Gateway"> <img src="{{asset('assets/images/menu/wallets.png')}}"> </a>
+                        data-bs-title="Payment Gateway"> <img src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
                 </li>
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage SEO"> <img src="{{asset('assets/images/menu/seo.png')}}"> </a>
+                        data-bs-title="Manage SEO"> <img src="{{ asset('assets/images/menu/seo.png') }}"> </a>
                 </li>
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage Blog"> <img src="{{asset('assets/images/menu/blog.png')}}"> </a>
+                        data-bs-title="Manage Blog"> <img src="{{ asset('assets/images/menu/blog.png') }}"> </a>
                 </li>
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Site Settings"> <img src="{{asset('assets/images/menu/settings.png')}}"> </a>
+                        data-bs-title="Site Settings"> <img src="{{ asset('assets/images/menu/settings.png') }}"> </a>
                 </li>
-                 <li>
+                <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="System Settings"> <img src="{{asset('assets/images/menu/system-setting.png')}}"> </a>
+                        data-bs-title="System Settings"> <img
+                            src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
                 </li>
 
             </ul>
@@ -171,6 +173,11 @@
     <!-- DATATABLE -->
     <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>

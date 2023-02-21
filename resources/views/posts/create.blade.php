@@ -185,19 +185,22 @@
                     prompt += ` and description ${description}.`;
                 }
                 let temp = $('#temp option:selected').val();
-                console.log(temp)
-                console.log(prompt)
-                $.post("{{ route('content.openai') }}", {
+
+                $.ajax({
+                    type: 'POST',
+                    url: "{{ route('content.openai') }}",
+                    data:{
                         prompt: prompt,
                         temp: temp
-                    })
-                    .done(function(data) {
-                        console.log(data);
-                    })
-                    .fail(function(error) {
-                        console.log(error.response);
-                        console.log("Error: ", error);
-                    });
+                    },
+                    success: function(data) {
+                        console.log(data)
+                    },
+                    error: function(msg) {
+                        console.log(msg);
+                        var errors = msg.responseJSON;
+                    }
+                });
 
             });
 

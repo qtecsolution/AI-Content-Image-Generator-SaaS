@@ -25,9 +25,9 @@ class PostController extends Controller
     /* Open AI Content Generate */
     public function openAi(Request $request)
     {
-        return response()->json($request->all(), 200);
         if (isset($request->prompt)) {
             $temp = floatval($request->temp ?? 0.7);
+           // return response()->json($temp, 200);
             $result = OpenAI::completions()->create([
                 'model' => 'text-davinci-003',
                 'prompt' => $request->prompt,
