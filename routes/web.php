@@ -23,4 +23,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/content-openai','PostController@openAi')->name('content.openai');
     Route::get('/image-openai','PostController@imageGenrate')->name('image.openai');
     Route::get('/default','PostController@default');
+
+    Route::get('/user/index','UserController@index')->name('user.index');
+    // Route::get('/plan/index','PlanController@index')->name('plan.index');
+    // Route::get('/plan/create','PlanController@create')->name('plan.create');
+    // Route::post('/plan/store','PlanController@store')->name('plan.store');
+    Route::resource('plan','PlanController');
+    Route::get('/plan/status/{id}/{status}','PlanController@status')->name('plan.status');
+    Route::get('/plan/user/index','PlanController@userIndex')->name('plan.userIndex');
+    Route::get('/plan/purchase/{id}','PlanController@purchase')->name('plan.purchase');
+    Route::get('/plan/expanse/{id}','PlanController@expanse')->name('plan.expanse');
+    Route::post('/plan/purchase','PlanController@purchaseDone')->name('plan.purchase.store');
+
 });

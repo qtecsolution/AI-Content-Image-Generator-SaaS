@@ -49,13 +49,19 @@
 
                 <!-- Admin Menu -->
                 <li>
-                    <a href="{{ url('default') }}" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{ route('user.index') }}" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="User Management"> <img src="{{ asset('assets/images/menu/user.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('plan.index')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Manage Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
+
+                <li>
+                    <a href="{{route('plan.userIndex')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                        data-bs-title="Purchase Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
+                </li>
+
                 <li>
                     <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Menu Builder"> <img src="{{ asset('assets/images/menu/menu-create.png') }}">
@@ -181,6 +187,7 @@
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
+    @include('sweetalert::alert')
     @yield('script')
 
 </body>
