@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UseCase;
+use App\Models\UserDocument;
 use GuzzleHttp\Client;
 use OpenAI\Laravel\Facades\OpenAI;
 use Illuminate\Http\Request;
@@ -85,11 +86,12 @@ class PostController extends Controller
             'use_case_id' => 'required',
             'generated_content' => 'required',
         ]);
-        return $request->all();
         
 
         try {
-            
+            $input = $request->except('_token');
+            $input['user_id'] = \Auth::user()->id;
+            UserDocument::create($input);
 
             return back();
         } catch (\Exception $e) {

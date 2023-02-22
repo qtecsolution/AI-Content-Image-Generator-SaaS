@@ -107,15 +107,13 @@
 
             <!-- editor column -->
             <div class="col-lg-7 border-start mt-0">
-                <form action="{{ route('posts.store') }}" id="save-form">
+                <form method="post" action="{{ route('posts.store') }}" id="save-form">
                     @csrf
-                    <input type="text" name="title" id="save-title">
-                    <input type="text" name="keywords" id="save-keywords">
-                    <input type="text" name="use_case_id" id="save-case">
-                    <input type="text" name="description" id="save-description">
-                    <textarea id="summernote" name="generated_content">
-                    <!-- default value -->
-                </textarea>
+                    <input type="hidden" name="title" id="save-title">
+                    <input type="hidden" name="keywords" id="save-keywords">
+                    <input type="hidden" name="use_case_id" id="save-case">
+                    <input type="hidden" name="description" id="save-description">
+                    <textarea id="summernote" name="generated_content"></textarea>
                 </form>
 
             </div>
@@ -159,6 +157,7 @@
             $('#save-keywords').val(keywords);
             $('#save-description').val(description);
             $('#save-case').val(useCaseVal);
+            $('form#save-form').submit();
         }
         $(document).ready(function() {
             // Submit form

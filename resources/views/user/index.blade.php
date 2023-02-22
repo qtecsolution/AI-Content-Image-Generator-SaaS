@@ -37,7 +37,7 @@
                                             <img src="{{ asset($item->avatar) }}" width="40" height="40">
                                         </td>
                                         <td>
-                                            {{ $item->plan->name }}
+                                            {{ $item->plan->name ?? '' }}
                                         </td>
 
                                     </tr>
