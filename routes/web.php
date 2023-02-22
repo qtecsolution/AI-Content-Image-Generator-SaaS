@@ -20,7 +20,10 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/','HomeController@index')->name('home');
     Route::get('/posts/create','PostController@create')->name('posts.create');
+    Route::post('/posts','PostController@store')->name('posts.store');
     Route::post('/content-openai','PostController@openAi')->name('content.openai');
     Route::get('/image-openai','PostController@imageGenrate')->name('image.openai');
+
+
     Route::get('/default','PostController@default');
 });

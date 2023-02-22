@@ -23,64 +23,18 @@
             <div class="popular-template-body">
 
                 <div class="template-wrapper">
+                    @foreach ($cases as $case)
+                        <a href="{{ route('posts.create') }}?case={{ $case->id }}" class="template-card">
+                            <figure class="card-img">
+                                <img src="{{ asset($case->icon) }}" alt="{{ $case->title }}">
+                            </figure>
+                            <h3 class="card-title"> {{ $case->title }} </h3>
 
-                    <!-- single template  -->
-                    <a href="{{route('posts.create')}}?case=pro_des" class="template-card">
-                        <figure class="card-img">
-                            <img src="assets/images/icons/box.svg " alt="">
-                        </figure>
-                        <h3 class="card-title">Product Description</h3>
+                            <p class="card-des">{{ $case->details }}</p>
 
-                        <p class="card-des">Generate beautifully written product descriptions to increase sales.</p>
+                        </a>
+                    @endforeach
 
-                    </a>
-
-                    <!-- single template  -->
-                    <a href="{{route('posts.create')}}?case=blog" class="template-card">
-
-                        <figure class="card-img">
-                            <img src="assets/images/icons/writting.svg" alt="blog image ">
-                        </figure>
-
-                        <h3 class="card-title">Blog Writing</h3>
-                        <p class="card-des">The Blog Writing template takes your topic from idea to outline and then
-                            generate perfect text.</p>
-                    </a>
-
-                    <!-- single template  -->
-                    <a href="{{route('posts.create')}}?case=social" class="template-card">
-
-                        <figure class="card-img">
-                            <img src="assets/images/icons/social-caption.svg " alt="socila media caption ">
-                        </figure>
-
-                        <h3 class="card-title">Social Media Caption</h3>
-                        <p class="card-des">Generate beautifully written product descriptions to increase sales.</p>
-                    </a>
-
-                    <!-- single template  -->
-                    <a href="{{route('posts.create')}}?case=mail" class="template-card">
-
-                        <figure class="card-img">
-                            <img src="assets/images/icons/gmail.svg " alt="">
-                        </figure>
-
-                        <h3 class="card-title">Mail Writing</h3>
-                        <p class="card-des">Generate simple and professional report based on different category with
-                            just a few keywords.</p>
-                    </a>
-
-                    <!-- single template  -->
-                    <a class="template-card" href="{{route('posts.create')}}?case=google_seo">
-
-                        <figure class="card-img">
-                            <img src="assets/images/icons/google.svg " alt="google">
-                        </figure>
-
-                        <h3 class="card-title">Google SEO</h3>
-                        <p class="card-des">The best-performing Google ad copy converts visitors into customer! So
-                            don’t miss it.</p>
-                    </a>
 
                 </div>
 
@@ -201,8 +155,7 @@
                                     <div class="action-wrapper">
                                         <a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg"
                                                 aria-hidden="true"></i></a>
-                                        <a href="edit-post.html"><i class="fa fa-pencil fa-lg"
-                                                aria-hidden="true"></i></a>
+                                        <a href="edit-post.html"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                                     </div>
 
                                 </td>
@@ -237,8 +190,7 @@
                                     <div class="action-wrapper">
                                         <a href="javascript:void(0)"><i class="fa fa-trash-o fa-lg"
                                                 aria-hidden="true"></i></a>
-                                        <a href="edit-post.html"><i class="fa fa-pencil fa-lg"
-                                                aria-hidden="true"></i></a>
+                                        <a href="edit-post.html"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a>
                                     </div>
 
                                 </td>

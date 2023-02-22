@@ -92,6 +92,8 @@
                         </div>
 
                         <div class="generate-btn-wrapper">
+                            <span id="content-generate-preloader" style="display: none" class="lh-50 me-2"> <i
+                                    class="fa fa-circle-o-notch fa-spin fs-4" aria-hidden="true"></i> </span>
                             <button type="submit" class="generate-btn">Generate post</button>
                         </div>
 
@@ -105,31 +107,40 @@
 
             <!-- editor column -->
             <div class="col-lg-7 border-start mt-0">
-                <textarea id="summernote">
+                <form action="{{ route('posts.store') }}" id="save-form">
+                    @csrf
+                    <input type="text" name="title" id="save-title">
+                    <input type="text" name="keywords" id="save-keywords">
+                    <input type="text" name="use_case_id" id="save-case">
+                    <input type="text" name="description" id="save-description">
+                    <textarea id="summernote" name="generated_content">
                     <!-- default value -->
                 </textarea>
+                </form>
 
             </div>
 
         </div>
 
         <!-- coutn -->
-        <div class="count sticky-bottom">
+        <div id="content-control" class="count sticky-bottom" style="display: none">
             <div class="left">
-                <span class="words">341 Words</span>
-                <span class="charecters">34851574 Characters</span>
+                <span class="words"> <span id="words-count"> 0 </span> Words</span>
+                <span class="charecters"> <span id="charecters-count"> 0 </span> Characters</span>
             </div>
 
             <div class="right">
-                <button>
-                    <i class="fa fa-random" aria-hidden="true"></i>
+                <button type="button" onclick="regenerate()">
+                    <i class="fa fa-refresh fa-spin content-generate-preloader" style="display: none"></i>
+                    <i class="fa fa-random content-regenerate" aria-hidden="true"></i>
                     <span>Regenerate</span>
                 </button>
-                <button>
+                <button type="button" class="copy-button" onclick="copyText()" data-bs-toggle="tooltip"
+                    data-bs-placement="top" title="Copy to clipboard">
                     <i class="fa fa-copy"></i>
                     <span>copy</span>
                 </button>
-                <button>
+                <button type="button" onclick="contentSave()">
                     <i class="fa fa-save"></i>
                     <span>save</span>
                 </button>
@@ -139,74 +150,96 @@
 @endsection
 @section('script')
     <script>
+        function contentSave() {
+            let title = $('#title').val();
+            let keywords = $('#keywords').val();
+            let description = $('#description').val();
+            let useCaseVal = $('#useCase option:selected').val();
+            $('#save-title').val(title);
+            $('#save-keywords').val(keywords);
+            $('#save-description').val(description);
+            $('#save-case').val(useCaseVal);
+        }
         $(document).ready(function() {
-
-            // Get form data
+            // Submit form
             $("form#input-form").submit(function(event) {
                 event.preventDefault();
-
-                let title = $('#title').val();
-                let keywords = $('#keywords').val();
-                let description = $('#description').val();
-                let useCaseVal = $('#useCase option:selected').val();
-                let prompt;
-
-                switch (useCaseVal) {
-                    case 'pro_des':
-                        prompt =
-                            `Write me product description with keywords ${keywords}. The title of product is "${title}"`;
-                        break;
-                    case 'blog':
-                        prompt =
-                            `Write blog description with keywords ${keywords}. The title of blog is "${title}"`;
-                        break;
-                    case 'social':
-                        prompt =
-                            `Write social media post with keywords ${keywords}. The title of post is "${title}"`;
-
-                        break;
-                    case 'mail':
-                        prompt =
-                            `Write me a mail content with keywords ${keywords}. The subject of mail is "${title}"`;
-                        break;
-                    case 'google_seo':
-                        prompt =
-                            `Write social media post with keywords ${keywords}. The title of post is "${title}"`;
-                        prompt =
-                            `Write google search ads with target keywords ${keywords}. The Product title is "${title}"`;
-
-                        break;
-                    default:
-                        prompt = 'Write me a test article';
-                        break;
-                }
-
-                if (description !== '') {
-                    prompt += ` and description ${description}.`;
-                }
-                let temp = $('#temp option:selected').val();
-
-                $.ajax({
-                    type: 'POST',
-                    url: "{{ route('content.openai') }}",
-                    data:{
-                        prompt: prompt,
-                        temp: temp
-                    },
-                    success: function(data) {
-                        console.log(data)
-                    },
-                    error: function(msg) {
-                        console.log(msg);
-                        var errors = msg.responseJSON;
-                    }
-                });
-
+                contentGenerate()
             });
-
-
         });
 
+        function contentGenerate() {
+            let title = $('#title').val();
+            let keywords = $('#keywords').val();
+            let description = $('#description').val();
+            let useCaseVal = $('#useCase option:selected').val();
+            let temp = $('#temp option:selected').val();
+
+            $('#content-generate-preloader').show();
+
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('content.openai') }}",
+                data: {
+                    title,
+                    keywords,
+                    description,
+                    temp,
+                    use_case: useCaseVal
+                },
+                success: function(data) {
+                    $('#summernote').summernote('code', data.content);
+                    $('#content-generate-preloader').hide();
+                    $('#words-count').html(data.words);
+                    $('#charecters-count').html(data.characters);
+                    $('#content-control').show();
+                    $('.content-regenerate').show();
+                    $('.content-generate-preloader').hide();
+                    console.log(data);
+                },
+                error: function(msg) {
+                    $('#content-generate-preloader').hide();
+                    $('#content-control').hide();
+                    console.log(msg);
+                    var errors = msg.responseJSON;
+                    console.log(errors)
+                }
+            });
+        }
+
+        // Regenerate content
+        function regenerate() {
+
+            let title = $('#title').val();
+            if (title != '') {
+                $('.content-regenerate').hide();
+                $('.content-generate-preloader').show();
+                $("form#input-form").submit();
+            }
+        }
+        // Document Copy
+        function copyText() {
+            // Copy content to clipboard
+            var textToCopy = $('#summernote').summernote('code');
+            textToCopy = textToCopy.replace("<!-- default value -->", "");
+            var $temp = $('<input>');
+            $('body').append($temp);
+            $temp.val(textToCopy).select();
+            document.execCommand('copy');
+            $temp.remove();
+
+            // Change copy button tooltip
+            $('.copy-button').attr('data-bs-original-title', 'Content Copied!');
+            $('.copy-button').tooltip('show');
+            setTimeout(function() {
+                $('.copy-button').attr('data-bs-original-title', 'Copy to clipboard');
+                $('.copy-button').tooltip('hide');
+            }, 1000);
+        }
+
+
+
+        // Summernote (Texteditor) Script
         $(document).ready(function() {
             $('#summernote').summernote({
                 toolbar: [

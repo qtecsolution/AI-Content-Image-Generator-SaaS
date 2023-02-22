@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\UseCase;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        $cases = UseCase::where('is_published',1)->get();
+        return view('index',compact('cases'));
     }
 }
