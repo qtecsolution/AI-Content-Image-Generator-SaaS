@@ -49,40 +49,30 @@
 
                 <!-- Admin Menu -->
                 <li>
-                    <a href="{{ url('default') }}" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{ route('user.index') }}" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="User Management"> <img src="{{ asset('assets/images/menu/user.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('plan.index')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Manage Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
+
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Menu Builder"> <img src="{{ asset('assets/images/menu/menu-create.png') }}">
-                    </a>
+                    <a href="{{route('plan.userIndex')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                        data-bs-title="Purchase Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
+
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Page Builder"> <img src="{{ asset('assets/images/menu/new-file.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('payment.method')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Payment Gateway"> <img src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('seo.setup')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Manage SEO"> <img src="{{ asset('assets/images/menu/seo.png') }}"> </a>
                 </li>
+                
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage Blog"> <img src="{{ asset('assets/images/menu/blog.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Site Settings"> <img src="{{ asset('assets/images/menu/settings.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('setting')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="System Settings"> <img
                             src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
                 </li>
@@ -181,6 +171,7 @@
         const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
+    @include('sweetalert::alert')
     @yield('script')
 
 </body>

@@ -77,6 +77,28 @@ class PostController extends Controller
         }
     }
 
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'keywords' => 'required',
+            'use_case_id' => 'required',
+            'generated_content' => 'required',
+        ]);
+        return $request->all();
+        
+
+        try {
+            
+
+            return back();
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            
+            // return response()->json($results, 200);
+        }
+    }
+
     public function imageGenrate(Request $request)
     {
         $image_url = '';

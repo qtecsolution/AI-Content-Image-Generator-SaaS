@@ -29,13 +29,9 @@
                                 <img src="{{ asset($case->icon) }}" alt="{{ $case->title }}">
                             </figure>
                             <h3 class="card-title"> {{ $case->title }} </h3>
-
                             <p class="card-des">{{ $case->details }}</p>
-
                         </a>
                     @endforeach
-
-
                 </div>
 
 
