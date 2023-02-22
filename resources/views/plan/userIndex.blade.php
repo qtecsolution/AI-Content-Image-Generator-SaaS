@@ -32,7 +32,7 @@
                                     <td>{{$item->price}}</td>
                                     <td>
                                         @if($user->plan_id == $item->id)
-                                        <a href="{{route('plan.expanses',$item->id)}}">See The Expanses</a>
+                                        <a href="{{route('plan.expanse',$item->id)}}">See The Expanses</a>
                                         @else
                                         <a href="{{route('plan.purchase',$item->id)}}">Purchase now</a>
                                         @endif

@@ -24,7 +24,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/image-openai','PostController@imageGenrate')->name('image.openai');
     Route::get('/default','PostController@default');
 
-    Route::get('/user/index','UserController@index')->name('user.index');
+    Route::resource('/user','UserController');
     // Route::get('/plan/index','PlanController@index')->name('plan.index');
     // Route::get('/plan/create','PlanController@create')->name('plan.create');
     // Route::post('/plan/store','PlanController@store')->name('plan.store');
@@ -33,6 +33,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/plan/user/index','PlanController@userIndex')->name('plan.userIndex');
     Route::get('/plan/purchase/{id}','PlanController@purchase')->name('plan.purchase');
     Route::get('/plan/expanse/{id}','PlanController@expanse')->name('plan.expanse');
+
     Route::post('/plan/purchase','PlanController@purchaseDone')->name('plan.purchase.store');
 
+
+    Route::get('/payment/method','PaymentMethodController@index')->name('payment.method');
+    Route::get('/seo/setup','SettingController@seoSetup')->name('seo.setup');
+    Route::get('/setting/setup','SettingController@setting')->name('setting');
 });

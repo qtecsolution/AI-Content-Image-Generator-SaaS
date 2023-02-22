@@ -63,32 +63,16 @@
                 </li>
 
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Menu Builder"> <img src="{{ asset('assets/images/menu/menu-create.png') }}">
-                    </a>
-                </li>
-                <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Page Builder"> <img src="{{ asset('assets/images/menu/new-file.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('payment.method')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Payment Gateway"> <img src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('seo.setup')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="Manage SEO"> <img src="{{ asset('assets/images/menu/seo.png') }}"> </a>
                 </li>
+                
                 <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage Blog"> <img src="{{ asset('assets/images/menu/blog.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Site Settings"> <img src="{{ asset('assets/images/menu/settings.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{route('setting')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="System Settings"> <img
                             src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
                 </li>
