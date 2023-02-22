@@ -1,0 +1,33 @@
+.no-margin{margin:0 !important}
+.no-padding{padding:0 !important}
+.color-white{color:#fff;}
+.sidebar-menu li{list-style: none;text-align: center; margin: 35px 0;}
+.sidebar-menu li:first-child{margin-top: 0;}
+.add-btn.cutom{background-image: linear-gradient(135deg, hsl(191deg 100% 87%) 0%, hsl(191deg 68% 48%) 100%);}
+.sidebar-menu li a img{width: 40px;}
+.sidebar-menu li a:hover img{transform: scale(1.1); transition: all .5s;}
+.sidebar-body{overflow-y: auto;}
+
+
+.sidebar-body::-webkit-scrollbar {
+    width: 2px;
+}
+ 
+.sidebar-body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,0.1);
+}
+ 
+.sidebar-body::-webkit-scrollbar-thumb {
+  background-color: #ddd;
+  outline: 1px solid #eee;
+}
+.card.custom{
+    margin-bottom: 5px;
+}
+.card.custom .card-header .card-title{
+    float: left;
+    line-height: 38px;
+}
+.card .card-button{
+    float: right;
+}
