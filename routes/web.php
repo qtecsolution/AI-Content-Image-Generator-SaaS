@@ -25,6 +25,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/image-openai','PostController@imageGenrate')->name('image.openai');
     Route::get('/default','PostController@default');
     Route::resource('/contents','UserDocumentController');
+    Route::delete('/contents-multiple-delete','UserDocumentController@multipleDelete')->name('contents-multiple-delete');
 
     Route::resource('/user','UserController');
     // Route::get('/plan/index','PlanController@index')->name('plan.index');

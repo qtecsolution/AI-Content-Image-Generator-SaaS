@@ -11,78 +11,41 @@
                     <div class="my-projects-header">
                         <h4 class="header-title">Saved Contents</h4>
                         <div class="project-button pull-right">
-                            <a href="" class="btn btn-light btn-xs"> <i class="fa fa-plus-circle"></i> New </a>
+                            <a href="{{ route('posts.create') }}" class="btn btn-light btn-xs"> <i
+                                    class="fa fa-plus-circle"></i> New </a>
                         </div>
                     </div>
                     <div class="my-projects-body">
-                        <div class="project-table-wrapper">
+                        <div class="project-table-wrapper no-default-search">
 
                             <div class="searchbox">
                                 <span class="search-icon">
                                     <i class="fa fa-search" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" name="" id="searchINputField">
+                                <input type="text" name="" id="search-datatable">
 
-                                <div class="right-text">
+                                <div class="right-text" id="delete-selected" style="display: none" role="button" onclick=multipleDelete()>
                                     <span>Delete</span>
-                                    <span class="selected">selected 4</span>
-                                    <span>Media posts </span>
+                                    <span class="selected">selected <span class="total-selected"> </span> </span>
+                                    <span> Contents </span>
+                                    <input type="hidden" id="multiuple-delete-url" value="{{route('contents-multiple-delete')}}">
                                 </div>
                             </div>
 
-                            <table id="projectTable" class="project-table table">
+                            <table id="datatables" class="project-table table">
                                 <thead>
                                     <tr>
                                         <td data-orderable="false"> <input type="checkbox" name="row-check"
-                                                class="form-check-input check-lg"></td>
+                                                class="form-check-input check-lg" id="allSelect"></td>
                                         <td>Title</td>
                                         <td>Keywords </td>
                                         <td> Use case </td>
                                         <td>Words </td>
-                                        <td>Characters</td>
                                         <td>last Modified</td>
                                         <td data-orderable="false"></td>
                                     </tr>
                                 </thead>
-
-                                <tbody>
-
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="row-check" class="form-check-input check-lg">
-                                        </td>
-                                        <td> 1Technology is Revolutionizing Marketing Strategies</td>
-                                        <td></td>
-                                        <td>
-                                            <div class="social-wrapper">
-                                                <i class="fa fa-facebook" aria-hidden="true"></i>
-                                                <span>facebook</span>
-                                            </div>
-
-                                        </td>
-                                        <td>
-                                            3421
-                                        </td>
-                                        <td>342412121</td>
-                                        <td> <span class="status-posted">posted</span> </td>
-                                        <td>January 13, 2023 , 11:07 am </td>
-                                        <td>
-                                            <div class="action-wrapper">
-                                                <span type="button" class="" data-bs-toggle="modal"
-                                                    data-bs-target="#deleteModal">
-                                                    <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                                                </span>
-
-                                                <a href="edit-post.html"><i class="fa fa-pencil fa-lg"
-                                                        aria-hidden="true"></i></a>
-                                            </div>
-
-                                        </td>
-                                    </tr>
-
-                                </tbody>
-
-
+                                <tbody> </tbody>
                             </table>
 
                         </div>
@@ -92,4 +55,84 @@
 
         </div>
     </div>
+@endsection
+@section('script')
+    <script type="text/javascript">
+        //Checked all Checkbox 
+        $('#allSelect').change(function() {
+            $('#datatables .input-checkbox').prop('checked', $(this).prop('checked'));
+            applicantSelected();
+        });
+        // Checkbox action
+        $(document).on("click", "#datatables .input-checkbox", function() {
+            applicantSelected();
+        })
+        // applicant selected
+        function applicantSelected() {
+            let numChecked = $('#datatables .input-checkbox:checked').length;
+            if (numChecked > 0) {
+                $('#delete-selected').show();
+                $('#delete-selected .total-selected').html(numChecked);
+            } else {
+                $('#delete-selected').hide();
+            }
+        }
+        // multiple delete 
+        function multipleDelete(){
+            let deleteId = []; 
+            $('#datatables .input-checkbox:checked').each(function(){
+                deleteId.push($(this).val())
+            })
+            let id = deleteId.toString();
+            let url = $('#multiuple-delete-url').val();
+            url+='?id='+id;
+            resourceDelete(url);
+        }
+
+
+        $(function() {
+            let table = $('#datatables').DataTable({
+                info: false,
+                sDom: 'Rfrtlip',
+                processing: true,
+                serverSide: true,
+                ordering: true,
+                ajax: {
+                    url: "{{ route('contents.create') }}"
+                },
+
+                columns: [{
+                        data: 'checkbox'
+                    },
+                    {
+                        data: 'title',
+                        name: 'title'
+                    },
+                    {
+                        data: 'keywords',
+                        name: 'keywords'
+                    },
+                    {
+                        data: 'use_case_title',
+                        name: 'useCase.title'
+                    },
+                    {
+                        data: 'word_count',
+                    },
+                    {
+                        data: 'last_modify',
+                        name: 'updated_at'
+                    },
+                    {
+                        data: 'action'
+                    },
+                ]
+            });
+
+            $('#search-datatable').keyup(function() {
+                table.search(this.value).draw();
+
+            })
+        });
+    </script>
 @endsection

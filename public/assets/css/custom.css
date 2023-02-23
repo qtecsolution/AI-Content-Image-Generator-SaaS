@@ -82,3 +82,4 @@
     width: 1.5em;
     height: 1.5em;
 }
+.no-default-search .dataTables_filter{display: none;}

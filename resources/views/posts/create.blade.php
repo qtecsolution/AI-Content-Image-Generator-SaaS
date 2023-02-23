@@ -60,7 +60,8 @@
                                     <div class="form-group">
                                         <label for="description" class="form-label">Description</label>
                                         <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
-                                            placeholder="Description"></textarea>
+                                            placeholder="Description" rows="6"></textarea>
+                                            <small class="text-mute"> Should describe your need for better result. </small>
                                         <div class="valid-feedback">
                                             Awesome! You're one step closer to greatness.
                                         </div>
@@ -107,7 +108,7 @@
 
             <!-- editor column -->
             <div class="col-lg-7 border-start mt-0">
-                <form method="post" action="{{ route('posts.store') }}" id="save-form">
+                <form method="post" action="{{ route('contents.store') }}" id="save-form">
                     @csrf
                     <input type="hidden" name="title" id="save-title">
                     <input type="hidden" name="keywords" id="save-keywords">
