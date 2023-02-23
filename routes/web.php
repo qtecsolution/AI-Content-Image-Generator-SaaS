@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/content-openai','PostController@openAi')->name('content.openai');
     Route::get('/image-openai','PostController@imageGenrate')->name('image.openai');
     Route::get('/default','PostController@default');
+    Route::resource('/contents','UserDocumentController');
 
     Route::resource('/user','UserController');
     // Route::get('/plan/index','PlanController@index')->name('plan.index');

@@ -53,26 +53,30 @@
                         data-bs-title="User Management"> <img src="{{ asset('assets/images/menu/user.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="{{route('plan.index')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
+                    <a href="{{ route('plan.index') }}" class="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Manage Plan"> <img
+                            src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
 
                 <li>
-                    <a href="{{route('plan.userIndex')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Purchase Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
+                    <a href="{{ route('plan.userIndex') }}" class="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Purchase Plan"> <img
+                            src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
 
                 <li>
-                    <a href="{{route('payment.method')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Payment Gateway"> <img src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
+                    <a href="{{ route('payment.method') }}" class="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Payment Gateway"> <img
+                            src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="{{route('seo.setup')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage SEO"> <img src="{{ asset('assets/images/menu/seo.png') }}"> </a>
+                    <a href="{{ route('seo.setup') }}" class="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Manage SEO"> <img
+                            src="{{ asset('assets/images/menu/seo.png') }}"> </a>
                 </li>
-                
+
                 <li>
-                    <a href="{{route('setting')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{ route('setting') }}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="System Settings"> <img
                             src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
                 </li>
@@ -140,6 +144,13 @@
                 </ul>
             </nav>
         </header>
+        <nav class="breadcrumb-nav" style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0 pr-2 pull-right">
+              <li class="breadcrumb-item"><a href="{{route('home')}}"> <i class="fa fa-home"></i> Home </a></li>
+              @yield('breadcrumb')
+              {{-- <li class="breadcrumb-item active">Contents</li> --}}
+            </ol>
+          </nav>
         @yield('content')
     </main>
     <!-- MAIN SECTION END -->

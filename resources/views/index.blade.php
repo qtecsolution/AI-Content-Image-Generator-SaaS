@@ -85,13 +85,7 @@
                                     <input type="checkbox" name="row-check" class="form-check-input">
                                 </td>
                                 <td> 1Technology is Revolutionizing Marketing Strategies</td>
-                                <td>
-
-                                    <figure class="porject-thumb">
-                                        <img src="assets/images/user.png" alt="">
-                                    </figure>
-
-                                </td>
+                                <td></td>
                                 <td>
                                     <div class="social-wrapper">
                                         <i class="fa fa-facebook" aria-hidden="true"></i>
@@ -127,13 +121,7 @@
                                     Revolutionizing Marketing StrategiesHow Technology is Revolutionizing Marketing
                                     StrategiesHow Technology is Revolutionizing Marketing Strategies
                                 </td>
-                                <td>
-
-                                    <figure class="porject-thumb">
-                                        <img src="assets/images/user.png" alt="">
-                                    </figure>
-
-                                </td>
+                                <td></td>
                                 <td>
                                     <div class="social-wrapper">
                                         <i class="fa fa-twitter" aria-hidden="true"></i>
@@ -162,13 +150,7 @@
                                     <input type="checkbox" name="row-check" class="form-check-input">
                                 </td>
                                 <td>How Technology is Revolutionizing Marketing Strategies</td>
-                                <td>
-
-                                    <figure class="porject-thumb">
-                                        <img src="assets/images/user.png" alt="">
-                                    </figure>
-
-                                </td>
+                                <td></td>
                                 <td>
                                     <div class="social-wrapper">
                                         <i class="fa fa-facebook" aria-hidden="true"></i>
