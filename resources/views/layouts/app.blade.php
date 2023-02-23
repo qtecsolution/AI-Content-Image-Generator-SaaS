@@ -172,6 +172,7 @@
         const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
     </script>
     @include('sweetalert::alert')
+    @include('layouts.delete');
     @yield('script')
 
 </body>
