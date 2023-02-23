@@ -1,20 +1,25 @@
 @extends('layouts.app')
+
+@section('breadcrumb')
+    <li class="breadcrumb-item active">User Create</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
-
             <div class="col-md-12">
-                <div class="card custom">
-                    <div class="card-header bg-default">
-                        <h5 class="card-title no-margin">User Create</h5>
-                        <div class="card-button">
-                            <a href="{{ route('user.index') }}" class="btn btn-success btn-xs">
+                <div class="my-projects">
+                    <div class="my-projects-header">
+                        <h5 class="header-title">User Create</h5>
+                        <div class="project-button pull-right">
+                            <a href="{{ route('user.index') }}" class="btn btn-light btn-xs">
                                 <i class="fa fa-add"></i>
                                 General Users
                             </a>
                         </div>
                     </div>
-                    <div class="card-body">
+
+                    <div class="my-projects-body">
+                    <div class="project-table-wrapper">
                         <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data"
                             class="authentication-form needs-validation" novalidate>
                             @csrf
@@ -125,6 +130,7 @@
                                 <button class="gradient-btn mt-2" type="submit">Create User </button>
                             </div>
                         </form>
+                    </div>
                     </div>
                 </div>
             </div>

@@ -1,21 +1,26 @@
 @extends('layouts.app')
+
+@section('breadcrumb')
+    <li class="breadcrumb-item active">User Details</li>
+@endsection
+
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
 
             <div class="col-md-12">
-                <div class="card custom">
-                    <div class="card-header bg-default">
-                        <h5 class="card-title no-margin">User Details</h5>
-                        <div class="card-button">
+                <div class="my-projects">
+                    <div class="my-projects-header">
+                        <h5 class="header-title">User Details</h5>
+                        <div class="project-button pull-right">
                             <a href="{{ route('user.index') }}" class="btn btn-success btn-xs">
                                 <i class="fa fa-add"></i>
                                 General Users
                             </a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <div class="authentication-form needs-validation">
+                    <div class="my-projects-body">
+                        <div class="project-table-wrapper">
 
                             <div class="authentication-form-body">
 
