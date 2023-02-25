@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/default','PostController@default');
     Route::resource('/contents','UserDocumentController');
     Route::delete('/contents-multiple-delete','UserDocumentController@multipleDelete')->name('contents-multiple-delete');
+    Route::resource('/use-case','UseCaseController');
 
     Route::resource('/user','UserController');
     // Route::get('/plan/index','PlanController@index')->name('plan.index');

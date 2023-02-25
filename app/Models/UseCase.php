@@ -9,5 +9,5 @@ class UseCase extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','icon','details','prompt','is_published'];
+    protected $fillable = ['title','icon','details','prompt','is_published','created_by'];
 }

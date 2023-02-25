@@ -77,7 +77,6 @@ class UserDocumentController extends Controller
             $errorMessage = $e->getMessage();
             alert()->error('Error', 'Something Error found!');
             return back();
-            // return response()->json($results, 200);
         }
     }
 
