@@ -37,7 +37,7 @@
         <div class="sidebar-body">
             <ul class="sidebar-menu">
                 <li>
-                    <a href="{{ route('posts.create') }}" class="add-btn" data-bs-toggle="tooltip"
+                    <a href="{{ route('content.create') }}" class="add-btn" data-bs-toggle="tooltip"
                         data-bs-placement="right" data-bs-title="Generate your Content">+</a>
                 </li>
                 <li>
@@ -161,7 +161,7 @@
 
 
     <!-- MOBILE FIXED BUTTON -->
-    <a class="add-btn mobile-fixed" href="create-post.html">+</a>
+    <a class="add-btn mobile-fixed" href="{{route('content.create')}}">+</a>
     
     <!-- BOOTSTRAP JS   -->
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

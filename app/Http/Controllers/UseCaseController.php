@@ -14,7 +14,7 @@ class UseCaseController extends Controller
     public function index()
     {
         $allData = UseCase::get();
-        return view('useCase.index',compact('allData'));
+        return view('useCase.index', compact('allData'));
     }
 
     /**
@@ -35,13 +35,13 @@ class UseCaseController extends Controller
             'details' => 'required',
             'prompt' => 'required',
         ]);
-        
+
 
         try {
             $input = $request->except('_token');
             $input['created_by'] = Auth::user()->id;
-            if($request->hasFile('icon')){
-                $input['icon'] = fileUpload($request->file('icon'),'useCase',$request->title);
+            if ($request->hasFile('icon')) {
+                $input['icon'] = fileUpload($request->file('icon'), 'useCase', $request->title);
             }
             UseCase::create($input);
             alert()->success('Success', 'Use case saved successfully.');
@@ -64,17 +64,38 @@ class UseCaseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UseCase $useCase)
+    public function edit($id)
     {
-        //
+        $data = UseCase::findOrFail($id);
+        return view('useCase.edit', compact('data'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UseCase $useCase)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'details' => 'required',
+            'prompt' => 'required',
+        ]);
+
+        try {
+            $data = UseCase::findOrFail($id);
+            $input = $request->except(['_token', '_method']);
+            if ($request->hasFile('icon')) {
+                $input['icon'] = fileUpload($request->file('icon'), 'useCase', $request->title);
+            }
+            
+            $data->update($input);
+            alert()->success('Success', 'Use case updated successfully.');
+            return back();
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            alert()->error('Error', 'Something Error found!');
+            return back();
+        }
     }
 
     /**
@@ -84,7 +105,7 @@ class UseCaseController extends Controller
     {
         try {
             $data = UseCase::findOrFail($id);
-            if($data->icon != '' && file_exists($data->icon)){
+            if ($data->icon != '' && file_exists($data->icon)) {
                 unlink($data->icon);
             }
             $data->delete();

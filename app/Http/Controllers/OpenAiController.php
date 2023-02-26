@@ -2,31 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Images;
 use App\Models\UseCase;
 use App\Models\UserDocument;
 use GuzzleHttp\Client;
 use OpenAI\Laravel\Facades\OpenAI;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
-class PostController extends Controller
+class OpenAiController extends Controller
 {
-    public function create(Request $request)
+    public function content(Request $request)
     {
         $cases = UseCase::where('is_published', 1)->pluck('title', 'id');
-        // $cases = [
-        //     'pro_des' => 'Product Description',
-        //     'blog' => 'Blog Writing',
-        //     'social' => 'Social Media',
-        //     'mail' => 'Mail Writing',
-        //     'google_seo' => 'Google SEO',
-        // ];
-
-        return view('posts.create', compact('cases', 'request'));
+        return view('openAi.content', compact('cases', 'request'));
     }
     /* Open AI Content Generate */
-    public function openAi(Request $request)
+    public function contentGenerate(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
@@ -48,8 +42,7 @@ class PostController extends Controller
             $case = UseCase::findOrFail($request->use_case);
             $placeholder = array("[keywords]", "[title]", "[description]");
             $replaceBy = array($request->keywords, $request->title, $request->description);
-             $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
-
+            $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
             $temp = floatval($request->temp ?? 0.7);
             $result = OpenAI::completions()->create([
                 'model' => 'text-davinci-003',
@@ -77,56 +70,47 @@ class PostController extends Controller
             return response()->json($results, 200);
         }
     }
-
-    public function store(Request $request)
+    public function image(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'keywords' => 'required',
-            'use_case_id' => 'required',
-            'generated_content' => 'required',
-        ]);
-        
-
-        try {
-            $input = $request->except('_token');
-            $input['user_id'] = \Auth::user()->id;
-            UserDocument::create($input);
-
-            return back();
-        } catch (\Exception $e) {
-            $errorMessage = $e->getMessage();
-            
-            // return response()->json($results, 200);
+        $images = [];
+        if (isset($request->id)) {
+            $id = explode(',', $request->id);
+            $images = Images::whereIn('id', $id)->where('user_id', Auth::user()->id)->get();
         }
-    }
 
+        return view('openAi.image',compact('images'));
+    }
+    public function allImages(Request $request)
+    {
+
+    }
     public function imageGenrate(Request $request)
     {
-        $image_url = '';
-
-
+        $request->validate([
+            'prompt' => 'required',
+            'quantity' => 'required',
+            'image_size' => 'required',
+        ]);
         // Open Ai Image generate
         $response = OpenAI::images()->create([
-            'prompt' => 'a man with a cat',
-            'n' => 1,
-            'size' => '256x256',
+            'prompt' => $request->prompt,
+            'n' => intval($request->quantity),
+            'size' => $request->image_size,
             'response_format' => 'url',
         ]);
+        $imageId = [];
         foreach ($response->data as $data) {
-            $image_url = $data->url;
-            echo "<img src=\"$data->url\" >";
+            $image = fileUploadFromUrl($data->url, "ai_images/", '');
+            $imageId[] = Images::create([
+                'prompt' => $request->prompt,
+                'size' => $request->image_size,
+                'image_path' => $image,
+                'user_id' => Auth::user()->id
+            ])->id;
         }
-        // Image download by guzzlehttp
-        $client = new Client();
-        // Make a GET request to the image URL
-        $response = $client->get($image_url);
-
-        // Get the contents of the response
-        $image_data = $response->getBody()->getContents();
-
-        // Save the image data to a file using Laravel's Storage facade
-        Storage::put('public/images/image.jpg', $image_data);
+        $id = implode(',', $imageId);
+        alert()->success('Success', 'Image Generated successfully.');
+        return redirect()->route('image.create', ['id' => $id]);
     }
 
     public function default()

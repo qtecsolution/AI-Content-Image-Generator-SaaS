@@ -2,16 +2,44 @@
 
 use Illuminate\Support\Str;
 use Winter\LaravelConfigWriter\ArrayFile;
+use GuzzleHttp\Client;
+use Illuminate\Support\Facades\File;
 
-function fileUpload($file, $folder, $name = '')
+function fileUpload($file, $folder, $name = null)
 {
-    if ($name == '') {
+    if ($name == null) {
         $name = date('Ymd');
     }
     $imageName = Str::slug($name) . rand(0, 9999) . '.' . $file->extension();
     $file->move(public_path('uploads/' . $folder), $imageName);
     $path = 'uploads/' . $folder . '/' . $imageName;
     return $path;
+}
+function fileUploadFromUrl($url, $folder, $name = null)
+{
+    $extension = getExtensionFromUrl($url);
+    $client = new Client();
+    $response = $client->get($url);
+    $imageData = $response->getBody()->getContents();
+    if ($name == null) {
+        $name = date('Ymd');
+    }
+    $imageName = Str::slug($name) . rand(0, 9999) . '.' . $extension;
+    $path = 'uploads/' . $folder.date('Y/m/d');
+    if (!File::exists($path)) {
+        File::makeDirectory($path, 0755, true);
+    }
+    file_put_contents($path.'/'.$imageName, $imageData);
+    $imagePath = $path. '/' . $imageName;
+    return $imagePath;
+}
+function getExtensionFromUrl($url){
+    $url_parts = parse_url($url);
+    if(isset($url_parts['path'])){
+       $extension = explode('.',$url_parts['path']);
+       return end($extension);
+    }
+    return '';
 }
 function fileDelete($file)
 {

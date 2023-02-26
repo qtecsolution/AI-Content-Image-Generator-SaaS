@@ -13,8 +13,8 @@
                     </div>
                     <div class="my-projects-body">
                         <div class="row">
-                            <div class="col-md-5">
-                                <form method="post" action="{{ route('use-case.store') }}" id="save-form"
+                            <div class="col-md-5" id="useCaseForm">
+                                <form method="post" class="p-2 border-lite bg-light" action="{{ route('use-case.store') }}" id="save-form"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12 mb-3">
@@ -101,26 +101,30 @@
                                                 <td>Name</td>
                                                 <td> Details </td>
                                                 <td>last Modified</td>
-                                                <td>...</td>
+                                                <td> Action </td>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($allData as $data)
                                                 <tr>
-                                                    <td> 
-                                                        @if($data->icon != '' && file_exists($data->icon))
-                                                            <img src="{{asset($data->icon)}}" alt="Icon" style="max-height:30px">
+                                                    <td>
+                                                        @if ($data->icon != '' && file_exists($data->icon))
+                                                            <img src="{{ asset($data->icon) }}" alt="Icon"
+                                                                style="max-height:30px">
                                                         @endif
                                                     </td>
-                                                    <td>{{$data->title}}</td>
-                                                    <td> {{$data->details}} </td>
-                                                    <td> {{$data->updated_at}} </td>
-                                                    <td> 
+                                                    <td>{{ $data->title }}</td>
+                                                    <td> {{ $data->details }} </td>
+                                                    <td> {{ $data->updated_at }} </td>
+                                                    <td>
                                                         <div class="action-wrapper">
-                                                            <a title="Edit Data" class="text-success" href="{{route('use-case.edit',$data->id)}}">
+                                                            <a title="Edit Data" class="text-success"
+                                                                href="javascript:void(0)"
+                                                                onclick='updateForm("{{ route('use-case.edit', $data->id) }}")'>
                                                                 <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
                                                             </a>
-                                                            <a class="text-danger" title="Delete Data" href="javascript:void(0)" type="button"
+                                                            <a class="text-danger" title="Delete Data"
+                                                                href="javascript:void(0)" type="button"
                                                                 onclick='resourceDelete("{{ route('use-case.destroy', $data->id) }}")'>
                                                                 <i class="fa fa-trash-o fa-lg"></i>
                                                             </a>
@@ -144,51 +148,61 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        $('#save-form').submit(function() {
-            let allowTypes = ["image/png", "image/jpeg", "image/svg+xml"];
-            var fileInput = $('#icon')[0];
-            var fileType = fileInput.files[0].type;
-            if (allowTypes.includes(fileType)) {
-                $('#fileNotSupported').hide();
-                $(this).submit();
-            } else {
-                $('#fileNotSupported').show();
-                event.preventDefault();
-            }
+        // Update Use case
+        function updateForm(url) {
+            $('#useCaseForm').load(url);
+        }
 
-        })
-        $('.placeholder-text').click(function() {
-            var plcr = $(this).html();
-            var area = $(this).attr('data');
-            insertAtCaret(area, plcr)
+        $(document).ready(function(){
+            // Create use case
+            $(document).on("submit", "#save-form", function() {
+
+                let inputFile = $('#icon');
+                if(inputFile.prop('files').length > 0){
+                    let file = inputFile.prop('files')[0];
+                    if (file.type.match('image.*')) {
+                        $('#fileNotSupported').hide();
+                        $(this).submit();
+                    } else {
+                        $('#fileNotSupported').show();
+                        event.preventDefault();
+                    }
+                }
+    
+            })
+            $(document).on("click", ".placeholder-text", function() {
+                let plcr = $(this).html();
+                let area = $(this).attr('data');
+                insertAtCaret(area, plcr)
+            })
         })
 
         function insertAtCaret(areaId, text) {
-            var txtarea = document.getElementById(areaId);
+            let txtarea = document.getElementById(areaId);
             if (!txtarea) {
                 return;
             }
 
-            var scrollPos = txtarea.scrollTop;
-            var strPos = 0;
-            var br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
+            let scrollPos = txtarea.scrollTop;
+            let strPos = 0;
+            let br = ((txtarea.selectionStart || txtarea.selectionStart == '0') ?
                 "ff" : (document.selection ? "ie" : false));
             if (br == "ie") {
                 txtarea.focus();
-                var range = document.selection.createRange();
+                let range = document.selection.createRange();
                 range.moveStart('character', -txtarea.value.length);
                 strPos = range.text.length;
             } else if (br == "ff") {
                 strPos = txtarea.selectionStart;
             }
 
-            var front = (txtarea.value).substring(0, strPos);
-            var back = (txtarea.value).substring(strPos, txtarea.value.length);
+            let front = (txtarea.value).substring(0, strPos);
+            let back = (txtarea.value).substring(strPos, txtarea.value.length);
             txtarea.value = front + text + back;
             strPos = strPos + text.length;
             if (br == "ie") {
                 txtarea.focus();
-                var ieRange = document.selection.createRange();
+                let ieRange = document.selection.createRange();
                 ieRange.moveStart('character', -txtarea.value.length);
                 ieRange.moveStart('character', strPos);
                 ieRange.moveEnd('character', 0);
@@ -204,9 +218,8 @@
 
         function imageCheck(thisData) {
 
-            let types = ["image/png", "image/jpeg", "image/svg+xml"];
             let file = thisData.files[0];
-            if (types.includes(file.type)) {
+            if (file.type.match('image.*')) {
                 $('#fileNotSupported').hide();
             } else {
                 $('#fileNotSupported').show();

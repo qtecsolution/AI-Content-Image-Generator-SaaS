@@ -19,11 +19,12 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function() {
     Route::get('/','HomeController@index')->name('home');
-    Route::get('/posts/create','PostController@create')->name('posts.create');
-    Route::post('/posts','PostController@store')->name('posts.store');
-    Route::post('/content-openai','PostController@openAi')->name('content.openai');
-    Route::get('/image-openai','PostController@imageGenrate')->name('image.openai');
-    Route::get('/default','PostController@default');
+    Route::get('/content-create','OpenAiController@content')->name('content.create');
+    Route::post('/content-generate','OpenAiController@contentGenerate')->name('content.generate');
+    Route::get('/image-create','OpenAiController@image')->name('image.create');
+    Route::get('/image-all','OpenAiController@allImages')->name('image.all');
+    Route::post('/image-generate','OpenAiController@imageGenrate')->name('image.generate');
+    Route::get('/default','OpenAiController@default');
     Route::resource('/contents','UserDocumentController');
     Route::delete('/contents-multiple-delete','UserDocumentController@multipleDelete')->name('contents-multiple-delete');
     Route::resource('/use-case','UseCaseController');

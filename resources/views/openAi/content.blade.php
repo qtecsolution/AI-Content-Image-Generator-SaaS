@@ -12,18 +12,37 @@
                         class="createpost-form  needs-validation  h-100 d-flex flex-column  justify-content-between">
 
                         <div class="form-content">
-                            <h3 class="create-post-header">Create Post</h3>
+                            <h3 class="create-post-header">Content Generate</h3>
 
-                            <div class="row g-4">
+                            <div class="row g-4 mb-3">
 
                                 <!-- Type    -->
-                                <div class="col-12">
+                                <div class="col-7">
                                     <div class="form-group">
                                         <label for="case" class="form-label">Choose Use Case</label>
                                         {{ Form::select('case', $cases, $request->case ?? '', ['class' => 'w-100 nice-select', 'required', 'id' => 'useCase']) }}
                                     </div>
                                 </div>
-
+                                <!-- select tone  -->
+                                <div class="col-5" id="selectPriority">
+                                    <div class="form-group">
+                                        <label for="priority" class="form-label">Select Tone</label>
+                                        <select class="nice-select w-100" name="priority" id="temp">
+                                            <option value="0">Funny</option>
+                                            <option value="0.7" selected>Serious</option>
+                                            <option value="0.9">Formal</option>
+                                            <option value="1">Respectful </option>
+                                        </select>
+                                        <div class="valid-feedback">
+                                            Awesome! You're one step closer to greatness.
+                                        </div>
+                                        <div class="invalid-feedback">
+                                            Please enter keywords
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row g-4">
                                 <!-- Title    -->
                                 <div class="col-12">
                                     <div class="form-group">
@@ -61,7 +80,7 @@
                                         <label for="description" class="form-label">Description</label>
                                         <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
                                             placeholder="Description" rows="6"></textarea>
-                                            <small class="text-mute"> Should describe your need for better result. </small>
+                                        <small class="text-mute"> Should describe your need for better result. </small>
                                         <div class="valid-feedback">
                                             Awesome! You're one step closer to greatness.
                                         </div>
@@ -70,24 +89,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- select tone  -->
-                                <div class="col-12" id="selectPriority">
-                                    <div class="form-group">
-                                        <label for="priority" class="form-label">Select Tone</label>
-                                        <select class="nice-select w-100" name="priority" id="temp">
-                                            <option value="0">Funny</option>
-                                            <option value="0.7" selected>Serious</option>
-                                            <option value="0.9">Formal</option>
-                                            <option value="1">Respectful </option>
-                                        </select>
-                                        <div class="valid-feedback">
-                                            Awesome! You're one step closer to greatness.
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            Please enter keywords
-                                        </div>
-                                    </div>
-                                </div>
+                                
 
                             </div>
                         </div>
@@ -179,7 +181,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('content.openai') }}",
+                url: "{{ route('content.generate') }}",
                 data: {
                     title,
                     keywords,
