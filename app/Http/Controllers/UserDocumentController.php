@@ -69,7 +69,7 @@ class UserDocumentController extends Controller
 
         try {
             $input = $request->except('_token');
-            $input['user_id'] = \Auth::user()->id;
+            $input['user_id'] = Auth::user()->id;
             UserDocument::create($input);
             alert()->success('Success', 'Content Saved successfully.');
             return back();
