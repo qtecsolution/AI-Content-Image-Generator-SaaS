@@ -7,12 +7,7 @@
                 <div class="card custom">
                     <div class="card-header bg-info">
                         <h5 class="card-title no-margin color-white">All Plans</h5>
-                        <div class="card-button">
-                            <a href="{{route('plan.create')}}" class="btn btn-success btn-xs">
-                                 <i class="fa fa-add"></i> 
-                                 Create Plan
-                            </a>
-                        </div>
+                      
                     </div>
                     <div class="card-body">
                         <table class="table">
