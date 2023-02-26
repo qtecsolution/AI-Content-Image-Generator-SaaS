@@ -39,61 +39,110 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade show active" id="Papal-tab-pane" role="tabpanel" aria-labelledby="Papal-tab"
                 tabindex="0">
-                <form>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Papal Submit</button>
-                </form>
+                <div>
+                    <form action="{{ route('payment.paypal.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+            
+                        <div class="form-group mb-2">
+                            <label  class="col-form-label">@translate(Paypal active) <span class="text-danger">*</span></label>
+                            <select class="form-control select2 w-100" name="PAYPAL_ACTIVE">
+                                <option value="on" {{ getSystemSetting('PAYPAL_ACTIVE') == 'on' ? 'selected' : null }}>ON
+                                </option>
+                                <option value="off" {{ getSystemSetting('PAYPAL_ACTIVE') == 'off' ? 'selected' : null }}>Off
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label  class="col-form-label">@translate(PAYPAL_CLIENT_ID)</label>
+                            <input class="form-control" name="PAYPAL_CLIENT_ID"
+                                value="{{ getSystemSetting('PAYPAL_CLIENT_ID') }}" placeholder="PAYPAL_CLIENT_ID">
+                        </div>
+            
+                        <div class="form-group mb-2">
+                            <label  class="col-form-label">@translate(PAYPAL_APP_SECRET)</label>
+                            <input class="form-control" name="PAYPAL_APP_SECRET"
+                                value="{{ getSystemSetting('PAYPAL_APP_SECRET') }}" placeholder="PAYPAL_APP_SECRET">
+                        </div>
+                
+                        <div class="text-center">
+                            <button class="btn btn-success " type="submit" name="action"
+                                value="published">@translate(Save)</button>
+                        </div>
+            
+            
+                    </form>
+                </div>
             </div>
             <div class="tab-pane fade" id="Stripe-tab-pane" role="tabpanel" aria-labelledby="Stripe-tab" tabindex="0">
 
-                <form>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <form action="{{ route('payment.stripe.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+    
+                    <div class="form-group mb-2">
+                        <label class="col-form-label">@translate(STRIPE_ACTIVE) <span class="text-danger">*</span></label>
+                        <select class="form-control select2 w-100" name="STRIPE_ACTIVE">
+                            <option value="on" {{ getSystemSetting('STRIPE_ACTIVE') == 'on' ? 'selected' : null }}>ON
+                            </option>
+                            <option value="off" {{ getSystemSetting('STRIPE_ACTIVE') == 'off' ? 'selected' : null }}>Off
+                            </option>
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    <div class="form-group mb-2">
+                        <label  class="col-form-label">@translate(STRIPE_KEY)</label>
+                        <input class="form-control" name="STRIPE_KEY" value="{{ getSystemSetting('STRIPE_KEY') }}"
+                            placeholder="STRIPE_KEY">
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    
+                    <div class="form-group mb-2">
+                        <label  class="col-form-label">@translate(STRIPE_SECRET)</label>
+                        <input class="form-control" name="STRIPE_SECRET" value="{{ getSystemSetting('STRIPE_SECRET') }}"
+                            placeholder="STRIPE_SECRET">
                     </div>
-                    <button type="submit" class="btn btn-primary">Stripe Submit</button>
+
+    
+                    <div class="text-center mt-2">
+                        <button class="btn btn-success float-left" type="submit" name="action"
+                            value="published">@translate(Save)</button>
+                    </div>
+    
+    
                 </form>
 
             </div>
             <div class="tab-pane fade" id="RazorPay-tab-pane" role="tabpanel" aria-labelledby="RazorPay-tab"
                 tabindex="0">
 
-                <form>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                <form action="{{ route('payment.rezor.store') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+    
+                    <div class="form-group mb-2">
+                        <label class="col-form-label">@translate(RAZORPAY_ACTIVE) <span class="text-danger">*</span></label>
+                        <select class="form-control select2 w-100" name="RAZORPAY_ACTIVE">
+                            <option value="on" {{ getSystemSetting('RAZORPAY_ACTIVE') == 'on' ? 'selected' : null }}>ON
+                            </option>
+                            <option value="off" {{ getSystemSetting('RAZORPAY_ACTIVE') == 'off' ? 'selected' : null }}>Off
+                            </option>
+                        </select>
                     </div>
-                    <div class="mb-3">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    <div class="form-group mb-2">
+                        <label class="col-form-label">@translate(RAZORPAY_KEY)</label>
+                        <input class="form-control" name="RAZORPAY_KEY" value="{{ getSystemSetting('RAZORPAY_KEY') }}"
+                            placeholder="RAZORPAY_KEY">
                     </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    
+                    <div class="form-group mb-2">
+                        <label class="col-form-label">@translate(RAZORPAY_SECRET)</label>
+                        <input class="form-control" name="RAZORPAY_SECRET" value="{{ getSystemSetting('RAZORPAY_SECRET') }}"
+                            placeholder="RAZORPAY_SECRET">
                     </div>
-                    <button type="submit" class="btn btn-primary">RazorPay Submit</button>
+
+    
+                    <div class="text-center">
+                        <button class="btn btn-success float-left" type="submit" name="action"
+                            value="published">@translate(Save)</button>
+                    </div>
+    
+    
                 </form>
 
             </div>
