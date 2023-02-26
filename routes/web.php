@@ -38,5 +38,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/plan/purchase','PlanController@purchaseDone')->name('plan.purchase.store');
     Route::get('/payment/method','PaymentMethodController@index')->name('payment.method');
     Route::get('/seo/setup','SettingController@seoSetup')->name('seo.setup');
+    Route::post('/seo/store','SettingController@seoStore')->name('seo.store');
     Route::get('/setting/setup','SettingController@setting')->name('setting');
 });
