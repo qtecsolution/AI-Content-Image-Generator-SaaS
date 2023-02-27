@@ -2,34 +2,34 @@
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
-          
+
             <div class="col-md-12">
                 <div class="card custom">
                     <div class="card-header bg-info">
                         <h5 class="card-title no-margin color-white">All Plans</h5>
                         <div class="card-button">
-                            <a href="{{route('plan.userIndex')}}" class="btn btn-success btn-xs">
-                                 <i class="fa fa-add"></i> 
-                                 See Plans
+                            <a href="{{ route('plan.userIndex') }}" class="btn btn-success btn-xs">
+                                <i class="fa fa-add"></i>
+                                See Plans
                             </a>
                         </div>
                     </div>
-                   
+
 
                     <div class="row">
                         <div class="col-md-4">
-                            {{$plan}}
+                            {{ $plan }}
                             show the plan card here
                         </div>
                         <div class="col-md-4">
 
-                            <form method="post" action="{{route('plan.purchase.store')}}">
-                            @csrf
-                            <input type="hidden" name="plan_id" value="{{$plan->id}}">
-                            <input type="hidden" name="payment_method" value="paypal">
-                            <input type="hidden" name="paymentAmount" value="{{$plan->price}}"> 
-                            {{-- this input filed the payment done amount --}}
-                            <button class="btn btn-primary" type="submit">Purchase </button>
+                            <form method="post" action="{{ route('plan.purchase.store') }}">
+                                @csrf
+                                <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                <input type="hidden" name="payment_method" value="paypal">
+                                <input type="hidden" name="paymentAmount" value="{{ $plan->price }}">
+                                {{-- this input filed the payment done amount --}}
+                                <button class="btn btn-primary" type="submit">Purchase </button>
                             </form>
                         </div>
 
@@ -37,12 +37,13 @@
                             <h3 class="title text-uppercase ls-10 pt-2">Select Payment Method</h3>
                             <div class="order-summary">
                                 {{-- this is order payment --}}
-                                <form action="{{ route('order.payment') }}" method="post" id="order_payment_done"
-                                    data-stripe-publishable-key="{{ getSystemSetting('STRIPE_KEY') }}">
+                                <form action="{{ route('plan.purchase.store') }}" method="post" id="order_payment_done"
+                                    data-stripe-publishable-key="{{ App\Http\Controllers\HomeController::readConfig('STRIPE_KEY') }}">
                                     @csrf
-                                    <input type="hidden" name="coin_id" value="{{ $coin->id }}">
-                                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="cod">
-                                    <input type="hidden" id="paymentAmount" name="paymentAmount" value="">
+                                    <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                    <input type="hidden" id="paymentMethod" name="paymentMethod" value="stripe">
+                                    <input type="hidden" id="paymentAmount" name="paymentAmount"
+                                        value="{{ $plan->price }}">
                                     <input type="hidden" id="paymentTID" name="paymentTID" value="">
                                     <input type="hidden" id="value_1" name="value_1" value="">
                                 </form>
@@ -51,20 +52,21 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-        
-        
-                                @if (getSystemSetting('PAYPAL_ACTIVE') == 'on')
+
+
+                                @if (App\Http\Controllers\HomeController::readConfig('PAYPAL_ACTIVE') == 'on')
                                     <div id="smart-button-container">
                                         <div style="text-align: center;">
                                             <div id="paypal-button-container"></div>
                                         </div>
                                     </div>
                                 @endif
-                                @if (getSystemSetting('STRIPE_ACTIVE') == 'on')
+
+                                @if (App\Http\Controllers\HomeController::readConfig('STRIPE_ACTIVE') == 'on')
                                     <div class="form-group place-order stripe-payment">
-                                        <a class="btn btn-dark btn-block btn-rounded checkout_btn"
-                                            data-bs-toggle="collapse" href="#collapseExample" role="button"
-                                            aria-expanded="false" aria-controls="collapseExample">
+                                        <a class="btn btn-dark btn-block btn-rounded checkout_btn" data-bs-toggle="collapse"
+                                            href="#collapseExample" role="button" aria-expanded="false"
+                                            aria-controls="collapseExample">
                                             <img src="{{ asset('stripe.png') }}">
                                         </a>
                                     </div>
@@ -85,9 +87,9 @@
                                             </div>
                                             <div class='row'>
                                                 <div class='col-xs-12 col-md-4 form-group cvc required'>
-                                                    <label class='control-label'>CVC</label> <input
-                                                        autocomplete='off' class='form-control card-cvc'
-                                                        placeholder='ex. 311' size='4' type='text'>
+                                                    <label class='control-label'>CVC</label> <input autocomplete='off'
+                                                        class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                                        type='text'>
                                                 </div>
                                                 <div class='col-xs-12 col-md-4 form-group expiration required'>
                                                     <label class='control-label'>Expiration Month</label> <input
@@ -110,109 +112,68 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <button class="btn btn-primary btn-lg btn-block"
-                                                        type="button" onclick="stripPaymnet()">Pay Now
-                                                        ({{ formatPrice($total) }})</button>
+                                                    <button class="btn btn-primary btn-lg btn-block" type="button"
+                                                        onclick="stripPaymnet()">Pay Now
+                                                        ({{ $plan->price }})</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <form action="{{ route('order.payment') }}" method="post"
+                                    <form action="{{ route('plan.purchase.store') }}" method="post"
                                         class="order_payment_stripe"
-                                        data-stripe-publishable-key="{{ getSystemSetting('STRIPE_KEY') }}">
+                                        data-stripe-publishable-key="{{ App\Http\Controllers\HomeController::readConfig('STRIPE_KEY') }}">
                                         @csrf
-                                        <input type="hidden" name="coin_id" value="{{ $coin->id }}">
-                                        <input type="hidden" class="paymentMethod" name="paymentMethod"
-                                            value="cod">
+                                        <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                        <input type="hidden" class="paymentMethod" name="paymentMethod" value="cod">
                                         <input type="hidden" class="paymentAmount" name="paymentAmount"
-                                            value="">
-                                        <input type="hidden" class="paymentTID" name="paymentTID"
-                                            value="">
+                                            value="{{ $plan->price }}">
+                                        <input type="hidden" class="paymentTID" name="paymentTID" value="">
                                         <input type="hidden" class="value_1" name="value_1" value="">
                                     </form>
                                 @endif
-                                @if (getSystemSetting('STORE_ACTIVE') == 'on')
-                                    <div class="form-group sslcommerz-payment place-order">
-                                        <button type="button"
-                                            class="btn btn-dark btn-block btn-rounded checkout_btn"
-                                            onclick="storePaymnet()">
-                                            <img src="{{ asset('sslcommerz.png') }}"
-                                                class="paypal-logo paypal-logo-paypal paypal-logo-color-blue">
-                                        </button>
-                                    </div>
-                                @endif
-                                @if (getSystemSetting('RAZORPAY_ACTIVE') == 'on')
+
+                                @if (App\Http\Controllers\HomeController::readConfig('RAZORPAY_ACTIVE') == 'on')
                                     <div class="form-group razorpay-payment place-order">
-                                        <button type="button"
-                                            class="btn btn-dark btn-block btn-rounded checkout_btn"
+                                        <button type="button" class="btn btn-dark btn-block btn-rounded checkout_btn"
                                             onclick="razorPaymnet()">
                                             <img src="{{ asset('razorpay_logo.png') }}"
                                                 class="paypal-logo paypal-logo-paypal paypal-logo-color-blue">
                                         </button>
                                     </div>
-                                    <form action="{{ route('order.payment') }}" method="POST"
+                                    <form action="{{ route('plan.purchase.store') }}" method="POST"
                                         class="razorPaymnet d-none">
                                         @csrf
-                                        <input type="hidden" name="coin_id" value="{{ $coin->id }}">
-                                        <input type="hidden" id="paymentMethod" name="paymentMethod"
-                                            value="rezorpay">
-                                        <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ getSystemSetting('RAZORPAY_KEY') }}"
-                                            data-amount="{{ 100 * $total }}" data-name="{{ getSystemSetting('type_name') }}" data-description=""
-                                            data-image="{{ filePath(getSystemSetting('type_logo')) }}" data-prefill.name="{{ $user->name }}"
-                                            data-prefill.email="{{ $user->email }}"></script>
+                                        <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                        <input type="hidden" id="paymentMethod" name="paymentMethod" value="rezorpay">
+                                        <input type="hidden" id="paymentAmount" name="paymentAmount"
+                                            value="{{ $plan->price }}">
+                                        <script src="https://checkout.razorpay.com/v1/checkout.js"
+                                            data-key="{{ App\Http\Controllers\HomeController::readConfig('RAZORPAY_KEY') }}"
+                                            data-amount="{{ 100 * $plan->price }}"
+                                            data-name="{{ App\Http\Controllers\HomeController::readConfig('type_name') }}" data-description=""
+                                            data-image="{{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\HomeController::readConfig('type_logo')) }}"
+                                            data-prefill.name="{{ $user->name }}" data-prefill.email="{{ $user->email }}"></script>
                                     </form>
                                 @endif
-                                @if (getSystemSetting('PAYTM_ACTIVE') == 'on')
-                                    <div class="form-group paytam-payment place-order">
-                                        <a class="btn btn-dark btn-block btn-rounded checkout_btn"
-                                            data-bs-toggle="collapse" href="#Paytm" role="button"
-                                            aria-expanded="false" aria-controls="Paytm">
-                                            <img src="{{ asset('paytm.png') }}"
+
+                                @if (App\Http\Controllers\HomeController::readConfig('MOLLIE_ACTIVE') == 'on')
+                                    <div class="form-group mollie-payment place-order">
+                                        <button type="button" class="btn btn-dark btn-block btn-rounded checkout_btn"
+                                            onclick="molliePaymnet()">
+                                            <img src="{{ asset('mollie.png') }}"
                                                 class="paypal-logo paypal-logo-paypal paypal-logo-color-blue">
-                                        </a>
+                                        </button>
                                     </div>
-                                    <div class="collapse" id="Paytm">
-                                        <form action="{{ route('order.payment') }}" method="post"
-                                            id="paytmPaymnet_form">
-        
-                                            @csrf
-                                            <input type="hidden" name="coin_id" value="{{ $coin->id }}">
-                                            <input type="hidden" id="paymentMethod" name="paymentMethod"
-                                                value="paytm">
-                                            <input type="hidden" id="paymentAmount" name="paymentAmount"
-                                                value="">
-                                            <input type="hidden" id="paymentTID" name="paymentTID"
-                                                value="">
-                                            <input type="hidden" id="value_1" name="value_1" value="">
-                                            <div class="card-body">
-                                                <div class='row'>
-                                                    <div class='col-xs-12'>
-                                                        <label class='control-label'>Name</label>
-                                                        <input class='form-control' name="name" size='4'
-                                                            type='text' value="{{ $user->name }}">
-                                                    </div>
-                                                </div>
-                                                <div class='row'>
-                                                    <div class='col-xs-12'>
-                                                        <label class='control-label'>Paytm Number</label>
-                                                        <input autocomplete='off' class='form-control card-number'
-                                                            name="mobile_no" value="{{ $user->phone }}"
-                                                            type='tel'>
-                                                    </div>
-                                                </div>
-        
-                                                <div class="row">
-                                                    <div class="col-xs-12">
-                                                        <button class="btn btn-primary btn-lg btn-block"
-                                                            type="submit">Pay
-                                                            Now
-                                                            ({{ formatPrice($total) }})</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
+                                    <form action="{{ route('plan.purchase.store') }}" method="POST"
+                                        class="molliePaymnet d-none">
+                                        @csrf
+                                        <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                        <input type="hidden" id="paymentMethod" name="paymentMethod" value="mollie">
+                                        <input type="hidden" id="paymentAmount" name="paymentAmount"
+                                            value="{{ $plan->price }}">
+                                    </form>
                                 @endif
+
                             </div>
                         </div>
                     </div>
@@ -221,10 +182,10 @@
         </div>
     </div>
 @endsection
-@section('scripts')
-    @if (getSystemSetting('PAYPAL_ACTIVE') == 'on')
+@section('script')
+    @if (App\Http\Controllers\HomeController::readConfig('PAYPAL_ACTIVE') == 'on')
         <script
-            src="https://www.paypal.com/sdk/js?client-id={{ getSystemSetting('PAYPAL_CLIENT_ID') }}&enable-funding=venmo&currency=USD"
+            src="https://www.paypal.com/sdk/js?client-id={{ App\Http\Controllers\HomeController::readConfig('PAYPAL_CLIENT_ID') }}&enable-funding=venmo&currency=USD"
             data-sdk-integration-source="button-factory"></script>
         <script>
             "use strict"
@@ -247,7 +208,7 @@
                             purchase_units: [{
                                 "amount": {
                                     "currency_code": "USD",
-                                    "value": {{ $total }}
+                                    "value": {{ $plan->price }}
                                 }
                             }]
                         });
@@ -300,15 +261,16 @@
 
 
 
-    @if (getSystemSetting('STRIPE_ACTIVE') == 'on')
+    @if (App\Http\Controllers\HomeController::readConfig('STRIPE_ACTIVE') == 'on')
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
         <script>
             "use strict"
 
             function stripPaymnet() {
+                debugger
                 // e.preventDefault();
                 $('.paymentMethod').val('stripe');
-                $('.paymentAmount').val({{ $total }});
+                $('.paymentAmount').val({{ $plan->price }});
                 $('.paymentTID').val('');
                 $('.value_1').val('');
 
@@ -334,33 +296,17 @@
                     /* token contains id, last4, and card type */
                     var token = response['id'];
                     // $('#order_payment_done').find('input[type=text]').empty();
-                    $('.order_payment_done').append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-                    $('.order_payment_done').submit();
+                    $('#order_payment_done').append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+                    $('#order_payment_done').submit();
                 }
             }
         </script>
     @endif
 
 
-    @if (getSystemSetting('STORE_ACTIVE') == 'on')
-        {}
-        <script>
-            "use strict"
 
-            function storePaymnet() {
-                // alert();
-                // e.preventDefault();
-                $('#paymentMethod').val('sslcommarze');
-                $('#paymentAmount').val({{ $total }});
-                $('#paymentTID').val('');
-                $('#value_1').val('');
-                $('#order_payment_done').submit();
 
-            }
-        </script>
-    @endif
-
-    @if (getSystemSetting('RAZORPAY_ACTIVE') == 'on')
+    @if (App\Http\Controllers\HomeController::readConfig('RAZORPAY_ACTIVE') == 'on')
         {}
         <script>
             "use strict"
@@ -369,6 +315,20 @@
 
 
                 $('.razorPaymnet').submit();
+
+            }
+        </script>
+    @endif
+
+    @if (App\Http\Controllers\HomeController::readConfig('MOLLIE_ACTIVE') == 'on')
+        {}
+        <script>
+            "use strict"
+            // MOLLIE_ACTIVE
+            function molliePaymnet() {
+
+
+                $('.molliePaymnet').submit();
 
             }
         </script>

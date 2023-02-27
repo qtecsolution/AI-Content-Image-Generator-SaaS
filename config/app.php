@@ -198,6 +198,8 @@ return [
 
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Mollie\Laravel\MollieServiceProvider::class
+
     ],
 
     /*

@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\PlanController;
+use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +18,12 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Auth::routes();
+
+// Route::get()
+Route::controller(GoogleController::class)->group(function(){
+    Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
+    Route::get('auth/google/callback', 'handleGoogleCallback')->name('auth.google.callback');
+});
 
 
 Route::group(['middleware' => ['auth']], function() {
@@ -44,6 +53,16 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('payment/paypal/store', 'PaymentMethodController@paypalSettingStore')->name('payment.paypal.store');
     Route::post('payment/stripe/store', 'PaymentMethodController@stripeSettingStore')->name('payment.stripe.store');
     Route::post('payment/rezor/store', 'PaymentMethodController@rezorSettingStore')->name('payment.rezor.store');
+    Route::post('payment/mollie/store', 'PaymentMethodController@mollieSettingStore')->name('payment.mollie.store');
     Route::get('/seo/setup','SettingController@seoSetup')->name('seo.setup');
-    Route::get('/setting/setup','SettingController@setting')->name('setting');
+    Route::post('/seo/store','SettingController@seoStore')->name('seo.store');
+    Route::get('/setting/setup','SettingController@setting')->name('setting');   
+    Route::post('/setting/setup/update','SettingController@siteSettingUpdate')->name('site.update');   
+    Route::post('/setting/smtp/update','SettingController@smtpStore')->name('smtp.store');   
+   
 });
+
+Route::get('payment/success',function(Request $request){
+    return $request;
+})->name('order.success');
+Route::get('handle',[PlanController::class,'handleWebhookNotification'])->name('webhooks.mollie');

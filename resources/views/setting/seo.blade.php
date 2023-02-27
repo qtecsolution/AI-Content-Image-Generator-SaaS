@@ -1,21 +1,45 @@
 @extends('layouts.app')
+
+@section('breadcrumb')
+    <li class="breadcrumb-item active">Seo Tools</li>
+@endsection
+
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
-        <form>
-            <div class="mb-3">
-                <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-                <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
-            </div>
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                <label class="form-check-label" for="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" class="btn btn-primary">Crepto Submit</button>
-        </form>
+        <div class="row">
+        <div class="col-6">
+            <form class="project-table-wrapper" method="post" action="{{route('seo.store')}}">
+                @csrf
+                <div class="form-group mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Meta Key</label>
+                    <input type="text" class="form-control custom-input" value="{{App\Http\Controllers\HomeController::readConfig('meta_key')}}" id="exampleInputEmail1" name="meta_key" aria-describedby="emailHelp">
+                </div>
+    
+                <div class="form-group mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Meta Title</label>
+                    <input type="text" class="form-control custom-input" value="{{App\Http\Controllers\HomeController::readConfig('meta_title')}}" id="exampleInputEmail1" name="meta_title" aria-describedby="emailHelp">
+                </div>
+    
+                <div class="form-group mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Meta Description</label>
+                    <input type="text" class="form-control custom-input" value="{{App\Http\Controllers\HomeController::readConfig('meta_desc')}}" id="exampleInputEmail1" name="meta_desc" aria-describedby="emailHelp">
+                </div>
+    
+                <div class="form-group mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Meta Image</label>
+                    <input type="file" class="form-control custom-input" value="{{App\Http\Controllers\HomeController::readConfig('meta_image')}}" id="exampleInputEmail1" name="meta_image" aria-describedby="emailHelp">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </div>
+        <div class="col-6">
+            <div class="card" style="width: 18rem;">
+                <img src="{{  App\Http\Controllers\HomeController::filePath(App\Http\Controllers\HomeController::readConfig('meta_image'))}}" class="card-img-top" alt="...">
+               
+              </div>    
+    </div>
+
+    </div>
     </div>
 @endsection
