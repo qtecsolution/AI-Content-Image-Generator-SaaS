@@ -38,7 +38,7 @@
                             <div class="order-summary">
                                 {{-- this is order payment --}}
                                 <form action="{{ route('plan.purchase.store') }}" method="post" id="order_payment_done"
-                                    data-stripe-publishable-key="{{ App\Http\Controllers\HomeController::readConfig('STRIPE_KEY') }}">
+                                    data-stripe-publishable-key="{{ App\Http\Controllers\readConfig('STRIPE_KEY') }}">
                                     @csrf
                                     <input type="hidden" name="plan_id" value="{{ $plan->id }}">
                                     <input type="hidden" id="paymentMethod" name="paymentMethod" value="stripe">
@@ -54,7 +54,7 @@
                                 @enderror
 
 
-                                @if (App\Http\Controllers\HomeController::readConfig('PAYPAL_ACTIVE') == 'on')
+                                @if (App\Http\Controllers\readConfig('PAYPAL_ACTIVE') == 'on')
                                     <div id="smart-button-container">
                                         <div style="text-align: center;">
                                             <div id="paypal-button-container"></div>
@@ -62,7 +62,7 @@
                                     </div>
                                 @endif
 
-                                @if (App\Http\Controllers\HomeController::readConfig('STRIPE_ACTIVE') == 'on')
+                                @if (App\Http\Controllers\readConfig('STRIPE_ACTIVE') == 'on')
                                     <div class="form-group place-order stripe-payment">
                                         <a class="btn btn-dark btn-block btn-rounded checkout_btn" data-bs-toggle="collapse"
                                             href="#collapseExample" role="button" aria-expanded="false"
@@ -121,7 +121,7 @@
                                     </div>
                                     <form action="{{ route('plan.purchase.store') }}" method="post"
                                         class="order_payment_stripe"
-                                        data-stripe-publishable-key="{{ App\Http\Controllers\HomeController::readConfig('STRIPE_KEY') }}">
+                                        data-stripe-publishable-key="{{ App\Http\Controllers\readConfig('STRIPE_KEY') }}">
                                         @csrf
                                         <input type="hidden" name="plan_id" value="{{ $plan->id }}">
                                         <input type="hidden" class="paymentMethod" name="paymentMethod" value="cod">
@@ -132,7 +132,7 @@
                                     </form>
                                 @endif
 
-                                @if (App\Http\Controllers\HomeController::readConfig('RAZORPAY_ACTIVE') == 'on')
+                                @if (App\Http\Controllers\readConfig('RAZORPAY_ACTIVE') == 'on')
                                     <div class="form-group razorpay-payment place-order">
                                         <button type="button" class="btn btn-dark btn-block btn-rounded checkout_btn"
                                             onclick="razorPaymnet()">
@@ -148,15 +148,15 @@
                                         <input type="hidden" id="paymentAmount" name="paymentAmount"
                                             value="{{ $plan->price }}">
                                         <script src="https://checkout.razorpay.com/v1/checkout.js"
-                                            data-key="{{ App\Http\Controllers\HomeController::readConfig('RAZORPAY_KEY') }}"
+                                            data-key="{{ App\Http\Controllers\readConfig('RAZORPAY_KEY') }}"
                                             data-amount="{{ 100 * $plan->price }}"
-                                            data-name="{{ App\Http\Controllers\HomeController::readConfig('type_name') }}" data-description=""
-                                            data-image="{{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\HomeController::readConfig('type_logo')) }}"
+                                            data-name="{{ App\Http\Controllers\readConfig('type_name') }}" data-description=""
+                                            data-image="{{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\readConfig('type_logo')) }}"
                                             data-prefill.name="{{ $user->name }}" data-prefill.email="{{ $user->email }}"></script>
                                     </form>
                                 @endif
 
-                                @if (App\Http\Controllers\HomeController::readConfig('MOLLIE_ACTIVE') == 'on')
+                                @if (App\Http\Controllers\readConfig('MOLLIE_ACTIVE') == 'on')
                                     <div class="form-group mollie-payment place-order">
                                         <button type="button" class="btn btn-dark btn-block btn-rounded checkout_btn"
                                             onclick="molliePaymnet()">
@@ -183,9 +183,9 @@
     </div>
 @endsection
 @section('script')
-    @if (App\Http\Controllers\HomeController::readConfig('PAYPAL_ACTIVE') == 'on')
+    @if (App\Http\Controllers\readConfig('PAYPAL_ACTIVE') == 'on')
         <script
-            src="https://www.paypal.com/sdk/js?client-id={{ App\Http\Controllers\HomeController::readConfig('PAYPAL_CLIENT_ID') }}&enable-funding=venmo&currency=USD"
+            src="https://www.paypal.com/sdk/js?client-id={{ App\Http\Controllers\readConfig('PAYPAL_CLIENT_ID') }}&enable-funding=venmo&currency=USD"
             data-sdk-integration-source="button-factory"></script>
         <script>
             "use strict"
@@ -261,7 +261,7 @@
 
 
 
-    @if (App\Http\Controllers\HomeController::readConfig('STRIPE_ACTIVE') == 'on')
+    @if (App\Http\Controllers\readConfig('STRIPE_ACTIVE') == 'on')
         <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
         <script>
             "use strict"
@@ -306,7 +306,7 @@
 
 
 
-    @if (App\Http\Controllers\HomeController::readConfig('RAZORPAY_ACTIVE') == 'on')
+    @if (App\Http\Controllers\readConfig('RAZORPAY_ACTIVE') == 'on')
         {}
         <script>
             "use strict"
@@ -320,7 +320,7 @@
         </script>
     @endif
 
-    @if (App\Http\Controllers\HomeController::readConfig('MOLLIE_ACTIVE') == 'on')
+    @if (App\Http\Controllers\readConfig('MOLLIE_ACTIVE') == 'on')
         {}
         <script>
             "use strict"

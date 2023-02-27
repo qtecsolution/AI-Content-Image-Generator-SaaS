@@ -33,7 +33,7 @@
                 <div class="form-group mb-3">
                     <label for="exampleInputEmail1" class="form-label">OpenAi Key</label>
                     <input type="text" name="open_key"
-                        value="{{ App\Http\Controllers\HomeController::readConfig('open_key') }}" class="form-control"
+                        value="{{ App\Http\Controllers\readConfig('open_key') }}" class="form-control"
                         id="exampleInputEmail1" aria-describedby="emailHelp">
 
                 </div>
@@ -175,7 +175,7 @@
                                 </div>
                                 <div class="avatar-preview">
                                     <div id="imagePreview"
-                                        style="background-image: url({{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\HomeController::readConfig('type_logo')) }});">
+                                        style="background-image: url({{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\readConfig('type_logo')) }});">
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="avatar-preview">
                                     <div id="imagePreview_f_logo"
-                                        style="background-image: url({{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\HomeController::readConfig('footer_logo')) }});">
+                                        style="background-image: url({{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\readConfig('footer_logo')) }});">
                                     </div>
                                 </div>
                             </div>
@@ -213,7 +213,7 @@
                                 </div>
                                 <div class="avatar-preview">
                                     <div id="imagePreview_f_icon"
-                                        style="background-image: url({{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\HomeController::readConfig('favicon_icon')) }}">
+                                        style="background-image: url({{ App\Http\Controllers\HomeController::filePath(App\Http\Controllers\readConfig('favicon_icon')) }}">
                                     </div>
                                 </div>
                             </div>
@@ -228,7 +228,7 @@
                                 <label class="label">CMS Name</label>
                                 <input type="hidden" value="type_name" name="type_name">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_name') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_name') }}"
                                     name="name" class="form-control">
                             </div>
                             <div class="mb-3">
@@ -236,7 +236,7 @@
                                 <label class="label font-weight-bold">CMS Footer</label>
                                 <input type="hidden" value="type_footer" name="type_footer">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_footer') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_footer') }}"
                                     name="footer" class="form-control">
 
                             </div>
@@ -245,7 +245,7 @@
                                 <label class="label">Address</label>
                                 <input type="hidden" value="type_address" name="type_address">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_address') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_address') }}"
                                     name="address" class="form-control">
 
                             </div>
@@ -254,7 +254,7 @@
                                 <label class="label">CMS Mail</label>
                                 <input type="hidden" value="type_mail" name="type_mail">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_mail') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_mail') }}"
                                     name="mail" class="form-control">
                             </div>
 
@@ -266,7 +266,7 @@
                                 <label class="label">CMS Facebook Link</label>
                                 <input type="hidden" value="type_fb" name="type_fb">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_fb') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_fb') }}"
                                     name="fb" class="form-control">
                             </div>
                             <div class="mb-3">
@@ -274,7 +274,7 @@
                                 <label class="label">CMS Twitter Link</label>
                                 <input type="hidden" value="type_tw" name="type_tw">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_tw') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_tw') }}"
                                     name="tw" class="form-control">
                             </div>
                             <div class="mb-3">
@@ -282,7 +282,7 @@
                                 <label class="label">CMS Google Link)</label>
                                 <input type="hidden" value="type_google" name="type_google">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_google') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_google') }}"
                                     name="google" class="form-control">
                             </div>
                             <div class="mb-3">
@@ -290,7 +290,7 @@
                                 <label class="label">CMS Number )</label>
                                 <input type="hidden" value="type_number" name="type_number">
                                 <input type="text"
-                                    value="{{ App\Http\Controllers\HomeController::readConfig('type_number') }}"
+                                    value="{{ App\Http\Controllers\readConfig('type_number') }}"
                                     name="number" class="form-control">
                             </div>
 

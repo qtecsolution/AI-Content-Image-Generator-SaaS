@@ -15,6 +15,7 @@ function fileUpload($file, $folder, $name = null)
     $path = 'uploads/' . $folder . '/' . $imageName;
     return $path;
 }
+
 function fileUploadFromUrl($url, $folder, $name = null)
 {
     $extension = getExtensionFromUrl($url);
@@ -33,6 +34,7 @@ function fileUploadFromUrl($url, $folder, $name = null)
     $imagePath = $path. '/' . $imageName;
     return $imagePath;
 }
+
 function getExtensionFromUrl($url){
     $url_parts = parse_url($url);
     if(isset($url_parts['path'])){
@@ -41,6 +43,7 @@ function getExtensionFromUrl($url){
     }
     return '';
 }
+
 function fileDelete($file)
 {
     if ($file != null) {
