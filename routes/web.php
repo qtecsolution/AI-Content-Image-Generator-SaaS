@@ -16,18 +16,22 @@ use Illuminate\Support\Facades\Auth;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+// Frontend Route
+Route::get('/',function(){
+    return redirect('/login');
+});
 
 Auth::routes();
 
-
+//  Backend Route
 Route::controller(GoogleController::class)->group(function(){
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback')->name('auth.google.callback');
 });
 
-
+// User Route
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/','HomeController@index')->name('home');
+    Route::get('/home','HomeController@index')->name('home');
     Route::get('/content-create','OpenAiController@content')->name('content.create');
     Route::post('/content-generate','OpenAiController@contentGenerate')->name('content.generate');
 
@@ -42,12 +46,12 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('/content-history/{id}','ContentHistoryController@destroy')->name('content-history.destroy');
     Route::delete('/content-history-multiple-delete','ContentHistoryController@multipleDelete')->name('content-history.multiple-delete');
 
-
-    Route::get('/default','OpenAiController@default');
-    Route::resource('/contents','UserDocumentController');
+    Route::resource('contents','UserDocumentController');
     Route::delete('/contents-multiple-delete','UserDocumentController@multipleDelete')->name('contents-multiple-delete');
+});
+// Admin Route
+Route::group(['middleware' => ['auth','admin']], function() {
     Route::resource('/use-case','UseCaseController');
-
     Route::resource('/user','UserController');
     Route::resource('plan','PlanController');
     Route::get('plan/{id}/edit','PlanController@edit')->name('plan.edit');
