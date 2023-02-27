@@ -41,48 +41,69 @@
                         data-bs-placement="right" data-bs-title="Generate your Content">+</a>
                 </li>
                 <li>
-                    <a href="{{ route('home') }}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Dashboard">
-                        <img src="{{ asset('assets/images/menu/home.png') }}">
+                    <a href="{{ route('image.create') }}" class="add-btn" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="AI Image Generate">-</a>
+                </li>
+                @if (Auth::user()->type == 'user')
+                <li>
+                    <a href="{{ route('home') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Home">
+                        <img src="{{ asset('assets/icons/home.svg') }}">
                     </a>
                 </li>
+                @endif
+                <li>
+                    <a href="{{ route('contents.index') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Saved Content">
+                        <img src="{{ asset('assets/icons/save.svg') }}">
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('content-history.index') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Genertated History">
+                        <img src="{{ asset('assets/icons/cards-icons/Book.svg') }}">
+                    </a>
+                </li>
+                
+                
+                @if (Auth::user()->type == 'admin')
+                    <!-- Admin Menu -->
+                    <li>
+                        <a href="{{ route('home') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-title="Dashboard">
+                            <img src="{{ asset('assets/icons/home.svg') }}">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('user.index') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-title="User Management"> <img
+                                src="{{ asset('assets/icons/users.svg') }}"> </a>
+                    </li>
 
-                <!-- Admin Menu -->
-                <li>
-                    <a href="{{ route('user.index') }}" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="User Management"> <img src="{{ asset('assets/images/menu/user.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="{{ route('plan.index') }}" class="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-title="Manage Plan"> <img
-                            src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
-                </li>
+                    <li>
+                        <a href="{{ route('plan.index') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-title="Manage Plan"> <img
+                                src="{{ asset('assets/icons/zap.svg') }}"> </a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('plan.userIndex') }}" class="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-title="Purchase Plan"> <img
-                            src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
-                </li>
+                    <li>
+                        <a href="{{ route('plan.userIndex') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-title="Purchase Plan"> <img
+                                src="{{ asset('assets/icons/layers.svg') }}"> </a>
+                    </li>
 
-                <li>
-                    <a href="{{ route('payment.method') }}" class="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-title="Payment Gateway"> <img
-                            src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
-                </li>
-                <li>
-<<<<<<< HEAD
-                    <a href="{{ route('seo.setup') }}" class="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-title="Manage SEO"> <img
-                            src="{{ asset('assets/images/menu/seo.png') }}"> </a>
-                </li>
+                    <li>
+                        <a href="{{ route('payment.method') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-title="Payment Gateway"> <img
+                                src="{{ asset('assets/icons/credit-card.svg') }}"> </a>
+                    </li>
 
-                <li>
-=======
->>>>>>> origin/rumon
-                    <a href="{{ route('setting') }}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="System Settings"> <img
-                            src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
-                </li>
+                    <li>
+                        <a href="{{ route('setting') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-title="System Settings"> <img
+                                src="{{ asset('assets/icons/gear.svg') }}"> </a>
+                    </li>
+                @endif
 
             </ul>
         </div>
@@ -93,13 +114,16 @@
     <main class="mainsection">
         <!-- HEADER SECTION START -->
         <header class="header">
+            <!-- hamburger icon  -->
+            <button class="btn d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"><img
+                    src="{{ asset('assets/icons/menu.svg') }}" alt=""></button>
             <!-- MOBILE-LOGO -->
-            <h3 class="logo-name d-lg-none ">{{readConfig('type_name')}}</h3>
+            <h3 class="logo-name d-lg-none ">{{ readConfig('type_name') }}</h3>
             <!-- ICON-MENU START -->
             <nav class="header-nav">
                 <ul class="headermenu">
                     <!-- language  -->
-                   
+
                     <!-- USER-DROPDOWN -->
                     <li class="headermenu-item">
                         <div class="user-info">
@@ -155,9 +179,20 @@
 
 
 
-    <!-- MOBILE FIXED BUTTON -->
-    <a class="add-btn mobile-fixed" href="{{route('content.create')}}">+</a>
-    
+    <!-- MOBILE OFFCANVAS MENU  -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="staticBackdropLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div>
+                I will not close if you click outside of me.
+            </div>
+        </div>
+    </div>
+
+
     <!-- BOOTSTRAP JS   -->
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 

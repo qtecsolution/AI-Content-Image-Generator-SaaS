@@ -114,12 +114,12 @@ class UserDocumentController extends Controller
             $data->update($input);
             DB::commit();
             alert()->success('Success', 'Content Updated successfully.');
-            return redirect()->route('contents.index');
+            return redirect()->back();
         } catch (\Exception $e) {
             DB::rollBack();
              $errorMessage = $e->getMessage();
             alert()->error('Error', $errorMessage);
-            return redirect()->route('employee.index');
+            return redirect()->back();
         }
     }
 

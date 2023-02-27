@@ -68,14 +68,14 @@ function filePath($file)
 {
 
     if ($file == null) {
-        return asset('placeholder.png');
+        return asset('assets/images/placeholder.png');
     }
     /*check here file is exxist*/
     $path = public_path() . '/' . $file;
     if (file_exists($path)) {
         return asset($file);
     } else {
-        return asset('placeholder.png');
+        return asset('assets/images/placeholder.png');
     }
 }
 

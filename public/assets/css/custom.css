@@ -10,11 +10,6 @@
     color: #fff;
 }
 
-.sidebar-menu li {
-    list-style: none;
-    text-align: center;
-    margin: 35px 0;
-}
 
 .sidebar-menu li:first-child {
     margin-top: 0;
@@ -25,7 +20,7 @@
 }
 
 .sidebar-menu li a img {
-    width: 40px;
+    width: 25px;
 }
 
 .sidebar-menu li a:hover img {
