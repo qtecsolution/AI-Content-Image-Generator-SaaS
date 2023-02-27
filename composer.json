@@ -16,8 +16,10 @@
         "laravelcollective/html": "^6.4",
         "mollie/laravel-mollie": "^2.22",
         "openai-php/laravel": "^0.3.1",
-        "razorpay/razorpay": "^2.8",
         "realrashid/sweet-alert": "^6.0",
+        "winter/laravel-config-writer": "^1.0",
+        "yajra/laravel-datatables-oracle": "^10.0",
+        "razorpay/razorpay": "^2.8",
         "stripe/stripe-php": "^10.7"
     },
     "require-dev": {
@@ -34,7 +36,10 @@
             "App\\": "app/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "app/Http/Helper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

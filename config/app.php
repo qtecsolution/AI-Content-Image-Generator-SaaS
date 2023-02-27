@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
-
 return [
 
     /*
@@ -55,7 +54,6 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-
     'asset_url' => env('ASSET_URL', '/'),
 
     /*
@@ -69,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
 
     /*
     |--------------------------------------------------------------------------
@@ -122,7 +120,6 @@ return [
     */
 
     'key' => env('APP_KEY'),
-
     'cipher' => 'AES-256-CBC',
 
     /*
@@ -159,6 +156,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -185,13 +183,19 @@ return [
         /*
          * Package Service Providers...
          */
+
         Collective\Html\HtmlServiceProvider::class,
+        Yajra\DataTables\DataTablesServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
+
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+
         // App\Providers\BroadcastServiceProvider::class,
+
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Mollie\Laravel\MollieServiceProvider::class
@@ -210,9 +214,11 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+
         // 'ExampleClass' => App\Example\ExampleClass::class,
+
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'DataTables' => Yajra\DataTables\Facades\DataTables::class,
     ])->toArray(),
-
 ];
