@@ -55,6 +55,9 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/setting/setup','SettingController@setting')->name('setting');   
     Route::post('/setting/setup/update','SettingController@siteSettingUpdate')->name('site.update');   
     Route::post('/setting/smtp/update','SettingController@smtpStore')->name('smtp.store');   
+    Route::post('/open/ai/store','SettingController@openAiStore')->name('open.ai.store');
+    Route::post('/tawkto/store','SettingController@tawkToStore')->name('tawkto.store');
+    Route::post('/social/store','SettingController@socialStore')->name('social.store');
    
 });
 

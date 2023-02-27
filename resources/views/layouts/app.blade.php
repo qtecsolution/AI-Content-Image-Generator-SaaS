@@ -53,26 +53,24 @@
                         data-bs-title="User Management"> <img src="{{ asset('assets/images/menu/user.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="{{route('plan.index')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
+                    <a href="{{ route('plan.index') }}" class="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Manage Plan"> <img
+                            src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
 
                 <li>
-                    <a href="{{route('plan.userIndex')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Purchase Plan"> <img src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
+                    <a href="{{ route('plan.userIndex') }}" class="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Purchase Plan"> <img
+                            src="{{ asset('assets/images/menu/wallet.png') }}"> </a>
                 </li>
 
                 <li>
-                    <a href="{{route('payment.method')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Payment Gateway"> <img src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
+                    <a href="{{ route('payment.method') }}" class="" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Payment Gateway"> <img
+                            src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
                 </li>
                 <li>
-                    <a href="{{route('seo.setup')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="Manage SEO"> <img src="{{ asset('assets/images/menu/seo.png') }}"> </a>
-                </li>
-                
-                <li>
-                    <a href="{{route('setting')}}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
+                    <a href="{{ route('setting') }}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="System Settings"> <img
                             src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
                 </li>
@@ -87,25 +85,17 @@
         <!-- HEADER SECTION START -->
         <header class="header">
             <!-- MOBILE-LOGO -->
-            <h3 class="logo-name d-lg-none ">type.ez</h3>
+            <h3 class="logo-name d-lg-none ">{{readConfig('type_name')}}</h3>
             <!-- ICON-MENU START -->
             <nav class="header-nav">
                 <ul class="headermenu">
                     <!-- language  -->
-                    <li class="headermenu-item ">
-                        <select name="" id="" class="nice-select"
-                            style="opacity: 0; width: 0px; padding: 0px; height: 0px;">
-                            <option value="danish">DA</option>
-                            <option value="dutch">NL</option>
-                            <option value="douch">EN</option>
-                            <option value="bangla">Bn</option>
-                        </select>
-                    </li>
+                   
                     <!-- USER-DROPDOWN -->
                     <li class="headermenu-item">
                         <div class="user-info">
                             <figure class="user-thumb">
-                                <img src="{{ asset('assets/images/user.png') }}" alt="user image ">
+                                <img src="{{ filePath(Auth::user()->avatar) }}" alt="user image ">
                             </figure>
                             <div class="name-email">
                                 <span class="name">{{ Auth::user()->name }}</span>
@@ -159,7 +149,7 @@
     <!-- JQUERY  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-
+    <script src="{{ asset('js/script.js') }}"></script>
     <!-- DATATABLE -->
     <script src="//cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
     <script>
@@ -174,5 +164,11 @@
     @include('sweetalert::alert')
     @include('layouts.delete');
     @yield('script')
+
+    <!--Start of Tawk.to Script-->
+    @if (readConfig('tawk_to') == 'yes')
+        @include('layouts.tawk_to');
+    @endif
+    <!--End of Tawk.to Script-->
 
 </body>

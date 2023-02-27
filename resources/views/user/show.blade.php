@@ -44,7 +44,7 @@
                                  
 
                                     @if ($user->avatar != null)
-                                        <img src="{{ App\Http\Controllers\HomeController::filePath($user->avatar) }}" width="80px" height="80px">
+                                        <img src="{{ filePath($user->avatar) }}" width="80px" height="80px">
                                     @endif
 
                                     @error('phone')
