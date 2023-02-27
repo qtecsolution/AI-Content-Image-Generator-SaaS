@@ -92,7 +92,6 @@
                                 src="{{ asset('assets/icons/layers.svg') }}"> </a>
                     </li>
 
-<<<<<<< HEAD
                     <li>
                         <a href="{{ route('payment.method') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
                             data-bs-placement="right" data-bs-title="Payment Gateway"> <img
@@ -105,18 +104,6 @@
                                 src="{{ asset('assets/icons/gear.svg') }}"> </a>
                     </li>
                 @endif
-=======
-                <li>
-                    <a href="{{ route('payment.method') }}" class="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-title="Payment Gateway"> <img
-                            src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
-                </li>
-                <li>
-                    <a href="{{ route('setting') }}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
-                        data-bs-title="System Settings"> <img
-                            src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
-                </li>
->>>>>>> origin/rumon
 
             </ul>
         </div>
