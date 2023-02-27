@@ -37,4 +37,5 @@ return [
     'MOLLIE_Profile_ID' => 'pfl_n3GFjcQ4EN',
     'tawk_to' => 'yes',
     'meta_key' => 'buwezalute@mailinator.com',
+    'currency_sambol'=>'$',
 ];

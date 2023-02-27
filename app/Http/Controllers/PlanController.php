@@ -65,21 +65,28 @@ class PlanController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, $id)
     {
-        $plan = Plan::where('id', $request->id);
-        $plan->user_id = Auth::id();
-        $plan->name = $request->name;
-        $plan->word_count = $request->word_count;
-        $plan->call_api_count = $request->call_api_count;
-        $plan->documet_count = $request->documet_count;
-        $plan->lang = $request->lang;
-        $plan->duration = $request->duration;
-        $plan->image_count = $request->image_count;
-        $plan->price = $request->price;
-        $plan->save();
-        alert('Plan', 'Plan Update Succssfully', 'success');
-        return back();
+        
+        $request->validate([
+            'name' => 'required',
+            'word_count' => 'required',
+            'documet_count' => 'required',
+        ]);
+
+        try {
+            $data = Plan::findOrFail($id);
+            $input = $request->except(['_token', '_method']);
+            $input['user_id'] = Auth::user()->id;
+            
+            $data->update($input);
+            alert()->success('Success', 'Plan Update updated successfully.');
+            return back();
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            alert()->error('Error', $errorMessage);
+            return back();
+        }
     }
 
     public function status($id, $status)

@@ -70,15 +70,6 @@
                             src="{{ asset('assets/images/menu/wallets.png') }}"> </a>
                 </li>
                 <li>
-<<<<<<< HEAD
-                    <a href="{{ route('seo.setup') }}" class="" data-bs-toggle="tooltip"
-                        data-bs-placement="right" data-bs-title="Manage SEO"> <img
-                            src="{{ asset('assets/images/menu/seo.png') }}"> </a>
-                </li>
-
-                <li>
-=======
->>>>>>> origin/rumon
                     <a href="{{ route('setting') }}" class="" data-bs-toggle="tooltip" data-bs-placement="right"
                         data-bs-title="System Settings"> <img
                             src="{{ asset('assets/images/menu/system-setting.png') }}"> </a>
