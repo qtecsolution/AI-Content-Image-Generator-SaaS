@@ -3,11 +3,10 @@
 @section('content')
 <form method="POST" class="authentication-form needs-validation" action="{{ route('password.email') }}">
     @csrf
-    @csrf
     <div class="authentication-form-header">
-        <h3 class="logo-name">type.ez</h3>
-        <h3 class="section-title">Log in to your account</h3>
-        <p class="form-des">Welcome back! Please enter your details. </p>
+        <h3 class="logo-name">{{readConfig('type_name')}}</h3>
+        <h3 class="section-title">Enter your valid email</h3>
+        <p class="form-des">Forget Your Password! Please enter your email here. </p>
     </div>
 
     <div class="authentication-form-body">
