@@ -7,9 +7,14 @@ use Illuminate\Http\Request;
 class PaymentMethodController extends Controller
 {
     //
-    public function index()
+    public function index(Request $request)
     {
-        return view('method.index');
+        if ($request->has('tab')) {
+            $tab = $request->tab;
+        } else {
+            $tab = 'paypal';
+        }
+        return view('method.index',compact('tab'));
     }
 
     public function paypalSettingStore(Request $request)
@@ -27,8 +32,10 @@ class PaymentMethodController extends Controller
             writeConfig('PAYPAL_APP_SECRET', $request->PAYPAL_APP_SECRET);
         }
 
-        alert('Success','Paypal payment method setup','success');
-        return back();
+       
+
+        toast('Paypal payment method setup', 'success');
+        return redirect()->route('payment.method', ['tab' => "paypal"]);
     }
 
 
@@ -47,8 +54,9 @@ class PaymentMethodController extends Controller
         }
 
       
-        alert('Success','Stripe payment method setup','success');
-        return back();
+
+        toast('Stripe payment method setup', 'success');
+        return redirect()->route('payment.method', ['tab' => "stripe"]);
 
     }
 
@@ -70,8 +78,9 @@ class PaymentMethodController extends Controller
             writeConfig('MOLLIE_Profile_ID', $request->MOLLIE_Profile_ID);
         }
 
-        alert('Success','Mollie payment method setup','success');
-        return back();
+     
+        toast('Mollie payment method setup', 'success');
+        return redirect()->route('payment.method', ['tab' => "mollie"]);
     }
 
     public function rezorSettingStore(Request $request)
@@ -88,11 +97,8 @@ class PaymentMethodController extends Controller
             writeConfig('RAZORPAY_SECRET', $request->RAZORPAY_SECRET);
         }
 
-
-       
-        alert('Success','Razorpay payment method setup','success');
-        return back();
-
+        toast('Razorpay payment method setup', 'success');
+        return redirect()->route('payment.method', ['tab' => "rezor"]);
     }
 
 }

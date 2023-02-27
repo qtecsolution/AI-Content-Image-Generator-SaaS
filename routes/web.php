@@ -50,7 +50,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('payment/stripe/store', 'PaymentMethodController@stripeSettingStore')->name('payment.stripe.store');
     Route::post('payment/rezor/store', 'PaymentMethodController@rezorSettingStore')->name('payment.rezor.store');
     Route::post('payment/mollie/store', 'PaymentMethodController@mollieSettingStore')->name('payment.mollie.store');
-    Route::get('/seo/setup','SettingController@seoSetup')->name('seo.setup');
     Route::post('/seo/store','SettingController@seoStore')->name('seo.store');
     Route::get('/setting/setup','SettingController@setting')->name('setting');   
     Route::post('/setting/setup/update','SettingController@siteSettingUpdate')->name('site.update');   
