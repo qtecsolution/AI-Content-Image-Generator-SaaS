@@ -127,7 +127,7 @@ class PlanController extends Controller
             //done stripe
             if ($request->paymentMethod == 'stripe') {
                 try {
-                    Stripe\Stripe::setApiKey(HomeController::readConfig('STRIPE_SECRET'));
+                    Stripe\Stripe::setApiKey(readConfig('STRIPE_SECRET'));
                     Stripe\Charge::create([
                         "amount" => 100 * $request->paymentAmount,
                         "currency" => "usd",
@@ -141,7 +141,7 @@ class PlanController extends Controller
                 }
             } else if ($request->paymentMethod == 'rezorpay') {
                 $input = $request->all();
-                $api = new Api(HomeController::readConfig('RAZORPAY_KEY'), HomeController::readConfig('RAZORPAY_SECRET'));
+                $api = new Api(readConfig('RAZORPAY_KEY'), readConfig('RAZORPAY_SECRET'));
 
                 $payment = $api->payment->fetch($input['razorpay_payment_id']);
 

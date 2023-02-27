@@ -6,9 +6,9 @@
     <form method="POST" class="authentication-form needs-validation" action="{{ route('login') }}" novalidate>
         @csrf
         <div class="authentication-form-header">
-            <h3 class="logo-name">type.ez</h3>
+            <h3 class="logo-name">{{readConfig('type_name')}}</h3>
             <h3 class="section-title">Log in to your account</h3>
-            <p class="form-des">Welcome back! Please enter your details. </p>
+            <p class="form-des">{{readConfig('type_login_title')}}</p>
         </div>
 
         <div class="authentication-form-body">
@@ -49,7 +49,7 @@
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                     <label class="form-check-label" for="remember">
-                        Remember for 30 days
+                        Remember Me
                     </label>
                 </div>
                 @if (Route::has('password.request'))

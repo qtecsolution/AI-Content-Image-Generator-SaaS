@@ -55,7 +55,7 @@
         
                                             @if ($user->avatar != null)
                                             <div class="mb-2 mt-2">
-                                                <img src="{{ App\Http\Controllers\HomeController::filePath($user->avatar) }}" width="80px" height="80px">
+                                                <img src="{{ filePath($user->avatar) }}" width="80px" height="80px">
                                             </div>
                                             @endif
         

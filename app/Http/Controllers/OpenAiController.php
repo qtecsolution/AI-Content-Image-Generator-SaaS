@@ -5,12 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\ContentHistory;
 use App\Models\Images;
 use App\Models\UseCase;
-use App\Models\UserDocument;
-use GuzzleHttp\Client;
 use OpenAI\Laravel\Facades\OpenAI;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class OpenAiController extends Controller

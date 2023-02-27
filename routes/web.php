@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
-// Route::get()
+
 Route::controller(GoogleController::class)->group(function(){
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback')->name('auth.google.callback');
@@ -64,11 +64,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('payment/stripe/store', 'PaymentMethodController@stripeSettingStore')->name('payment.stripe.store');
     Route::post('payment/rezor/store', 'PaymentMethodController@rezorSettingStore')->name('payment.rezor.store');
     Route::post('payment/mollie/store', 'PaymentMethodController@mollieSettingStore')->name('payment.mollie.store');
-    Route::get('/seo/setup','SettingController@seoSetup')->name('seo.setup');
     Route::post('/seo/store','SettingController@seoStore')->name('seo.store');
     Route::get('/setting/setup','SettingController@setting')->name('setting');   
     Route::post('/setting/setup/update','SettingController@siteSettingUpdate')->name('site.update');   
     Route::post('/setting/smtp/update','SettingController@smtpStore')->name('smtp.store');   
+    Route::post('/open/ai/store','SettingController@openAiStore')->name('open.ai.store');
+    Route::post('/tawkto/store','SettingController@tawkToStore')->name('tawkto.store');
+    Route::post('/social/store','SettingController@socialStore')->name('social.store');
    
 });
 

@@ -8,9 +8,9 @@
     @csrf
 
     <div class="authentication-form-header align-items-start">
-        <h3 class="logo-name">type.ez</h3>
+        <h3 class="logo-name">{{readConfig('type_name')}}</h3>
         <h3 class="section-title">Sign up</h3>
-        <p class="form-des">Start your 30-day free trial. </p>
+        <p class="form-des">{{readConfig('type_register_title')}}</p>
     </div>
 
     <div class="authentication-form-body">
@@ -76,12 +76,13 @@
 
 
         <!-- google  -->
-        <button class="social-btn" type="button">
-            <span class="icon">
-                <img src="{{asset('assets/images/icons/google.svg')}}" width="25">
-            </span>
-            <span class="text">Sign up with Google</span>
-        </button>
+       <!-- google  -->
+       <button onclick="redirectUrl('{{ route('auth.google') }}')" class="social-btn" type="button">
+        <span class="icon">
+            <img src="{{asset('/assets/images/icons/google.svg')}}" width="25">
+        </span>
+        <span class="text">Sign up with Google</span>
+    </button>
 
 
         <p class="authentication-bottom">Already have an account? <a href="{{route('login')}}">Log in </a> </p>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
@@ -13,42 +14,78 @@ class SettingController extends Controller
         return view('setting.seo');
     }
 
-    public function setting()
+    public function setting(Request $request)
     {
-        return view('setting.setting');
+        if ($request->has('tab')) {
+            $tab = $request->tab;
+        } else {
+            $tab = 'openai';
+        }
+        return view('setting.setting', compact('tab'));
+    }
+
+    public function openAiStore(Request $request)
+    {
+        overWriteEnvFile('OPENAI_API_KEY', $request->OPENAI_API_KEY);
+        toast('Open Ai API key is saved', 'success');
+        return redirect()->route('setting', ['tab' => "openai"]);
+    }
+
+    public function tawkToStore(Request $request)
+    {
+        
+        writeConfig('tawk_to', $request->tawk_to);
+        
+        $fileName = 'tawk_to.blade.php';
+        $fileContents = $request->code;
+        File::put($fileName, $fileContents);
+        copy(public_path('tawk_to.blade.php'), base_path('resources/views/layouts/tawk_to.blade.php'));
+        toast('Tawk to is setup', 'success');
+        return redirect()->route('setting', ['tab' => "tawkto"]);
+    }
+
+    public function socialStore(Request $request)
+    {
+        overWriteEnvFile('GOOGLE_CLIENT_ID', $request->GOOGLE_CLIENT_ID);
+        overWriteEnvFile('GOOGLE_CLIENT_SECRET', $request->GOOGLE_CLIENT_SECRET);
+        overWriteEnvFile('GOOGLE_REDIRECT_URL', $request->GOOGLE_REDIRECT_URL);
+
+        toast('Google Login Credential is setup', 'success');
+        return redirect()->route('setting', ['tab' => "login"]);
     }
 
 
     public function seoStore(Request $request)
     {
         if ($request->has('meta_key')) {
-            HomeController::writeConfig('meta_key', $request->meta_key);
+            writeConfig('meta_key', $request->meta_key);
         }
 
         if ($request->has('meta_title')) {
-            HomeController::writeConfig('meta_title', $request->meta_title);
+            writeConfig('meta_title', $request->meta_title);
         }
 
         if ($request->has('meta_desc')) {
-            HomeController::writeConfig('meta_desc', $request->meta_desc);
+            writeConfig('meta_desc', $request->meta_desc);
         }
 
         if ($request->hasFile('meta_image')) {
-            $imag = HomeController::fileUpload($request->meta_image, '', '');
-            HomeController::writeConfig('meta_image', $request->meta_image);
+            $imag = fileUpload($request->meta_image, '', '');
+            writeConfig('meta_image', $imag);
         }
 
-        alert('Seo', 'Seo Setup Succssfully', 'success');
-        return back();
+        toast('Seo Setup Succssfully', 'success');
+        return redirect()->route('setting', ['tab' => "seo"]);
     }
 
     public function smtpStore(Request $request)
     {
         foreach ($request->types as $key => $type) {
-            HomeController::overWriteEnvFile($type, $request[$type]);
+            overWriteEnvFile($type, $request[$type]);
         }
-        alert('SMTP', 'Mail setup  successfully', 'success');
-        return back();
+
+        toast('Mail setup  successfully', 'success');
+        return redirect()->route('setting', ['tab' => "smtp"]);
     }
 
     public  function siteSettingUpdate(Request $request)
@@ -56,52 +93,51 @@ class SettingController extends Controller
 
         // return $request;
         if ($request->hasFile('logo')) {
-            $logo = HomeController::fileUpload($request->logo, 'site', 'own_site');
-            HomeController::writeConfig('type_logo', $logo);
+            $logo = fileUpload($request->logo, 'site', 'own_site');
+            writeConfig('type_logo', $logo);
         }
         if ($request->hasFile('f_icon')) {
-            $f_icon = HomeController::fileUpload($request->f_icon, 'site', 'f_icon');
-            HomeController::writeConfig('favicon_icon', $f_icon);
+            $f_icon = fileUpload($request->f_icon, 'site', 'f_icon');
+            writeConfig('favicon_icon', $f_icon);
         }
 
         if ($request->hasFile('f_logo')) {
-            $f_logo = HomeController::fileUpload($request->f_logo, 'site', 'footer_logo');
-            HomeController::writeConfig('footer_logo', $f_logo);
+            $f_logo = fileUpload($request->f_logo, 'site', 'footer_logo');
+            writeConfig('footer_logo', $f_logo);
         }
 
         if ($request->has('name')) {
-            HomeController::writeConfig($request->type_name, $request->name);
+            writeConfig($request->type_name, $request->name);
         }
 
         if ($request->has('footer')) {
-            HomeController::writeConfig($request->type_footer, $request->footer);
+            writeConfig($request->type_footer, $request->footer);
         }
 
         if ($request->has('fb')) {
-            HomeController::writeConfig($request->type_fb, $request->fb);
+            writeConfig($request->type_fb, $request->fb);
         }
 
         if ($request->has('tw')) {
-            HomeController::writeConfig($request->type_tw, $request->tw);
+            writeConfig($request->type_tw, $request->tw);
         }
 
         if ($request->has('google')) {
-            HomeController::writeConfig($request->type_google, $request->google);
+            writeConfig($request->type_google, $request->google);
         }
 
         if ($request->has('address')) {
-            HomeController::writeConfig($request->type_address, $request->address);
+            writeConfig($request->type_address, $request->address);
         }
 
         if ($request->has('number')) {
-            HomeController::writeConfig($request->type_number, $request->number);
+            writeConfig($request->type_number, $request->number);
         }
 
         if ($request->has('mail')) {
-            HomeController::writeConfig($request->type_mail, $request->mail);
+            writeConfig($request->type_mail, $request->mail);
         }
-        
-        alert('CMS', 'Site Setting Is  Setup  Successfully', 'success');
-        return back();
+        toast('Site Setting Is  Setup  Successfully', 'success');
+        return redirect()->route('setting', ['tab' => "cms"]);
     }
 }
