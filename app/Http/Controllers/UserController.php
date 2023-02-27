@@ -41,9 +41,9 @@ class UserController extends Controller
         $user->name = $request->name;
         $user->phone = $request->phone;
         $user->email = $request->email;
-        $user->type = $request->type;
+        $user->type =  'admin';
         if ($request->hasFile('avatar')) {
-            $user->avatar = HomeController::fileUpload($request->avatar, 'user', '');
+            $user->avatar = fileUpload($request->avatar, 'user', '');
         }
         $user->password = Hash::make($request->password);
         $user->save();
@@ -82,7 +82,7 @@ class UserController extends Controller
 
         $user->type = $request->type;
         if ($request->hasFile('avatar')) {
-            $user->avatar = HomeController::fileUpload($request->avatar, 'user', '');
+            $user->avatar = fileUpload($request->avatar, 'user', '');
         }
 
         $user->save();
@@ -96,7 +96,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         $user = User::find($id);
-        HomeController::fileDelete($user->avatar);
+        fileDelete($user->avatar);
         $user->delete();
         alert('User', 'User Delete Succssfully', 'success');
         return back();

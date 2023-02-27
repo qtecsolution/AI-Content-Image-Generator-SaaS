@@ -54,6 +54,7 @@ Route::group(['middleware' => ['auth','admin']], function() {
     Route::resource('/use-case','UseCaseController');
     Route::resource('/user','UserController');
     Route::resource('plan','PlanController');
+    Route::get('plan/{id}/edit','PlanController@edit')->name('plan.edit');
     Route::get('/plan/status/{id}/{status}','PlanController@status')->name('plan.status');
     Route::get('/plan/user/index','PlanController@userIndex')->name('plan.userIndex');
     Route::get('/plan/purchase/{id}','PlanController@purchase')->name('plan.purchase');

@@ -13,8 +13,9 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{route('plan.update')}}">
+                        <form method="post" action="{{route('plan.update',$plan->id)}}">
                             @csrf
+                            @method('PUT')
                             <input type="hidden" name="id" value="{{$plan->id}}">
                             <div class="row mb-3">
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">Plan Name  <span class="text-danger">*</span></label>
@@ -64,14 +65,14 @@
                                 <small class="text-muted">if you input the 0 value it's will be unlimited</small>
                             </div>
 
-                            <div class="row mb-3">
+                            {{-- <div class="row mb-3">
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">Duration <span class="text-danger">*</span></label>
                                
                                 <div class="col-sm-12">
                                     <input type="number" min="0" value="{{$plan->duration}}" required name="duration" class="form-control" id="inputEmail3">
                                 </div>
                                 <small class="text-muted">if you input the 0 value it's will be unlimited</small>
-                            </div>
+                            </div> --}}
 
                             <div class="row mb-3">
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">Language Support <span class="text-danger">*</span></label>
@@ -79,8 +80,8 @@
                                 <div class="col-sm-12">
                                     <select class="form-control" required name="lang">
                                         <option value="">Select Option</option>
-                                        <option value="english" {{$plan->type == 'english' ? 'selected' : 'null'}}>English</option>
-                                        <option value="all" {{$plan->type == 'all' ? 'selected' : 'null'}}>All Languages</option>
+                                        <option value="english" {{$plan->lang == 'english' ? 'selected' : 'null'}}>English</option>
+                                        <option value="all" {{$plan->lang == 'all' ? 'selected' : 'null'}}>All Languages</option>
                                     </select>
                                 </div>
                                

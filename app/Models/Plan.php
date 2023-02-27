@@ -10,6 +10,11 @@ class Plan extends Model
     use HasFactory;
 
 
+
+    protected $fillable = ['user_id', 
+    'name', 'word_count', 'call_api_count', 
+    'documet_count', 'lang','image_count','is_published','price'];
+
     // public function userHasThisPlan()
     // {
     //     return $this->hasOneThrough(User::class, PlanExpanse::class,'plan_id','plan_expanse_id');
