@@ -34,7 +34,7 @@ class SettingController extends Controller
         }
 
         if ($request->hasFile('meta_image')) {
-            $imag = HomeController::fileUpload($request->meta_image,'','');
+            $imag = HomeController::fileUpload($request->meta_image, '', '');
             HomeController::writeConfig('meta_image', $request->meta_image);
         }
 
@@ -68,33 +68,40 @@ class SettingController extends Controller
             $f_logo = HomeController::fileUpload($request->f_logo, 'site', 'footer_logo');
             HomeController::writeConfig('footer_logo', $f_logo);
         }
+
         if ($request->has('name')) {
-            
             HomeController::writeConfig($request->type_name, $request->name);
         }
+
         if ($request->has('footer')) {
             HomeController::writeConfig($request->type_footer, $request->footer);
         }
+
         if ($request->has('fb')) {
             HomeController::writeConfig($request->type_fb, $request->fb);
         }
+
         if ($request->has('tw')) {
             HomeController::writeConfig($request->type_tw, $request->tw);
         }
+
         if ($request->has('google')) {
             HomeController::writeConfig($request->type_google, $request->google);
         }
+
         if ($request->has('address')) {
             HomeController::writeConfig($request->type_address, $request->address);
         }
+
         if ($request->has('number')) {
             HomeController::writeConfig($request->type_number, $request->number);
         }
+
         if ($request->has('mail')) {
             HomeController::writeConfig($request->type_mail, $request->mail);
         }
+        
         alert('CMS', 'Site Setting Is  Setup  Successfully', 'success');
         return back();
     }
-
 }

@@ -63,7 +63,7 @@
 
 
             <!-- google  -->
-            <button class="social-btn" type="button">
+            <button onclick="redirectUrl('{{ route('auth.google') }}')" class="social-btn" type="button">
                 <span class="icon">
                     <img src="{{asset('/assets/images/icons/google.svg')}}" width="25">
                 </span>
