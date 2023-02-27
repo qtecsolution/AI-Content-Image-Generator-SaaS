@@ -30,9 +30,19 @@ Route::group(['middleware' => ['auth']], function() {
     Route::get('/','HomeController@index')->name('home');
     Route::get('/content-create','OpenAiController@content')->name('content.create');
     Route::post('/content-generate','OpenAiController@contentGenerate')->name('content.generate');
+
     Route::get('/image-create','OpenAiController@image')->name('image.create');
-    Route::get('/image-all','OpenAiController@allImages')->name('image.all');
     Route::post('/image-generate','OpenAiController@imageGenrate')->name('image.generate');
+    Route::get('/image-all','OpenAiController@allImages')->name('image.all');
+    Route::delete('/image-delete/{id}','OpenAiController@imageDelete')->name('image.destroy');
+
+    Route::get('/content-history','ContentHistoryController@index')->name('content-history.index');
+    Route::get('/content-history/all','ContentHistoryController@viewAll')->name('content-history.all');
+    Route::get('/content-history/{id}','ContentHistoryController@show')->name('content-history.show');
+    Route::delete('/content-history/{id}','ContentHistoryController@destroy')->name('content-history.destroy');
+    Route::delete('/content-history-multiple-delete','ContentHistoryController@multipleDelete')->name('content-history.multiple-delete');
+
+
     Route::get('/default','OpenAiController@default');
     Route::resource('/contents','UserDocumentController');
     Route::delete('/contents-multiple-delete','UserDocumentController@multipleDelete')->name('contents-multiple-delete');

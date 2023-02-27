@@ -101,3 +101,4 @@
     background: #f7f4aa;
 }
 .border-lite{border:1px solid #f7f7f7;}
+.searchbox.custom{border-left: solid 0.0625rem #eaecf0;border-right: solid 0.0625rem #eaecf0;}

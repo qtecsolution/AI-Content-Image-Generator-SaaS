@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ContentHistory;
 use App\Models\Images;
 use App\Models\UseCase;
 use App\Models\UserDocument;
@@ -58,6 +59,16 @@ class OpenAiController extends Controller
                 'words' => $wordCount,
                 'characters' => $charCount
             ];
+            ContentHistory::create([
+                'title'=>$request->title,
+                'keywords'=>$request->keywords,
+                'description'=>$request->description,
+                'temperature'=>$temp,
+                'generated_content'=>$content,
+                'prompt'=>$prompt,
+                'use_case_id'=>$request->use_case,
+                'user_id'=> Auth::user()->id
+            ]);
 
             return response()->json($results, 200);
         } catch (\Exception $e) {
@@ -82,7 +93,12 @@ class OpenAiController extends Controller
     }
     public function allImages(Request $request)
     {
-
+        $images = Images::where('user_id', Auth::user()->id);
+        if(isset($request->q)){
+            $images = $images->where('prompt', 'like', "%$request->q%"); 
+        }
+        $images = $images->paginate(8);
+        return view('openAi.allImages',compact('images','request'));
     }
     public function imageGenrate(Request $request)
     {
@@ -113,6 +129,22 @@ class OpenAiController extends Controller
         return redirect()->route('image.create', ['id' => $id]);
     }
 
+    public function imageDelete($id)
+    {
+        try {
+            $data = Images::findOrFail($id);
+            if ($data->image_path != '' && file_exists($data->image_path)) {
+                unlink($data->image_path);
+            }
+            $data->delete();
+            alert()->success('Success', 'Image is deleted');
+            return back();
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            alert()->error('Error', $errorMessage);
+            return back();
+        }
+    }
     public function default()
     {
         return view('default');

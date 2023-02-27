@@ -34,7 +34,7 @@ class UserDocumentController extends Controller
                 return $data->useCase->title ?? '';
             })
             ->addColumn('word_count', function ($data) {
-                return '';
+                return str_word_count($data->generated_content);
             })
             ->addColumn('last_modify', function ($data) {
                 return $data->updated_at;
@@ -59,7 +59,7 @@ class UserDocumentController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        $request->validate([
             'title' => 'required',
             'keywords' => 'required',
             'use_case_id' => 'required',
@@ -139,7 +139,7 @@ class UserDocumentController extends Controller
             return redirect()->route('contents.index');
         }
     }
-     public function multipleDelete(request $request)
+     public function multipleDelete(Request $request)
     {
         $allId = explode(',',$request->id);
         try {

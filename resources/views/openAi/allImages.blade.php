@@ -2,104 +2,60 @@
 
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
-        <div class="row g-4">
+        <section class="my-projects">
 
-            <!-- create post column -->
-            <div class="col-lg-5 mt-0">
-
-                <div class="create-post">
-                    <form action="{{ route('image.generate') }}" method="POST" id="input-form"
-                        class="createpost-form  needs-validation h-100 flex-column  justify-content-between">
-                        @csrf
-
-                        <div class="form-content">
-                            <h3 class="create-post-header">AI Image Generator</h3>
-
-                            <div class="row g-4 mb-3">
-
-                                <!-- Title    -->
-                                <div class="col-12">
-                                    <div class="form-group">
-                                        <label for="prompt" class="form-label">Details</label>
-                                        <input type="text"
-                                            class="form-control custom-input @error('prompt') is-invalid @enderror"
-                                            id="prompt" required autocomplete="off" name="prompt"
-                                            placeholder="What go you want to generate?">
-                                        <div class="invalid-feedback">
-                                            Please enter a details
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-4">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="quantity" class="form-label">Quantity</label>
-                                        <select class="nice-select w-100" name="quantity" id="quantity">
-                                            <option value="1" selected>1</option>
-                                            <option value="2">2</option>
-                                            <option value="3">3</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please Select Quantity
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label for="image_size" class="form-label">Image Size</label>
-                                        <select class="nice-select w-100" name="image_size" id="image_size">
-                                            <option value="256x256" selected>256x256</option>
-                                            <option value="512x512">512x512</option>
-                                            <option value="1024x1024">1024x1024</option>
-                                        </select>
-                                        <div class="invalid-feedback">
-                                            Please Select Size
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="generate-btn-wrapper">
-                            <button type="submit" class="generate-btn">Generate</button>
-                        </div>
-
-
-                    </form>
+            <div class="my-projects-header">
+                <h4 class="header-title">All Generated Images</h4>
+                <div class="project-button pull-right">
+                    <a href="{{ route('image.create') }}" class="btn btn-light btn-xs"> <i class="fa fa-plus-circle"></i> New
+                    </a>
                 </div>
-
-
-
             </div>
+            <div class="my-projects-body">
+                <form action="">
+                    <div class="searchbox mb-3 custom">
+                        <span class="search-icon">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                        </span>
+                        <input type="text" name="q" value="{{ $request->q ?? '' }}" id="searchINputField">
 
-            <!-- editor column -->
-            <div class="col-lg-7 border-start mt-0">
+                        <div class="right-text">
+                            <button class="btn btn-secondary btn-sm"> <i class="fa fa-search"></i> </button>
+                            <a href="{{ route('image.all') }}" class="btn btn-light btn-sm"> <i class="fa fa-refresh"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
                 <div class="row g-2">
                     @foreach ($images as $image)
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="card">
-                                <img src="{{asset($image->image_path)}}" class="card-img-top p-1" alt="{{$image->prompt}}">
+                                <img src="{{ asset($image->image_path) }}" class="card-img-top p-1"
+                                    alt="{{ $image->prompt }}">
                                 <div class="card-body">
-                                    <p class="card-text">{{$image->prompt}}</p>
+                                    <p class="card-text text-truncate">{{ $image->prompt }}</p>
                                 </div>
                                 <div class="card-body">
-                                    <a href="{{asset($image->image_path)}}" class="card-link btn btn-sm btn-success pull-right" download> <i class="fa fa-download"></i> Download  </a>
+                                    <a href="{{ asset($image->image_path) }}" title="Download Image"
+                                        class="card-link btn btn-sm btn-light text-info" download> <i
+                                            class="fa fa-lg fa-download"></i> </a>
+                                    <a class="btn btn-sm btn-light pull-right text-danger" title="Delete Data"
+                                        href="javascript:void(0)" type="button"
+                                        onclick='resourceDelete("{{ route('image.destroy', $image->id) }}")'>
+                                        <i class="fa fa-trash-o fa-lg"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="row">
-                    <div class="col text-center">
-                        <br>
-                        <a class="btn btn-secondary w-100"> View All <i class="fa fa-arrow-right"></i> </a>
+                <div class="row g-2">
+                    <div class="col mt-3">
+                        {{ $images->links('vendor.pagination.bootstrap-5') }}
                     </div>
                 </div>
             </div>
-
-        </div>
-
+        </section>
     </div>
 @endsection
 @section('script')
