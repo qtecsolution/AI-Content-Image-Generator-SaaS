@@ -24,7 +24,7 @@
 
                 <div class="template-wrapper">
                     @foreach ($cases as $case)
-                        <a href="{{ route('posts.create') }}?case={{ $case->id }}" class="template-card">
+                        <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card">
                             <figure class="card-img">
                                 <img src="{{ asset($case->icon) }}" alt="{{ $case->title }}">
                             </figure>

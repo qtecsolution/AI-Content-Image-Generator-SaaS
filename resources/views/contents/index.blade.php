@@ -11,7 +11,7 @@
                     <div class="my-projects-header">
                         <h4 class="header-title">Saved Contents</h4>
                         <div class="project-button pull-right">
-                            <a href="{{ route('posts.create') }}" class="btn btn-light btn-xs"> <i
+                            <a href="{{ route('content.create') }}" class="btn btn-light btn-xs"> <i
                                     class="fa fa-plus-circle"></i> New </a>
                         </div>
                     </div>
