@@ -24,6 +24,9 @@
 
 
 
+    @if(readConfig('pwa_active') == 'yes')
+      @laravelPWA
+    @endif
 
 
 </head>

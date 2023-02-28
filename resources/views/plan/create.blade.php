@@ -5,7 +5,7 @@
            
             <div class="col-md-12">
                 <div class="card custom">
-                    <div class="card-header bg-info">
+                    <div class="card-header setting-tab">
                         <h5 class="card-title no-margin color-white">Create Plan</h5>
                         <div class="card-button">
                             <a href="{{route('plan.index')}}" class="btn btn-success btn-xs"> 

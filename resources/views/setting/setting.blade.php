@@ -47,6 +47,12 @@
                                 setting</button>
                         </li>
 
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link @if (isset($tab) && $tab == 'pwa') active @endif" id="pwa-tab"
+                                data-bs-toggle="tab" data-bs-target="#pwa-tab-pane" type="button" role="tab"
+                                aria-controls="pwa-tab-pane" aria-selected="false">Progressive Web Apps
+                                Configer</button>
+                        </li>
 
 
                     </ul>
@@ -172,7 +178,7 @@
 
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <form class="project-table-wrapper" method="post" action="{{ route('social.store') }}">
+                                    <form class="project-table-wrapper p-3" method="post" action="{{ route('social.store') }}">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Google Client Id</label>
@@ -242,7 +248,7 @@
 
                             <div class="row">
                                 <div class="col-lg-7">
-                                    <form class="project-table-wrapper" method="post"
+                                    <form class="project-table-wrapper p-3" method="post"
                                         action="{{ route('seo.store') }}">
                                         @csrf
                                         <div class="form-group mb-3">
@@ -447,6 +453,7 @@
 
 
                         </div>
+
                         <div class="tab-pane fade @if (isset($tab) && $tab == 'cms') show active @endif"
                             id="FlutterWave-tab-pane" role="tabpanel" aria-labelledby="FlutterWave-tab" tabindex="0">
 
@@ -582,6 +589,209 @@
 
                                 <div class="m-2 text-center mt-3">
                                     <button class="btn btn-block btn-primary" type="submit">Save</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade @if (isset($tab) && $tab == 'pwa') show active @endif"
+                            id="pwa-tab-pane" role="tabpanel" aria-labelledby="pwa-tab" tabindex="0">
+
+                            <form method="post" action="{{ route('pwa.setup.store') }}" enctype="multipart/form-data">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps Actives Status) <span class="text-danger">*</span></label>
+                                            <select name="pwa_active" class="form-control select2" required>
+                                                <option value="yes" {{ readConfig('pwa_active') == 'yes' ? 'selected' : null }}>
+                                                    @translate(On)</option>
+                                                <option value="off" {{ readConfig('pwa_active') == 'off' ? 'selected' : null }}>
+                                                    @translate(Off)</option>
+                                            </select>
+                                        </div>
+                                        <!--name-->
+                
+                                        <!--name-->
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps Name)</label>
+                                            <input class="form-control" name="pwa_name" type="text"
+                                                value="{{ config('laravelpwa.name') }}">
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps Short Name)</label>
+                                            <input class="form-control" name="short_name" type="text"
+                                                value="{{ config('laravelpwa.manifest.short_name') }}">
+                                        </div>
+                
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps background color)</label>
+                                            <input class="form-control" name="background_color" type="color"
+                                                value="{{ config('laravelpwa.manifest.background_color') }}">
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps theme color)</label>
+                                            <input class="form-control" name="theme_color" type="color"
+                                                value="{{ config('laravelpwa.manifest.theme_color') }}">
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 72x72 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x72x72_icon" type="file">
+                                            <div class="text-center m-2">
+                                                {{ filePathRoot(config('laravelpwa.manifest.icons.72x72.path')) }}
+                                                <img class="img-fluid" width="72" height="72" src="{{ filePathRoot(config('laravelpwa.manifest.icons.72x72.path')) }}">
+                                            </div>
+                                        </div>
+                
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 96x96 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x96x96_icon" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="96" height="96" src="{{ filePathRoot(config('laravelpwa.manifest.icons.96x96,path')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 128x128 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x128x128_icon" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="128" height="128" src="{{ filePathRoot(config('laravelpwa.manifest.icons.128x128.path')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 144x144 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x144x144_icon" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="144" height="144" src="{{ filePathRoot(config('laravelpwa.manifest.icons.144x144.path')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 152x152 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x152x152_icon" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="152" height="152" src="{{ filePathRoot(config('laravelpwa.manifest.icons.152x152.path')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 192x192 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x192x192_icon" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="192" height="192" src="{{ filePathRoot(config('laravelpwa.manifest.icons.192x192.path')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 384x384 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x384x384_icon" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="384" height="384" src="{{ filePathRoot(config('laravelpwa.manifest.icons.384x384.path')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 512x512 Icon)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x512x512_icon" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="512" height="512" src="{{ filePathRoot(config('laravelpwa.manifest.icons.512x512.path')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 640x1136 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x640x1136_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="640" height="1136" src="{{ filePathRoot(config('laravelpwa.manifest.splash.640x1136')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 750x1334 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x750x1334_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="750" height="1334" src="{{ filePathRoot(config('laravelpwa.manifest.splash.750x1334')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 828x1792 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x828x1792_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="828" height="1792" src="{{ filePathRoot(config('laravelpwa.manifest.splash.828x1792')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 1536x2048 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x1536x2048_splash" type="file">
+                                            
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="1536" height="2048" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1536x2048')) }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-md-6">
+                                       
+                
+                                      
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 1125x2436 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x1125x2436_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="1125" height="2436" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1125x2436')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 1242x2208 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x1242x2208_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="1242" height="2208" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1242x2208')) }}">
+                                            </div>
+                                        </div>
+                
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 1242x2688_splash Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x1242x2688_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="1242" height="2688" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1242x2688')) }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 1668x2224 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x1668x2224_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="1668" height="2224" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1668x2224')) }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 1668x2388 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x1668x2388_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="1668" height="2388" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1668x2388')) }}">
+                                            </div>
+                                        </div>
+                                        <div class="form-group md-2">
+                                            <label class="col-form-label">@translate(Progressive Web Apps 2048x2732 Splash Screen)</label>
+                                            <input class="form-control" accept="image/png, image/jpeg" name="x2048x2732_splash" type="file">
+                                            <div class="text-center m-2">
+                                                <img class="img-fluid" width="2048" height="2732" src="{{ filePathRoot(config('laravelpwa.manifest.splash.2048x2732')) }}">
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                </div>
+                
+                                <div class="m-2 text-center">
+                                    <button class="btn btn-primary px-5 radius-30" type="submit">@translate(Save)</button>
                                 </div>
                             </form>
                         </div>

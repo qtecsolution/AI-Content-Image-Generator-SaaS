@@ -92,7 +92,7 @@
                                 </form>
                             </div>
                             <div class="col-md-7">
-                                <div class="project-table-wrapper no-default-search">
+                                <div class="project-table-wrapper  p-3 no-default-search">
 
                                     <table id="datatables" class="project-table table">
                                         <thead>

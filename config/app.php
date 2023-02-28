@@ -1,5 +1,6 @@
 <?php
 
+use App\Providers\TranslateServiceProvider;
 use Illuminate\Support\Facades\Facade;
 return [
 
@@ -198,7 +199,8 @@ return [
 
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        Mollie\Laravel\MollieServiceProvider::class
+        Mollie\Laravel\MollieServiceProvider::class,
+        TranslateServiceProvider::class,
 
     ],
 
