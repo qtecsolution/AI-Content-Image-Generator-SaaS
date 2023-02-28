@@ -5,36 +5,46 @@
         <section class="my-projects">
 
             <div class="my-projects-header border-bottom">
-                <h4 class="header-title">AI Image Generator</h4>
+                <h4 class="header-title">AI Image Variation Generator</h4>
                 <div class="project-button pull-right">
                     <a href="{{ route('image.all') }}" class="btn btn-light btn-xs"> <i class="fa fa-list"></i> View All </a>
                 </div>
             </div>
             <div class="my-projects-body">
                 <div class="row">
-                    <div class="col-lg-5 mt-3">
+                    <div class="col-lg-5">
 
                         <div class="create-post">
 
-                            <form action="{{ route('image.generate') }}" method="POST" id="input-form"
-                                class="createpost-form  needs-validation h-100 flex-column  justify-content-between">
+                            <form action="{{ route('image.generate.variation') }}" method="POST" id="input-form"
+                                class="createpost-form  needs-validation h-100 flex-column  justify-content-between"
+                                enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="form-content">
                                     <div class="row g-4 mb-3">
-                                        <div class="col-12">
+                                        <div class="col-9">
                                             <div class="form-group">
-                                                <input type="text"
-                                                    class="form-control custom-input @error('prompt') is-invalid @enderror"
-                                                    id="prompt" required autocomplete="off" name="prompt"
-                                                    placeholder="What go you want to generate?" value="{{$editImage->prompt??''}}">
+                                                <label for="upload-image" class="form-label">Select your image</label>
+                                                <input type="file"
+                                                    class="form-control custom-input @error('old_image') is-invalid @enderror"
+                                                    id="upload-image" required name="old_image">
+                                                <small class="text-mute">Must be a valid PNG file, less than 4MB, and
+                                                    square.</small>
                                                 <div class="invalid-feedback">
-                                                    Please enter a details
+                                                    Please select valid image
                                                 </div>
+                                                <small id="#fileNotSupported" class="text-danger"></small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div id="preview-image" style="display:none">
+                                                <img src="{{ asset('assets/images/placeholder.png') }}" width="100px">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row g-4">
-                                        <div class="col-6">
+                                        {{-- <div class="col-6">
                                             <div class="form-group">
                                                 <label for="quantity" class="form-label">Quantity</label>
                                                 <select class="nice-select w-100" name="quantity" id="quantity">
@@ -46,8 +56,8 @@
                                                     Please Select Quantity
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6">
+                                        </div> --}}
+                                        <div class="col-9">
                                             <div class="form-group">
                                                 <label for="image_size" class="form-label">Image Size</label>
                                                 <select class="nice-select w-100" name="image_size" id="image_size">
@@ -63,7 +73,7 @@
                                     </div>
                                 </div>
 
-                                <div class="generate-btn-wrapper">
+                                <div class="generate-btn-wrapper" style="justify-content: flex-start;">
                                     <button type="submit" class="generate-btn">Generate</button>
                                 </div>
 
@@ -102,7 +112,7 @@
                                             <a href="{{ asset($image->image_path) }}" title="Download Image"
                                                 class="card-link btn btn-sm btn-light text-info" download> <i
                                                     class="fa fa-lg fa-download"></i> </a>
-                                            <a href="{{ route('image.regenerate',$image->id) }}" title="Regenerate Image"
+                                            <a href="{{ route('image.regenerate', $image->id) }}" title="Regenerate Image"
                                                 class="card-link btn btn-sm btn-light text-warning"> <i
                                                     class="fa fa-lg fa-refresh"></i> </a>
                                             <a class="btn btn-sm btn-light text-danger" title="Delete Image"
@@ -134,6 +144,26 @@
 @endsection
 @section('script')
     <script>
+        $('#upload-image').change(function() {
+            $('#preview-image').show();
+            var file = this.files[0];
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#preview-image img').attr('src', e.target.result);
+                var image = new Image();
+                image.src = e.target.result;
+                image.onload = function () {
+                    var height = this.height;
+                    var width = this.width;
+                    if(width!=height){
+                        $('#fileNotSupported').html('Image should be square!');
+                        return false;
+                    }
+                    return true;
+                };
+            }
+            reader.readAsDataURL(file);
+        });
         $(document).ready(function() {
             $('#image-spinner').hide();
         })

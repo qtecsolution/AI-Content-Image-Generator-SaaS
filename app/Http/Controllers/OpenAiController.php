@@ -78,20 +78,18 @@ class OpenAiController extends Controller
             return response()->json($results, 200);
         }
     }
+    // View for generate image
     public function image(Request $request)
     {
         $images = [];
-        $editImage = '';
         if (isset($request->id)) {
             $id = explode(',', $request->id);
             $images = Images::whereIn('id', $id)->where('user_id', Auth::user()->id)->get();
         }
-        if (isset($request->edit)) {
-            $editImage = Images::where('id', $request->edit)->where('user_id', Auth::user()->id)->first();
-        }
 
-        return view('openAi.image', compact('images', 'editImage'));
+        return view('openAi.image', compact('images'));
     }
+    // ALL Generated Images List
     public function allImages(Request $request)
     {
         $images = Images::where('user_id', Auth::user()->id);
@@ -101,33 +99,20 @@ class OpenAiController extends Controller
         $images = $images->paginate(8);
         return view('openAi.allImages', compact('images', 'request'));
     }
-    public function imageGenrate(Request $request)
+    // Generate Image
+    public function imageGenerate(Request $request)
     {
         $request->validate([
             'prompt' => 'required',
             'quantity' => 'required',
             'image_size' => 'required',
         ]);
-        if (isset($request->edit_image)) {
-            // Open Ai Image Edit
-            $editImage = Images::where('id', $request->edit_image)->where('user_id', Auth::user()->id)->firstOrFail();
-            if ($editImage->image_path != '' && file_exists($editImage->image_path)) {
-                $response = OpenAI::images()->variation([
-                    'image' => fopen(asset($editImage->image_path), 'r'),
-                    'n' => intval($request->quantity),
-                    'size' => $request->image_size,
-                    'response_format' => 'url',
-                ]);
-            }
-        } else {
-            // Open Ai new Image generate
-            $response = OpenAI::images()->create([
-                'prompt' => $request->prompt,
-                'n' => intval($request->quantity),
-                'size' => $request->image_size,
-                'response_format' => 'url',
-            ]);
-        }
+        $response = OpenAI::images()->create([
+            'prompt' => $request->prompt,
+            'n' => intval($request->quantity),
+            'size' => $request->image_size,
+            'response_format' => 'url',
+        ]);
         $imageId = [];
         if (isset($response->data)) {
             foreach ($response->data as $data) {
@@ -144,6 +129,7 @@ class OpenAiController extends Controller
         alert()->success('Success', 'Image Generated successfully.');
         return redirect()->route('image.create', ['id' => $id]);
     }
+    // Image Re-Generate
     public function imageReGenerate($oldId)
     {
         $oldImage = Images::where('id', $oldId)->where('user_id', Auth::user()->id)->firstOrFail();
@@ -172,21 +158,25 @@ class OpenAiController extends Controller
 
     public function imageVariation(Request $request)
     {
-
+        $images = [];
+        if (isset($request->id)) {
+            $id = explode(',', $request->id);
+            $images = Images::whereIn('id', $id)->where('user_id', Auth::user()->id)->get();
+        }
+        return view('openAi.imageVariation',compact('images'));
     }
     public function imageGenerateVariation(Request $request)
     {
-        return $request->all();
+        
         $request->validate([
-            'prompt' => 'required',
+            'old_image' => 'required|image|mimes:png',
             'quantity' => 'required',
             'image_size' => 'required',
         ]);
         // Open Ai Image Edit
-        $response = OpenAI::images()->edit([
-            'image' => fopen('image_edit_original.png', 'r'),
-            'prompt' => $request->prompt,
-            'n' => intval($request->quantity),
+        $response = OpenAI::images()->variation([
+            'image' => fopen($request->file('old_image'), 'r'),
+            'n' => intval($request->quantity??1),
             'size' => $request->image_size,
             'response_format' => 'url',
         ]);
@@ -194,14 +184,14 @@ class OpenAiController extends Controller
         foreach ($response->data as $data) {
             $image = fileUploadFromUrl($data->url, "ai_images/", '');
             $imageId[] = Images::create([
-                'prompt' => $request->prompt,
+                'old_image' => fileUpload($request->file('old_image'),'ai_images/local'),
                 'size' => $request->image_size,
                 'image_path' => $image,
                 'user_id' => Auth::user()->id
             ])->id;
         }
         $id = implode(',', $imageId);
-        alert()->success('Success', 'Image Generated successfully.');
+        alert()->success('Success', 'Image Variation Generated successfully.');
         return redirect()->route('image.create', ['id' => $id]);
     }
 

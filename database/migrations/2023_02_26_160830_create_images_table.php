@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('prompt');
+            $table->string('prompt')->nullable();
             $table->string('size');
             $table->string('image_path');
+            $table->string('old_image')->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

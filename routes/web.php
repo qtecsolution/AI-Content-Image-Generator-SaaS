@@ -36,7 +36,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('/content-generate','OpenAiController@contentGenerate')->name('content.generate');
 
     Route::get('/image-create','OpenAiController@image')->name('image.create');
-    Route::post('/image-generate','OpenAiController@imageGenrate')->name('image.generate');
+    Route::post('/image-generate','OpenAiController@imageGenerate')->name('image.generate');
     Route::get('/image-regenerate/{id}','OpenAiController@imageReGenerate')->name('image.regenerate');
 
     Route::get('/image-variation','OpenAiController@imageVariation')->name('image.variation');
