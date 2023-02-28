@@ -79,6 +79,14 @@ function filePath($file)
     }
 }
 
+
+function filePathRoot($file)
+{
+
+    return asset(str_replace("public/", "", $file));
+}
+
+
 function readConfig($key)
 {
     return config('system.' . $key);
@@ -87,6 +95,15 @@ function readConfig($key)
 function writeConfig($key, $value)
 {
     $config = ArrayFile::open(base_path('config/system.php'));
+    $config->set($key, $value);
+    $config->write();
+    return $value;
+}
+
+
+function writePwaConfig($key, $value)
+{
+    $config = ArrayFile::open(base_path('config/laravelpwa.php'));
     $config->set($key, $value);
     $config->write();
     return $value;

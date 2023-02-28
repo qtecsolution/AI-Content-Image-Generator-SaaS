@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
@@ -33,9 +35,9 @@ class SettingController extends Controller
 
     public function tawkToStore(Request $request)
     {
-        
+
         writeConfig('tawk_to', $request->tawk_to);
-        
+
         $fileName = 'tawk_to.blade.php';
         $fileContents = $request->code;
         File::put($fileName, $fileContents);
@@ -139,5 +141,135 @@ class SettingController extends Controller
         }
         toast('Site Setting Is  Setup  Successfully', 'success');
         return redirect()->route('setting', ['tab' => "cms"]);
+    }
+
+
+
+
+
+    public function pwaSetupStore(Request $request)
+    {
+
+
+
+        if ($request->has('pwa_active')) {
+            writeConfig('pwa_active', $request->pwa_active);
+        }
+
+        if ($request->has('pwa_name')) {
+            // setSystemSetting('pwa_name', $request->pwa_name);
+            writePwaConfig('name', $request->pwa_name);
+        }
+
+        if ($request->has('short_name')) {
+            // setSystemSetting('short_name', $request->short_name);
+            writePwaConfig('manifest.short_name', $request->short_name);
+        }
+
+        if ($request->has('background_color')) {
+            // setSystemSetting('background_color', $request->background_color);
+            writePwaConfig('manifest.background_color', $request->background_color);
+        }
+
+        if ($request->has('theme_color')) {
+            // setSystemSetting('theme_color', $request->theme_color);
+            writePwaConfig('manifest.theme_color', $request->theme_color);
+        }
+
+        if ($request->has('x72x72_icon')) {
+            $path = 'public/' . fileUpload($request->x72x72_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.72x72.path', $path);
+            // setSystemSetting('x72x72_icon', $path);
+        }
+
+        if ($request->has('x96x96_icon')) {
+            $path = 'public/' . fileUpload($request->x96x96_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.96x96.path', $path);
+            // setSystemSetting('x96x96_icon', $path);
+        }
+        if ($request->has('x128x128_icon')) {
+            $path = 'public/' . fileUpload($request->x128x128_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.128x128.path', $path);
+            // setSystemSetting('x128x128_icon', $path);
+        }
+        if ($request->has('x144x144_icon')) {
+            $path = 'public/' . fileUpload($request->x144x144_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.144x144.path', $path);
+            // setSystemSetting('x144x144_icon', $path);
+        }
+        if ($request->has('x152x152_icon')) {
+            $path = 'public/' . fileUpload($request->x152x152_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.152x152.path', $path);
+            // setSystemSetting('x152x152_icon', $path);
+        }
+        if ($request->has('x192x192_icon')) {
+            $path = 'public/' . fileUpload($request->x192x192_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.192x192.path', $path);
+            // setSystemSetting('x192x192_icon', $path);
+        }
+        if ($request->has('x384x384_icon')) {
+            $path = 'public/' . fileUpload($request->x384x384_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.384x384.path', $path);
+            // setSystemSetting('x384x384_icon', $path);
+        }
+        if ($request->has('x512x512_icon')) {
+            $path = fileUpload($request->x512x512_icon, 'site', 'pwx');
+            writePwaConfig('manifest.icons.512x512.path', $path);
+            // setSystemSetting('x512x512_icon', $path);
+        }
+        if ($request->has('x640x1136_splash')) {
+            $path = 'public/' . fileUpload($request->x640x1136_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.640x1136', $path);
+            // setSystemSetting('x640x1136_splash', $path);
+        }
+        if ($request->has('x750x1334_splash')) {
+            $path = 'public/' . fileUpload($request->x750x1334_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.750x1334', $path);
+            // setSystemSetting('x750x1334_splash', $path);
+        }
+        if ($request->has('x828x1792_splash')) {
+            $path = 'public/' . fileUpload($request->x828x1792_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.828x1792', $path);
+            // setSystemSetting('x828x1792_splash', $path);
+        }
+        if ($request->has('x1536x2048_splash')) {
+            $path = 'public/' . fileUpload($request->x1536x2048_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.1536x2048', $path);
+            // setSystemSetting('x1536x2048_splash', $path);
+        }
+        if ($request->has('x1125x2436_splash')) {
+            $path = 'public/' . fileUpload($request->x1125x2436_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.1125x2436', $path);
+            // setSystemSetting('x1125x2436_splash', $path);
+        }
+        if ($request->has('x1242x2208_splash')) {
+            $path = 'public/' . fileUpload($request->x1242x2208_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.1242x2208', $path);
+            // setSystemSetting('x1242x2208_splash', $path);
+        }
+        if ($request->has('x1242x2688_splash')) {
+            $path = 'public/' . fileUpload($request->x1242x2688_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.1242x2688', $path);
+            // setSystemSetting('x1242x2688_splash', $path);
+        }
+        if ($request->has('x1668x2224_splash')) {
+            $path = 'public/' . fileUpload($request->x1668x2224_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.1668x2224', $path);
+            // setSystemSetting('x1668x2224_splash', $path);
+        }
+        if ($request->has('x1668x2388_splash')) {
+            $path = 'public/' . fileUpload($request->x1668x2388_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.1668x2388', $path);
+            // setSystemSetting('x1668x2388_splash', $path);
+        }
+        if ($request->has('x2048x2732_splash')) {
+            $path = 'public/' . fileUpload($request->x2048x2732_splash, 'site', 'pwx');
+            writePwaConfig('manifest.splash.2048x2732', $path);
+            // setSystemSetting('x2048x2732_splash', $path);
+        }
+        Artisan::call('optimize:clear');
+
+        toast('Pwa Is  Setup  Successfully', 'success');
+        return redirect()->route('setting', ['tab' => "pwa"]);
     }
 }

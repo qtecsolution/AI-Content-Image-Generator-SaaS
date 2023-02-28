@@ -18,7 +18,7 @@
                     </div>
                     <div class="my-projects-body">
 
-                        <div class="project-table-wrapper">
+                        <div class="project-table-wrapper p-3">
 
                             <div class="searchbox">
                                 <span class="search-icon">

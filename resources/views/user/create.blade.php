@@ -21,7 +21,7 @@
                     <div class="my-projects-body">
                         <div class="row">
                             <div class="col-md-6 ">
-                                <div class="project-table-wrapper">
+                                <div class="project-table-wrapper p-3">
                                     <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data"
                                         class="authentication-form needs-validation" novalidate>
                                         @csrf

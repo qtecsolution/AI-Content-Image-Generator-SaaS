@@ -16,11 +16,12 @@
         "laravelcollective/html": "^6.4",
         "mollie/laravel-mollie": "^2.22",
         "openai-php/laravel": "^0.3.1",
-        "realrashid/sweet-alert": "^6.0",
-        "winter/laravel-config-writer": "^1.0",
-        "yajra/laravel-datatables-oracle": "^10.0",
         "razorpay/razorpay": "^2.8",
-        "stripe/stripe-php": "^10.7"
+        "realrashid/sweet-alert": "^6.0",
+        "silviolleite/laravelpwa": "^2.0",
+        "stripe/stripe-php": "^10.7",
+        "winter/laravel-config-writer": "^1.0",
+        "yajra/laravel-datatables-oracle": "^10.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

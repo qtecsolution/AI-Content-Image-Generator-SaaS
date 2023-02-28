@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <div class="my-projects-body">
-                    <div class="project-table-wrapper">
+                    <div class="project-table-wrapper p-3">
                         <div class="row">
                             <div class="col-6">
                                 <form method="POST" action="{{ route('user.update',$user->id) }}" enctype="multipart/form-data"
