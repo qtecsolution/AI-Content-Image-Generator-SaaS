@@ -4,7 +4,7 @@
     <div class="main-content p-2 p-md-4 pt-0">
         <section class="my-projects">
 
-            <div class="my-projects-header">
+            <div class="my-projects-header border-bottom">
                 <h4 class="header-title">AI Image Generator</h4>
                 <div class="project-button pull-right">
                     <a href="{{ route('image.all') }}" class="btn btn-light btn-xs"> <i class="fa fa-list"></i> View All </a>
@@ -15,19 +15,27 @@
                     <div class="col-lg-5 mt-3">
 
                         <div class="create-post">
+
                             <form action="{{ route('image.generate') }}" method="POST" id="input-form"
                                 class="createpost-form  needs-validation h-100 flex-column  justify-content-between">
                                 @csrf
+                                @if($editImage != '')
+                                <div>
+                                    <h6><small> Editable Image </small></h6>
+                                    <img src="{{ asset($editImage->image_path) }}" class="mb-2" alt="{{ $editImage->prompt }}"
+                                        width="100">
+                                        <input type="hidden" name="edit_image" value="{{$editImage->id}}">
+                                </div>
+                                @endif
 
                                 <div class="form-content">
                                     <div class="row g-4 mb-3">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="prompt" class="form-label">Details</label>
                                                 <input type="text"
                                                     class="form-control custom-input @error('prompt') is-invalid @enderror"
                                                     id="prompt" required autocomplete="off" name="prompt"
-                                                    placeholder="What go you want to generate?">
+                                                    placeholder="What go you want to generate?" value="{{$editImage->prompt??''}}">
                                                 <div class="invalid-feedback">
                                                     Please enter a details
                                                 </div>
@@ -97,12 +105,20 @@
                                         <img src="{{ asset($image->image_path) }}" class="card-img-top p-1"
                                             alt="{{ $image->prompt }}">
                                         <div class="card-body">
-                                            <p class="card-text">{{ $image->prompt }}</p>
+                                            <p class="card-text text-truncate">{{ $image->prompt }}</p>
                                         </div>
-                                        <div class="card-body">
-                                            <a href="{{ asset($image->image_path) }}"
-                                                class="card-link btn btn-sm btn-success pull-right" download> <i
-                                                    class="fa fa-download"></i> Download </a>
+                                        <div class="card-body text-center">
+                                            <a href="{{ asset($image->image_path) }}" title="Download Image"
+                                                class="card-link btn btn-sm btn-light text-info" download> <i
+                                                    class="fa fa-lg fa-download"></i> </a>
+                                            <a href="{{ route('image.regenerate',$image->id) }}" title="Regenerate Image"
+                                                class="card-link btn btn-sm btn-light text-warning"> <i
+                                                    class="fa fa-lg fa-refresh"></i> </a>
+                                            <a class="btn btn-sm btn-light text-danger" title="Delete Image"
+                                                href="javascript:void(0)" type="button"
+                                                onclick='resourceDelete("{{ route('image.destroy', $image->id) }}")'>
+                                                <i class="fa fa-trash-o fa-lg"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -112,8 +128,8 @@
                             <div class="row generated-images">
                                 <div class="col text-center">
                                     <br>
-                                    <a href="{{route('image.all')}}" class="btn btn-secondary w-100"> View All Generated Images <i
-                                            class="fa fa-arrow-right"></i> </a>
+                                    <a href="{{ route('image.all') }}" class="btn btn-secondary w-100"> View All Generated
+                                        Images <i class="fa fa-arrow-right"></i> </a>
                                 </div>
                             </div>
                         @endif
@@ -127,10 +143,10 @@
 @endsection
 @section('script')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#image-spinner').hide();
         })
-        $('#input-form').submit(function(){
+        $('#input-form').submit(function() {
             $('#image-spinner').show();
             $('.generated-images').hide();
         })
