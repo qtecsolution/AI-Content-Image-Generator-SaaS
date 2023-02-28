@@ -10,7 +10,7 @@
 
             <div class="col-md-12">
                 <div class="my-projects">
-                    <div class="my-projects-header">
+                    <div class="my-projects-header border-bottom">
                         <h4 class="header-title">All Users</h4>
                         <div class="project-button pull-right">
                             <a href="{{ route('user.create') }}" class="btn btn-light btn-xs"> <i class="fa fa-plus-circle"></i> Create User </a>

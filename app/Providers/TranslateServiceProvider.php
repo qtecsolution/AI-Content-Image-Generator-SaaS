@@ -21,8 +21,7 @@ class TranslateServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::directive('translate', function ($key) {
-            $string = substr($key, 1);
-            $string = substr($string, 0, -1);
+           
             return  __($key);
          });
     }
