@@ -102,7 +102,6 @@ class UserDocumentController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'keywords' => 'required',
             'generated_content' => 'required',
         ]);
         try {

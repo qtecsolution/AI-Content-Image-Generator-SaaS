@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <section class="my-projects">
 
-                    <div class="my-projects-header">
+                    <div class="my-projects-header border-bottom">
                         <h4 class="header-title">Content History</h4>
                         <div class="project-button pull-right">
                             <a href="{{ route('content.create') }}" class="btn btn-light btn-xs"> <i

@@ -6,7 +6,6 @@ use App\Models\ContentHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
-use Illuminate\Support\Facades\DB;
 
 class ContentHistoryController extends Controller
 {

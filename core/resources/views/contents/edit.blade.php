@@ -51,7 +51,7 @@
                                                     <div class="form-group">
                                                         <label for="keywords" class="form-label">Keywords</label>
                                                         <input type="text" class="form-control custom-input"
-                                                            id="keywords" required autocomplete="off" name="keywords"
+                                                            id="keywords" autocomplete="off" name="keywords"
                                                             placeholder="Enter your keywords" value="{{ $data->keywords }}">
                                                         <div class="valid-feedback">
                                                             Awesome! You're one step closer to greatness.

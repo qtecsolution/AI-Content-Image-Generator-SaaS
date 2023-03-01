@@ -8,7 +8,7 @@
             <div class="col-md-12">
                 <section class="my-projects">
 
-                    <div class="my-projects-header">
+                    <div class="my-projects-header border-bottom">
                         <h4 class="header-title">Manage Use Case</h4>
                     </div>
                     <div class="my-projects-body">
@@ -152,6 +152,11 @@
                                         </tbody>
                                     </table>
 
+                                </div>
+                                <div class="row g-2">
+                                    <div class="col mt-3">
+                                        {{ $allData->links('vendor.pagination.bootstrap-5') }}
+                                    </div>
                                 </div>
                             </div>
                         </div>

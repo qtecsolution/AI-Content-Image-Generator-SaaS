@@ -58,6 +58,9 @@ Route::group(['middleware' => ['auth']], function () {
 // Admin Route
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/use-case', 'UseCaseController');
+    Route::resource('/blog-category', 'BlogCategoryController');
+    Route::resource('/manage-blogs', 'BlogController');
+    Route::get('/manage-blogs-all', 'BlogController@viewAll')->name('manage-blogs.all');
     Route::resource('/user', 'UserController');
     Route::resource('plan', 'PlanController');
     Route::get('plan/{id}/edit', 'PlanController@edit')->name('plan.edit');

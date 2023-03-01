@@ -111,3 +111,11 @@ function writePwaConfig($key, $value)
     $config->write();
     return $value;
 }
+function myAlert($status,$message){
+    if($status=='success'){
+        alert()->success('Success', $message);
+    }else{
+        alert()->error('Error', $message);
+    }
+    
+}
