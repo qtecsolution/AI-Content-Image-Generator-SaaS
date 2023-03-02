@@ -54,6 +54,13 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('contents', 'UserDocumentController');
     Route::delete('/contents-multiple-delete', 'UserDocumentController@multipleDelete')->name('contents-multiple-delete');
+    Route::get('stripe-pay-load/{id}', 'PurchaseController@stripeLoad')->name('plan.stripe.load');
+    Route::get('razor-pay-load/{id}', 'PurchaseController@razorPayLoad')->name('plan.razorpay.load');
+    Route::get('/plan/user/index', 'PlanController@userIndex')->name('plan.userIndex');
+    Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
+    Route::get('/plan/expanse/{id}', 'PurchaseController@expanse')->name('plan.expanse');
+
+    Route::post('/plan/purchase', 'PurchaseController@purchaseDone')->name('plan.purchase.store');
 });
 // Admin Route
 Route::group(['middleware' => ['auth', 'admin']], function () {
@@ -65,11 +72,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('plan', 'PlanController');
     Route::get('plan/{id}/edit', 'PlanController@edit')->name('plan.edit');
     Route::get('/plan/status/{id}/{status}', 'PlanController@status')->name('plan.status');
-    Route::get('/plan/user/index', 'PlanController@userIndex')->name('plan.userIndex');
-    Route::get('/plan/purchase/{id}', 'PlanController@purchase')->name('plan.purchase');
-    Route::get('/plan/expanse/{id}', 'PlanController@expanse')->name('plan.expanse');
-
-    Route::post('/plan/purchase', 'PlanController@purchaseDone')->name('plan.purchase.store');
+ 
     Route::get('/payment/method', 'PaymentMethodController@index')->name('payment.method');
     Route::post('payment/paypal/store', 'PaymentMethodController@paypalSettingStore')->name('payment.paypal.store');
     Route::post('payment/stripe/store', 'PaymentMethodController@stripeSettingStore')->name('payment.stripe.store');

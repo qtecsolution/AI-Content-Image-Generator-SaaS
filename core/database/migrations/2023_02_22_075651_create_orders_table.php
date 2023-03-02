@@ -20,6 +20,10 @@ return new class extends Migration
             $table->double('total',10,2)->nullable();
             $table->string('payment_method')->nullable();
             $table->string('other')->nullable();
+            $table->string('name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
