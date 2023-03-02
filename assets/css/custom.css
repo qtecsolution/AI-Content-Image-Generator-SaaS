@@ -210,3 +210,6 @@
     height: 300px;
     background: #fff;
 }
+.razorpay-payment-button{
+    display: none;
+}
