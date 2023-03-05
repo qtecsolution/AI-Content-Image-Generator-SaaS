@@ -15,6 +15,7 @@
 
     <!-- MAIN CSS  -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
     <!-- aos scroll animation  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 </head>
@@ -32,19 +33,19 @@
                     </a>
                     <ul class="desk-menu">
                         <li>
-                            <a href="#usecase" class="desk-menu-link">Use Cases</a>
+                            <a href="{{route('/')}}#usecase" class="desk-menu-link">Use Cases</a>
                         </li>
                         <li>
-                            <a href="#generateImage" class="desk-menu-link">Image generator </a>
+                            <a href="{{route('/')}}#generateImage" class="desk-menu-link">Image generator </a>
                         </li>
                         <li>
-                            <a href="#works" class="desk-menu-link">How it Works </a>
+                            <a href="{{route('/')}}#works" class="desk-menu-link">How it Works </a>
                         </li>
 
                         <li>
-                            <a href="#pricing" class="desk-menu-link">Pricing</a>
+                            <a href="{{route('/')}}#pricing" class="desk-menu-link">Pricing</a>
                         </li>
-                        <li><a href="blog.html" class="desk-menu-link">Blog</a></li>
+                        <li><a href="{{route('blogs.index')}}" class="desk-menu-link">Blog</a></li>
                     </ul>
                 </div>
 
@@ -80,6 +81,89 @@
     <!-- ===================header end ======================= -->
 
     @yield('content')
+    <!-- ==============get started start======================= -->
+    <section class="get-started">
+        <div class="container py-5">
+
+            <div class="row g-4 align-items-center" data-aos="fade-up" data-aos-duration="1000">
+
+                <div class="col-12" data-aos-duration="1000">
+                    <div class="section-header">
+                        <h3 class="benifits-title"> Ready to get started?</h3>
+                        <p class="des">Write 10x faster, engage your audience, & never struggle <br> with the blank page
+                            again.</p>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row g-4 text-center px-5 justify-content-center" data-aos="fade-up" data-aos-duration="1000">
+
+                <div class="col-lg-4">
+                    <div class="getstarted-box">
+                        <div class="long-check-wrapper">
+                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                        </div>
+                        <span>No credit card required</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="getstarted-box">
+                        <div class="long-check-wrapper">
+                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                        </div>
+                        <span>7-day trial of Standard plan</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="getstarted-box">
+                        <div class="long-check-wrapper">
+                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                        </div>
+                        <span>{{totalUseCase()}}+ content types to explore</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="getstarted-box">
+                        <div class="long-check-wrapper">
+                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                        </div>
+                        <span>AI Image generate</span>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="getstarted-box">
+                        <div class="long-check-wrapper">
+                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                        </div>
+                        <span>Progressive Web Apps</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="button-wrapper py-5 d-flex align-items-center  ps-5 ps-lg-0 justify-content-lg-center"
+                data-aos="fade-up">
+                <a href="{{route('register')}}" class="primarybtn-landing">
+                    <span class="title">Get your free access now </span>
+                    <span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 15L15 5" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                            <path d="M6.875 5H15V13.125" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round"></path>
+                        </svg>
+
+                    </span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+    <!-- ==============get started end ======================= -->
 
     <footer class="landing-footer ">
         <div class="container">
@@ -147,15 +231,15 @@
                 <div class="footer-social">
                     <ul class="socilmenu">
                         <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="assets/icons/social/facebook.svg"
+                            <a href="" class="socialmenu-link"><img src="{{asset('assets/icons/social/facebook.svg')}}"
                                     alt=""></a>
                         </li>
                         <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="assets/icons/social/twitter.svg"
+                            <a href="" class="socialmenu-link"><img src="{{asset('assets/icons/social/twitter.svg')}}"
                                     alt=""></a>
                         </li>
                         <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="assets/icons/social/linkdin.svg"
+                            <a href="" class="socialmenu-link"><img src="{{asset('assets/icons/social/linkdin.svg')}}"
                                     alt=""></a>
                         </li>
                     </ul>

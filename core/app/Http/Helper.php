@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\UseCase;
 use Illuminate\Support\Str;
 use Winter\LaravelConfigWriter\ArrayFile;
 use GuzzleHttp\Client;
@@ -112,4 +113,9 @@ function myAlert($status,$message){
         alert()->error('Error', $message);
     }
 
+}
+
+function totalUseCase()
+{
+    return UseCase::where('is_published',1)->count();
 }

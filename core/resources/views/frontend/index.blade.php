@@ -9,10 +9,12 @@
                     <div class="hero-content pt-5">
                         <h1 class="hero-title">Write your Business Idea <br>
                             with <span class="logo-name"> {{ readConfig('name') }} </span> </h1>
-                        <p class="hero-des">{{ readConfig('name') }}  is designed to help you streamline your writing process, <br>
-                            increase your productivity, and create high-quality content.</p>
+                        <p class="hero-des">{{ readConfig('name') }} is designed to help you streamline your writing process,
+                            <br>
+                            increase your productivity, and create high-quality content.
+                        </p>
 
-                        <a href="{{route('register')}}" class="primarybtn-landing">
+                        <a href="{{ route('register') }}" class="primarybtn-landing">
                             <span class="title">Get your free access now </span>
                             <span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -48,7 +50,7 @@
                 <div class="col-12" data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                     <div class="section-header">
                         <button class="section-btn"><span class="text">Content</span></button>
-                        <h3 class="benifits-title"> <span>Type.ez</span> helps <br> <span>startup teams.</span></h3>
+                        <h3 class="benifits-title"> <span>{{ readConfig('name') }}</span> helps <br> <span>startup teams.</span></h3>
                         <p class="des">Get better results in a fraction of the time. Finally, a writing tool <br> you’ll
                             actually use.</p>
                     </div>
@@ -61,142 +63,27 @@
                 <div class="benifits-container">
                     <!-- benifits cards  -->
                     <div class="benifits-cards-wrapper">
-
-                        <!-- single card  -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/NotePencil.svg" alt="">
-                                </figure>
+                        @foreach ($firstUseCases as $fUseCase)
+                            <!-- single card  -->
+                            <div class="benifits-card" data-aos="fade-up">
+                                <div class="left">
+                                    <figure class="card-icon-wrapper">
+                                        @if ($fUseCase->icon != '' && file_exists($fUseCase->icon))
+                                            <img src="{{ asset($fUseCase->icon) }}" alt="">
+                                        @else
+                                            <img src="assets/icons/cards-icons/NotePencil.svg" alt="">
+                                        @endif
+                                    </figure>
+                                </div>
+                                <div class="right">
+                                    <p class="title"> {{ $fUseCase->title }} </p>
+                                    <p class="text">{{ $fUseCase->details }}</p>
+                                    <a href="{{ route('content.create') }}?case={{ $fUseCase->id }}" class="card-link">
+                                        <span class="text">Try {{ $fUseCase->title }} </span> <img
+                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                </div>
                             </div>
-                            <div class="right">
-                                <p class="title">Blog Content</p>
-                                <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try blog content </span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/File.svg" alt="">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">Sales Copy</p>
-                                <p class="text">Conver your audience with copy thats sells</p>
-                                <a href="#" class="card-link"> <span class="text">Try Sales Copy </span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/MonitorPlay.svg" alt="">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">Digital Ad Copy</p>
-                                <p class="text">Produce compelling ad copy in just a few clicks.</p>
-                                <a href="#" class="card-link"> <span class="text">Try Digital Ad Copy </span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/TwitterLogo.svg" alt="twitter logo ">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">Social Media Content</p>
-                                <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try Social Media Content</span>
-                                    <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/ShoppingCartSimple.svg" alt="twitter logo ">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">eCommerce Content</p>
-                                <p class="text">Generate beautifully written product descriptions to increase sales.</p>
-                                <a href="#" class="card-link"> <span class="text">Try eCommerce Content</span>
-                                    <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/Desktop.svg" alt="twitter logo ">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">Website Copy</p>
-                                <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try Website Copy </span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/Desktop.svg" alt="twitter logo ">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">Cover Letter</p>
-                                <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try Cover Letter </span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/Tag.svg" alt="SEO meta description logo   ">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">SEO Meta Description</p>
-                                <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try SEO Meta Description
-                                    </span> <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
-
-                        <!-- single card -->
-                        <div class="benifits-card" data-aos="fade-up">
-                            <div class="left">
-                                <figure class="card-icon-wrapper">
-                                    <img src="assets/icons/cards-icons/GoogleLogo.svg" alt=" Google logo ">
-                                </figure>
-                            </div>
-                            <div class="right">
-                                <p class="title">Google Search Ads</p>
-                                <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try Google Search Ads </span>
-                                    <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                            </div>
-                        </div>
+                        @endforeach
 
                     </div>
 
@@ -205,155 +92,38 @@
                         <!-- benifits cards  -->
                         <div class="benifits-cards-wrapper py-4">
 
-                            <!-- single card  -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/NotePencil.svg" alt="">
-                                    </figure>
+                            @foreach ($restUseCases as $rUseCase)
+                                <!-- single card  -->
+                                <div class="benifits-card" data-aos="fade-up">
+                                    <div class="left">
+                                        <figure class="card-icon-wrapper">
+                                            @if ($rUseCase->icon != '' && file_exists($rUseCase->icon))
+                                                <img src="{{ asset($rUseCase->icon) }}" alt="">
+                                            @else
+                                                <img src="assets/icons/cards-icons/NotePencil.svg" alt="">
+                                            @endif
+                                        </figure>
+                                    </div>
+                                    <div class="right">
+                                        <p class="title"> {{ $rUseCase->title }} </p>
+                                        <p class="text">{{ $rUseCase->details }}</p>
+                                        <a href="{{ route('content.create') }}?case={{ $rUseCase->id }}"
+                                            class="card-link"> <span class="text">Try {{ $rUseCase->title }} </span> <img
+                                                src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                    </div>
                                 </div>
-                                <div class="right">
-                                    <p class="title">Blog Content</p>
-                                    <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try blog content </span>
-                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/File.svg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">Sales Copy</p>
-                                    <p class="text">Conver your audience with copy thats sells</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Sales Copy </span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/MonitorPlay.svg" alt="">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">Digital Ad Copy</p>
-                                    <p class="text">Produce compelling ad copy in just a few clicks.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Digital Ad Copy </span>
-                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/TwitterLogo.svg" alt="twitter logo ">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">Social Media Content</p>
-                                    <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Social Media
-                                            Content</span>
-                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/ShoppingCartSimple.svg" alt="twitter logo ">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">eCommerce Content</p>
-                                    <p class="text">Generate beautifully written product descriptions to increase sales.
-                                    </p>
-                                    <a href="#" class="card-link"> <span class="text">Try eCommerce
-                                            Content</span> <img src="assets/icons/cards-icons/right-arrow.svg"
-                                            alt=""> </a>
-                                </div>
-                            </div>
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/Desktop.svg" alt="twitter logo ">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">Website Copy</p>
-                                    <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Website Copy </span>
-                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/Desktop.svg" alt="twitter logo ">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">Cover Letter</p>
-                                    <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Cover Letter </span>
-                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
-
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/Tag.svg" alt="SEO meta description logo   ">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">SEO Meta Description</p>
-                                    <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try SEO Meta Description
-                                        </span>
-                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
-
-                            <!-- single card -->
-                            <div class="benifits-card" data-aos="fade-up">
-                                <div class="left">
-                                    <figure class="card-icon-wrapper">
-                                        <img src="assets/icons/cards-icons/GoogleLogo.svg" alt=" Google logo ">
-                                    </figure>
-                                </div>
-                                <div class="right">
-                                    <p class="title">Google Search Ads</p>
-                                    <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Google Search Ads
-                                        </span> <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
-                                </div>
-                            </div>
+                            @endforeach
 
                         </div>
 
                     </div>
-
                     <!-- all template button -->
                     <div class="d-flex  align-items-center justify-content-center py-5">
-                        <button class="all-template-btn" data-bs-toggle="collapse" data-bs-target="#collapseExample">
-                            <span>See All templates </span> <img src="assets/icons/cards-icons/ArrowUpRight.svg"
-                                alt="arrow icon "> </button>
+                        @if (count($restUseCases) > 0)
+                            <button class="all-template-btn" data-bs-toggle="collapse" data-bs-target="#collapseExample">
+                                <span>See All templates </span> <img src="assets/icons/cards-icons/ArrowUpRight.svg"
+                                    alt="arrow icon "> </button>
+                        @endif
                     </div>
 
                     <!--  -->
@@ -378,8 +148,8 @@
 
                         <div class="col-md-4" data-aos="flip-right" data-aos-anchor-placement="center-bottom">
                             <div class="benifit-col">
-                                <h3 class="title">20+ templates</h3>
-                                <p class="content">Streamline content production by leveraging 20+ templates.</p>
+                                <h3 class="title">{{$totalUseCase}}+ templates</h3>
+                                <p class="content">Streamline content production by leveraging {{$totalUseCase}}+ templates.</p>
                             </div>
                         </div>
                     </div>
@@ -403,7 +173,7 @@
                     data-aos-duration="1000">
                     <div class="section-header">
                         <button class="section-btn"><span class="text">Content</span></button>
-                        <h3 class="benifits-title"> <span>Type.ez</span> helps to <br> <span>generate image..</span></h3>
+                        <h3 class="benifits-title"> <span>{{ readConfig('name') }}</span> helps to <br> <span>generate image..</span></h3>
                         <p class="des">Get your content and content thumbnail in one place. <br> Generate unique and
                             beautiful image with one click.</p>
                     </div>
@@ -435,7 +205,7 @@
                 <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
                     <div class="section-header">
                         <button class="section-btn"><span class="text">Work</span></button>
-                        <h3 class="benifits-title"> How <span class="logo-color">Type.ez</span> works </h3>
+                        <h3 class="benifits-title"> How <span class="logo-color">{{ readConfig('name') }}</span> works </h3>
 
                     </div>
                 </div>
@@ -508,7 +278,7 @@
                     </div>
                     <div class="right">
                         <h3 class="title">Edit, polish, and publish</h3>
-                        <p class="content">Use Type.ez editor to rewrite paragraphs and polish up sentences.</p>
+                        <p class="content">Use {{ readConfig('name') }} editor to rewrite paragraphs and polish up sentences.</p>
                     </div>
                 </div>
 
@@ -540,17 +310,17 @@
             <div class="swiper mySwiper py-5 mx-2">
                 <div class="swiper-wrapper">
                     <!-- single  card free-->
-
+                    @foreach ($plans as $item)
                     <div class="swiper-slide" data-aos="fade-up" data-aos-duration="1000">
                         <div class="pricing-card">
 
                             <div class="pricing-card-header">
                                 <span class="price">
-                                    <span class="currency">$</span>
-                                    <span class="number">0</span>
+                                    <span class="currency">{{readConfig('currency_sambol')}}</span>
+                                    <span class="number">{{$item->price}}</span>
                                     <span class="plane-time">/mo</span>
                                 </span>
-                                <span class="name">Free</span>
+                                <span class="name">{{$item->name}}</span>
                                 <p class="info text-secondary">No credit card required</p>
                             </div>
 
@@ -566,249 +336,35 @@
                                         <span class="icon-wrapper">
                                             <img src="assets/images/icons/check.svg" alt="check icon ">
                                         </span>
-                                        <span>Generate 2,000 AI Words / month</span>
+                                        <span>Generate {{$item->word_count}} AI Words / month</span>
                                     </li>
                                     <li>
                                         <span class="icon-wrapper">
                                             <img src="assets/images/icons/check.svg" alt="check icon ">
                                         </span>
-                                        <span>Access upto 5 use-cases</span>
+                                        <span>{{$item->call_api_count}} Api Request / month</span>
                                     </li>
                                     <li>
                                         <span class="icon-wrapper">
                                             <img src="assets/images/icons/check.svg" alt="check icon ">
                                         </span>
-                                        <span>Unlimited projects</span>
+                                        <span>Store {{$item->documet_count}} documents on server</span>
                                     </li>
                                     <li>
-                                        <span class="icon-wrapper cross-icon">
-                                            <img src="assets/images/icons/cross.svg" alt="cross  icon ">
+                                        <span class="icon-wrapper">
+                                            <img src="assets/images/icons/check.svg" alt="check icon ">
                                         </span>
-                                        <span>Multiple user & email support</span>
+                                        <span>Generate {{$item->image_count}} Image / month </span>
                                     </li>
                                 </ul>
                                 <div class="d-grid">
-                                    <button class="btn-subscribe">Subscribe</button>
+                                    <a href="" class="btn-subscribe text-center text-white"> Subscribe </a>
                                 </div>
                             </div>
 
                         </div>
                     </div>
-
-                    <div class="swiper-slide" data-aos="fade-up">
-                        <div class="pricing-card">
-
-                            <div class="pricing-card-header">
-                                <span class="price">
-                                    <span class="currency">$</span>
-                                    <span class="number">0</span>
-                                    <span class="plane-time">/mo</span>
-                                </span>
-                                <span class="name">Free</span>
-                                <p class="info text-secondary">No credit card required</p>
-                            </div>
-
-                            <div class="pricing-card-body">
-                                <ul class="facility-list">
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access to all basic features</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Generate 2,000 AI Words / month</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access upto 5 use-cases</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Unlimited projects</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper cross-icon">
-                                            <img src="assets/images/icons/cross.svg" alt="cross  icon ">
-                                        </span>
-                                        <span>Multiple user & email support</span>
-                                    </li>
-                                </ul>
-                                <div class="d-grid">
-                                    <button class="btn-subscribe subscribed">Already subscribed</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="swiper-slide" data-aos="fade-up">
-                        <div class="pricing-card">
-
-                            <div class="pricing-card-header">
-                                <span class="price">
-                                    <span class="currency">$</span>
-                                    <span class="number">0</span>
-                                    <span class="plane-time">/mo</span>
-                                </span>
-                                <span class="name">Free</span>
-                                <p class="info text-secondary">No credit card required</p>
-                            </div>
-
-                            <div class="pricing-card-body">
-                                <ul class="facility-list">
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access to all basic features</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Generate 2,000 AI Words / month</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access upto 5 use-cases</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Unlimited projects</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper cross-icon">
-                                            <img src="assets/images/icons/cross.svg" alt="cross  icon ">
-                                        </span>
-                                        <span>Multiple user & email support</span>
-                                    </li>
-                                </ul>
-                                <div class="d-grid">
-                                    <button class="btn-subscribe subscribed">Already subscribed</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="swiper-slide" data-aos="fade-up">
-                        <div class="pricing-card">
-
-                            <div class="pricing-card-header">
-                                <span class="price">
-                                    <span class="currency">$</span>
-                                    <span class="number">0</span>
-                                    <span class="plane-time">/mo</span>
-                                </span>
-                                <span class="name">Free</span>
-                                <p class="info text-secondary">No credit card required</p>
-                            </div>
-
-                            <div class="pricing-card-body">
-                                <ul class="facility-list">
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access to all basic features</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Generate 2,000 AI Words / month</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access upto 5 use-cases</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Unlimited projects</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper cross-icon">
-                                            <img src="assets/images/icons/cross.svg" alt="cross  icon ">
-                                        </span>
-                                        <span>Multiple user & email support</span>
-                                    </li>
-                                </ul>
-                                <div class="d-grid">
-                                    <button class="btn-subscribe subscribed">Already subscribed</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                    <div class="swiper-slide" data-aos="fade-up">
-                        <div class="pricing-card">
-
-                            <div class="pricing-card-header">
-                                <span class="price">
-                                    <span class="currency">$</span>
-                                    <span class="number">0</span>
-                                    <span class="plane-time">/mo</span>
-                                </span>
-                                <span class="name">Free</span>
-                                <p class="info text-secondary">No credit card required</p>
-                            </div>
-
-                            <div class="pricing-card-body">
-                                <ul class="facility-list">
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access to all basic features</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Generate 2,000 AI Words / month</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Access upto 5 use-cases</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper">
-                                            <img src="assets/images/icons/check.svg" alt="check icon ">
-                                        </span>
-                                        <span>Unlimited projects</span>
-                                    </li>
-                                    <li>
-                                        <span class="icon-wrapper cross-icon">
-                                            <img src="assets/images/icons/cross.svg" alt="cross  icon ">
-                                        </span>
-                                        <span>Multiple user & email support</span>
-                                    </li>
-                                </ul>
-                                <div class="d-grid">
-                                    <button class="btn-subscribe subscribed">Already subscribed</button>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-
+                    @endforeach
                 </div>
             </div>
 
@@ -835,199 +391,28 @@
             <div class="row">
                 <div class="col-lg-8 mx-auto">
                     <div class="accordion" id="faqAccordion">
-                        <!-- accordion item one  -->
+                        <!-- accordion item -->
+                        @foreach($allFaq as $faqIndex => $faq)
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                    What can I create with Type.ez?
+                            <h2 class="accordion-header" id="heading-{{$faq->id}}">
+                                <button class="accordion-button @if($faqIndex>0) collapsed @endif" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#faqCollapse-{{$faq->id}}" aria-expanded="false" aria-controls="faqCollapse-{{$faq->id}}">
+                                    {{$faq->question}}
                                 </button>
                             </h2>
-                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            <div id="faqCollapse-{{$faq->id}}" class="accordion-collapse collapse @if($faqIndex==0) show @endif" aria-labelledby="heading-{{$faq->id}}"
                                 data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
                                     <div class="card-divider-faq"></div>
-                                    <p>We have copywriting tools for everything you need to start and run your business! You
-                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
-                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
+                                    <p> {{$faq->answear}} </p>
                                 </div>
                             </div>
                         </div>
-                        <!-- accordion item two -->
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingTwo">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                                    What can I create with Type.ez?
-                                </button>
-                            </h2>
-                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    <div class="card-divider-faq"></div>
-                                    <p>We have copywriting tools for everything you need to start and run your business! You
-                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
-                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- accordion item Three  -->
-
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                    What can I create with Type.ez?
-                                </button>
-                            </h2>
-                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    <div class="card-divider-faq"></div>
-                                    <p>We have copywriting tools for everything you need to start and run your business! You
-                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
-                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
-
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- accordion item four -->
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
-                                    What can I create with Type.ez?
-                                </button>
-                            </h2>
-                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    <div class="card-divider-faq"></div>
-                                    <p>We have copywriting tools for everything you need to start and run your business! You
-                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
-                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
-
-                                </div>
-                            </div>
-                        </div>
-                        <!-- accordion item five -->
-
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
-                                    What can I create with Type.ez?
-                                </button>
-                            </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingThree"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    <div class="card-divider-faq"></div>
-                                    <p>Visa is a document which you need to travoel to a country legally. Some of the
-                                        important visa types are Tourist
-                                        Visa, Transit Visa, Short Stay or Visitor Visa, Business Visa, Residence Visa,
-                                        Immigrant Visa, and Medical Visa. </p>
-
-                                </div>
-                            </div>
-                        </div>
-
-
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!--===================== faq  end=====================-->
-
-    <!-- ==============get started start======================= -->
-    <section class="get-started">
-        <div class="container py-5">
-
-            <div class="row g-4 align-items-center" data-aos="fade-up" data-aos-duration="1000">
-
-                <div class="col-12" data-aos-duration="1000">
-                    <div class="section-header">
-                        <h3 class="benifits-title"> Ready to get started?</h3>
-                        <p class="des">Write 10x faster, engage your audience, & never struggle <br> with the blank page
-                            again.</p>
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="row g-4 text-center px-5 justify-content-center" data-aos="fade-up" data-aos-duration="1000">
-
-                <div class="col-lg-4">
-                    <div class="getstarted-box">
-                        <div class="long-check-wrapper">
-                            <img src="assets/icons/cards-icons/check-logn.svg" alt="long check icon ">
-                        </div>
-                        <span>No credit card required</span>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="getstarted-box">
-                        <div class="long-check-wrapper">
-                            <img src="assets/icons/cards-icons/check-logn.svg" alt="long check icon ">
-                        </div>
-                        <span>7-day trial of Standard plan</span>
-                    </div>
-                </div>
-
-                <div class="col-lg-4">
-                    <div class="getstarted-box">
-                        <div class="long-check-wrapper">
-                            <img src="assets/icons/cards-icons/check-logn.svg" alt="long check icon ">
-                        </div>
-                        <span>20+ content types to explore</span>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="getstarted-box">
-                        <div class="long-check-wrapper">
-                            <img src="assets/icons/cards-icons/check-logn.svg" alt="long check icon ">
-                        </div>
-                        <span>AI Image generate</span>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="getstarted-box">
-                        <div class="long-check-wrapper">
-                            <img src="assets/icons/cards-icons/check-logn.svg" alt="long check icon ">
-                        </div>
-                        <span>Progressive Web Apps</span>
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="button-wrapper py-5 d-flex align-items-center  ps-5 ps-lg-0 justify-content-lg-center"
-                data-aos="fade-up">
-                <button class="primarybtn-landing">
-                    <span class="title">Get your free access now </span>
-                    <span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path d="M5 15L15 5" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                            <path d="M6.875 5H15V13.125" stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                stroke-linejoin="round"></path>
-                        </svg>
-
-                    </span>
-                </button>
-            </div>
-
-        </div>
-    </section>
-    <!-- ==============get started end ======================= -->
 @endsection

@@ -1,0 +1,18 @@
+.blog-pagination ul {
+    display: flex;
+    gap: 0.625rem;
+} 
+
+.icon {
+    display: inline-block;
+}
+.icon svg {
+    width: 24px;
+    height: 24px;
+    display: inherit;
+}
+.icon img {
+    width: 20px;
+    height: 20px;
+    display: inherit;
+}
