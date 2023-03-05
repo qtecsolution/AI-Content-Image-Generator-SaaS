@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->tinyText('meta_description')->nullable();
             $table->longText('description');
+            $table->tinyInteger('is_published')->default(1);
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('blog_categories')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');

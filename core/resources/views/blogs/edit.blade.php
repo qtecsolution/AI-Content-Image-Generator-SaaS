@@ -14,8 +14,9 @@
                     </div>
                     <div class="my-projects-body">
                         <form method="post" class="blog-form p-2 border-lite bg-light"
-                            action="{{ route('manage-blogs.store') }}" id="save-form" enctype="multipart/form-data">
+                            action="{{ route('manage-blogs.update',$data->id) }}" id="save-form" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="row">
 
                                 <!-- create post column -->
@@ -64,6 +65,11 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Image</label>
+                                                @if($data->image != '' && file_exists($data->image))
+                                                <div class="mb-1">
+                                                    <img src="{{asset($data->image)}}" width="100px">
+                                                </div>
+                                                @endif
                                                 <div>
                                                     <input  type="file" name="image" class="form-control" >
                                                      @error('image')
@@ -108,12 +114,18 @@
                                         <div class="form-group">
                                             <label for="meta_description" class="form-label">Meta Description</label>
                                             <textarea class="form-control custom-input" id="meta_description" autocomplete="off" name="meta_description"
-                                                placeholder="Meta Description" rows="5">{{ $data->meta_description }}</textarea>
+                                                placeholder="Meta Description" rows="4">{{ $data->meta_description }}</textarea>
                                             @error('meta_description')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="is_published" class="form-label col-md-12"> Status : </label>
+                                            {!! Form::select('is_published', [1=>'Published',2=>'Draft'], $data->is_published, ['class'=>'nice-select']) !!}
                                         </div>
                                     </div>
                                     <div class="generate-btn-wrapper">

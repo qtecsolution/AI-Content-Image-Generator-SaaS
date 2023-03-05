@@ -1,13 +1,6 @@
 @extends('layouts.app')
 @section('breadcrumb')
-    <li class="breadcrumb-item">
-        @if ($user->type == 'user')
-            <a href="{{ route('users.index') }}"> User </a>
-        @else
-            <a href="{{ route('admin.all') }}"> Admin </a>
-        @endif
-    </li>
-    <li class="breadcrumb-item active"> Edit</li>
+    <li class="breadcrumb-item active"> Profile</li>
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
@@ -16,20 +9,7 @@
             <div class="col-md-12">
                 <div class="my-projects">
                     <div class="my-projects-header border-bottom">
-                        <h5 class="header-title text-capitalize">{{ $user->type }} Information Edit</h5>
-                        <div class="project-button pull-right">
-                            @if ($user->type == 'user')
-                                <a href="{{ route('users.index') }}" class="btn btn-light btn-sm">
-                                    <i class="fa fa-list"></i>
-                                    Users List
-                                </a>
-                            @else
-                                <a href="{{ route('admin.all') }}" class="btn btn-light btn-sm">
-                                    <i class="fa fa-list"></i>
-                                    Admin List
-                                </a>
-                            @endif
-                        </div>
+                        <h5 class="header-title text-capitalize"> Profile </h5>
                     </div>
                     <div class="my-projects-body">
                         <div class="row">
@@ -58,10 +38,9 @@
                                 </div>
                             </div>
                             <div class="col-6 border-start">
-                                <form method="POST" action="{{ route('users.update', $user->id) }}"
-                                    enctype="multipart/form-data" class="authentication-form needs-validation" novalidate>
+                                <form method="POST" action="{{ route('profile.update') }}"
+                                    enctype="multipart/form-data" class="authentication-form needs-validation">
                                     @csrf
-                                    @method('PUT')
 
                                     <input type="hidden" name="id" value="{{ $user->id }}">
 

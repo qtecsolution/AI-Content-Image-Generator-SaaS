@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
 @section('breadcrumb')
-    <li class="breadcrumb-item active">User Create</li>
+    <li class="breadcrumb-item active">New</li>
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
             <div class="col-md-12">
                 <div class="my-projects">
-                    <div class="my-projects-header">
-                        <h5 class="header-title">User Create</h5>
+                    <div class="my-projects-header border-bottom">
+                        <h5 class="header-title">Admin Create</h5>
                         <div class="project-button pull-right">
-                            <a href="{{ route('user.index') }}" class="btn btn-light btn-xs">
-                                <i class="fa fa-add"></i>
-                                General Users
+                            <a href="{{ route('admin.all') }}" class="btn btn-light btn-xs">
+                                <i class="fa fa-list"></i>
+                                View All
                             </a>
                         </div>
                     </div>
@@ -22,7 +22,7 @@
                         <div class="row">
                             <div class="col-md-6 ">
                                 <div class="project-table-wrapper p-3">
-                                    <form method="POST" action="{{ route('user.store') }}" enctype="multipart/form-data"
+                                    <form method="POST" action="{{ route('users.store') }}" enctype="multipart/form-data"
                                         class="authentication-form needs-validation" novalidate>
                                         @csrf
         
@@ -46,30 +46,12 @@
                                             </div>
         
                                             <div class="form-group  mb-3">
-                                                <label for="phone" class="form-label">Avatar* </label>
-                                                <input id="phone" type="file"
-                                                    class="form-control custom-input @error('phone') is-invalid @enderror"
-                                                    name="avatar" value="{{ old('avatar') }}" required autocomplete="phone"
-                                                    placeholder="Enter your phone">
+                                                <label for="avatar" class="form-label">Avatar* </label>
+                                                <input id="avatar" type="file"
+                                                    class="form-control custom-input @error('avatar') is-invalid @enderror"
+                                                    name="avatar" value="{{ old('avatar') }}" required>
         
-                                                @error('phone')
-                                                    <span class="invalid-feedback" role="alert">
-                                                        <strong>{{ $message }}</strong>
-                                                    </span>
-                                                @enderror
-                                            </div>
-        
-                                            <div class="form-group  mb-3">
-                                                <label for="type" class="form-label">User Type* </label>
-                                                <select name="type"
-                                                    class="form-control custom-input @error('type') is-invalid @enderror" required>
-                                                    <option value="">Select User Type</option>
-                                                    <option value="admin">Admin</option>
-                                                    <option value="user">General User</option>
-                                                </select>
-        
-        
-                                                @error('type')
+                                                @error('avatar')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
@@ -96,10 +78,23 @@
                                                 <label for="phone" class="form-label">Phone* </label>
                                                 <input id="phone" type="tel"
                                                     class="form-control custom-input @error('phone') is-invalid @enderror"
-                                                    name="phone" value="{{ old('phone') }}" required autocomplete="phone"
+                                                    name="phone" value="{{ old('phone') }}" required
                                                     placeholder="Enter your phone">
         
                                                 @error('phone')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group  mb-3">
+                                                <label for="address" class="form-label">Address </label>
+                                                <input id="address" type="text"
+                                                    class="form-control custom-input @error('address') is-invalid @enderror"
+                                                    name="address" value="{{ old('address') }}" required
+                                                    placeholder="Enter your address">
+        
+                                                @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

@@ -103,7 +103,7 @@
                                     </div>
 
                                     <!-- description -->
-                                    <div class="col-12">
+                                    <div class="col-12 mb-3">
                                         <!-- description  -->
                                         <div class="form-group">
                                             <label for="meta_description" class="form-label">Meta Description</label>
@@ -114,6 +114,12 @@
                                                     {{ $message }}
                                                 </div>
                                             @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="is_published" class="form-label col-md-12"> Status : </label>
+                                            {!! Form::select('is_published', [1=>'Published',2=>'Draft'], '1', ['class'=>'nice-select']) !!}
                                         </div>
                                     </div>
                                     <div class="generate-btn-wrapper">

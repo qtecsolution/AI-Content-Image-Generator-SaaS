@@ -78,7 +78,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('user.index') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                        <a href="{{ route('users.index') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
                             data-bs-placement="right" data-bs-title="User Management"> <img
                                 src="{{ asset('assets/icons/users.svg') }}"> </a>
                     </li>
@@ -146,7 +146,7 @@
                             </div>
                             <ul class="userlist">
                                 <li class="userlist-item">
-                                    <a href="{{ route('home') }}" class="userlist-link">My Profile</a>
+                                    <a href="{{ route('profile') }}" class="userlist-link">My Profile</a>
                                 </li>
                                 <li class="userlist-item">
                                     <a class="userlist-link" href="{{ route('logout') }}"

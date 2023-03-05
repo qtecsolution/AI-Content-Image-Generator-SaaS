@@ -50,7 +50,6 @@ function fileUploadFromUrl($url, $folder, $name = null)
     $imagePath = $path. '/' . $imageName;
     return $imagePath;
 }
-
 function getExtensionFromUrl($url){
     $url_parts = parse_url($url);
     if(isset($url_parts['path'])){
@@ -59,8 +58,6 @@ function getExtensionFromUrl($url){
     }
     return '';
 }
-
-
 function fileDelete($file)
 {
     if ($file != null) {
@@ -72,13 +69,7 @@ function fileDelete($file)
 
 function filePath($file)
 {
-
-    if ($file == null) {
-        return asset('assets/images/placeholder.png');
-    }
-    /*check here file is exxist*/
-    $path = asset($file);
-    if (file_exists($path)) {
+    if ($file != null && file_exists($file)) {
         return asset($file);
     } else {
         return asset('assets/images/placeholder.png');
@@ -120,5 +111,5 @@ function myAlert($status,$message){
     }else{
         alert()->error('Error', $message);
     }
-    
+
 }

@@ -20,9 +20,16 @@ class BlogController extends Controller
     }
     public function viewAll()
     {
-        $allData = Blog::with(['category','user'])->latest();
+        $allData = Blog::with(['category', 'user'])->latest();
         return DataTables::of($allData)
             ->addIndexColumn()
+            ->addColumn('status', '
+                @if ($is_published == 1)
+                    <span class="text-success">Published</span>
+                @else
+                    <span class="form-text">Draft</span>
+                @endif'
+            )
             ->addColumn('category_name', function ($data) {
                 return $data->category->name ?? '';
             })
@@ -43,7 +50,7 @@ class BlogController extends Controller
                 </a>
             </div>
         ')
-            ->rawColumns(['action'])
+            ->rawColumns(['action','status'])
             ->toJson();
     }
 
@@ -87,9 +94,10 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Blog $blog)
+    public function show($id)
     {
-        //
+        $data = Blog::findOrFail($id);
+        return view('blogs.show', compact('data'));
     }
 
     /**
@@ -99,15 +107,35 @@ class BlogController extends Controller
     {
         $data = Blog::findOrFail($id);
         $category = BlogCategory::pluck('name', 'id');
-        return view('blogs.edit', compact('data','category'));
+        return view('blogs.edit', compact('data', 'category'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Blog $blog)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => "required|unique:blogs,title,$id",
+            'description' => 'required',
+            'category_id' => 'required',
+        ]);
+
+        try {
+            $data = Blog::findOrFail($id);
+            $input = $request->except('_token');
+            $input['slug'] = Str::slug($request->title);
+            if ($request->hasFile('image')) {
+                $input['image'] = fileUpload($request->file('image'), 'blogs', time());
+            }
+            $data->update($input);
+            myAlert('success', 'Blog Updated.');
+            return back();
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            myAlert('error', $errorMessage);
+            return back();
+        }
     }
 
     /**

@@ -32,6 +32,7 @@
                                         <td>Tags </td>
                                         <td> Category </td>
                                         <td> Author </td>
+                                        <td> Status </td>
                                         <td data-orderable="false"></td>
                                     </tr>
                                 </thead>
@@ -77,6 +78,9 @@
                     {
                         data: 'author_name',
                         name: 'user.name'
+                    },
+                    {
+                        data: 'status'
                     },
                     {
                         data: 'action'

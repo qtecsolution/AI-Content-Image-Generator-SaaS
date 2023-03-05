@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Blog extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','tags','slug','meta_description','image','description','category_id','user_id'];
+    protected $fillable = ['title','tags','slug','meta_description','image','description','category_id','user_id','is_published'];
 
     public function user(){
         return $this->belongsTo(User::class,'user_id','id');

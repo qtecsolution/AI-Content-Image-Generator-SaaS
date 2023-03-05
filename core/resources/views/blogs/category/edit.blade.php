@@ -47,6 +47,12 @@
             </div>
         </div>
     </div>
+    <div class="col-12 mb-3">
+        <div class="form-group">
+            <label for="is_published" class="form-label col-md-12"> Status : </label>
+            {!! Form::select('is_published', [1=>'Active',2=>'Inactive'], $data->is_published, ['class'=>'nice-select']) !!}
+        </div>
+    </div>
     <div class="generate-btn-wrapper">
         <button type="submit" class="generate-btn">Update</button>
     </div>

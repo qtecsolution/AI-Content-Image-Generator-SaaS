@@ -17,10 +17,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 // Frontend Route
-Route::get('/', function () {
-    return redirect('/login');
+Route::group(['namespace' => 'Frontend'], function () {
+    Route::get('/', 'FrontendController@index');
 });
-
 Auth::routes();
 
 //  Backend Route
@@ -32,6 +31,8 @@ Route::controller(GoogleController::class)->group(function () {
 // User Route
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/profile', 'HomeController@profile')->name('profile');
+    Route::post('/profile', 'HomeController@profileUpdate')->name('profile.update');
     Route::get('/content-create', 'OpenAiController@content')->name('content.create');
     Route::post('/content-generate', 'OpenAiController@contentGenerate')->name('content.generate');
 
@@ -65,14 +66,17 @@ Route::group(['middleware' => ['auth']], function () {
 // Admin Route
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('/use-case', 'UseCaseController');
+    Route::resource('/manage-faq', 'FaqController');
     Route::resource('/blog-category', 'BlogCategoryController');
     Route::resource('/manage-blogs', 'BlogController');
     Route::get('/manage-blogs-all', 'BlogController@viewAll')->name('manage-blogs.all');
-    Route::resource('/user', 'UserController');
+    Route::resource('/users', 'UserController');
+    Route::get('/users-all', 'UserController@viewAll')->name('users.all');
+    Route::get('/admin-all', 'UserController@allAdmin')->name('admin.all');
     Route::resource('plan', 'PlanController');
     Route::get('plan/{id}/edit', 'PlanController@edit')->name('plan.edit');
     Route::get('/plan/status/{id}/{status}', 'PlanController@status')->name('plan.status');
- 
+
     Route::get('/payment/method', 'PaymentMethodController@index')->name('payment.method');
     Route::post('payment/paypal/store', 'PaymentMethodController@paypalSettingStore')->name('payment.paypal.store');
     Route::post('payment/stripe/store', 'PaymentMethodController@stripeSettingStore')->name('payment.stripe.store');

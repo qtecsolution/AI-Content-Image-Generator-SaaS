@@ -46,11 +46,11 @@ class UseCaseController extends Controller
                 $input['icon'] = fileUpload($request->file('icon'), 'useCase', $request->title);
             }
             UseCase::create($input);
-            alert()->success('Success', 'Use case saved successfully.');
+            myAlert('success', 'Use case saved successfully.');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error',$errorMessage);
             return back();
         }
     }
@@ -94,11 +94,11 @@ class UseCaseController extends Controller
             }
             
             $data->update($input);
-            alert()->success('Success', 'Use case updated successfully.');
+            myAlert('success', 'Use case updated successfully.');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', 'Something Error found!');
+            myAlert('error',$errorMessage);
             return back();
         }
     }
@@ -114,11 +114,11 @@ class UseCaseController extends Controller
                 unlink($data->icon);
             }
             $data->delete();
-            alert()->success('Success', 'Data is deleted');
+            myAlert('success', 'Data is deleted');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return back();
         }
     }
