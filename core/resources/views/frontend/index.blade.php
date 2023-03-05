@@ -1,82 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI WRITER LANDING </title>
-
-    <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
-    <!-- BOOTSTRAP CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-
-    <!-- MAIN CSS  -->
-    <link rel="stylesheet" href="{{asset('assets/css/style.min.css')}}">
-    <!-- aos scroll animation  -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-</head>
-
-<body class="body-landing">
-    <!-- ===================header start======================= -->
-    <header class="landing-header">
-        <div class="container">
-
-            <!-- desktop header  -->
-            <div class="header-desk d-none d-lg-flex ">
-                <div class="header-left">
-                    <a href="index.html">
-                        <h3 class="logo-name text-center header-logo">type.ez</h3>
-                    </a>
-                    <ul class="desk-menu">
-                        <li>
-                            <a href="#usecase" class="desk-menu-link">Use Cases</a>
-                        </li>
-                        <li>
-                            <a href="#generateImage" class="desk-menu-link">Image generator </a>
-                        </li>
-                        <li>
-                            <a href="#works" class="desk-menu-link">How it Works </a>
-                        </li>
-                        
-                        <li>
-                            <a href="#pricing" class="desk-menu-link">Pricing</a>
-                        </li>
-                        <li><a href="blog.html" class="desk-menu-link">Blog</a></li>
-                    </ul>
-                </div>
-
-                <div class="header-right">
-                    <ul class="desk-menu">
-                       
-                        <li><a href="login.html" class="primarybtn-landing ">Get started ___ it’s free</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- mobile header  -->
-
-            <div class="moble-header d-flex justify-content-between d-lg-none align-items-center ">
-                <a href="index.html">
-                    <h3 class="logo-name text-center header-logo">type.ez</h3>
-                </a>
-
-                <span data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
-                    <svg width="36" height="10" viewBox="0 0 36 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="36" height="4" fill="#1D2939"/>
-                        <rect y="6" width="36" height="4" fill="#1D2939"/>
-                    </svg>
-                        
-                </span>
-            </div>
-
-
-
-        </div>
-    </header>
-    <!-- ===================header end ======================= -->
-
+@extends('frontend.app')
+@section('content')
     <!-- ===================hero  start======================= -->
     <section class="hero">
         <div class="container">
@@ -85,23 +8,23 @@
                 <div class="col-12">
                     <div class="hero-content pt-5">
                         <h1 class="hero-title">Write your Business Idea <br>
-                            with <span class="logo-name"> type.ez</span> </h1>
-                        <p class="hero-des">` Type.ez is designed to help you streamline your writing process, <br>
+                            with <span class="logo-name"> {{ readConfig('name') }} </span> </h1>
+                        <p class="hero-des">{{ readConfig('name') }}  is designed to help you streamline your writing process, <br>
                             increase your productivity, and create high-quality content.</p>
 
-                        <button class="primarybtn-landing">
+                        <a href="{{route('register')}}" class="primarybtn-landing">
                             <span class="title">Get your free access now </span>
                             <span>
                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <path d="M5 15L15 5" stroke="white" stroke-width="1.5" stroke-linecap="round"
                                         stroke-linejoin="round" />
-                                    <path d="M6.875 5H15V13.125" stroke="white" stroke-width="1.5"
-                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M6.875 5H15V13.125" stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
 
                             </span>
-                        </button>
+                        </a>
 
                         <p class="credit">No credit card required</p>
                     </div>
@@ -122,8 +45,7 @@
     <section class="benifits" id="usecase">
         <div class="container">
             <div class="row">
-                <div class="col-12" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
-                    data-aos-duration="1000">
+                <div class="col-12" data-aos="fade-up" data-aos-anchor-placement="center-bottom" data-aos-duration="1000">
                     <div class="section-header">
                         <button class="section-btn"><span class="text">Content</span></button>
                         <h3 class="benifits-title"> <span>Type.ez</span> helps <br> <span>startup teams.</span></h3>
@@ -195,8 +117,8 @@
                             <div class="right">
                                 <p class="title">Social Media Content</p>
                                 <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try Social Media Content</span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                <a href="#" class="card-link"> <span class="text">Try Social Media Content</span>
+                                    <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                             </div>
                         </div>
 
@@ -210,8 +132,8 @@
                             <div class="right">
                                 <p class="title">eCommerce Content</p>
                                 <p class="text">Generate beautifully written product descriptions to increase sales.</p>
-                                <a href="#" class="card-link"> <span class="text">Try eCommerce Content</span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                <a href="#" class="card-link"> <span class="text">Try eCommerce Content</span>
+                                    <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                             </div>
                         </div>
 
@@ -256,8 +178,8 @@
                             <div class="right">
                                 <p class="title">SEO Meta Description</p>
                                 <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try SEO Meta Description </span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                <a href="#" class="card-link"> <span class="text">Try SEO Meta Description
+                                    </span> <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                             </div>
                         </div>
 
@@ -271,8 +193,8 @@
                             <div class="right">
                                 <p class="title">Google Search Ads</p>
                                 <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                <a href="#" class="card-link"> <span class="text">Try Google Search Ads </span> <img
-                                        src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                <a href="#" class="card-link"> <span class="text">Try Google Search Ads </span>
+                                    <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                             </div>
                         </div>
 
@@ -293,8 +215,8 @@
                                 <div class="right">
                                     <p class="title">Blog Content</p>
                                     <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try blog content </span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                    <a href="#" class="card-link"> <span class="text">Try blog content </span>
+                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
 
@@ -323,8 +245,8 @@
                                 <div class="right">
                                     <p class="title">Digital Ad Copy</p>
                                     <p class="text">Produce compelling ad copy in just a few clicks.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Digital Ad Copy </span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                    <a href="#" class="card-link"> <span class="text">Try Digital Ad Copy </span>
+                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
 
@@ -338,7 +260,8 @@
                                 <div class="right">
                                     <p class="title">Social Media Content</p>
                                     <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Social Media Content</span>
+                                    <a href="#" class="card-link"> <span class="text">Try Social Media
+                                            Content</span>
                                         <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
@@ -354,8 +277,9 @@
                                     <p class="title">eCommerce Content</p>
                                     <p class="text">Generate beautifully written product descriptions to increase sales.
                                     </p>
-                                    <a href="#" class="card-link"> <span class="text">Try eCommerce Content</span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                    <a href="#" class="card-link"> <span class="text">Try eCommerce
+                                            Content</span> <img src="assets/icons/cards-icons/right-arrow.svg"
+                                            alt=""> </a>
                                 </div>
                             </div>
 
@@ -369,8 +293,8 @@
                                 <div class="right">
                                     <p class="title">Website Copy</p>
                                     <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Website Copy </span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                    <a href="#" class="card-link"> <span class="text">Try Website Copy </span>
+                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
 
@@ -384,8 +308,8 @@
                                 <div class="right">
                                     <p class="title">Cover Letter</p>
                                     <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Cover Letter </span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                    <a href="#" class="card-link"> <span class="text">Try Cover Letter </span>
+                                        <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
 
@@ -400,7 +324,8 @@
                                 <div class="right">
                                     <p class="title">SEO Meta Description</p>
                                     <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try SEO Meta Description </span>
+                                    <a href="#" class="card-link"> <span class="text">Try SEO Meta Description
+                                        </span>
                                         <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
@@ -415,8 +340,8 @@
                                 <div class="right">
                                     <p class="title">Google Search Ads</p>
                                     <p class="text">Write optimized blog posts in a fraction of the time.</p>
-                                    <a href="#" class="card-link"> <span class="text">Try Google Search Ads </span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                    <a href="#" class="card-link"> <span class="text">Try Google Search Ads
+                                        </span> <img src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
 
@@ -471,7 +396,7 @@
     <!--================= AI IMAGE GENERATE START================ -->
     <section class="image-generate" id="generateImage">
         <div class="container">
-            
+
             <div class="row g-4">
 
                 <div class="col-12" data-aos="fade-up" data-aos-anchor-placement="center-bottom"
@@ -479,12 +404,13 @@
                     <div class="section-header">
                         <button class="section-btn"><span class="text">Content</span></button>
                         <h3 class="benifits-title"> <span>Type.ez</span> helps to <br> <span>generate image..</span></h3>
-                        <p class="des">Get your content and content thumbnail in one place. <br> Generate unique and beautiful image with one click.</p>
+                        <p class="des">Get your content and content thumbnail in one place. <br> Generate unique and
+                            beautiful image with one click.</p>
                     </div>
                 </div>
                 <div class="col-lg-8 mx-auto">
                     <figure class="generate-image1">
-                        <img src="assets/images/landing/generate.svg"  alt="generate image ">
+                        <img src="assets/images/landing/generate.svg" alt="generate image ">
                     </figure>
                 </div>
                 <div class="col-lg-8 mx-auto">
@@ -492,10 +418,10 @@
                         <img src="assets/images/landing/generate2.svg" alt="generate image ">
                     </figure>
                 </div>
-                
+
             </div>
 
-            
+
         </div>
     </section>
     <!--================= AI IMAGE GENERATE END================== -->
@@ -516,7 +442,7 @@
 
                 <div class="col-lg-5" data-aos="zoom-in" data-aos-duration="1000">
                     <figure class="works-immage">
-                        <img src="assets/images/landing/create-post.svg"  alt="preview editor">
+                        <img src="assets/images/landing/create-post.svg" alt="preview editor">
                     </figure>
                 </div>
                 <div class="col-lg-7" data-aos="zoom-in" data-aos-duration="1000">
@@ -889,9 +815,9 @@
         </div>
     </section>
     <!-- ==============Choose package end ======================= -->
-    
-     <!--===================== faq  start=====================-->
-     <section class="faq">
+
+    <!--===================== faq  start=====================-->
+    <section class="faq">
         <div class="container">
 
             <div class="row g-4 align-items-center">
@@ -899,7 +825,7 @@
                 <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
                     <div class="section-header">
                         <button class="section-btn"><span class="text">Faq</span></button>
-                        <h3 class="benifits-title"> Frequently Asked  <br>
+                        <h3 class="benifits-title"> Frequently Asked <br>
                             Questions </h3>
                     </div>
                 </div>
@@ -911,91 +837,106 @@
                     <div class="accordion" id="faqAccordion">
                         <!-- accordion item one  -->
                         <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" 
-                            aria-expanded="true" aria-controls="collapseOne">
-                               What can I create with Type.ez?
-                            </button>
-                          </h2>
-                          <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body"> 
-                                <div class="card-divider-faq"></div>
-                                <p>We have copywriting tools for everything you need to start and run your business! You can write blog posts, product descriptions, and even Instagram captions with Type.ez . We're always updating our tools, so let us know what else you'd like to see!</p>
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    What can I create with Type.ez?
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="card-divider-faq"></div>
+                                    <p>We have copywriting tools for everything you need to start and run your business! You
+                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
+                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
+                                </div>
                             </div>
-                          </div>
                         </div>
                         <!-- accordion item two -->
 
                         <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingTwo">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" 
-                            aria-controls="collapseTwo">
-                            What can I create with Type.ez?
-                            </button>
-                          </h2>
-                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body"> 
-                                <div class="card-divider-faq"></div>
-                                <p>We have copywriting tools for everything you need to start and run your business! You can write blog posts, product descriptions, and even Instagram captions with Type.ez . We're always updating our tools, so let us know what else you'd like to see!</p>
+                            <h2 class="accordion-header" id="headingTwo">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    What can I create with Type.ez?
+                                </button>
+                            </h2>
+                            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="card-divider-faq"></div>
+                                    <p>We have copywriting tools for everything you need to start and run your business! You
+                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
+                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
 
 
+                                </div>
                             </div>
-                          </div>
                         </div>
                         <!-- accordion item Three  -->
 
 
                         <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" 
-                             aria-controls="collapseThree">
-                             What can I create with Type.ez?
-                            </button>
-                          </h2>
-                          <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body"> 
-                                <div class="card-divider-faq"></div>
-                                <p>We have copywriting tools for everything you need to start and run your business! You can write blog posts, product descriptions, and even Instagram captions with Type.ez . We're always updating our tools, so let us know what else you'd like to see!</p>
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    What can I create with Type.ez?
+                                </button>
+                            </h2>
+                            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="card-divider-faq"></div>
+                                    <p>We have copywriting tools for everything you need to start and run your business! You
+                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
+                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
 
 
+                                </div>
                             </div>
-                          </div>
                         </div>
                         <!-- accordion item four -->
-                        
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="headingThree">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" 
-                             aria-controls="collapseThree">
-                             What can I create with Type.ez?
-                            </button>
-                          </h2>
-                          <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                            <div class="accordion-body">
-                               <div class="card-divider-faq"></div>
-                               <p>We have copywriting tools for everything you need to start and run your business! You can write blog posts, product descriptions, and even Instagram captions with Type.ez . We're always updating our tools, so let us know what else you'd like to see!</p>
 
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                    What can I create with Type.ez?
+                                </button>
+                            </h2>
+                            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="card-divider-faq"></div>
+                                    <p>We have copywriting tools for everything you need to start and run your business! You
+                                        can write blog posts, product descriptions, and even Instagram captions with Type.ez
+                                        . We're always updating our tools, so let us know what else you'd like to see!</p>
+
+                                </div>
                             </div>
-                          </div>
                         </div>
                         <!-- accordion item five -->
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" 
-                               aria-controls="collapseThree">
-                               What can I create with Type.ez?
-                              </button>
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseThree">
+                                    What can I create with Type.ez?
+                                </button>
                             </h2>
-                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                              <div class="accordion-body"> 
-                                <div class="card-divider-faq"></div>
-                                  <p>Visa is a document which you need to travoel to a country legally. Some of the important visa types are Tourist 
-                                  Visa, Transit Visa, Short Stay or Visitor Visa, Business Visa, Residence Visa, Immigrant Visa, and Medical Visa. </p>
+                            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                                data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    <div class="card-divider-faq"></div>
+                                    <p>Visa is a document which you need to travoel to a country legally. Some of the
+                                        important visa types are Tourist
+                                        Visa, Transit Visa, Short Stay or Visitor Visa, Business Visa, Residence Visa,
+                                        Immigrant Visa, and Medical Visa. </p>
 
-                              </div>
+                                </div>
                             </div>
-                          </div>
+                        </div>
 
 
                     </div>
@@ -1074,7 +1015,8 @@
                 <button class="primarybtn-landing">
                     <span class="title">Get your free access now </span>
                     <span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
                             <path d="M5 15L15 5" stroke="white" stroke-width="1.5" stroke-linecap="round"
                                 stroke-linejoin="round"></path>
                             <path d="M6.875 5H15V13.125" stroke="white" stroke-width="1.5" stroke-linecap="round"
@@ -1088,179 +1030,4 @@
         </div>
     </section>
     <!-- ==============get started end ======================= -->
-
-    <footer class="landing-footer ">
-        <div class="container">
-            <div class="footer-content" data-aos="fade-up" data-aos-duration="1000">
-                <div class="row g-4">
-                    <div class="col-lg-2">
-                        <a href="index.html">
-                            <h3 class="logo-name ">type.ez</h3>
-                        </a>
-                    </div>
-
-                    <div class=" col-sm-6 col-lg-2">
-                        <div class="footerlinks">
-                            <h5 class="footerlinks-title">Product</h5>
-                            <div class="footerlink">
-                                <a href="" class="link">Pricing</a>
-                                <a href="" class="link">Start Writing For Free</a>
-                                <a href="" class="link"> User Dashboard</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-2">
-                        <div class="footerlinks">
-                            <h5 class="footerlinks-title">Use Cases</h5>
-                            <div class="footerlink">
-                                <a href="" class="link">Blog Idea & Outline</a>
-                                <a href="" class="link">Googe Search Ads</a>
-                                <a href="" class="link"> Blog Section Writing</a>
-                                <a href="" class="link"> Business Ideas</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-2">
-                        <div class="footerlinks">
-                            <h5 class="footerlinks-title">Support</h5>
-                            <div class="footerlink">
-                                <a href="" class="link">Contact Us</a>
-                                <a href="" class="link"> Register</a>
-                                <a href="" class="link"> Login</a>
-                                <a href="" class="link"> SEO Meta Description</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="footerlinks">
-                            <h5 class="footerlinks-title">Blogs</h5>
-                            <div class="footerlink">
-                                <a href="" class="link">AI for Sales Teams: How It Works, and How to Get Started</a>
-                                <a href="" class="link"> Automated Product Descriptions for Large E-commerce
-                                    Retailers</a>
-                                <a href="" class="link"> AI for Advertising: The Tools, Tips, & Examples You Need</a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="card-divider"></div>
-
-                <div class="footer-social">
-                    <ul class="socilmenu">
-                        <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="assets/icons/social/facebook.svg" alt=""></a>
-                        </li>
-                        <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="assets/icons/social/twitter.svg" alt=""></a>
-                        </li>
-                        <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="assets/icons/social/linkdin.svg" alt=""></a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="copyright">
-                    <p class="copyright-text">© 2023 Type.ez</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
-    <!-- MOBILE-MENU -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenu">
-        <div class="offcanvas-header">
-            <a href="index.html">
-                <h3 class="logo-name text-center header-logo">type.ez</h3>
-            </a>
-
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M13.2849 15.5425L7.62804 9.88562L1.97118 15.5425L0.0855651 13.6569L5.74242 8L0.0855651 
-                    2.34315L1.97118 0.457528L7.62804 6.11438L13.2849 0.457527L15.1705 2.34315L9.51366 8L15.1705 13.6569L13.2849 
-                    15.5425Z" fill="#718096" />
-                </svg>
-
-            </button>
-        </div>
-
-        <div class="offcanvas-body">
-            <ul class="mobilelist">
-                <li class="mobilelist-item" data-bs-dismiss="offcanvas">
-                    <a href="#usecase" class="mobilelist-link">Use Cases</a>
-                </li>
-                <li class="mobilelist-item" data-bs-dismiss="offcanvas">
-                    <a href="#works" class="mobilelist-link">How it Works </a>
-                </li>
-                <li class="mobilelist-item" data-bs-dismiss="offcanvas">
-                    <a href="#pricing" class="mobilelist-link">Pricing</a>
-                </li>
-                <li class="mobilelist-item" data-bs-dismiss="offcanvas">
-                    <a href="login.html" class="mobilelist-link">Login</a>
-                </li>
-
-
-            </ul>
-
-
-        </div>
-    </div>
-
-
-
-
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-        crossorigin="anonymous"></script>
-    <script>
-        // animation on scroll 
-        AOS.init({
-            offset: 120, // offset (in px) from the original trigger point
-            delay: 0, // values from 0 to 3000, with step 50ms
-            duration: 1000, // values from 0 to 3000, with step 50ms
-            easing: 'ease', // default easing for AOS animations
-            once: false, // whether animation should happen only once - while scrolling down
-            mirror: false, // whether elements should animate out while scrolling past them
-            anchorPlacement: 'top-bottom'
-        });
-
-        var swiper = new Swiper(".mySwiper", {
-            breakpoints: {
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                },
-                992: {
-                    slidesPerView: 3,
-                    spaceBetween: 40,
-                },
-
-            },
-        });
-
-       
-
-        // header background add when scroll start 
-        var scrollTrigger = 80;
-
-        window.onscroll = function () {
-            // We add pageYOffset for compatibility with IE.
-            if (window.scrollY >= scrollTrigger || window.pageYOffset >= scrollTrigger) {
-                document.getElementsByTagName("header")[0].classList.add('bg-white');
-            } else {
-                document.getElementsByTagName("header")[0].classList.remove('bg-white');
-            }
-        };
-       
-    </script>
-</body>
-
-</html>
+@endsection

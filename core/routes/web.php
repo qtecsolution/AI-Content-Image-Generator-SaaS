@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Auth;
 */
 // Frontend Route
 Route::group(['namespace' => 'Frontend'], function () {
-    Route::get('/', 'FrontendController@index');
+    Route::get('/', 'FrontendController@index')->name('/');
 });
 Auth::routes();
 
