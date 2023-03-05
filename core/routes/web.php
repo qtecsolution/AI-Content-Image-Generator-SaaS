@@ -33,6 +33,7 @@ Route::controller(GoogleController::class)->group(function () {
 // User Route
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::post('/profile', 'HomeController@profileUpdate')->name('profile.update');
     Route::get('/content-create', 'OpenAiController@content')->name('content.create');

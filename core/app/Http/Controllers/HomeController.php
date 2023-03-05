@@ -30,6 +30,12 @@ class HomeController extends Controller
         $cases = UseCase::where('is_published', 1)->get();
         return view('index', compact('cases'));
     }
+    public function dashboard()
+    {
+        $totalUser = User::where('type','user')->count();
+        $recentUsers = User::where('type','user')->limit(10)->latest()->get();
+        return view('dashboard.index',compact('totalUser','recentUsers'));
+    }
     
     public function profile()
     {
