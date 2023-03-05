@@ -1,19 +1,25 @@
 @extends('layouts.app')
-
+@section('title','AI Content Generate')
+@section('breadcrumb')
+    <li class="breadcrumb-item active">AI Content Generate</li>
+@endsection
 @section('content')
-    <div class="main-content p-2 p-md-4 pt-0">
-        <div class="row g-4">
+<div class="main-content p-2 p-md-4 pt-0">
+    <section class="my-projects">
+        <div class="my-projects-header border-bottom">
+            <h4 class="header-title">AI Content Generate</h4>
+        </div>
+        <div class="my-projects-body">
+        <div class="row">
 
             <!-- create post column -->
-            <div class="col-lg-5 mt-0">
+            <div class="col-lg-5 mt-3">
 
                 <div class="create-post">
                     <form action="" id="input-form"
                         class="createpost-form  needs-validation  h-100 flex-column  justify-content-between">
 
                         <div class="form-content">
-                            <h3 class="create-post-header">Content Generate</h3>
-
                             <div class="row g-4 mb-3">
 
                                 <!-- Type    -->
@@ -147,6 +153,8 @@
             </div>
         </div>
     </div>
+    </section>
+</div>
 @endsection
 @section('script')
     <script>

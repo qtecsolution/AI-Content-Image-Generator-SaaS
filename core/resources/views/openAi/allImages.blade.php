@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('title','All Generated Images')
+@section('breadcrumb')
+    <li class="breadcrumb-item active">All Generated Images</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <section class="my-projects">
@@ -11,7 +14,7 @@
                     <a href="{{ route('image.variation') }}" class="btn btn-light btn-xs"> <i class="fa fa-plus-circle"></i> New Variant</a>
                 </div>
             </div>
-            <div class="my-projects-body">
+            <div class="my-projects-body mt-2">
                 <form action="">
                     <div class="searchbox mb-3 custom">
                         <span class="search-icon">

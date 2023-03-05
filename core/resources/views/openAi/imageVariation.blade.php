@@ -1,5 +1,8 @@
 @extends('layouts.app')
-
+@section('title','AI Image Variation Generate')
+@section('breadcrumb')
+    <li class="breadcrumb-item active">AI Image Variation Generator</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <section class="my-projects">
