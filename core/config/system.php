@@ -1,12 +1,12 @@
 <?php
 
 return [
-    'name' => 'app_name',
+    'name' => 'Type.ez',
     'type_logo' => 'uploads/site/own-site7189.png',
-    'type_name' => 'Hat bazar',
-    'type_footer' => 'HatBazar',
-    'type_mail' => 'hatbazar@mail.com',
-    'type_address' => 'Uttara vuter golie,',
+    'type_name' => 'Type.ez',
+    'type_footer' => 'Type.ez',
+    'type_mail' => 'example@mail.com',
+    'type_address' => 'United state',
     'footer_logo' => 'uploads/site/footer-logo4574.jpg',
     'favicon_icon' => 'uploads/site/f-icon1290.png',
     'type_fb' => 'facebook.com',

@@ -17,7 +17,6 @@
                                 <!-- single  card free  -->
                                 @foreach ($plans as $item)
                                 <div class="pricing-card">
-
                                     <div class="pricing-card-header">
                                         <span class="price">
                                             <span class="currency">{{readConfig('currency_sambol')}}</span>
