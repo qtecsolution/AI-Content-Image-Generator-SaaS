@@ -36,6 +36,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::post('/profile', 'HomeController@profileUpdate')->name('profile.update');
+
+    Route::get('/profile/password', 'HomeController@password')->name('profile.password');
+    Route::post('/profile/password', 'HomeController@updatePassword')->name('profile.password.update');
+
     Route::get('/content-create', 'OpenAiController@content')->name('content.create');
     Route::post('/content-generate', 'OpenAiController@contentGenerate')->name('content.generate');
 

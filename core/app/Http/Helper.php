@@ -108,9 +108,9 @@ function writePwaConfig($key, $value)
 }
 function myAlert($status,$message){
     if($status=='success'){
-        alert()->success('Success', $message);
+        toast($message,'success');
     }else{
-        alert()->error('Error', $message);
+        toast($message,'warning');
     }
 
 }

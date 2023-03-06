@@ -38,7 +38,213 @@
             <h3 class="logo-name text-center">type.ez</h3>
         </div>
         <div class="sidebar-body">
+            <!-- user  -->
             <ul class="sidebar-menu">
+
+                <li>
+                    <a href="index.html" class="sidebar-menu-link">
+                        <img src="assets/icons/home.svg" alt="home icon ">
+                        <span class="text">User Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="sidebar-menu-link">
+                        <img src="assets/icons/content.svg" alt="home icon ">
+                        <span class="text">Content generate</span>
+                    </a>
+                </li>
+                <li data-bs-toggle="collapse" data-bs-target="#generateDropdown">
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/image.svg" alt="user icon ">
+                        <span class="text">generate image</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="generateDropdown">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="#">New Image</a></li>
+                                <li><a href="#">Image Variation </a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/saved.svg" alt="layers icon ">
+                        <span class="text">Saved Content</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/history.svg" alt="layers icon ">
+                        <span class="text">Content History</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/list.svg" alt="layers icon ">
+                        <span class="text">Generated Images</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/credit-card.svg" alt="credit card  icon ">
+                        <span class="text">Purchase plane</span>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/reports.svg" alt="credit card  icon ">
+                        <span class="text">Reports</span>
+
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- admin  -->
+
+            <ul class="sidebar-menu  ">
+
+                <li>
+                    <a href="index.html" class="sidebar-menu-link">
+                        <img src="assets/icons/home.svg" alt="home icon ">
+                        <span class="text">admin </span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="sidebar-menu-link">
+                        <img src="assets/icons/content.svg" alt="home icon ">
+                        <span class="text">Manage Use Case</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="sidebar-menu-link">
+                        <img src="assets/icons/users.svg" alt="home icon ">
+                        <span class="text">Users List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/users.svg" alt="home icon ">
+                        <span class="text">Admin List</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/users.svg" alt="home icon ">
+                        <span class="text">Manage plane</span>
+                    </a>
+                </li>
+                <li data-bs-toggle="collapse" data-bs-target="#manageBlog">
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/image.svg" alt="user icon ">
+                        <span class="text">Manage Blog</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="manageBlog">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="#">Category</a></li>
+                                <li><a href="#">Blog</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/users.svg" alt="home icon ">
+                        <span class="text">Manage Faq</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/users.svg" alt="home icon ">
+                        <span class="text">Page Builder</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/users.svg" alt="home icon ">
+                        <span class="text">Payment Method</span>
+                    </a>
+                </li>
+
+
+
+
+                <li data-bs-toggle="collapse" data-bs-target="#reports">
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/reports.svg" alt="credit card  icon ">
+                        <span class="text">Reports</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+
+                    </a> 
+
+                    <div class="collapse" id="reports">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="#">Sales Reports</a></li>
+                                <li><a href="#">Google Analytics</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                <li data-bs-toggle="collapse" data-bs-target="#settings">
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="assets/icons/reports.svg" alt="credit card  icon ">
+                        <span class="text">Settings</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+
+                    </a> 
+
+                    <div class="collapse" id="settings">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="#">Seo Settings</a></li>
+                                <li><a href="#">Mail Configure</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+             
+
+            </ul>
+            <ul class="sidebar-menu d-none">
                 <li>
                     <a href="{{ route('content.create') }}" class="add-btn" data-bs-toggle="tooltip"
                         data-bs-placement="right" data-bs-title="Generate your Content">+</a>
@@ -147,6 +353,9 @@
                             <ul class="userlist">
                                 <li class="userlist-item">
                                     <a href="{{ route('profile') }}" class="userlist-link">My Profile</a>
+                                </li>
+                                <li class="userlist-item">
+                                    <a href="{{ route('profile.password') }}" class="userlist-link">Change Password</a>
                                 </li>
                                 <li class="userlist-item">
                                     <a class="userlist-link" href="{{ route('logout') }}"

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('breadcrumb')
-    <li class="breadcrumb-item active"> Profile</li>
+    <li class="breadcrumb-item active"> Change Password</li>
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="my-projects">
                     <div class="my-projects-header border-bottom">
-                        <h5 class="header-title text-capitalize"> Profile </h5>
+                        <h5 class="header-title text-capitalize"> Change Password </h5>
                     </div>
                     <div class="my-projects-body">
                         <div class="row mt-3">
@@ -38,23 +38,20 @@
                                 </div>
                             </div>
                             <div class="col-6 border-start">
-                                <form method="POST" action="{{ route('profile.update') }}"
-                                    enctype="multipart/form-data" class="authentication-form needs-validation">
+                                <form method="POST" action="{{ route('profile.password.update') }}" class="authentication-form needs-validation">
                                     @csrf
-
-                                    <input type="hidden" name="id" value="{{ $user->id }}">
 
                                     <div class="authentication-form-body">
 
                                         <!-- Name   -->
                                         <div class="form-group mb-3">
-                                            <label for="name" class="form-label">Name *</label>
-                                            <input id="name" type="text"
-                                                class="form-control custom-input @error('name') is-invalid @enderror"
-                                                name="name" value="{{ $user->name }}" required
-                                                placeholder="Enter your name" autocomplete="name" autofocus>
+                                            <label for="current_password" class="form-label">Current Password *</label>
+                                            <input id="current_password" type="password"
+                                                class="form-control custom-input @error('current_password') is-invalid @enderror"
+                                                name="current_password" required
+                                                placeholder="Enter your current password" autocomplete="off" autofocus>
 
-                                            @error('name')
+                                            @error('current_password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -64,13 +61,13 @@
 
                                         <!-- Email    -->
                                         <div class="form-group mb-3">
-                                            <label for="email" class="form-label">Email* </label>
-                                            <input id="email" type="email" readonly
-                                                class="form-control custom-input @error('email') is-invalid @enderror"
-                                                name="email" value="{{ $user->email }}" required autocomplete="email"
-                                                placeholder="Enter your Email">
+                                            <label for="new_password" class="form-label">New Password* </label>
+                                            <input id="new_password" type="password"
+                                                class="form-control custom-input @error('new_password') is-invalid @enderror"
+                                                name="new_password" required autocomplete="off"
+                                                placeholder="Enter your new password">
 
-                                            @error('email')
+                                            @error('new_password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -79,38 +76,13 @@
                                         </div>
 
                                         <div class="form-group mb-3">
-                                            <label for="phone" class="form-label">Phone* </label>
-                                            <input id="phone" type="tel"
-                                                class="form-control custom-input @error('phone') is-invalid @enderror"
-                                                name="phone" value="{{ $user->phone }}" required
-                                                placeholder="Enter your phone">
+                                            <label for="confirm_password" class="form-label">Confirm Password* </label>
+                                            <input id="confirm_password" type="password"
+                                                class="form-control custom-input @error('confirm_password') is-invalid @enderror"
+                                                name="confirm_password" required
+                                                placeholder="Confirm your password">
 
-                                            @error('phone')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="address" class="form-label">Address </label>
-                                            <input id="address" type="tel"
-                                                class="form-control custom-input @error('address') is-invalid @enderror"
-                                                name="address" value="{{ $user->address }}"
-                                                placeholder="Enter your address">
-
-                                            @error('address')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                        <div class="form-group mb-3">
-                                            <label for="avatar" class="form-label"> New Avatar </label>
-                                            <input id="avatar" type="file"
-                                                class="form-control custom-input @error('avatar') is-invalid @enderror"
-                                                name="avatar" value="{{ old('avatar') }}">
-
-                                            @error('avatar')
+                                            @error('confirm_password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
