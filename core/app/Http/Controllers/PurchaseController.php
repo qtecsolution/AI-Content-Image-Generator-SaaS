@@ -22,8 +22,8 @@ class PurchaseController extends Controller
     public function __construct()
     {
         $this->gateway = Omnipay::create('PayPal_Rest');
-        $this->gateway->setClientId(readConfig('PAYPAL_CLIENT_ID'));
-        $this->gateway->setSecret(readConfig('PAYPAL_APP_SECRET'));
+        $this->gateway->setClientId(env('PAYPAL_CLIENT_ID'));
+        $this->gateway->setSecret(env('PAYPAL_APP_SECRET'));
         $this->gateway->setTestMode(true);
     }
 
@@ -134,8 +134,8 @@ class PurchaseController extends Controller
                 try {
 
                     $response = $this->gateway->purchase(array(
-                        'amount' => $request->amount,
-                        'currency' => env('PAYPAL_CURRENCY'),
+                        'amount' => $request->paymentAmount,
+                        'currency' => 'USD',
                         'returnUrl' => route('paypal.pay.success', $order->id),
                         'cancelUrl' => route('paypal.pay.error', $order->id)
                     ))->send();

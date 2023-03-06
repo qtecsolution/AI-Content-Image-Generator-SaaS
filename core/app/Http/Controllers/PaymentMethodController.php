@@ -22,14 +22,17 @@ class PaymentMethodController extends Controller
 
         if ($request->has('PAYPAL_ACTIVE')) {
             writeConfig('PAYPAL_ACTIVE', $request->PAYPAL_ACTIVE);
+           
         }
 
         if ($request->has('PAYPAL_CLIENT_ID')) {
             writeConfig('PAYPAL_CLIENT_ID', $request->PAYPAL_CLIENT_ID);
+            overWriteEnvFile('PAYPAL_CLIENT_ID', $request->PAYPAL_CLIENT_ID);
         }
 
         if ($request->has('PAYPAL_APP_SECRET')) {
             writeConfig('PAYPAL_APP_SECRET', $request->PAYPAL_APP_SECRET);
+            overWriteEnvFile('PAYPAL_APP_SECRET', $request->PAYPAL_APP_SECRET);
         }
 
        

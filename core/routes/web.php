@@ -65,7 +65,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('razor-pay-load/{id}', 'PurchaseController@razorPayLoad')->name('plan.razorpay.load');
     Route::get('paypal-pay-load', 'PurchaseController@paypalPayLoad')->name('checkout.paypal');
     Route::get('bank-pay-load', 'PurchaseController@bankPayLoad')->name('checkout.bank');
-    Route::get('paypal/pay/success/{id}', 'PurchaseController@paySuccess')->name('aypal.pay.success');
+    Route::get('paypal/pay/success/{id}', 'PurchaseController@paySuccess')->name('paypal.pay.success');
     Route::get('paypal/pay/cancle/{id}', 'PurchaseController@payCancle')->name('paypal.pay.error');
     Route::get('/plan/user/index', 'PlanController@userIndex')->name('plan.userIndex');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');

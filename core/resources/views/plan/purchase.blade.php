@@ -77,28 +77,28 @@
                                             </label>
                                             <div class="collapse" id="collapseExample">
                                                 <div class="card-body">
-
-                                                    <div class='form-group mb-2'>
-                                                        <label class='control-label'>Card Number</label>
-                                                        <input autocomplete='off' class='form-control card-number'
-                                                            size='20' type='text'>
-                                                    </div>
-
                                                     <div class='row'>
-                                                        <div class='col-xs-12 col-md-4 form-group cvc required p-2'>
+                                                        <div class='col-xs-12 col-md-4  form-group'>
+                                                            <label class='control-label'>Card Number</label>
+                                                            <input autocomplete='off'
+                                                                class='form-control custom-input card-number' size='20'
+                                                                type='text'>
+                                                        </div>
+                                                        <div class='col-xs-12 col-md-2 form-group cvc required'>
                                                             <label class='control-label'>CVC</label> <input
-                                                                autocomplete='off' class='form-control card-cvc'
+                                                                autocomplete='off'
+                                                                class='form-control custom-input card-cvc'
                                                                 placeholder='ex. 311' size='4' type='text'>
                                                         </div>
-                                                        <div class='col-xs-12 col-md-4 form-group expiration required p-2'>
+                                                        <div class='col-xs-12 col-md-2 form-group expiration required'>
                                                             <label class='control-label'>Expiration Month</label>
-                                                            <input class='form-control card-expiry-month' placeholder='MM'
-                                                                size='2' type='text'>
+                                                            <input class='form-control custom-input card-expiry-month'
+                                                                placeholder='MM' size='2' type='text'>
                                                         </div>
-                                                        <div class='col-xs-12 col-md-4 form-group expiration required p-2'>
+                                                        <div class='col-xs-12 col-md-2 form-group expiration required'>
                                                             <label class='control-label'>Expiration Year</label>
-                                                            <input class='form-control card-expiry-year' placeholder='YYYY'
-                                                                size='4' type='text'>
+                                                            <input class='form-control custom-input card-expiry-year'
+                                                                placeholder='YYYY' size='4' type='text'>
                                                         </div>
                                                     </div>
                                                     <div class='row '>
@@ -179,12 +179,15 @@
                         <div class="card-body d-flex flex-column gap-3 form-methods">
                             <form action="{{ route('plan.purchase.store') }}" enctype="multipart/form-data"
                                 method="post" id="order_payment_done" class="mt-4">
+
                                 @csrf
 
-                                <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ readConfig('RAZORPAY_KEY') }}"
-                                    data-amount="{{ 100 * $plan->price }}" data-name="{{ readConfig('type_name') }}" data-description=""
-                                    data-image="{{ filePath(readConfig('type_logo')) }}" data-prefill.name="{{ $user->name }}"
-                                    data-prefill.email="{{ $user->email }}"></script>
+                                {{-- @if (readConfig('RAZORPAY_ACTIVE') == 'on')
+                                    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ readConfig('RAZORPAY_KEY') }}"
+                                        data-amount="{{ 100 * $plan->price }}" data-name="{{ readConfig('type_name') }}" data-description=""
+                                        data-image="{{ filePath(readConfig('type_logo')) }}" data-prefill.name="{{ $user->name }}"
+                                        data-prefill.email="{{ $user->email }}"></script>
+                                @endif --}}
                                 {{-- this is single form --}}
                                 <input type="hidden" id="plan_id" name="plan_id" value="{{ $plan->id }}">
                                 <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
@@ -370,6 +373,7 @@
                     stripPaymnet();
                     break;
                 case 'razorpay':
+                    // $('.form-methods').load('{{ route('plan.razorpay.load', $plan->id) }}');
                     razorPaymnet();
                     break;
                 case 'bank':
@@ -396,11 +400,11 @@
             "use strict"
 
             function paypalPayment() {
-                debugger
-                var planId = $('#plan_id').val();
-                // var formData = $('#order_payment_done').serialize();
-                var url = '{{ route('checkout.paypal') }}' + '?plan_id=' + planId;
-                forModal(url, 'Paypal Payment Methods', 'hide');
+                $('#paymentMethod').val('paypal');
+                $('#paymentAmount').val({{ $plan->price }});
+                $('#paymentTID').val('');
+                $('#value_1').val('');
+                $('#order_payment_done').submit();
             }
         </script>
     @endif
@@ -411,7 +415,7 @@
             "use strict"
 
             function bankPayment() {
-                debugger
+
                 var planId = $('#plan_id').val();
                 // var formData = $('#order_payment_done').serialize();
                 var url = '{{ route('checkout.bank') }}' + '?plan_id=' + planId;
@@ -469,16 +473,43 @@
 
 
 
-
     @if (readConfig('RAZORPAY_ACTIVE') == 'on')
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
         <script>
             "use strict"
 
             function razorPaymnet() {
 
+                debugger
+                var SITEURL = '{{ URL::to('/') }}';
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var options = {
+                    "key": "{{ readConfig('RAZORPAY_KEY') }}",
+                    "amount": ({{ $plan->price }} * 100), // 2000 paise = INR 20
+                    "name": "{{ $plan->name }}",
+                    "description": "Payment",
+                    "image": "{{ filePath(readConfig('type_logo')) }}",
+                    "handler": function(response) {
+                        window.location.href = SITEURL + '/' + 'paysuccess?payment_id=' + response
+                            .razorpay_payment_id + '&product_id=' + product_id + '&amount=' + totalAmount;
+                    },
+                    "prefill": {
+                        "contact": '{{ $user->phone }}',
+                        "email": '{{ $user->email }}',
+                    },
+                    "theme": {
+                        "color": "#528FF0"
+                    }
+                };
+                var rzp1 = new Razorpay(options);
+                rzp1.open();
+                // e.preventDefault();
 
                 $('#order_payment_done').submit();
-
             }
         </script>
     @endif
@@ -488,10 +519,7 @@
             "use strict"
             // MOLLIE_ACTIVE
             function molliePaymnet() {
-
-
                 $('.molliePaymnet').submit();
-
             }
         </script>
     @endif
