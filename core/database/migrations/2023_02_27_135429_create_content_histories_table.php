@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('temperature');
             $table->string('title')->nullable();
             $table->string('keywords')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->text('prompt');
             $table->longText('generated_content');
             $table->unsignedBigInteger('user_id');

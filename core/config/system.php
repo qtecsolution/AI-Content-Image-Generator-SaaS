@@ -46,4 +46,5 @@ return [
     'meta_key' => 'buwezalute@mailinator.com',
     'currency_sambol' => '$',
     'pwa_active' => 'yes',
+    'open_ai_model' => 'text-davinci-003'
 ];

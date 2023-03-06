@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('keywords')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->longText('generated_content');
             $table->unsignedBigInteger('use_case_id');
             $table->foreign('use_case_id')->references('id')->on('use_cases')->onDelete('cascade');

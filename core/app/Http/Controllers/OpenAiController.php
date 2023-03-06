@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ContentHistory;
 use App\Models\Images;
+use App\Models\Language;
+use App\Models\Plan;
 use App\Models\UseCase;
 use OpenAI\Laravel\Facades\OpenAI;
 use Illuminate\Http\Request;
@@ -16,15 +18,16 @@ class OpenAiController extends Controller
     {
         $cases = UseCase::where('is_published', 1)->pluck('title', 'id');
         $inputFields = [];
-        if(isset($request->case)){
-            $defaultCase = UseCase::where('id',$request->case)->first();
-        }else{
-            $defaultCase = UseCase::latest()->first();
+        if (isset($request->case)) {
+            $defaultCase = UseCase::where('id', $request->case)->first();
+        } else {
+            $defaultCase = UseCase::first();
         }
-        if(isset($defaultCase->input_fields)){
-            $inputFields = explode(',',$defaultCase->input_fields);
+        if (isset($defaultCase->input_fields)) {
+            $inputFields = explode(',', $defaultCase->input_fields);
         }
-        return view('openAi.content', compact('cases', 'request','inputFields'));
+        $languages = Language::where('status',1)->pluck('language','language');
+        return view('openAi.content', compact('cases', 'request', 'inputFields','languages'));
     }
     /* Open AI Content Generate */
     public function contentGenerate(Request $request)
@@ -32,6 +35,8 @@ class OpenAiController extends Controller
         $validator = Validator::make($request->all(), [
             'use_case' => 'required',
             'temp' => 'required',
+            'max_words' => 'required',
+            'quantity' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -43,30 +48,38 @@ class OpenAiController extends Controller
         }
 
         try {
-            // Get use case prompt & replcae placeholder
+            // Get use case prompt & generate prompt by replacing placeholder
             $case = UseCase::findOrFail($request->use_case);
-            $placeholder = array("[keywords]", "[title]", "[description]");
-            $replaceBy = array($request->keywords, $request->title, $request->description);
+            $placeholder = array("[keywords]", "[title]", "[description]","[tone]","[language]");
+            $replaceBy = array($request->keywords??'', $request->title??'', $request->description??'',$request->tone,$request->language);
             $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
+
             $temp = floatval($request->temp ?? 0.7);
+
+            $plan = Plan::where('id', auth()->user()->plan_id)->first();
+            $max_tokens = ($plan->word_count < (int)$request->max_words) ? $plan->word_count : (int)$request->max_words;
+            $model = readConfig('open_ai_model');
+            // Open AI API call
             $result = OpenAI::completions()->create([
-                'model' => 'text-davinci-003',
+                'model' => $model,
                 'prompt' => $prompt,
                 'temperature' => $temp,
-                'max_tokens' => 2048
+                'max_tokens' => $max_tokens,
+                'n' => (int)$request->quantity
             ]);
             $content =  $result['choices'][0]['text'] ?? '';
-            $wordCount = str_word_count($content);
-            $charCount = strlen($content);
+            $wordCount = str_word_count($content)??0;
+            $charCount = strlen($content)??0;
             $results = [
                 'content' => $content,
                 'words' => $wordCount,
                 'characters' => $charCount
             ];
+            // Content history create
             ContentHistory::create([
-                'title' => $request->title??'',
-                'keywords' => $request->keywords??'',
-                'description' => $request->description??'',
+                'title' => $request->title ?? '',
+                'keywords' => $request->keywords ?? '',
+                'description' => $request->description ?? '',
                 'temperature' => $temp,
                 'generated_content' => $content,
                 'prompt' => $prompt,
@@ -170,7 +183,7 @@ class OpenAiController extends Controller
             $id = explode(',', $request->id);
             $images = Images::whereIn('id', $id)->where('user_id', Auth::user()->id)->get();
         }
-        return view('openAi.imageVariation',compact('images'));
+        return view('openAi.imageVariation', compact('images'));
     }
     public function imageGenerateVariation(Request $request)
     {
@@ -182,7 +195,7 @@ class OpenAiController extends Controller
         // Open Ai Image Edit
         $response = OpenAI::images()->variation([
             'image' => fopen($request->file('old_image'), 'r'),
-            'n' => intval($request->quantity??1),
+            'n' => intval($request->quantity ?? 1),
             'size' => $request->image_size,
             'response_format' => 'url',
         ]);
@@ -190,7 +203,7 @@ class OpenAiController extends Controller
         foreach ($response->data as $data) {
             $image = fileUploadFromUrl($data->url, "ai_images/", '');
             $imageId[] = Images::create([
-                'old_image' => fileUpload($request->file('old_image'),'ai_images/local'),
+                'old_image' => fileUpload($request->file('old_image'), 'ai_images/local'),
                 'size' => $request->image_size,
                 'image_path' => $image,
                 'user_id' => Auth::user()->id
