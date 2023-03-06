@@ -84,6 +84,35 @@ $("#imageUpload_f_icon").change(function () {
 
 
 
+//show the modal in this function
+function forModal(url, message, header='show') {
+    $("#show-modal").modal("show");
+    $("#title").text(message);
+    $("#show-form").load(url);
+
+    if(header != 'show'){
+        $("#modal-header").empty();
+        $("#modal-header").removeClass('modal-header');
+        $("#show-form").removeClass('modal-body');
+    }
+
+    $("body").on("shown.bs.modal", ".modal", function () {
+        $(this)
+            .find("select")
+            .each(function () {
+                var dropdownParent = $(document.body);
+                if ($(this).parents(".modal.in:first").length !== 0)
+                    dropdownParent = $(this).parents(".modal.in:first");
+                $(this).select2({
+                    dropdownParent: dropdownParent,
+                    templateResult: formatState,
+                    templateSelection: formatState,
+                });
+            });
+    });
+}
+
+
 function imageUploadPreIcon(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

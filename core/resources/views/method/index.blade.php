@@ -28,6 +28,13 @@
                     Setup</button>
             </li>
 
+            <li class="nav-item" role="presentation">
+                <button class="nav-link @if (isset($tab) && $tab == 'bank') active @endif" id="bank-tab"
+                    data-bs-toggle="tab" data-bs-target="#bank-tab-pane" type="button" role="tab"
+                    aria-controls="bank-tab-pane" aria-selected="false">Bank Payment
+                    Setup</button>
+            </li>
+
 
 
         </ul>
@@ -287,6 +294,81 @@
                 </div>
 
             </div>
+
+            <div class="tab-pane fade @if (isset($tab) && $tab == 'bank') show active @endif" id="bank-tab-pane" role="tabpanel" aria
+            -labelledby="bank-tab"
+            tabindex="0">
+
+            <div class="row">
+                <div class="col-md-7">
+                    <form action="{{ route('payment.bank.store') }}" method="post" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Bank Payment Active <span class="text-danger">*</span></label>
+                            <select class="form-control select2 w-100" name="bank_status">
+                                <option value="on" {{ readConfig('bank_status') == 'on' ? 'selected' : null }}>
+                                    ON
+                                </option>
+                                <option value="off" {{ readConfig('bank_status') == 'off' ? 'selected' : null }}>
+                                    Off
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">About the Bank</label>
+                            <input class="form-control" name="about_bank" value="{{ readConfig('about_bank') }}"
+                                placeholder="About the Bank">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Bank Name</label>
+                            <input class="form-control" name="bank_name"
+                                value="{{ readConfig('bank_name') }}" placeholder="Bank Name">
+                        </div>
+
+
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Account Number</label>
+                            <input class="form-control" name="account_number"
+                                value="{{ readConfig('account_number') }}" placeholder="Account Number">
+                        </div>
+
+
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Account Name</label>
+                            <input class="form-control" name="account_name"
+                                value="{{ readConfig('account_name') }}" placeholder="Account Name">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Swift Code</label>
+                            <input class="form-control" name="swift_code"
+                                value="{{ readConfig('swift_code') }}" placeholder="Swift Code">
+                        </div>
+
+                        <div class="form-group mb-2">
+                            <label class="col-form-label">Routing number</label>
+                            <input class="form-control" name="routing_number"
+                                value="{{ readConfig('routing_number') }}" placeholder="Routing Number">
+                        </div>
+
+
+                        <div class="text-center">
+                            <button class="btn btn-success float-left" type="submit" name="action"
+                                value="published">Save</button>
+                        </div>
+
+
+                    </form>
+
+                </div>
+                <div class="col-md-5">
+
+                </div>
+            </div>
+
+        </div>
 
 
         </div>

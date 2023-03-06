@@ -39,6 +39,41 @@ class PaymentMethodController extends Controller
     }
 
 
+    public function bankSettingStore(Request $request)
+    {
+        if ($request->has('bank_status')) {
+            writeConfig('bank_status', $request->bank_status);
+        }
+
+        if ($request->has('about_bank')) {
+            writeConfig('about_bank', $request->about_bank);
+        }
+
+        if ($request->has('bank_name')) {
+            writeConfig('bank_name', $request->bank_name);
+        }
+
+        if ($request->has('account_number')) {
+            writeConfig('account_number', $request->account_number);
+        }
+
+        if ($request->has('account_name')) {
+            writeConfig('account_name', $request->account_name);
+        }
+
+        if ($request->has('swift_code')) {
+            writeConfig('swift_code', $request->swift_code);
+        }
+
+        if ($request->has('routing_number')) {
+            writeConfig('routing_number', $request->routing_number);
+        }
+
+        toast('Bank informations store successfully', 'success');
+        return redirect()->route('payment.method', ['tab' => "bank"]);
+    }
+
+
     public function stripeSettingStore(Request $request)
     {
         if ($request->has('STRIPE_ACTIVE')) {
