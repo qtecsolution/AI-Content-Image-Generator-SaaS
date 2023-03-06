@@ -207,7 +207,7 @@
                                 <li><a href="{{ route('manage-blogs.index') }}">Blog Manager</a></li>
                                 <li><a href="{{ route('blog-category.index') }}">Blog Category</a></li>
                                 <li><a href="{{ route('manage-faq.index') }}">FAQ Manager</a></li>
-                                <li><a href="{{ route('home') }}">Page Builder</a></li>
+                                <li><a href="{{ route('pages.index') }}">Page Builder</a></li>
                             </ul>
                         </div>
                     </div>

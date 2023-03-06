@@ -30,8 +30,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <!-- BOOTSTRAP VALIDATION  -->
     <script src="{{ asset('assets/js/bootstrap-validation.js') }}"></script>
-    
+    <script src="{{ asset('assets/js/script.js') }}"></script>
     @yield('script')
+
 
 </body>
 

@@ -1,9 +1,11 @@
 <?php
 
+use App\Models\PlanExpanse;
 use App\Models\UseCase;
 use Illuminate\Support\Str;
 use Winter\LaravelConfigWriter\ArrayFile;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 
@@ -36,12 +38,12 @@ function fileUpload($file, $folder, $name = null)
         $name = date('Ymd');
     }
     $imageName = Str::slug($name) . rand(0, 9999) . '.' . $file->extension();
-    $path = 'assets/uploads/' . $folder.date('/Y/m/d');
+    $path = 'assets/uploads/' . $folder . date('/Y/m/d');
     if (!File::exists($path)) {
         File::makeDirectory($path, 0755, true);
     }
     $file->move($path, $imageName);
-    return $path. '/' . $imageName;
+    return $path . '/' . $imageName;
 }
 function fileUploadFromUrl($url, $folder, $name = null)
 {
@@ -53,19 +55,20 @@ function fileUploadFromUrl($url, $folder, $name = null)
         $name = date('Ymd');
     }
     $imageName = Str::slug($name) . rand(0, 9999) . '.' . $extension;
-    $path = 'assets/uploads/' . $folder.date('/Y/m/d');
+    $path = 'assets/uploads/' . $folder . date('/Y/m/d');
     if (!File::exists($path)) {
         File::makeDirectory($path, 0755, true);
     }
-    file_put_contents($path.'/'.$imageName, $imageData);
-    $imagePath = $path. '/' . $imageName;
+    file_put_contents($path . '/' . $imageName, $imageData);
+    $imagePath = $path . '/' . $imageName;
     return $imagePath;
 }
-function getExtensionFromUrl($url){
+function getExtensionFromUrl($url)
+{
     $url_parts = parse_url($url);
-    if(isset($url_parts['path'])){
-       $extension = explode('.',$url_parts['path']);
-       return end($extension);
+    if (isset($url_parts['path'])) {
+        $extension = explode('.', $url_parts['path']);
+        return end($extension);
     }
     return '';
 }
@@ -105,6 +108,70 @@ function dateTimeFormat($data)
     return $data;
 }
 
+
+function showBalance()
+{
+    $user = Auth();
+   return PlanExpanse::where('id', $user->plan_expanses_id)
+        ->where('activated_at', '<=', now())
+        ->where(function ($query) {
+            $query->whereNull('expire_at')
+                ->orWhere('expire_at', '>', now());
+        })
+        ->where('user_id', $user->id)->first();
+}
+
+function balanceDeduction($type, $n=1)
+{
+    // call_api,document,image
+    $status = false;
+    $user = Auth();
+    $planExpanses = PlanExpanse::where('id', $user->plan_expanses_id)
+        ->where('activated_at', '<=', now())
+        ->where(function ($query) {
+            $query->whereNull('expire_at')
+                ->orWhere('expire_at', '>', now());
+        })
+        ->where('user_id', $user->id)->first();
+    if ($planExpanses == null) {
+        return false;
+    } else {
+        switch ($type) {
+            case 'call_api':
+                if ($planExpanses->call_api_count > $planExpanses->current_api_count) {
+                    $planExpanses->current_api_count++;
+                    $status =  true;
+                } else {
+                    $status = false;
+                }
+                break;
+
+            case 'document':
+                if ($planExpanses->documet_count > $planExpanses->current_documet_count) {
+                    $planExpanses->current_documet_count++;
+                    $status =  true;
+                } else {
+                    $status = false;
+                }
+                break;
+
+            case 'image':
+                if ($planExpanses->image_count > $planExpanses->current_image_count) {
+                    $planExpanses->current_image_count += $n;
+                    $status =  true;
+                } else {
+                    $status = false;
+                }
+                break;
+
+            default:
+                $status = false;
+                break;
+        }
+        return $status;
+    }
+}
+
 function writeConfig($key, $value)
 {
     $config = ArrayFile::open(base_path('config/system.php'));
@@ -121,16 +188,22 @@ function writePwaConfig($key, $value)
     $config->write();
     return $value;
 }
-function myAlert($status,$message){
-    if($status=='success'){
-        toast($message,'success');
-    }else{
-        toast($message,'warning');
+function myAlert($status, $message)
+{
+    if ($status == 'success') {
+        toast($message, 'success');
+    } else {
+        toast($message, 'warning');
     }
-
 }
 
 function totalUseCase()
 {
-    return UseCase::where('is_published',1)->count();
+    return UseCase::where('is_published', 1)->count();
+}
+
+
+function translate($data)
+{
+    return $data;
 }
