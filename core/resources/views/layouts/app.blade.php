@@ -181,8 +181,8 @@
                             <ul>
                                 <li><a href="{{ route('plan.index') }}">Manage Plan</a></li>
                                 <li><a href="{{ route('payment.method') }}">Payment Methods</a></li>
-                                <li><a href="#">All Transections</a></li>
-                                <li><a href="#">Pending Transections</a></li>
+                                <li><a href="{{route('order.index')}}">All Transections</a></li>
+                                <li><a href="{{route('order.pending')}}">Pending Transections</a></li>
                             </ul>
                         </div>
                     </div>

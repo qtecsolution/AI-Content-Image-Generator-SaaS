@@ -13,7 +13,13 @@ class OrderController extends Controller
 {
     public function index()
     {
-        $sales = Order::latest()->paginate(10);
+        $sales = Order::where('is_paid',true)->latest()->paginate(10);
+        return view('order.index', compact('sales'));
+    }
+
+    function pending()
+    {
+        $sales = Order::where('is_paid',false)->latest()->paginate(10);
         return view('order.index', compact('sales'));
     }
 
@@ -62,4 +68,6 @@ class OrderController extends Controller
         toast('This Order is approved', 'success');
         return redirect()->route('plan.expanse', $order->id);
     }
+
+
 }
