@@ -151,16 +151,14 @@ class PurchaseController extends Controller
                 $user->plan_expanse_id = $expanse->id;
                 $user->save();
 
-
-                toast('Plan is successfully subscribed  enjoy the service','success');
-                // alert('Plan', 'Plan is successfully subscribed  enjoy the service', 'success');
+                myAlert('success', 'Plan is successfully subscribed  enjoy the service');
                 return redirect()->route('plan.expanse', $plan->id);
             } else {
                 toast('There are some problem, please try again','error');
                 return back();
             }
         } else {
-            toast('Your payabol amount is lower the the plan purchase price, please try again','warning');
+            myAlert('error','Your payabol amount is lower the the plan purchase price, please try again');
             return back();
         }
         return $request;

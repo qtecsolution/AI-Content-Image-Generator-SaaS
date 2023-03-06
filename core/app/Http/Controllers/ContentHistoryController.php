@@ -75,11 +75,11 @@ class ContentHistoryController extends Controller
         try {
             $data = ContentHistory::findOrFail($id);
             $data->delete();
-            alert()->success('Success', 'Content is deleted');
+            myAlert('success', 'Content is deleted');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return redirect()->route('content-history.index');
         }
     }
@@ -91,11 +91,11 @@ class ContentHistoryController extends Controller
                 $data = ContentHistory::findOrFail($id);
                 $data->delete();
             }
-            alert()->success('Success', 'Content is deleted');
+            myAlert('success', 'Content is deleted');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return redirect()->route('content-history.index');
         }
     }

@@ -69,11 +69,11 @@ class UserDocumentController extends Controller
             $input = $request->except('_token');
             $input['user_id'] = Auth::user()->id;
             UserDocument::create($input);
-            alert()->success('Success', 'Content Saved successfully.');
+            myAlert('success', 'Content Saved successfully.');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', 'Something Error found!');
+            myAlert('error', $errorMessage);
             return back();
         }
     }
@@ -110,12 +110,12 @@ class UserDocumentController extends Controller
             $input = $request->except(['_token']);
             $data->update($input);
             DB::commit();
-            alert()->success('Success', 'Content Updated successfully.');
+            myAlert('success', 'Content Updated successfully.');
             return redirect()->back();
         } catch (\Exception $e) {
             DB::rollBack();
              $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return redirect()->back();
         }
     }
@@ -128,11 +128,11 @@ class UserDocumentController extends Controller
         try {
             $data = UserDocument::findOrFail($id);
             $data->delete();
-            alert()->success('Success', 'Content is deleted');
+            myAlert('success', 'Content is deleted');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return redirect()->route('contents.index');
         }
     }
@@ -144,11 +144,11 @@ class UserDocumentController extends Controller
                 $data = UserDocument::findOrFail($id);
                 $data->delete();
             }
-            alert()->success('Success', 'Content is deleted');
+            myAlert('success', 'Content is deleted');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return redirect()->route('contents.index');
         }
     }

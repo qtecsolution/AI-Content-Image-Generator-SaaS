@@ -133,7 +133,7 @@ class OpenAiController extends Controller
             }
         }
         $id = implode(',', $imageId);
-        alert()->success('Success', 'Image Generated successfully.');
+        myAlert('success', 'Image Generated successfully.');
         return redirect()->route('image.create', ['id' => $id]);
     }
     // Image Re-Generate
@@ -159,7 +159,7 @@ class OpenAiController extends Controller
             }
         }
         $id = implode(',', $imageId);
-        alert()->success('Success', 'Image Generated successfully.');
+        myAlert('success', 'Image Generated successfully.');
         return redirect()->route('image.create', ['id' => $id]);
     }
 
@@ -197,7 +197,7 @@ class OpenAiController extends Controller
             ])->id;
         }
         $id = implode(',', $imageId);
-        alert()->success('Success', 'Image Variation Generated successfully.');
+        myAlert('success', 'Image Variation Generated successfully.');
         return redirect()->route('image.variation', ['id' => $id]);
     }
 
@@ -209,11 +209,11 @@ class OpenAiController extends Controller
                 unlink($data->image_path);
             }
             $data->delete();
-            alert()->success('Success', 'Image is deleted');
+            myAlert('success', 'Image is deleted');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return back();
         }
     }
