@@ -37,7 +37,7 @@
                             <div class="m-2">
                                 <h4>Purchase Information</h4>
                                 <ul class="list-group mt-3">
-                                    <li class="list-group-item">Date: {{ $order->created_at }}</li>
+                                    <li class="list-group-item">Date: {{ dateTimeFormat($order->created_at) }}</li>
                                     <li class="list-group-item">Invoice: {{ $order->invoice }}</li>
                                     <li class="list-group-item">Paid Amount: {{ $order->total }} </li>
                                     <li class="list-group-item">Payment Method: {{ $order->payment_method }}</li>
@@ -45,6 +45,7 @@
                             </div>
                         </div>
 
+                        @if($expanse != null)
                         <div class="col-md-4">
                             <div class="m-2">
                                 <h4>Your Service Expanses summary</h4>
@@ -67,6 +68,13 @@
 
                             </div>
                         </div>
+                        @endif
+
+                        @if(!$order->is_paid)
+                          <div class="col-md-4">
+                                <h3 class="text-center text-info mt-5"> Wait for the admin approvel</h3>
+                          </div>
+                        @endif
                     </div>
                 </div>
             </div>

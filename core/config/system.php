@@ -22,9 +22,21 @@ return [
     "meta_desc" => 'XOXO  CMS',
     "meta_title" => 'XOXO  CMS',
     "meta_image" => "",
+
     'PAYPAL_ACTIVE' => 'on',
     'PAYPAL_CLIENT_ID' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',
     'PAYPAL_APP_SECRET' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',
+
+
+    'bank_status' => "on",
+    'about_bank' => "Write some message",
+    'bank_name' => 'City Bank',
+    'account_number' => '12344355434',
+    'account_name' => 'Busniss account',
+    'swift_code' => 'City Bank',
+    'routing_number' => ' 223123',
+
+
     'STRIPE_ACTIVE' => 'on',
     'STRIPE_KEY' => 'pk_test_51MhAgUSFoGrMA7dvDe9FpEhOIw3NAJ5VTIn0qxFNqPwWxqbwC67ifgEjOxN0UeAuAFpObrAhXa2nD2MpERIQFql300FqL62ptY',
     'STRIPE_SECRET' => 'sk_test_51MhAgUSFoGrMA7dvH4irwUdcN1MBj1FoSsN3cFFptA070eq6VIfTDH7wZNLOglbNQI7XqNzXJU3YahY2Oi02RmoK001ZqiaS7W',

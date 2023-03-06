@@ -28,12 +28,27 @@ class PurchaseController extends Controller
         return view('plan.stripePay', compact('plan', 'user'));
     }
 
+    public function paypalPayLoad(Request $request)
+    {
+        $plan = Plan::where('id', $request->plan_id)->first();
+        $user = Auth::user();
+        return view('plan.paypal', compact('plan', 'user'));
+    }
+
+
+    public function bankPayLoad(Request $request)
+    {
+        $plan = Plan::where('id', $request->plan_id)->first();
+        $user = Auth::user();
+        return view('plan.bank', compact('plan', 'user'));
+    }
+
     public function purchaseDone(Request $request)
     {
-        // $request->validate([
-        //     'paymentMethod'=>'required',
-        
-        // ]);
+        $request->validate([
+            'paymentMethod' => 'required',
+            'paymentAmount' => 'required',
+        ]);
         // return $request;
         $user = Auth::user();
         $plan = Plan::where('id', $request->plan_id)->first();
@@ -46,7 +61,7 @@ class PurchaseController extends Controller
             // payment get ways the data
 
             $order = new Order();
-            $order->invoice = 'invoice id';
+            $order->invoice = invoiceGenerator();
             $order->user_id = $user->id;
             $order->plan_id = $plan->id;
             $order->total = $request->paymentAmount;
@@ -59,19 +74,19 @@ class PurchaseController extends Controller
 
             //done stripe
             if ($request->paymentMethod == 'stripe') {
-                try {
-                    Stripe\Stripe::setApiKey(readConfig('STRIPE_SECRET'));
-                    Stripe\Charge::create([
-                        "amount" => 100 * $request->paymentAmount,
-                        "currency" => "usd",
-                        "source" => $request->stripeToken,
-                        "description" => $plan->title . ' Purchase',
-                    ]);
-                    $orderInformationUpdate = true;
-                    $message = 'Stripe payment is successfully done';
-                } catch (Exception $e) {
-                    $message = $e->getMessage();
-                }
+                // try {
+                Stripe\Stripe::setApiKey(readConfig('STRIPE_SECRET'));
+                Stripe\Charge::create([
+                    "amount" => 100 * $request->paymentAmount,
+                    "currency" => "usd",
+                    "source" => $request->stripeToken,
+                    "description" => $plan->title . ' Purchase',
+                ]);
+                $orderInformationUpdate = true;
+                $message = 'Stripe payment is successfully done';
+                // } catch (Exception $e) {
+                //     $message = $e->getMessage();
+                // }
             } else if ($request->paymentMethod == 'rezorpay') {
                 $input = $request->all();
                 $api = new Api(readConfig('RAZORPAY_KEY'), readConfig('RAZORPAY_SECRET'));
@@ -105,6 +120,20 @@ class PurchaseController extends Controller
             } else if ($request->paymentMethod == 'paypal') {
                 $order->other = $request->value_1;
                 $orderInformationUpdate = true;
+            } else if ($request->paymentMethod == 'bank') {
+                if ($request->has('value_1')) {
+                    $order->other = fileUpload($request->value_1, 'payment', 'bank');
+                }
+                $order->is_paid = false;
+                $order->payment_method = $request->paymentMethod;
+                $order->save();
+
+                $user->plan_id = $plan->id;
+                $user->save();
+                $orderInformationUpdate = false;
+
+                toast('Plan is successfully subscribed  Wating for approvel', 'success');
+                return redirect()->route('plan.expanse', $order->id);
             }
 
             if ($orderInformationUpdate) {
@@ -127,7 +156,7 @@ class PurchaseController extends Controller
                     $expanse->documet_count = $plan->documet_count + ($oldExpanse->documet_count - $oldExpanse->current_documet_count);
                     $expanse->image_count = $plan->image_count + ($oldExpanse->image_count - $oldExpanse->current_image_count);
                     $expanse->activated_at = Carbon::now();
-                    $expanse->expire_at =  $plan->duration == 0 ? null : Carbon::now()->addDay($plan->duration);
+                    $expanse->expire_at =  Carbon::now()->addDay(30);
                     $expanse->save();
                 } else {
                     //eassign the plan expanse
@@ -140,7 +169,7 @@ class PurchaseController extends Controller
                     $expanse->documet_count = $plan->documet_count;
                     $expanse->image_count = $plan->image_count;
                     $expanse->activated_at = Carbon::now();
-                    $expanse->expire_at =  $plan->duration == 0 ? null : Carbon::now()->addDay($plan->duration);
+                    $expanse->expire_at =  Carbon::now()->addDay(30);
                     $expanse->save();
                 }
 
@@ -152,31 +181,41 @@ class PurchaseController extends Controller
                 $user->save();
 
 
-                toast('Plan is successfully subscribed  enjoy the service','success');
-                // alert('Plan', 'Plan is successfully subscribed  enjoy the service', 'success');
+                toast('Plan is successfully subscribed  enjoy the service', 'success');
                 return redirect()->route('plan.expanse', $plan->id);
             } else {
-                toast('There are some problem, please try again','error');
+                toast('There are some problem, please try again', 'error');
                 return back();
             }
         } else {
-            toast('Your payabol amount is lower the the plan purchase price, please try again','warning');
+            toast('Your payabol amount is lower the the plan purchase price, please try again', 'warning');
             return back();
         }
-        return $request;
     }
 
-    public function expanse($id,ExpansesChart $expanseChart)
+    public function expanse($id)
     {
+  //id is order id
 
-        $expanseChart = $expanseChart->build();
+        $user = Auth::user();
+        $order = Order::where('id', $id)->first();
+        $plan = Plan::where('id', $order->plan_id)->first();
+
+        $expanse = PlanExpanse::where('user_id', $user->id)->where('order_id', $order->id)->first();
+        return view('plan.expanse', compact('plan', 'expanse', 'order'));
+    }
+
+    public function expanseBasePlan($id)
+    {
+  //id is plan id
+
         $user = Auth::user();
         $plan = Plan::where('id', $id)->first();
         $order = Order::where('user_id', $user->id)->where('plan_id', $id)->first();
-        $expanse = PlanExpanse::where('user_id', $user->id)
-            ->where('plan_id', $id)->where('order_id', $order->id)->first();
-        return view('plan.expanse', compact('plan', 'expanse', 'order','expanseChart'));
+        $expanse = PlanExpanse::where('user_id', $user->id)->where('order_id', $order->id)->first();
+        return view('plan.expanse', compact('plan', 'expanse', 'order'));
     }
+
 
     /**
      * After the customer has completed the transaction,
@@ -194,6 +233,4 @@ class PurchaseController extends Controller
             // Do your thing ...
         }
     }
-
-  
 }

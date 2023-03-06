@@ -60,9 +60,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/contents-multiple-delete', 'UserDocumentController@multipleDelete')->name('contents-multiple-delete');
     Route::get('stripe-pay-load/{id}', 'PurchaseController@stripeLoad')->name('plan.stripe.load');
     Route::get('razor-pay-load/{id}', 'PurchaseController@razorPayLoad')->name('plan.razorpay.load');
+    Route::get('paypal-pay-load', 'PurchaseController@paypalPayLoad')->name('checkout.paypal');
+    Route::get('bank-pay-load', 'PurchaseController@bankPayLoad')->name('checkout.bank');
     Route::get('/plan/user/index', 'PlanController@userIndex')->name('plan.userIndex');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
     Route::get('/plan/expanse/{id}', 'PurchaseController@expanse')->name('plan.expanse');
+    Route::get('/plan/expanse/base/{id}', 'PurchaseController@expanseBasePlan')->name('plan.expanse.2');
 
     Route::post('/plan/purchase', 'PurchaseController@purchaseDone')->name('plan.purchase.store');
 });
@@ -93,6 +96,10 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::post('/tawkto/store', 'SettingController@tawkToStore')->name('tawkto.store');
     Route::post('/social/store', 'SettingController@socialStore')->name('social.store');
     Route::post('/pwa/configer', 'SettingController@pwaSetupStore')->name('pwa.setup.store');
+
+    // order get data
+    Route::get('orders','OrderController@index')->name('order.index');
+    Route::get('order/approved/{id}','OrderController@approved')->name('order.approved');
 });
 
 Route::get('payment/success', function (Request $request) {

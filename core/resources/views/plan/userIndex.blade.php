@@ -62,7 +62,7 @@
                                         </ul>
                                         <div class="d-grid">
                                             @if($user->plan_id == $item->id)
-                                            <button type="button" class="btn-subscribe subscribed" onclick="redirectUrl('{{route('plan.expanse',$item->id)}}')"> 
+                                            <button type="button" class="btn-subscribe subscribed" onclick="redirectUrl('{{route('plan.expanse.2',$item->id)}}')"> 
                                                 See The Expanses
                                             </button>
                                             @else

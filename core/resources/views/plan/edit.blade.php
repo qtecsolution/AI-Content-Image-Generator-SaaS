@@ -65,14 +65,7 @@
                                 <small class="text-muted">if you input the 0 value it's will be unlimited</small>
                             </div>
 
-                            {{-- <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-12 col-form-label">Duration <span class="text-danger">*</span></label>
-                               
-                                <div class="col-sm-12">
-                                    <input type="number" min="0" value="{{$plan->duration}}" required name="duration" class="form-control" id="inputEmail3">
-                                </div>
-                                <small class="text-muted">if you input the 0 value it's will be unlimited</small>
-                            </div> --}}
+                            
 
                             <div class="row mb-3">
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">Language Support <span class="text-danger">*</span></label>

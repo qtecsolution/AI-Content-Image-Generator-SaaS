@@ -9,14 +9,14 @@
             </div>
 
             @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-                </ul>
-            </div>
-        @endif
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
 
 
             <div class="row m-n2">
@@ -59,9 +59,9 @@
                                             <input type="radio" id="stripe" class="customradio-box"
                                                 name="payment_processor" value="stripe" hidden="">
                                             <label data-bs-toggle="collapse" href="#collapseExample" role="button"
-                                            aria-expanded="false" aria-controls="collapseExample" for="stripe" class="customradio-label w-100">
-                                                <div 
-                                                    class="d-flex justify-content-between align-items-center">
+                                                aria-expanded="false" aria-controls="collapseExample" for="stripe"
+                                                class="customradio-label w-100">
+                                                <div class="d-flex justify-content-between align-items-center">
 
                                                     <div class="d-flex align-items-center gap-2">
                                                         <img src="{{ asset('assets/images/stripe.svg') }}"
@@ -138,26 +138,29 @@
                                         </div>
                                     </li>
                                 @endif
-                                <li class="list-group-item p-0">
-                                    <div class="customradio p-2">
-                                        <input type="radio" id="bank" class="customradio-box"
-                                            name="payment_processor" value="bank" hidden="">
-                                        <label for="bank" class="customradio-label w-100">
-                                            <div class="d-flex justify-content-between align-items-center">
 
-                                                <div class="d-flex align-items-center gap-2">
-                                                    <img src="https://phpcontent.lunatio.com/img/icons/payments/bank.svg"
-                                                        class="width-6 rounded-sm">
-                                                    <span class="payment-name">Bank</span>
-                                                </div>
+                                @if (readConfig('bank_status') == 'on')
+                                    <li class="list-group-item p-0">
+                                        <div class="customradio p-2">
+                                            <input type="radio" id="bank" class="customradio-box"
+                                                name="payment_processor" value="bank" hidden="">
+                                            <label for="bank" class="customradio-label w-100">
+                                                <div class="d-flex justify-content-between align-items-center">
 
-                                                <div>
-                                                    <div class="payment-way">Bank Transfar</div>
+                                                    <div class="d-flex align-items-center gap-2">
+                                                        <img src="https://phpcontent.lunatio.com/img/icons/payments/bank.svg"
+                                                            class="width-6 rounded-sm">
+                                                        <span class="payment-name">Bank</span>
+                                                    </div>
+
+                                                    <div>
+                                                        <div class="payment-way">Bank Transfar</div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </li>
+                                            </label>
+                                        </div>
+                                    </li>
+                                @endif
                             </ul>
 
 
@@ -183,7 +186,7 @@
                                     data-image="{{ filePath(readConfig('type_logo')) }}" data-prefill.name="{{ $user->name }}"
                                     data-prefill.email="{{ $user->email }}"></script>
                                 {{-- this is single form --}}
-                                <input type="hidden" name="plan_id" value="{{ $plan->id }}">
+                                <input type="hidden" id="plan_id" name="plan_id" value="{{ $plan->id }}">
                                 <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
                                 <input type="hidden" id="paymentAmount" name="paymentAmount"
                                     value="{{ $plan->price }}">
@@ -360,22 +363,17 @@
 
             switch (methods) {
                 case 'paypal':
-                    // day = "Sunday";
-
-                    // scriptRemove();
+                    paypalPayment();
                     break;
                 case 'stripe':
                     $('.form-methods').load('{{ route('plan.stripe.load', $plan->id) }}');
                     stripPaymnet();
                     break;
                 case 'razorpay':
-                    // day = "Tuesday";
-
-                    // $('.form-methods').load('{{ route('plan.razorpay.load', $plan->id) }}');
                     razorPaymnet();
                     break;
-                case 3:
-                    day = "Wednesday";
+                case 'bank':
+                    bankPayment()
                     break;
                 case 4:
                     day = "Thursday";
@@ -391,83 +389,34 @@
             }
 
         }
-
-       
     </script>
 
-    @if (readConfig('PAYPAL_ACTIVE') == 'ppp')
-        <script
-            src="https://www.paypal.com/sdk/js?client-id={{ readConfig('PAYPAL_CLIENT_ID') }}&enable-funding=venmo&currency=USD"
-            data-sdk-integration-source="button-factory"></script>
+    @if (readConfig('PAYPAL_ACTIVE') == 'on')
         <script>
             "use strict"
 
-            function initPayPalButton() {
-                //get amount
-
-                paypal.Buttons({
-                    style: {
-                        shape: 'rect',
-                        color: 'black',
-                        layout: 'vertical',
-                        label: 'checkout',
-                        tagline: false
-                    },
-
-                    createOrder: function(data, actions) {
-
-                        return actions.order.create({
-                            purchase_units: [{
-                                "amount": {
-                                    "currency_code": "USD",
-                                    "value": {{ $plan->price }}
-                                }
-                            }]
-                        });
-
-                    },
-
-                    onApprove: function(data, actions) {
-                        return actions.order.capture().then(function(orderData) {
-
-                            // Full available details
-                            var data = JSON.stringify(orderData, null, 2);
-
-                            console.log('Capture result' + data['purchase_units']['amount']['value'] + ' ' +
-                                data['id']);
-                            //append the data
-                            $('#paymentMethod').val('paypal');
-                            $('#paymentAmount').val(data['purchase_units']['amount']['value']);
-                            $('#paymentTID').val(data['id']);
-                            $('#value_1').val(data);
-                            $('#order_payment_done').submit();
-
-
-
-                            // Show a success message within this page, e.g.
-                            const element = document.getElementById('paypal-button-container');
-                            element.innerHTML = '';
-                            element.innerHTML = '<h3>Thank you for your payment!</h3>';
-
-                            // Or go to another URL:  actions.redirect('thank_you.html');
-
-                        });
-                    },
-
-                    onError: function(err) {
-
-                        if ($('input[type="radio"][name="shipping_method"]').is(":checked")) {
-                            const element = document.getElementById('paypal-button-container');
-                            element.innerHTML = '';
-                            element.innerHTML =
-                                '<h3>Transaction is failed, please Place order as partial payment !</h3>';
-                            console.log('error = ' + err);
-                        }
-
-                    }
-                }).render('#paypal-button-container');
+            function paypalPayment() {
+                debugger
+                var planId = $('#plan_id').val();
+                // var formData = $('#order_payment_done').serialize();
+                var url = '{{ route('checkout.paypal') }}' + '?plan_id=' + planId;
+                forModal(url, 'Paypal Payment Methods', 'hide');
             }
-            // initPayPalButton();
+        </script>
+    @endif
+
+
+    @if (readConfig('bank_status') == 'on')
+        <script>
+            "use strict"
+
+            function bankPayment() {
+                debugger
+                var planId = $('#plan_id').val();
+                // var formData = $('#order_payment_done').serialize();
+                var url = '{{ route('checkout.bank') }}' + '?plan_id=' + planId;
+                forModal(url, 'Bank Payment Methods');
+            }
         </script>
     @endif
 
@@ -480,7 +429,7 @@
             "use strict"
 
             function stripPaymnet() {
-               
+
                 // e.preventDefault();
                 $('#paymentMethod').val('stripe');
                 $('#paymentAmount').val({{ $plan->price }});
@@ -499,7 +448,7 @@
             }
 
             function stripeResponseHandler(status, response) {
-               
+
                 console.log(response);
                 console.log(status);
                 if (response.error) {

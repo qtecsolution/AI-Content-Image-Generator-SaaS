@@ -67,6 +67,12 @@
                         <img src="{{ asset('assets/icons/cards-icons/Book.svg') }}">
                     </a>
                 </li>
+
+                <li>
+                    <a href="{{ route('plan.userIndex') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                        data-bs-placement="right" data-bs-title="Purchase Plan"> <img
+                            src="{{ asset('assets/icons/layers.svg') }}"> </a>
+                </li>
                 
                 
                 @if (Auth::user()->type == 'admin')
@@ -95,6 +101,11 @@
                                 src="{{ asset('assets/icons/layers.svg') }}"> </a>
                     </li>
 
+                    <li>
+                        <a href="{{ route('order.index') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
+                            data-bs-placement="right" data-bs-title="Orders"> <img
+                                src="{{ asset('assets/icons/layers.svg') }}"> </a>
+                    </li>
                     <li>
                         <a href="{{ route('payment.method') }}" class="sidebar-menu-link" data-bs-toggle="tooltip"
                             data-bs-placement="right" data-bs-title="Payment Gateway"> <img
@@ -221,7 +232,7 @@
     @include('sweetalert::alert')
     @include('layouts.delete');
     @yield('script')
-
+    @include('layouts.modal');
     <!--Start of Tawk.to Script-->
     @if (readConfig('tawk_to') == 'yes')
         @include('layouts.tawk_to');

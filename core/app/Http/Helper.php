@@ -7,6 +7,16 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\File;
 
 
+function strUpperCase($data)
+{
+    return $data;
+}
+
+function invoiceGenerator()
+{
+    return $invoiceNumber = time() . '-' . rand(10000, 99999);
+}
+
 function overWriteEnvFile($type, $val)
 {
     $path = base_path('.env'); // get file ENV path
@@ -88,6 +98,11 @@ function filePathRoot($file)
 function readConfig($key)
 {
     return config('system.' . $key);
+}
+
+function dateTimeFormat($data)
+{
+    return $data;
 }
 
 function writeConfig($key, $value)
