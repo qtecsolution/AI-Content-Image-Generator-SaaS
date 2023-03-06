@@ -12,9 +12,21 @@ use Illuminate\Support\Facades\Auth;
 use Mollie\Laravel\Facades\Mollie;
 use Razorpay\Api\Api;
 use Stripe;
+use Omnipay\Omnipay;
 
 class PurchaseController extends Controller
 {
+
+    private $gateway;
+
+    public function __construct()
+    {
+        $this->gateway = Omnipay::create('PayPal_Rest');
+        $this->gateway->setClientId(env('PAYPAL_CLIENT_ID'));
+        $this->gateway->setSecret(env('PAYPAL_APP_SECRET'));
+        $this->gateway->setTestMode(true);
+    }
+
     public function purchase($id)
     {
         $plan = Plan::where('id', $id)->first();
@@ -74,19 +86,19 @@ class PurchaseController extends Controller
 
             //done stripe
             if ($request->paymentMethod == 'stripe') {
-                // try {
-                Stripe\Stripe::setApiKey(readConfig('STRIPE_SECRET'));
-                Stripe\Charge::create([
-                    "amount" => 100 * $request->paymentAmount,
-                    "currency" => "usd",
-                    "source" => $request->stripeToken,
-                    "description" => $plan->title . ' Purchase',
-                ]);
-                $orderInformationUpdate = true;
-                $message = 'Stripe payment is successfully done';
-                // } catch (Exception $e) {
-                //     $message = $e->getMessage();
-                // }
+                try {
+                    Stripe\Stripe::setApiKey(readConfig('STRIPE_SECRET'));
+                    Stripe\Charge::create([
+                        "amount" => 100 * $request->paymentAmount,
+                        "currency" => "usd",
+                        "source" => $request->stripeToken,
+                        "description" => $plan->title . ' Purchase',
+                    ]);
+                    $orderInformationUpdate = true;
+                    $message = 'Stripe payment is successfully done';
+                } catch (Exception $e) {
+                    $message = $e->getMessage();
+                }
             } else if ($request->paymentMethod == 'rezorpay') {
                 $input = $request->all();
                 $api = new Api(readConfig('RAZORPAY_KEY'), readConfig('RAZORPAY_SECRET'));
@@ -118,8 +130,24 @@ class PurchaseController extends Controller
                 // redirect customer to Mollie checkout page
                 return redirect($payment->getCheckoutUrl(), 303);
             } else if ($request->paymentMethod == 'paypal') {
-                $order->other = $request->value_1;
-                $orderInformationUpdate = true;
+
+                try {
+
+                    $response = $this->gateway->purchase(array(
+                        'amount' => $request->paymentAmount,
+                        'currency' => 'USD',
+                        'returnUrl' => route('paypal.pay.success', $order->id),
+                        'cancelUrl' => route('paypal.pay.error', $order->id)
+                    ))->send();
+
+                    if ($response->isRedirect()) {
+                        $response->redirect();
+                    } else {
+                        return $response->getMessage();
+                    }
+                } catch (\Throwable $th) {
+                    return $th->getMessage();
+                }
             } else if ($request->paymentMethod == 'bank') {
                 if ($request->has('value_1')) {
                     $order->other = fileUpload($request->value_1, 'payment', 'bank');
@@ -181,20 +209,98 @@ class PurchaseController extends Controller
                 $user->save();
 
                 myAlert('success', 'Plan is successfully subscribed  enjoy the service');
-                return redirect()->route('plan.expanse', $plan->id);
+                return redirect()->route('plan.expanse', $order->id);
             } else {
                 toast('There are some problem, please try again', 'error');
                 return back();
             }
         } else {
-            myAlert('error','Your payabol amount is lower the the plan purchase price, please try again');
+            myAlert('error', 'Your payabol amount is lower the the plan purchase price, please try again');
             return back();
         }
     }
 
+    public function paySuccess(Request $request, $id)
+    {
+        if ($request->input('paymentId') && $request->input('PayerID')) {
+            $transaction = $this->gateway->completePurchase(array(
+                'payer_id' => $request->input('PayerID'),
+                'transactionReference' => $request->input('paymentId')
+            ));
+
+            $response = $transaction->send();
+
+            if ($response->isSuccessful()) {
+
+                $arr = $response->getData();
+                $order = Order::where('id', $id)->first();
+                $user = Auth::user();
+                $plan = Plan::where('id', $order->plan_id)->first();
+                $order->is_paid = true;
+                $order->other = $arr['id'];
+                $order->payment_method = 'paypal';
+                $order->save();
+
+                //get old expnase
+                $oldExpanse = PlanExpanse::where('id', $user->plan_expanse_id)->first();
+
+                if ($oldExpanse != null) {
+                    //eassign the plan expanse
+                    $expanse = new PlanExpanse();
+                    $expanse->user_id = $user->id;
+                    $expanse->order_id = $order->id;
+                    $expanse->plan_id = $plan->id;
+                    $expanse->word_count = $plan->word_count;
+                    $expanse->call_api_count = $plan->call_api_count + ($oldExpanse->call_api_count - $oldExpanse->current_api_count);
+                    $expanse->documet_count = $plan->documet_count + ($oldExpanse->documet_count - $oldExpanse->current_documet_count);
+                    $expanse->image_count = $plan->image_count + ($oldExpanse->image_count - $oldExpanse->current_image_count);
+                    $expanse->activated_at = Carbon::now();
+                    $expanse->expire_at =  Carbon::now()->addDay(30);
+                    $expanse->save();
+                } else {
+                    //eassign the plan expanse
+                    $expanse = new PlanExpanse();
+                    $expanse->user_id = $user->id;
+                    $expanse->order_id = $order->id;
+                    $expanse->plan_id = $plan->id;
+                    $expanse->word_count = $plan->word_count;
+                    $expanse->call_api_count = $plan->call_api_count;
+                    $expanse->documet_count = $plan->documet_count;
+                    $expanse->image_count = $plan->image_count;
+                    $expanse->activated_at = Carbon::now();
+                    $expanse->expire_at =  Carbon::now()->addDay(30);
+                    $expanse->save();
+                }
+
+
+
+                //update user active plane
+                $user->plan_id = $plan->id;
+                $user->plan_expanse_id = $expanse->id;
+                $user->save();
+
+                myAlert('success', 'Payment is Successfull. Your Transaction Id is : '.$arr['id']);
+                return redirect()->route('plan.expanse', $order->id);
+
+            } else {
+                myAlert('success', $response->getMessage());
+                return back();
+            }
+        } else {
+            myAlert('success', 'Payment declined!');
+            return back();
+        }
+    }
+
+    public function error()
+    {
+        myAlert('error', 'User declined the payment!');
+        return back();  
+    }
+
     public function expanse($id)
     {
-  //id is order id
+        //id is order id
 
         $user = Auth::user();
         $order = Order::where('id', $id)->first();
@@ -206,7 +312,7 @@ class PurchaseController extends Controller
 
     public function expanseBasePlan($id)
     {
-  //id is plan id
+        //id is plan id
 
         $user = Auth::user();
         $plan = Plan::where('id', $id)->first();

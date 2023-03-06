@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\PlanController;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Route;
@@ -65,6 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('razor-pay-load/{id}', 'PurchaseController@razorPayLoad')->name('plan.razorpay.load');
     Route::get('paypal-pay-load', 'PurchaseController@paypalPayLoad')->name('checkout.paypal');
     Route::get('bank-pay-load', 'PurchaseController@bankPayLoad')->name('checkout.bank');
+    Route::get('paypal/pay/success/{id}', 'PurchaseController@paySuccess')->name('paypal.pay.success');
+    Route::get('paypal/pay/cancle/{id}', 'PurchaseController@payCancle')->name('paypal.pay.error');
     Route::get('/plan/user/index', 'PlanController@userIndex')->name('plan.userIndex');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
     Route::get('/plan/expanse/{id}', 'PurchaseController@expanse')->name('plan.expanse');
@@ -104,7 +107,25 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
 
     // order get data
     Route::get('orders','OrderController@index')->name('order.index');
+    Route::get('order/pending','OrderController@pending')->name('order.pending');
     Route::get('order/approved/{id}','OrderController@approved')->name('order.approved');
+
+    Route::get('pages', [PageController::class, 'pageIndex'])->name('pages.index');
+    Route::get('pages/create', [PageController::class, 'pageCreate'])->name('pages.create');
+    Route::get('pages/delete/{id}', [PageController::class, 'pageDestroy'])->name('pages.destroy');
+    Route::post('pages/store', [PageController::class, 'pageStore'])->name('pages.store');
+    Route::get('pages/edit/{id}', [PageController::class, 'pageEdit'])->name('pages.edit');
+    Route::post('pages/update', [PageController::class, 'pageUpdate'])->name('pages.update');
+    Route::get('pages/active', [PageController::class, 'pageActive'])->name('pages.active');
+    Route::get('pages/authorize', [PageController::class, 'pageAuthorize'])->name('pages.authorize');
+    Route::get('content/{id}', [PageController::class, 'contentIndex'])->name('pages.content.index');
+    Route::get('pages/content/create/{id}', [PageController::class, 'contentCreate'])->name('pages.content.create');
+    Route::post('pages/content/store', [PageController::class, 'contentStore'])->name('pages.content.store');
+    Route::get('pages/content/active', [PageController::class, 'contentActive'])->name('pages.content.active');
+    Route::get('pages/content/edit/{id}', [PageController::class, 'contentEdit'])->name('pages.content.edit');
+    Route::post('pages/content/update', [PageController::class, 'contentUpdate'])->name('pages.content.update');
+    Route::get('pages/content/delete/{id}', [PageController::class, 'contentDestroy'])->name('pages.content.destroy');
+
 });
 
 Route::get('payment/success', function (Request $request) {

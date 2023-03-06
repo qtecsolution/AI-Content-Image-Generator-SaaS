@@ -107,27 +107,4 @@
         </div>
     </div>
 @endsection
-@section('script')
-    <script>
-        // Summernote (Texteditor) Script
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontsize', ['fontsize']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link', 'picture', 'list']],
-                    ['color', ['forecolor']],
-                    ['height', ['height']]
-                ],
-                colorNames: {
-                    'red': '#ff0000',
-                    'green': '#00ff00',
-                    'blue': '#0000ff'
-                }
-            });
 
-        })
-    </script>
-@endsection
