@@ -33,9 +33,12 @@ Route::controller(GoogleController::class)->group(function () {
 // User Route
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::post('/profile', 'HomeController@profileUpdate')->name('profile.update');
+
+    Route::get('/profile/password', 'HomeController@password')->name('profile.password');
+    Route::post('/profile/password', 'HomeController@updatePassword')->name('profile.password.update');
+
     Route::get('/content-create', 'OpenAiController@content')->name('content.create');
     Route::post('/content-generate', 'OpenAiController@contentGenerate')->name('content.generate');
 
@@ -71,6 +74,7 @@ Route::group(['middleware' => ['auth']], function () {
 });
 // Admin Route
 Route::group(['middleware' => ['auth', 'admin']], function () {
+    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::resource('/use-case', 'UseCaseController');
     Route::resource('/manage-faq', 'FaqController');
     Route::resource('/blog-category', 'BlogCategoryController');

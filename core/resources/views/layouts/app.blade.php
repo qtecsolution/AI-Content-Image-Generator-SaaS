@@ -38,7 +38,231 @@
             <h3 class="logo-name text-center">type.ez</h3>
         </div>
         <div class="sidebar-body">
+            <!-- user  -->
             <ul class="sidebar-menu">
+
+                <li>
+                    <a href="{{route('home')}}" class="sidebar-menu-link">
+                        <img src="{{asset('assets/icons/home.svg')}}" alt="home icon ">
+                        <span class="text">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link" data-bs-toggle="collapse" data-bs-target="#aiContent">
+                        <img src="{{asset('assets/icons/content.svg')}}" alt="user icon ">
+                        <span class="text">AI Content</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="aiContent">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="{{ route('content.create') }}">Content Generate</a></li>
+                                <li><a href="{{ route('contents.index') }}">Saved Content</a></li>
+                                <li><a href="{{ route('content-history.index') }}">Content History</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link" data-bs-toggle="collapse" data-bs-target="#generateDropdown">
+                        <img src="{{asset('assets/icons/image.svg')}}" alt="user icon ">
+                        <span class="text">AI Image</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="generateDropdown">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="{{ route('image.create') }}">New Image</a></li>
+                                <li><a href="{{ route('image.variation') }}">Image Variation</a></li>
+                                <li><a href="{{ route('image.all') }}">All Images</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+
+                
+                <li>
+                    <a href="{{ route('plan.userIndex') }}" class="sidebar-menu-link">
+                        <img src="{{asset('assets/icons/credit-card.svg')}}" alt="credit card  icon ">
+                        <span class="text">Purchase plane</span>
+
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="{{asset('assets/icons/reports.svg')}}" alt="credit card  icon ">
+                        <span class="text">Reports</span>
+
+                    </a>
+                </li>
+
+                @if (Auth::user()->type == 'admin')
+                <li class="text-center border-bottom"> Admin Area </li>
+
+                <li>
+                    <a href="{{route('dashboard')}}" class="sidebar-menu-link">
+                        <img src="{{asset('assets/icons/home.svg')}}" alt="home icon ">
+                        <span class="text">Admin Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link" data-bs-toggle="collapse" data-bs-target="#aiManage">
+                        <img src="{{asset('assets/icons/content.svg')}}" alt="user icon ">
+                        <span class="text">AI Management</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="aiManage">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="{{ route('use-case.index') }}">Use Case Templates</a></li>
+                                <li><a href="#">AI Settings</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link" data-bs-toggle="collapse" data-bs-target="#userManagement">
+                        <img src="{{asset('assets/icons/content.svg')}}" alt="user icon ">
+                        <span class="text">Manage Users</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="userManagement">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="{{ route('users.index') }}">Customer List</a></li>
+                                <li><a href="{{ route('admin.all') }}">Admin List</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link" data-bs-toggle="collapse" data-bs-target="#financialManagement">
+                        <img src="{{asset('assets/icons/content.svg')}}" alt="user icon ">
+                        <span class="text">Financial</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="financialManagement">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="{{ route('plan.index') }}">Manage Plan</a></li>
+                                <li><a href="{{ route('payment.method') }}">Payment Methods</a></li>
+                                <li><a href="#">All Transections</a></li>
+                                <li><a href="#">Pending Transections</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link" data-bs-toggle="collapse" data-bs-target="#frontendManage">
+                        <img src="{{asset('assets/icons/content.svg')}}" alt="user icon ">
+                        <span class="text">Frontend</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="frontendManage">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="#">Frontend Settings</a></li>
+                                <li><a href="{{ route('manage-blogs.index') }}">Blog Manager</a></li>
+                                <li><a href="{{ route('blog-category.index') }}">Blog Category</a></li>
+                                <li><a href="{{ route('manage-faq.index') }}">FAQ Manager</a></li>
+                                <li><a href="{{ route('home') }}">Page Builder</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="sidebar-menu-link" data-bs-toggle="collapse" data-bs-target="#settings">
+                        <img src="{{asset('assets/icons/content.svg')}}" alt="user icon ">
+                        <span class="text">Settings</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+                    </a>
+
+                    <div class="collapse" id="settings">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="#">General Settings</a></li>
+                                <li><a href="{{ route('setting') }}">PWA Settings</a></li>
+                                <li><a href="{{ route('setting') }}">SEO Settings</a></li>
+                                <li><a href="{{ route('setting') }}">Mail Configure</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li data-bs-toggle="collapse" data-bs-target="#reports">
+                    <a href="#" class="sidebar-menu-link">
+                        <img src="{{asset('assets/icons/reports.svg')}}" alt="credit card  icon ">
+                        <span class="text">Reports</span>
+                        <span class="arrow-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-chevron-down">
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
+                        </span>
+
+                    </a> 
+
+                    <div class="collapse" id="reports">
+                        <div class="sidebar-drop">
+                            <ul>
+                                <li><a href="#">Sales Reports</a></li>
+                                <li><a href="#">Google Analytics</a></li>
+
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                @endif
+            </ul>
+            <ul class="sidebar-menu d-none">
                 <li>
                     <a href="{{ route('content.create') }}" class="add-btn" data-bs-toggle="tooltip"
                         data-bs-placement="right" data-bs-title="Generate your Content">+</a>
@@ -158,6 +382,9 @@
                             <ul class="userlist">
                                 <li class="userlist-item">
                                     <a href="{{ route('profile') }}" class="userlist-link">My Profile</a>
+                                </li>
+                                <li class="userlist-item">
+                                    <a href="{{ route('profile.password') }}" class="userlist-link">Change Password</a>
                                 </li>
                                 <li class="userlist-item">
                                     <a class="userlist-link" href="{{ route('logout') }}"

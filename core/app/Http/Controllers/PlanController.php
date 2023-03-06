@@ -53,7 +53,7 @@ class PlanController extends Controller
         $plan->price = $request->price;
         $plan->duration = $request->duration;
         $plan->save();
-        alert('Plan', 'Plan Created Succssfully', 'success');
+        myAlert('success', 'Plan Created Succssfully');
         return back();
     }
 
@@ -80,11 +80,11 @@ class PlanController extends Controller
             $input['user_id'] = Auth::user()->id;
             
             $data->update($input);
-            alert()->success('Success', 'Plan Update updated successfully.');
+            myAlert('success', 'Plan Update updated successfully.');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
-            alert()->error('Error', $errorMessage);
+            myAlert('error', $errorMessage);
             return back();
         }
     }
@@ -98,7 +98,7 @@ class PlanController extends Controller
             $plan->is_published = false;
         }
         $plan->save();
-        alert('Plan', 'Plan Status is updated Succssfully', 'success');
+        myAlert('success', 'Plan Status is updated Succssfully');
         return back();
     }
 
