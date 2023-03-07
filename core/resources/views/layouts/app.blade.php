@@ -230,10 +230,12 @@
                     <div class="collapse" id="settings">
                         <div class="sidebar-drop">
                             <ul>
-                                <li><a href="#">General Settings</a></li>
-                                <li><a href="{{ route('setting') }}">PWA Settings</a></li>
-                                <li><a href="{{ route('setting') }}">SEO Settings</a></li>
-                                <li><a href="{{ route('setting') }}">Mail Configure</a></li>
+                                <li><a href="{{ route('setting') }}?tab=cms">General Settings</a></li>
+                                <li><a href="{{ route('setting') }}?tab=smtp">Mail Configure</a></li>
+                                <li><a href="{{ route('setting') }}?tab=seo">SEO Settings</a></li>
+                                <li><a href="{{ route('setting') }}?tab=login">Social Login</a></li>
+                                <li><a href="{{ route('setting') }}?tab=tawkto">Tawk (Live chat)</a></li>
+                                <li><a href="{{ route('setting') }}?tab=pwa">PWA Settings</a></li>
                             </ul>
                         </div>
                     </div>

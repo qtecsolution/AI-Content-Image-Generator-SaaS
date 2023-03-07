@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('plan_id');
             
-            $table->integer('word_count')->default(0); // 0 mins Work Count limit per request 
+            $table->integer('word_count')->default(0); // 0 mins Word Count limit per request 
             
             $table->integer('call_api_count')->default(0); 
             $table->integer('current_api_count')->default(0); 

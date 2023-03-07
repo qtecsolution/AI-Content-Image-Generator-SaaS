@@ -32,7 +32,7 @@
                             
 
                             <div class="row mb-3">
-                                <label for="inputEmail3" class="col-sm-12 col-form-label">Work Count limit per request <span class="text-danger">*</span></label>
+                                <label for="inputEmail3" class="col-sm-12 col-form-label">Word Count limit per request <span class="text-danger">*</span></label>
                                
                                 <div class="col-sm-12">
                                     <input type="number" min="0" required name="word_count" class="form-control custom-input" id="inputEmail3">

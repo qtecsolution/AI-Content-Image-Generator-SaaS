@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('icon');
             $table->string('details')->nullable();
             $table->string('prompt');
-            $table->string('input_fields');
+            $table->string('input_fields')->default('1,2,3');
             $table->boolean('is_published')->default(1);
             $table->timestamps();
         });
