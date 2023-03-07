@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Edit')
 @section('breadcrumb')
     <li class="breadcrumb-item">
         @if ($user->type == 'user')

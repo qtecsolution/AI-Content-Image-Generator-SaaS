@@ -1,7 +1,9 @@
 @extends('layouts.app')
+@section('title','Use Case')
 @section('breadcrumb')
     <li class="breadcrumb-item active">Use Case</li>
 @endsection
+
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">

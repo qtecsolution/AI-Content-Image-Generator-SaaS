@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\UseCase;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -35,7 +37,14 @@ class HomeController extends Controller
     {
         $totalUser = User::where('type', 'user')->count();
         $recentUsers = User::where('type', 'user')->limit(10)->latest()->get();
-        return view('dashboard.index', compact('totalUser', 'recentUsers'));
+        $orders = Order::limit(10)->latest()->get();
+
+        $currentMonthStart = Carbon::now()->startOfMonth();
+        $currentMonthEnd = Carbon::now()->endOfMonth();
+
+        $salesData = Order::whereBetween('created_at', [$currentMonthStart, $currentMonthEnd]);
+
+        return view('dashboard.index', compact('totalUser', 'orders', 'recentUsers','salesData'));
     }
 
     public function profile()

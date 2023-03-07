@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Change Password')
 @section('breadcrumb')
     <li class="breadcrumb-item active"> Change Password</li>
 @endsection

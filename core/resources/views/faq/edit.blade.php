@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="answear" class="form-label"> Answear : </label>
             <textarea class="form-control custom-input @error('answear') is-invalid @enderror" id="answear" autocomplete="off"
-                name="answear" placeholder="Answear" rows="8">{{ $data->answear }}</textarea>
+                name="answear" placeholder="Answear" rows="8">@purify($data->answear)</textarea>
             @error('answear')
                 <div class="invalid-feedback">
                     {{ $message }}

@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title','Tranzactions')
+@section('breadcrumb')
+    <li class="breadcrumb-item">Tranzactions</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
        

@@ -21,24 +21,24 @@
                 <div class="form-group mb-3">
                     <input type="hidden" name="types[]" value="DB_HOST">
                     <label class="mb-2">@lang('Database Host')</label>
-                    <input class="form-control" placeholder="Database Host" name="DB_HOST" required>
+                    <input class="form-control custom-input" placeholder="Database Host" name="DB_HOST" required>
                 </div>
                 <div class="form-group mb-3">
                     <input type="hidden" name="types[]" value="DB_DATABASE">
                     <label class="mb-2">@lang('Database Name')</label>
-                    <input class="form-control" placeholder="Database Name" name="DB_DATABASE" required>
+                    <input class="form-control custom-input" placeholder="Database Name" name="DB_DATABASE" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <input type="hidden" name="types[]" value="DB_USERNAME">
                     <label class="mb-2">@lang('Database Username')</label>
-                    <input class="form-control" placeholder="Database Username" name="DB_USERNAME" required>
+                    <input class="form-control custom-input" placeholder="Database Username" name="DB_USERNAME" required>
                 </div>
 
                 <div class="form-group mb-3">
                     <input type="hidden" name="types[]" value="DB_PASSWORD">
                     <label class="mb-2">@lang('Database Password')</label>
-                    <input class="form-control" placeholder="Database Password" type="password" name="DB_PASSWORD">
+                    <input class="form-control custom-input" placeholder="Database Password" type="password" name="DB_PASSWORD">
                 </div>
 
                 <div class="text-center">

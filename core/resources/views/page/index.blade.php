@@ -1,6 +1,10 @@
 @extends('layouts.app')
+
 @section('title')
-    @translate(Page list)
+    @translate(Page List)
+@endsection
+@section('breadcrumb')
+    <li class="breadcrumb-item">@translate(Page List)</li>
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">

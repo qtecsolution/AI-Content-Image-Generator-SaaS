@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Blog Edit')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('manage-blogs.index') }}">Blog</a></li>
     <li class="breadcrumb-item active">Edit</li>
@@ -42,7 +43,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="description" class="form-label">Blog Description</label>
-                                                        <textarea id="summernote" name="description">{!! $data->description !!}</textarea>
+                                                        <textarea id="summernote" name="description">@purify($data->description)</textarea>
                                                         @error('description')
                                                             <div class="invalid-feedback">
                                                                 {{ $message }}
@@ -71,7 +72,7 @@
                                                 </div>
                                                 @endif
                                                 <div>
-                                                    <input  type="file" name="image" class="form-control" >
+                                                    <input  type="file" name="image" class="form-control custom-input" >
                                                      @error('image')
                                                          <div class="invalid-feedback">
                                                              {{ $message }}
@@ -99,7 +100,7 @@
                                         <div class="form-group">
                                             <label for="tags" class="form-label">Tags</label>
                                             <textarea class="form-control custom-input" id="tags" autocomplete="off" name="tags"
-                                                placeholder="Tags sapareted by comma" rows="2">{{ $data->tags }}</textarea>
+                                                placeholder="Tags sapareted by comma" rows="2">@purify($data->tags)</textarea>
                                             @error('tags')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -114,7 +115,7 @@
                                         <div class="form-group">
                                             <label for="meta_description" class="form-label">Meta Description</label>
                                             <textarea class="form-control custom-input" id="meta_description" autocomplete="off" name="meta_description"
-                                                placeholder="Meta Description" rows="4">{{ $data->meta_description }}</textarea>
+                                                placeholder="Meta Description" rows="4">@purify($data->meta_description)</textarea>
                                             @error('meta_description')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

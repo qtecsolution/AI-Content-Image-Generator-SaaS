@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Blog Posts')
 @section('breadcrumb')
     <li class="breadcrumb-item active">Blogs</li>
 @endsection
@@ -11,8 +12,8 @@
                     <div class="my-projects-header border-bottom">
                         <h4 class="header-title">Blogs</h4>
                         <div class="project-button pull-right">
-                            <a href="{{ route('manage-blogs.create') }}" class="btn btn-light btn-xs"> <i
-                                    class="fa fa-plus-circle"></i> New </a>
+                            <a href="{{ route('manage-blogs.create') }}" class="btn btn-light btn-xs"> 
+                                <i class="fa fa-plus-circle"></i> New </a>
                         </div>
                     </div>
                     <div class="my-projects-body">
