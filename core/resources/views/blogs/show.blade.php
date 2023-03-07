@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Post Show')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('manage-blogs.index') }}">Blog</a></li>
     <li class="breadcrumb-item active">Show</li>

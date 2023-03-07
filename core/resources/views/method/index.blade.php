@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title','Payment Methods')
+@section('breadcrumb')
+    <li class="breadcrumb-item">Payment Methods</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <ul class="nav nav-tabs setting-tab" id="myTab" role="tablist">
@@ -58,13 +62,13 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Paypal Client Id</label>
-                                <input class="form-control" name="PAYPAL_CLIENT_ID"
+                                <input class="form-control custom-input" name="PAYPAL_CLIENT_ID"
                                     value="{{ readConfig('PAYPAL_CLIENT_ID') }}" placeholder="PAYPAL_CLIENT_ID">
                             </div>
 
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Paypal App Secret </label>
-                                <input class="form-control" name="PAYPAL_APP_SECRET"
+                                <input class="form-control custom-input" name="PAYPAL_APP_SECRET"
                                     value="{{ readConfig('PAYPAL_APP_SECRET') }}" placeholder="PAYPAL_APP_SECRET">
                             </div>
 
@@ -112,7 +116,7 @@
 
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Stripe Active<span class="text-danger">*</span></label>
-                                <select class="form-control select2 w-100" name="STRIPE_ACTIVE">
+                                <select class="form-control custom-input select2 w-100" name="STRIPE_ACTIVE">
                                     <option value="on" {{ readConfig('STRIPE_ACTIVE') == 'on' ? 'selected' : null }}>ON
                                     </option>
                                     <option value="off" {{ readConfig('STRIPE_ACTIVE') == 'off' ? 'selected' : null }}>
@@ -122,13 +126,13 @@
                             </div>
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Stripe Key </label>
-                                <input class="form-control" name="STRIPE_KEY" value="{{ readConfig('STRIPE_KEY') }}"
+                                <input class="form-control custom-input" name="STRIPE_KEY" value="{{ readConfig('STRIPE_KEY') }}"
                                     placeholder="STRIPE_KEY">
                             </div>
 
                             <div class="form-group mb-2">
                                 <label class="col-form-label">Stripe Secret</label>
-                                <input class="form-control" name="STRIPE_SECRET"
+                                <input class="form-control custom-input" name="STRIPE_SECRET"
                                     value="{{ readConfig('STRIPE_SECRET') }}" placeholder="STRIPE_SECRET">
                             </div>
 

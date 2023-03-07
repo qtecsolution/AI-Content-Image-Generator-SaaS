@@ -80,44 +80,44 @@
                         <label class="label  mb-2">@lang('CMS Footer')</label>
                         <input type="hidden" value="type_footer" name="type_footer">
                         <input type="text"  value="{{ getInstallerSystemSetting('type_footer') }}" name="footer"
-                               class="form-control  mb-2">
+                               class="form-control custom-input  mb-2">
 
                         <!--address-->
                         <label class="label  mb-2">@lang('CMS Address')</label>
                         <input type="hidden" value="type_address" name="type_address">
                         <input type="text" value="{{ getInstallerSystemSetting('type_address') }}" name="address"
-                               class="form-control  mb-2">
+                               class="form-control custom-input  mb-2">
 
                         <!--mail-->
                         <label class="label  mb-2">@lang('CMS Mail')</label>
                         <input type="hidden" value="type_mail" name="type_mail">
                         <input type="text" value="{{ getInstallerSystemSetting('type_mail') }}" name="mail"
-                               class="form-control  mb-2">
+                               class="form-control custom-input  mb-2">
                     </div>
                     <div class="col-6">
                         <!--fb-->
                         <label class="label  mb-2">@lang('CMS Facebook Link')</label>
                         <input type="hidden" value="type_fb" name="type_fb">
                         <input type="text" value="{{ getInstallerSystemSetting('type_fb') }}" name="fb"
-                               class="form-control  mb-2">
+                               class="form-control custom-input  mb-2">
 
                         <!--tw-->
                         <label class="label  mb-2">@lang('CMS Twitter Link')</label>
                         <input type="hidden" value="type_tw" name="type_tw">
                         <input type="text" value="{{ getInstallerSystemSetting('type_tw') }}" name="tw"
-                               class="form-control  mb-2">
+                               class="form-control custom-input  mb-2">
 
                         <!--google-->
                         <label class="label  mb-2">@lang('CMS Google Link')</label>
                         <input type="hidden" value="type_google" name="type_google">
                         <input type="text" value="{{ getInstallerSystemSetting('type_google') }}" name="google"
-                               class="form-control  mb-2">
+                               class="form-control custom-input mb-2">
 
                         <!--Number-->
                         <label class="label  mb-2">@lang('CMS Number')</label>
                         <input type="hidden" value="type_number" name="type_number">
                         <input type="text" value="{{ getInstallerSystemSetting('type_number') }}" name="number"
-                               class="form-control  mb-2">
+                               class="form-control custom-input mb-2">
                     </div>
                 </div>
 

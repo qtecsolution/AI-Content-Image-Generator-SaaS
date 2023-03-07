@@ -4,22 +4,22 @@
 
         <div class="form-group mb-2">
             <label>@translate(Page Title) <span class="text-danger">*</span></label>
-            <input class="form-control" placeholder="@translate(Page Title)" type="text"  name="title" required>
+            <input class="form-control custom-input" placeholder="@translate(Page Title)" type="text"  name="title" required>
         </div>
 
         <div class="form-group mb-2">
             <label>@translate(Meta Title)</label>
-            <input class="form-control" name="meta_title" type="text" max="100" placeholder="@translate(Meth Title)">
+            <input class="form-control custom-input" name="meta_title" type="text" max="100" placeholder="@translate(Meth Title)">
         </div>
 
         <div class="form-group mb-2">
             <label>@translate(Meta Keywords)</label>
-            <input class="form-control" name="meta_keys" type="text" max="100" placeholder="@translate(Meth Keys)">
+            <input class="form-control custom-input" name="meta_keys" type="text" max="100" placeholder="@translate(Meth Keys)">
         </div>
 
         <div class="form-group mb-2">
             <label>@translate(Meta Description)</label>
-            <textarea class="form-control" name="meta_desc" maxlength="200" placeholder="@translate(Meta Description write)"></textarea>
+            <textarea class="form-control custom-input" name="meta_desc" maxlength="200" placeholder="@translate(Meta Description write)"></textarea>
         </div>
         
 

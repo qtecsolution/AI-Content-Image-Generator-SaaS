@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title','Setting')
+@section('breadcrumb')
+    <li class="breadcrumb-item active"> Setting</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
 
@@ -328,7 +332,7 @@
                                             <input type="hidden" name="types[]" value="MAIL_DRIVER">
                                             <label class="form-label">MAIL DRIVER <span
                                                     class="text-danger">*</span></label>
-                                            <select class="form-control ustom-input" name="MAIL_DRIVER">
+                                            <select class="form-control custom-input" name="MAIL_DRIVER">
                                                 <option value="sendmail"
                                                     @if (env('MAIL_DRIVER') == 'sendmail') selected @endif>
                                                     Sendmail
@@ -345,7 +349,7 @@
                                                         class="text-danger">*</span></label>
                                             </div>
                                             <div class="">
-                                                <input type="text" class="form-control" name="MAIL_HOST"
+                                                <input type="text" class="form-control custom-input" name="MAIL_HOST"
                                                     value="{{ env('MAIL_HOST') }}">
                                             </div>
                                         </div>
@@ -356,7 +360,7 @@
                                                         class="text-danger">*</span></label>
                                             </div>
                                             <div class="">
-                                                <input type="text" class="form-control" name="MAIL_PORT"
+                                                <input type="text" class="form-control custom-input" name="MAIL_PORT"
                                                     value="{{ env('MAIL_PORT') }}">
                                             </div>
                                         </div>
@@ -367,7 +371,7 @@
                                                         class="text-danger">*</span></label>
                                             </div>
                                             <div class="">
-                                                <input type="text" class="form-control" name="MAIL_USERNAME"
+                                                <input type="text" class="form-control custom-input" name="MAIL_USERNAME"
                                                     value="{{ env('MAIL_USERNAME') }}" required>
                                             </div>
                                         </div>
@@ -378,7 +382,7 @@
                                                         class="text-danger">*</span></label>
                                             </div>
                                             <div class="">
-                                                <input type="text" class="form-control" name="MAIL_PASSWORD"
+                                                <input type="text" class="form-control custom-input" name="MAIL_PASSWORD"
                                                     value="{{ env('MAIL_PASSWORD') }}">
                                             </div>
                                         </div>
@@ -389,7 +393,7 @@
                                                         class="text-danger">*</span></label>
                                             </div>
                                             <div class="">
-                                                <input type="text" class="form-control" name="MAIL_ENCRYPTION"
+                                                <input type="text" class="form-control custom-input" name="MAIL_ENCRYPTION"
                                                     value="{{ env('MAIL_ENCRYPTION') }}">
                                             </div>
                                         </div>
@@ -400,7 +404,7 @@
                                                         class="text-danger">*</span></label>
                                             </div>
                                             <div class="">
-                                                <input type="text" class="form-control" name="MAIL_FROM_ADDRESS"
+                                                <input type="text" class="form-control custom-input" name="MAIL_FROM_ADDRESS"
                                                     value="{{ env('MAIL_FROM_ADDRESS') }}" required>
                                             </div>
                                         </div>
@@ -411,7 +415,7 @@
                                                         class="text-danger">*</span></label>
                                             </div>
                                             <div class="">
-                                                <input type="text" class="form-control" name="MAIL_FROM_NAME"
+                                                <input type="text" class="form-control custom-input" name="MAIL_FROM_NAME"
                                                     value="{{ env('MAIL_FROM_NAME') }}" required>
                                             </div>
                                         </div>
@@ -614,18 +618,18 @@
                                         <!--name-->
                                         <div class="form-group md-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps Name)</label>
-                                            <input class="form-control" name="pwa_name" type="text"
+                                            <input class="form-control custom-input" name="pwa_name" type="text"
                                                 value="{{ config('laravelpwa.name') }}">
                                         </div>
                 
                                         <div class="form-group md-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps Short Name)</label>
-                                            <input class="form-control" name="short_name" type="text"
+                                            <input class="form-control custom-input" name="short_name" type="text"
                                                 value="{{ config('laravelpwa.manifest.short_name') }}">
                                         </div>
                 
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group md-2 ">
                                             <label class="col-form-label">@translate(Progressive Web Apps background color)</label>
                                             <input class="form-control" name="background_color" type="color"
                                                 value="{{ config('laravelpwa.manifest.background_color') }}">
@@ -633,13 +637,13 @@
                 
                                         <div class="form-group md-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps theme color)</label>
-                                            <input class="form-control" name="theme_color" type="color"
+                                            <input class="form-control custom-input" name="theme_color" type="color"
                                                 value="{{ config('laravelpwa.manifest.theme_color') }}">
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 72x72 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x72x72_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x72x72_icon" type="file">
                                             <div class="text-center m-2">
                                                 {{ filePathRoot(config('laravelpwa.manifest.icons.72x72.path')) }}
                                                 <img class="img-fluid" width="72" height="72" src="{{ filePathRoot(config('laravelpwa.manifest.icons.72x72.path')) }}">
@@ -647,15 +651,15 @@
                                         </div>
                 
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 96x96 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x96x96_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x96x96_icon" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="96" height="96" src="{{ filePathRoot(config('laravelpwa.manifest.icons.96x96,path')) }}">
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 128x128 Icon)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x128x128_icon" type="file">
                                             <div class="text-center m-2">
@@ -663,7 +667,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 144x144 Icon)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x144x144_icon" type="file">
                                             <div class="text-center m-2">
@@ -671,7 +675,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 152x152 Icon)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x152x152_icon" type="file">
                                             <div class="text-center m-2">
@@ -679,7 +683,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 192x192 Icon)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x192x192_icon" type="file">
                                             <div class="text-center m-2">
@@ -687,7 +691,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 384x384 Icon)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x384x384_icon" type="file">
                                             <div class="text-center m-2">
@@ -695,7 +699,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 512x512 Icon)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x512x512_icon" type="file">
                                             <div class="text-center m-2">
@@ -703,7 +707,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 640x1136 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x640x1136_splash" type="file">
                                             <div class="text-center m-2">
@@ -711,7 +715,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 750x1334 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x750x1334_splash" type="file">
                                             <div class="text-center m-2">
@@ -719,7 +723,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 828x1792 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x828x1792_splash" type="file">
                                             <div class="text-center m-2">
@@ -727,7 +731,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1536x2048 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x1536x2048_splash" type="file">
                                             
@@ -742,7 +746,7 @@
                 
                                       
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1125x2436 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x1125x2436_splash" type="file">
                                             <div class="text-center m-2">
@@ -750,7 +754,7 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1242x2208 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x1242x2208_splash" type="file">
                                             <div class="text-center m-2">
@@ -758,28 +762,28 @@
                                             </div>
                                         </div>
                 
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1242x2688_splash Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x1242x2688_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1242" height="2688" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1242x2688')) }}">
                                             </div>
                                         </div>
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1668x2224 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x1668x2224_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1668" height="2224" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1668x2224')) }}">
                                             </div>
                                         </div>
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1668x2388 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x1668x2388_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1668" height="2388" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1668x2388')) }}">
                                             </div>
                                         </div>
-                                        <div class="form-group md-2">
+                                        <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 2048x2732 Splash Screen)</label>
                                             <input class="form-control" accept="image/png, image/jpeg" name="x2048x2732_splash" type="file">
                                             <div class="text-center m-2">

@@ -1,6 +1,8 @@
 @extends('layouts.app')
-@section('title')
-    @translate(Page Content Create)
+
+@section('title','Page Content Create')
+@section('breadcrumb')
+    <li class="breadcrumb-item">@translate(Page Content Create)</li>
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
@@ -29,14 +31,14 @@
                                         <label class="col-form-label">@translate(Content Title) <span
                                                 class="text-danger">*</span></label>
                                         <input placeholder="@translate(Enter Content Title)"
-                                            class="form-control @error('title') is-invalid @enderror" type="text"
+                                            class="form-control custom-input @error('title') is-invalid @enderror" type="text"
                                             value="{{ old('title') }}" name="title">
                                     </div>
 
                                     <div class="form-group mb-2">
                                         <label class="col-form-label" for="val-suggestions">
                                             @translate(Content Description)</label>
-                                        <textarea required id="summernote" class="form-control note-editable @error('body') is-invalid @enderror" name="body" rows="5"
+                                        <textarea required id="summernote" class="form-control  custom-input note-editable @error('body') is-invalid @enderror" name="body" rows="5"
                                             aria-required="true">{{ old('body') }}</textarea>
                                         @error('body')
                                             <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong>

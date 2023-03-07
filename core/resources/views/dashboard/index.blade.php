@@ -17,7 +17,7 @@
                             <h5 class="card-header bg-light"> <i class="fa fa-users"></i> Total Users</h5>
                             <div class="card-body">
                                 <h4> {{ $totalUser }} </h4>
-                                <p> Users </p>
+
                             </div>
                         </div>
                     </div>
@@ -26,25 +26,27 @@
                             <h5 class="card-header bg-light"> <i class="fa fa-file"></i> Total Use Case</h5>
                             <div class="card-body">
                                 <h4> {{ totalUseCase() }} </h4>
-                                <p> Use Case </p>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="card text-center">
-                            <h5 class="card-header bg-light"> <i class="fa fa-bolt"></i> Monthly Transection</h5>
+                            <h5 class="card-header bg-light">
+                                <i class="fa fa-bolt"></i> Current Month Transection
+                            </h5>
                             <div class="card-body">
-                                <h4> 20 </h4>
-                                <p>Fab 01 - Mar 01</p>
+                                <h4> {{ $salesData->count() }} </h4>
+
                             </div>
                         </div>
                     </div>
                     <div class="col-3">
                         <div class="card text-center">
-                            <h5 class="card-header bg-light"> <i class="fa fa-credit-card"></i> Monthly Revenue</h5>
+                            <h5 class="card-header bg-light"> <i class="fa fa-credit-card"></i> Current Month Revenue</h5>
                             <div class="card-body">
-                                <h4> 20 </h4>
-                                <p>Fab 01 - Mar 01</p>
+                                <h4> {{ $salesData->sum('total') }} </h4>
+
                             </div>
                         </div>
                     </div>
@@ -55,71 +57,30 @@
                             <div class="card-header bg-light">
                                 <h5 class="card-title no-margin">Recent Transection</h5>
                                 <div class="card-button">
-                                    <a href="" class="btn btn-light btn-sm"> <i class="fa fa-list"></i> See All </a>
+                                    <a href="{{ route('order.index') }}" class="btn btn-light btn-sm"> <i
+                                            class="fa fa-list"></i> See All </a>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th scope="col">Trx ID</th>
-                                            <th scope="col">Gateway</th>
-                                            <th scope="col">Amount</th>
-                                            <th scope="col">Created At</th>
+                                            <th scope="col">Invoice</th>
+                                            <th scope="col">Users</th>
+                                            <th scope="col">Plan</th>
+                                            <th scope="col">Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">1</th>
-                                            <td>Mark</td>
-                                            <td>Otto</td>
-                                            <td>@mdo</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">2</th>
-                                            <td>Jacob</td>
-                                            <td>Thornton</td>
-                                            <td>@fat</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row">3</th>
-                                            <td colspan="2">Larry the Bird</td>
-                                            <td>@twitter</td>
-                                        </tr>
+                                        @foreach ($orders as $item)
+                                            <tr>
+                                                <th scope="row">{{ $item->invoice }}</th>
+                                                <td>{{ $item->user->name }}</td>
+                                                <td>{{ $item->plan->name }}</td>
+                                                <td>{{ dateTimeFormat($item->created_at) }}</td>
+                                            </tr>
+                                        @endforeach
+
                                     </tbody>
                                 </table>
                             </div>
@@ -130,7 +91,8 @@
                             <div class="card-header bg-light">
                                 <h5 class="card-title no-margin">Recent Users</h5>
                                 <div class="card-button">
-                                    <a href="" class="btn btn-light btn-sm"> <i class="fa fa-list"></i> See All </a>
+                                    <a href="{{ route('users.all') }}" class="btn btn-light btn-sm"> <i
+                                            class="fa fa-list"></i> See All </a>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -149,7 +111,7 @@
                                                 <th scope="row">{{ $userIndex + 1 }}</th>
                                                 <td>{{ $user->name }}</td>
                                                 <td>{{ $user->email }}</td>
-                                                <td> {{ $user->plan->name ?? '' }} </td>
+                                                <td> {{ $user->plan->name ?? 'No Plan ' }} </td>
                                             </tr>
                                         @endforeach
                                     </tbody>

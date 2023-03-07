@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Contents')
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('contents.index') }}">Contents</a></li>
     <li class="breadcrumb-item active">Edit</li>
@@ -68,7 +69,7 @@
                                                     <div class="form-group">
                                                         <label for="description" class="form-label">Description</label>
                                                         <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
-                                                            placeholder="Description">{{ $data->description }}</textarea>
+                                                            placeholder="Description">@purify($data->description)</textarea>
                                                         <div class="valid-feedback">
                                                             Awesome! You're one step closer to greatness.
                                                         </div>
@@ -96,7 +97,7 @@
 
                                 <!-- editor column -->
                                 <div class="col-lg-7 border-start mt-0">
-                                    <textarea id="summernote" name="generated_content">{!! $data->generated_content !!}</textarea>
+                                    <textarea id="summernote" name="generated_content">@purify($data->generated_content)</textarea>
                                 </div>
 
                             </div>

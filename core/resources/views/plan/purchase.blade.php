@@ -1,4 +1,8 @@
 @extends('layouts.app')
+@section('title','Checkout')
+@section('breadcrumb')
+    <li class="breadcrumb-item active">Checkout</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
 
