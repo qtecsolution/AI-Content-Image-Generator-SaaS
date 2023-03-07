@@ -9,12 +9,6 @@ use Illuminate\Support\Facades\File;
 
 class SettingController extends Controller
 {
-    //
-
-    public function seoSetup()
-    {
-        return view('setting.seo');
-    }
 
     public function setting(Request $request)
     {
@@ -41,7 +35,7 @@ class SettingController extends Controller
         $fileName = 'tawk_to.blade.php';
         $fileContents = $request->code;
         File::put($fileName, $fileContents);
-        copy(public_path('tawk_to.blade.php'), base_path('resources/views/layouts/tawk_to.blade.php'));
+        copy(asset('tawk_to.blade.php'), base_path('resources/views/layouts/tawk_to.blade.php'));
         toast('Tawk to is setup', 'success');
         return redirect()->route('setting', ['tab' => "tawkto"]);
     }
@@ -72,7 +66,7 @@ class SettingController extends Controller
         }
 
         if ($request->hasFile('meta_image')) {
-            $imag = fileUpload($request->meta_image, '', '');
+            $imag = fileUpload($request->file('meta_image'), 'seo', '');
             writeConfig('meta_image', $imag);
         }
 
@@ -82,6 +76,7 @@ class SettingController extends Controller
 
     public function smtpStore(Request $request)
     {
+        
         foreach ($request->types as $key => $type) {
             overWriteEnvFile($type, $request[$type]);
         }

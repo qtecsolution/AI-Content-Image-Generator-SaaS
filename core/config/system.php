@@ -9,7 +9,7 @@ return [
     'type_address' => 'United state',
     'footer_logo' => 'uploads/site/footer-logo4574.jpg',
     'favicon_icon' => 'uploads/site/f-icon1290.png',
-    'type_fb' => 'facebook.com',
+    'type_fb' => 'facebook.com/a',
     'type_tw' => 'facebook.com',
     'type_google' => 'facebook.com',
     'type_insta' => 'instagram.com',
@@ -19,9 +19,9 @@ return [
     'type_register_title' => 'Start your 30-day free trial',
     'type_login_title' => 'Welcome back! Please enter your details',
     "meta_keys" => "XOXO CMS",
-    "meta_desc" => 'XOXO  CMS',
-    "meta_title" => 'XOXO  CMS',
-    "meta_image" => "",
+    "meta_desc" => 'Creaify',
+    "meta_title" => 'Creaify',
+    "meta_image" => 'assets/uploads/seo/2023/03/07/202303073932.png',
     'PAYPAL_ACTIVE' => 'on',
     'PAYPAL_CLIENT_ID' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',
     'PAYPAL_APP_SECRET' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',
@@ -46,5 +46,5 @@ return [
     'meta_key' => 'buwezalute@mailinator.com',
     'currency_sambol' => '$',
     'pwa_active' => 'yes',
-    'open_ai_model' => 'text-davinci-003'
+    'open_ai_model' => 'text-davinci-003',
 ];

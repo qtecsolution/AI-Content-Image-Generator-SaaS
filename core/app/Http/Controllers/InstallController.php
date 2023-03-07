@@ -226,7 +226,7 @@ class InstallController extends Controller
             overWriteEnvFile('VUE_APP_ROOT_URL', $se . '/api/');
             overWriteEnvFile('APP_DEBUG', false);
             overWriteEnvFile('APP_DEMO', false);
-            copy(public_path('RouteServiceProvider.php'), base_path('app/Providers/RouteServiceProvider.php'));
+            copy(base_path('install/RouteServiceProvider.php'), base_path('app/Providers/RouteServiceProvider.php'));
             Artisan::call('optimize:clear');
             return view('install.done');
        

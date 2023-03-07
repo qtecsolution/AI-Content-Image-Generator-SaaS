@@ -249,7 +249,7 @@
                             <div class="row">
                                 <div class="col-lg-7">
                                     <form class="project-table-wrapper p-3" method="post"
-                                        action="{{ route('seo.store') }}">
+                                        action="{{ route('seo.store') }}" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Meta Key</label>
@@ -274,9 +274,9 @@
 
                                         <div class="form-group mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Meta Image</label>
-                                            <input type="file" class="form-control custom-input"
-                                                value="{{ readConfig('meta_image') }}" id="exampleInputEmail1"
+                                            <input type="file" class="form-control custom-input" id="exampleInputEmail1"
                                                 name="meta_image" aria-describedby="emailHelp">
+                                                <img src="{{ filePath(readConfig('meta_image')) }}" width="100">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Save</button>

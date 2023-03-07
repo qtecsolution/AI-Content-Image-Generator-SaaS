@@ -5,7 +5,7 @@
         <section class="welcome">
             <div class="row">
                 <div class="col-12 text-center">
-                    <h3 class="welcome-title">👋 Hi, {{Auth::user()->name}} </h3>
+                    <h3 class="welcome-title">👋 Hi, {{ Auth::user()->name }} </h3>
                     <p class="welcome-text">"Welcome Type.ez! We're glad to have you here. Our platform is designed
                         to help you streamline <br> your writing process, increase your productivity, and create
                         high-quality content. <br> We're confident you'll find the tools and features here to be
@@ -14,27 +14,28 @@
             </div>
         </section>
         <!-- WELCOME SECTION END -->
-
         <!-- POPULAR TEMPLATE  SECTION START -->
         <section class="popular-template">
             <div class="popular-template-header">
-                <h4 class="header-title">Use Cases</h4>
+                <h4 class="header-title">Popular Use Case Templates</h4>
             </div>
             <div class="popular-template-body">
-
-                <div class="template-wrapper">
-                    @foreach ($cases as $case)
-                        <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card">
-                            <figure class="card-img">
-                                <img src="{{ asset($case->icon) }}" alt="{{ $case->title }}">
-                            </figure>
-                            <h3 class="card-title"> {{ $case->title }} </h3>
-                            <p class="card-des">{{ $case->details }}</p>
-                        </a>
-                    @endforeach
+                <div class=" swiper templateSwiper">
+                    <div class="swiper-wrapper pb-5">
+                        @foreach ($cases as $case)
+                            <div class="swiper-slide">
+                                <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card">
+                                    <figure class="card-img">
+                                        <img src="{{ asset($case->icon) }}" alt="{{ $case->title }}">
+                                    </figure>
+                                    <h3 class="card-title"> {{ $case->title }} </h3>
+                                    <p class="card-des">{{ $case->details }}</p>
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination mt-5"></div>
                 </div>
-
-
             </div>
         </section>
         <!-- POPULAR TEMPLATE  SECTION END -->
@@ -55,17 +56,19 @@
                         </span>
                         <input type="text" name="" id="search-datatable">
 
-                        <div class="right-text" id="delete-selected" style="display: none" role="button" onclick=multipleDelete()>
+                        <div class="right-text" id="delete-selected" style="display: none" role="button"
+                            onclick=multipleDelete()>
                             <span>Delete</span>
                             <span class="selected">selected <span class="total-selected"> </span> </span>
                             <span> Contents </span>
-                            <input type="hidden" id="multiuple-delete-url" value="{{route('contents-multiple-delete')}}">
+                            <input type="hidden" id="multiuple-delete-url"
+                                value="{{ route('contents-multiple-delete') }}">
                         </div>
                     </div>
 
-                    <table id="datatables" class="project-table table">
+                    <table id="projectTable" class="project-table">
                         <thead>
-                            <tr>
+                            <tr class="bg-white">
                                 <td data-orderable="false"> <input type="checkbox" name="row-check"
                                         class="form-check-input check-lg" id="allSelect"></td>
                                 <td>Title</td>
@@ -88,18 +91,48 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+        var swiper = new Swiper(".templateSwiper", {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            breakpoints: {
+                420: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                640: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1100: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+                1300: {
+                    slidesPerView: 5,
+                    spaceBetween: 8,
+                },
+            },
+        });
         //Checked all Checkbox 
         $('#allSelect').change(function() {
-            $('#datatables .input-checkbox').prop('checked', $(this).prop('checked'));
+            $('#projectTable .input-checkbox').prop('checked', $(this).prop('checked'));
             applicantSelected();
         });
         // Checkbox action
-        $(document).on("click", "#datatables .input-checkbox", function() {
+        $(document).on("click", "#projectTable .input-checkbox", function() {
             applicantSelected();
         })
         // applicant selected
         function applicantSelected() {
-            let numChecked = $('#datatables .input-checkbox:checked').length;
+            let numChecked = $('#projectTable .input-checkbox:checked').length;
             if (numChecked > 0) {
                 $('#delete-selected').show();
                 $('#delete-selected .total-selected').html(numChecked);
@@ -108,22 +141,33 @@
             }
         }
         // multiple delete 
-        function multipleDelete(){
-            let deleteId = []; 
-            $('#datatables .input-checkbox:checked').each(function(){
+        function multipleDelete() {
+            let deleteId = [];
+            $('#projectTable .input-checkbox:checked').each(function() {
                 deleteId.push($(this).val())
             })
             let id = deleteId.toString();
             let url = $('#multiuple-delete-url').val();
-            url+='?id='+id;
+            url += '?id=' + id;
             resourceDelete(url);
         }
 
 
         $(function() {
-            let table = $('#datatables').DataTable({
+            let table = $('#projectTable').DataTable({
                 info: false,
                 sDom: 'Rfrtlip',
+                language: {
+                    paginate: {
+                        next: '<i class="fa fa-arrow-right"></i>',
+                        previous: '<i class="fa fa-arrow-left"></i>'
+                    },
+                    "lengthMenu": "Show _MENU_ entries ",
+                    pageLength: 10,
+                },
+                fixedColumns: {
+                    left: 1,
+                },
                 processing: true,
                 serverSide: true,
                 ordering: true,
