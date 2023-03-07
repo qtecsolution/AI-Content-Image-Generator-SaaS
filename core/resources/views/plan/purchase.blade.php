@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Checkout')
+@section('title', 'Checkout')
 @section('breadcrumb')
     <li class="breadcrumb-item active">Checkout</li>
 @endsection
@@ -397,6 +397,19 @@
             }
 
         }
+
+        @if ($plan->price <= 0)
+          
+            $(document).ready(function() {
+
+                $('#paymentMethod').val('Free');
+                $('#paymentAmount').val({{ $plan->price }});
+                $('#paymentTID').val('');
+                $('#value_1').val('');
+                $('#order_payment_done').submit();
+
+            });
+        @endif
     </script>
 
     @if (readConfig('PAYPAL_ACTIVE') == 'on')
