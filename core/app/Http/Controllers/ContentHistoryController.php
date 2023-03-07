@@ -27,7 +27,7 @@ class ContentHistoryController extends Controller
     return DataTables::of($allData)
         ->addIndexColumn()
         ->addColumn('checkbox', '
-        <input type="checkbox" value="{{$id}}" name="row-check" class="input-checkbox form-check-input check-lg">
+        <input type="checkbox" value="{{$id}}" name="row-check" class="input-checkbox custom-input form-check-input check-lg">
         ')
         ->addColumn('use_case_title', function ($data) {
             return $data->useCase->title ?? '';

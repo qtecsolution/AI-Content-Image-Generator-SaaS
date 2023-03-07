@@ -1,20 +1,24 @@
 @extends('layouts.app')
+@section('title','All Plans')
+@section('breadcrumb')
+    <li class="breadcrumb-item active">All Plans</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
 
             <div class="col-md-12">
-                <div class="card custom">
-                    <div class="card-header bg-info">
-                        <h5 class="card-title no-margin color-white">All Plans</h5>
-                        <div class="card-button">
-                            <a href="{{ route('plan.create') }}" class="btn btn-success btn-xs">
-                                <i class="fa fa-add"></i>
+                <div class="my-projects">
+                    <div class="my-projects-header border-bottom">
+                        <h5 class="header-title">All Plans</h5>
+                        <div class="project-button pull-right">
+                            <a href="{{ route('plan.create') }}" class="btn btn-light btn-xs">
+                                <i class="fa fa-plus-circle"></i>
                                 Create Plan
                             </a>
                         </div>
                     </div>
-                    <div class="card-body">
+                    <div class="my-projects-body">
                         <div class="pricing-body">
 
                             <div class="pricing-cards">

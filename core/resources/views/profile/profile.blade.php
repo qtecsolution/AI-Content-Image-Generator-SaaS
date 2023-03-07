@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Profile')
 @section('breadcrumb')
     <li class="breadcrumb-item active"> Profile</li>
 @endsection

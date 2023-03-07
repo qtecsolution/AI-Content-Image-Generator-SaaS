@@ -2,6 +2,9 @@
 @section('title')
     @translate(Page Content Edit)
 @endsection
+@section('breadcrumb')
+    <li class="breadcrumb-item">@translate(Page Content Edit)</li>
+@endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row">
@@ -29,7 +32,7 @@
                                     <input name="page_id" type="hidden" value="{{ $content->page_id }}">
                                     <div class="form-group mb-2">
                                         <label>@translate(Content Title) <span class="text-danger">*</span></label>
-                                        <input class="form-control @error('title') is-invalid @enderror" type="text"
+                                        <input class="form-control custom-input @error('title') is-invalid @enderror" type="text"
                                             value="{{$content->title}}" name="title" required>
                                     </div>
 
@@ -37,7 +40,7 @@
                                         <label class="col-form-label" for="val-suggestions">
                                             @translate(Content Description)</label>
                                         <textarea required id="summernote" class="form-control note-editable @error('body') is-invalid @enderror" name="body" rows="5"
-                                            aria-required="true">{!!$content->body !!}</textarea>
+                                            aria-required="true">@purify($content->body)</textarea>
                                         @error('body')
                                             <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong>
                                             </span>

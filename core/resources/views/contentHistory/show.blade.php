@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Contents History')
 @section('breadcrumb')
     <li class="breadcrumb-item active">Contents History Details</li>
 @endsection

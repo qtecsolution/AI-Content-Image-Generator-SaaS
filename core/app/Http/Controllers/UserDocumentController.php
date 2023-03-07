@@ -28,7 +28,7 @@ class UserDocumentController extends Controller
         return DataTables::of($allData)
             ->addIndexColumn()
             ->addColumn('checkbox', '
-            <input type="checkbox" value="{{$id}}" name="row-check" class="input-checkbox form-check-input check-lg">
+            <input type="checkbox" value="{{$id}}" name="row-check" class="input-checkbox custom-input form-check-input check-lg">
             ')
             ->addColumn('use_case_title', function ($data) {
                 return $data->useCase->title ?? '';
@@ -42,11 +42,11 @@ class UserDocumentController extends Controller
             ->addColumn('action', '
             <div class="action-wrapper">
                 <a class="text-success" href="{{route(\'contents.edit\',$id)}}">
-                    <i class="fa fa-pencil fa-lg" aria-hidden="true"></i>
+                <img src="{{asset(\'assets/icons/edit.svg\')}}" alt="">
                 </a>
                 <a class="text-danger" title="Delete Contents" href="javascript:void(0)" type="button"
                     onclick="resourceDelete(\'{{ route(\'contents.destroy\', $id) }}\')">
-                    <i class="fa fa-trash-o fa-lg"></i>
+                    <img src="{{asset(\'assets/icons/delete.svg\')}}" alt="">
                 </a>
             </div>
             ')

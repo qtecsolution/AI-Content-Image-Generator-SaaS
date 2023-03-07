@@ -40,7 +40,7 @@
         <div class="form-group">
             <label for="meta_description" class="form-label"> Meta Description : </label>
             <textarea class="form-control custom-input @error('meta_description') is-invalid @enderror" id="meta_description" autocomplete="off"
-                name="meta_description" placeholder="Meta Description" rows="4">{{ $data->meta_description}}</textarea>
+                name="meta_description" placeholder="Meta Description" rows="4">@purify($data->meta_description)</textarea>
             <div class="form-text"> For seo (Optional) </div>
             <div class="invalid-feedback">
                 Please enter your description

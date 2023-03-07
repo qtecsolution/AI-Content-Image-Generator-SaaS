@@ -26,7 +26,7 @@
         <div class="form-group">
             <label for="details" class="form-label">Details : </label>
             <textarea class="form-control custom-input @error('details') is-invalid @enderror" id="details" autocomplete="off"
-                name="details" placeholder="Details" rows="4">{{ $data->details }}</textarea>
+                name="details" placeholder="Details" rows="4">@purify($data->details)</textarea>
             <div class="valid-feedback">
                 Awesome! You're one step closer to greatness.
             </div>
@@ -62,7 +62,7 @@
         <div class="form-group">
             <label for="promt-body" class="form-label">Open AI Resuest Prompt : </label>
             <textarea class="form-control custom-input @error('prompt') is-invalid @enderror" id="promt-body" autocomplete="off"
-                name="prompt" placeholder="Prompt" rows="4">{{ $data->prompt ?? 'Write me content with this keywords: [keywords]. The title is "[title]" and the description: [description]' }}</textarea>
+                name="prompt" placeholder="Prompt" rows="4">@purify( $data->prompt ?? 'Write me content with this keywords: [keywords]. The title is "[title]" and the description: [description]')</textarea>
             <div class="valid-feedback">
                 Awesome! You're one step closer to greatness.
             </div>

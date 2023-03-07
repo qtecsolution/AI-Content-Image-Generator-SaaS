@@ -12,6 +12,8 @@
 
     <!-- BOOTSTRAP CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <link rel="stylesheet" href="//cdn.datatables.net/1.13.2/css/jquery.dataTables.min.css">
     <!-- FONTAWESOME  -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -35,7 +37,7 @@
     <!-- SIDEBAR MENU START -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h3 class="logo-name text-center">type.ez</h3>
+            <h3 class="logo-name text-center">{{readConfig('name')}}</h3>
         </div>
         <div class="sidebar-body">
             <!-- user  -->
@@ -136,7 +138,7 @@
                         <div class="sidebar-drop">
                             <ul>
                                 <li><a href="{{ route('use-case.index') }}">Use Case Templates</a></li>
-                                <li><a href="#">AI Settings</a></li>
+                                <li><a href="{{ route('setting') }}?tab=openai">AI Settings</a></li>
                             </ul>
                         </div>
                     </div>
@@ -203,7 +205,7 @@
                     <div class="collapse" id="frontendManage">
                         <div class="sidebar-drop">
                             <ul>
-                                <li><a href="#">Frontend Settings</a></li>
+                                <li><a href="{{ route('setting') }}?tab=cms">Frontend Settings</a></li>
                                 <li><a href="{{ route('manage-blogs.index') }}">Blog Manager</a></li>
                                 <li><a href="{{ route('blog-category.index') }}">Blog Category</a></li>
                                 <li><a href="{{ route('manage-faq.index') }}">FAQ Manager</a></li>
@@ -423,17 +425,230 @@
     <!-- MOBILE OFFCANVAS MENU  -->
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="staticBackdropLabel">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <a href="index.html">
+                <h3 class="logo-name text-center header-logo">type.ez</h3>
+            </a>
+
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 20L4 4M20 4L4 20" stroke="#121212" stroke-width="2" stroke-linecap="round"></path>
+                </svg>
+
+            </button>
         </div>
+
         <div class="offcanvas-body">
-            <div>
-                I will not close if you click outside of me.
-            </div>
+           <!-- user  -->
+           <ul class="sidebar-menu  ">
+
+            <li>
+                <a href="index.html" class="sidebar-menu-link">
+                    <img src="assets/icons/home.svg" alt="home icon ">
+                    <span class="text">User Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="index.html" class="sidebar-menu-link ">
+                    <img src="assets/icons/content.svg" alt="home icon ">
+                    <span class="text">Content generate</span>
+                </a>
+            </li>
+            <li data-bs-toggle="collapse" data-bs-target="#generateDropdown">
+                <a href="#" class="sidebar-menu-link active">
+                    <img src="assets/icons/image.svg" alt="user icon ">
+                    <span class="text">generate image</span>
+                    <span class="arrow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-down">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+                </a>
+
+                <div class="collapse" id="generateDropdown">
+                    <div class="sidebar-drop">
+                        <ul>
+                            <li><a href="#">New Image</a></li>
+                            <li><a href="#">Image Variation </a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
+
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/saved.svg" alt="layers icon ">
+                    <span class="text">Saved Content</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/history.svg" alt="layers icon ">
+                    <span class="text">Content History</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/list.svg" alt="layers icon ">
+                    <span class="text">Generated Images</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/credit-card.svg" alt="credit card  icon ">
+                    <span class="text">Purchase plane</span>
+
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/reports.svg" alt="credit card  icon ">
+                    <span class="text">Reports</span>
+
+                </a>
+            </li>
+
+        </ul>
+
+        <!-- admin  -->
+
+        <ul class="sidebar-menu w-100">
+
+            <li>
+                <a href="index.html" class="sidebar-menu-link">
+                    <img src="assets/icons/home.svg" alt=" admin  icon ">
+                    <span class="text">admin </span>
+                </a>
+            </li>
+            <li>
+                <a href="index.html" class="sidebar-menu-link">
+                    <img src="assets/icons/usecases.svg" alt="usecase icon ">
+                    <span class="text">Manage Use Case</span>
+                </a>
+            </li>
+            <li>
+                <a href="index.html" class="sidebar-menu-link">
+                    <img src="assets/icons/users.svg" alt="user icon  icon ">
+                    <span class="text">Users List</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/admin.svg" alt="admin  icon ">
+                    <span class="text">Admin List</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/plan.svg" alt="plan">
+                    <span class="text">Manage plane</span>
+                </a>
+            </li>
+            <li data-bs-toggle="collapse" data-bs-target="#manageBlog">
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons//blog.svg" alt="user icon ">
+                    <span class="text">Manage Blog</span>
+                    <span class="arrow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-down">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+                </a>
+
+                <div class="collapse" id="manageBlog">
+                    <div class="sidebar-drop">
+                        <ul>
+                            <li><a href="#">Category</a></li>
+                            <li><a href="#">Blog</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/faq.svg" alt="home icon ">
+                    <span class="text">Manage Faq</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/pagebuilder.svg" alt="home icon ">
+                    <span class="text">Page Builder</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/payment.svg" alt="home icon ">
+                    <span class="text">Payment Method</span>
+                </a>
+            </li>
+
+
+
+
+            <li data-bs-toggle="collapse" data-bs-target="#reports">
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/reports.svg" alt="credit card  icon ">
+                    <span class="text">Reports</span>
+                    <span class="arrow-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-down">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+
+                </a> 
+
+                <div class="collapse" id="reports">
+                    <div class="sidebar-drop">
+                        <ul>
+                            <li><a href="#">Sales Reports</a></li>
+                            <li><a href="#">Google Analytics</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+            </li>
+
+            <li>
+                <a href="#" class="sidebar-menu-link">
+                    <img src="assets/icons/settings.svg" alt="credit card  icon ">
+                    <span class="text">Settings</span>
+                    <span class="arrow-icon" data-bs-toggle="collapse" data-bs-target="#settings">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                            fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round" class="feather feather-chevron-down">
+                            <polyline points="6 9 12 15 18 9" />
+                        </svg>
+                    </span>
+
+                </a> 
+
+                <div class="collapse" id="settings">
+                    <div class="sidebar-drop">
+                        <ul>
+                            <li><a href="blog.html">Seo Settings</a></li>
+                            <li><a href="#">Mail Configure</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </li>
+         
+
+        </ul>
+
         </div>
     </div>
 
-
+    <!-- SWIPER JS  -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
     <!-- BOOTSTRAP JS   -->
     <script src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 

@@ -1,1 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-image"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M15.8333 2.5H4.16667C3.24619 2.5 2.5 3.24619 2.5 4.16667V15.8333C2.5 16.7538 3.24619 17.5 4.16667 17.5H15.8333C16.7538 17.5 17.5 16.7538 17.5 15.8333V4.16667C17.5 3.24619 16.7538 2.5 15.8333 2.5Z" stroke="url(#paint0_linear_477_20500)" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M7.08334 8.33334C7.7737 8.33334 8.33334 7.7737 8.33334 7.08334C8.33334 6.39299 7.7737 5.83334 7.08334 5.83334C6.39299 5.83334 5.83334 6.39299 5.83334 7.08334C5.83334 7.7737 6.39299 8.33334 7.08334 8.33334Z" stroke="url(#paint1_linear_477_20500)" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17.5 12.5L13.3333 8.33334L4.16666 17.5" stroke="url(#paint2_linear_477_20500)" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/>
+<defs>
+<linearGradient id="paint0_linear_477_20500" x1="2.5" y1="2.5" x2="17.5" y2="17.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="#97ABFF"/>
+<stop offset="1" stop-color="#123597"/>
+</linearGradient>
+<linearGradient id="paint1_linear_477_20500" x1="5.83334" y1="5.83334" x2="8.33334" y2="8.33334" gradientUnits="userSpaceOnUse">
+<stop stop-color="#97ABFF"/>
+<stop offset="1" stop-color="#123597"/>
+</linearGradient>
+<linearGradient id="paint2_linear_477_20500" x1="4.16666" y1="8.33334" x2="12.7255" y2="20.7825" gradientUnits="userSpaceOnUse">
+<stop stop-color="#97ABFF"/>
+<stop offset="1" stop-color="#123597"/>
+</linearGradient>
+</defs>
+</svg>

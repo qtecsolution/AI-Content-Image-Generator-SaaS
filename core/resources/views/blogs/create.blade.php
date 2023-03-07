@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('title','Blog Create')
+
 @section('breadcrumb')
     <li class="breadcrumb-item"><a href="{{ route('manage-blogs.index') }}">Blog</a></li>
     <li class="breadcrumb-item active">Add New</li>
@@ -65,7 +67,7 @@
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Image</label>
                                                 <div>
-                                                    <input  type="file" name="image" class="form-control" >
+                                                    <input  type="file" name="image" class="form-control custom-input" >
                                                      @error('image')
                                                          <div class="invalid-feedback">
                                                              {{ $message }}

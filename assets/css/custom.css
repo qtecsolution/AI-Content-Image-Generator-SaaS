@@ -213,3 +213,6 @@
 .razorpay-payment-button{
     display: none;
 }
+.form-control.custom-input:focus {
+    box-shadow: none;
+}

@@ -1,4 +1,11 @@
 @extends('layouts.app')
+@section('title')
+    @translate(Plan Create)
+@endsection
+@section('breadcrumb')
+    <li class="breadcrumb-item">@translate(Plan Create)</li>
+@endsection
+
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
@@ -19,7 +26,7 @@
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">Plan Name  <span class="text-danger">*</span></label>
                                 <br>
                                 <div class="col-sm-12">
-                                    <input type="text" name="name" required class="form-control" id="inputEmail3">
+                                    <input type="text" name="name" required class="form-control custom-input" id="inputEmail3">
                                 </div>
                             </div>
                             
@@ -28,7 +35,7 @@
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">Work Count limit per request <span class="text-danger">*</span></label>
                                
                                 <div class="col-sm-12">
-                                    <input type="number" min="0" required name="word_count" class="form-control" id="inputEmail3">
+                                    <input type="number" min="0" required name="word_count" class="form-control custom-input" id="inputEmail3">
                                 </div>
                                 <small class="text-muted">if you input the 0 value it's will be unlimited</small>
                             </div>
@@ -38,7 +45,7 @@
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">User request limit <span class="text-danger">*</span></label>
                                
                                 <div class="col-sm-12">
-                                    <input type="number" min="0" required name="call_api_count" class="form-control" id="inputEmail3">
+                                    <input type="number" min="0" required name="call_api_count" class="form-control custom-input" id="inputEmail3">
                                 </div>
                                 <small class="text-muted">if you input the 0 value it's will be unlimited</small>
                             </div>
@@ -48,7 +55,7 @@
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">User Save Documets limit <span class="text-danger">*</span></label>
                                
                                 <div class="col-sm-12">
-                                    <input type="number" min="0" required name="documet_count" class="form-control" id="inputEmail3">
+                                    <input type="number" min="0" required name="documet_count" class="form-control custom-input" id="inputEmail3">
                                 </div>
                                 <small class="text-muted">if you input the 0 value it's will be unlimited</small>
                             </div>
@@ -58,7 +65,7 @@
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">How many image can generate user <span class="text-danger">*</span></label>
                                
                                 <div class="col-sm-12">
-                                    <input type="number" min="0" required name="image_count" class="form-control" id="inputEmail3">
+                                    <input type="number" min="0" required name="image_count" class="form-control custom-input" id="inputEmail3">
                                 </div>
                                 <small class="text-muted">if you input the 0 value it's will be unlimited</small>
                             </div>
@@ -70,7 +77,7 @@
                                 <label for="inputEmail3" class="col-sm-12 col-form-label">Price <span class="text-danger">*</span> </label>
                                
                                 <div class="col-sm-12">
-                                    <input type="number" min="0" step="0.01" required name="price" class="form-control" id="inputEmail3">
+                                    <input type="number" min="0" step="0.01" required name="price" class="form-control custom-input" id="inputEmail3">
                                 </div>
                                 <small class="text-muted">if you input the 0 value it's will be free</small>
                             </div>

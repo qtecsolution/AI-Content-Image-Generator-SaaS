@@ -162,6 +162,9 @@ class PurchaseController extends Controller
 
                 toast('Plan is successfully subscribed  Wating for approvel', 'success');
                 return redirect()->route('plan.expanse', $order->id);
+            } else {
+                //it's free
+                $orderInformationUpdate = true;
             }
 
             if ($orderInformationUpdate) {
@@ -279,9 +282,8 @@ class PurchaseController extends Controller
                 $user->plan_expanse_id = $expanse->id;
                 $user->save();
 
-                myAlert('success', 'Payment is Successfull. Your Transaction Id is : '.$arr['id']);
+                myAlert('success', 'Payment is Successfull. Your Transaction Id is : ' . $arr['id']);
                 return redirect()->route('plan.expanse', $order->id);
-
             } else {
                 myAlert('success', $response->getMessage());
                 return back();
@@ -295,7 +297,7 @@ class PurchaseController extends Controller
     public function error()
     {
         myAlert('error', 'User declined the payment!');
-        return back();  
+        return back();
     }
 
     public function expanse($id)
@@ -315,9 +317,9 @@ class PurchaseController extends Controller
         //id is plan id
 
         $user = Auth::user();
-        $plan = Plan::where('id', $id)->first();
-        $order = Order::where('user_id', $user->id)->where('plan_id', $id)->first();
-        $expanse = PlanExpanse::where('user_id', $user->id)->where('order_id', $order->id)->first();
+        $plan = Plan::where('id', $user->plan_id)->first();
+        $expanse = PlanExpanse::where('id', $user->plan_expanse_id)->first();
+        $order = Order::where('id', $expanse->order_id)->first();
         return view('plan.expanse', compact('plan', 'expanse', 'order'));
     }
 
