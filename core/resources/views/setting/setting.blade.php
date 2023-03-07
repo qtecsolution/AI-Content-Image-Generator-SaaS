@@ -122,7 +122,7 @@
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Active Tawk to</label>
-                                            <select class="form-control" name="tawk_to" required>
+                                            <select class="form-control custom-input" name="tawk_to" required>
                                                 <option value="no"
                                                     {{ readConfig('tawk_to') == 'no' ? 'selected' : null }}>NO</option>
                                                 <option value="yes"
@@ -133,7 +133,7 @@
                                         <div class="form-group mb-3">
                                             <label for="exampleInputPassword1" class="form-label">Place where the Tawk to
                                                 script</label>
-                                            <textarea class="form-control" name="code">@include('layouts.tawk_to');</textarea>
+                                            <textarea class="form-control custom-input" name="code" rows="14">@include('layouts.tawk_to');</textarea>
 
                                         </div>
 
@@ -466,7 +466,7 @@
                                 <div class="row">
                                     <div class="col-md-4 col-sm-12 mb-2">
                                         <!--logo-->
-                                        <label class="form-label">CMS logo</label>
+                                        <label class="form-label">logo</label>
 
                                         <div class="avatar-upload">
                                             <div class="avatar-edit">
@@ -526,17 +526,17 @@
                                     <div class="col-md-6 ">
                                         <!--name-->
                                         <div class="mb-3">
-                                            <label class="form-label">CMS Name</label>
+                                            <label class="form-label">Application Name</label>
                                             <input type="hidden" value="type_name" name="type_name">
                                             <input type="text" value="{{ readConfig('type_name') }}" name="name"
-                                                class="form-control">
+                                                class="form-control custom-input">
                                         </div>
                                         <div class="mb-3">
                                             <!--footer-->
-                                            <label class="label font-weight-bold">CMS Footer</label>
+                                            <label class="label font-weight-bold">Application Footer</label>
                                             <input type="hidden" value="type_footer" name="type_footer">
                                             <input type="text" value="{{ readConfig('type_footer') }}" name="footer"
-                                                class="form-control">
+                                                class="form-control custom-input">
 
                                         </div>
                                         <div class="mb-3">
@@ -544,7 +544,7 @@
                                             <label class="form-label">Address</label>
                                             <input type="hidden" value="type_address" name="type_address">
                                             <input type="text" value="{{ readConfig('type_address') }}"
-                                                name="address" class="form-control">
+                                                name="address" class="form-control custom-input">
 
                                         </div>
                                         <div class="mb-3">
@@ -552,7 +552,7 @@
                                             <label class="form-label">CMS Mail</label>
                                             <input type="hidden" value="type_mail" name="type_mail">
                                             <input type="text" value="{{ readConfig('type_mail') }}" name="mail"
-                                                class="form-control">
+                                                class="form-control custom-input">
                                         </div>
 
                                     </div>
@@ -563,28 +563,28 @@
                                             <label class="form-label">CMS Facebook Link</label>
                                             <input type="hidden" value="type_fb" name="type_fb">
                                             <input type="text" value="{{ readConfig('type_fb') }}" name="fb"
-                                                class="form-control">
+                                                class="form-control custom-input">
                                         </div>
                                         <div class="mb-3">
                                             <!--tw-->
                                             <label class="form-label">CMS Twitter Link</label>
                                             <input type="hidden" value="type_tw" name="type_tw">
                                             <input type="text" value="{{ readConfig('type_tw') }}" name="tw"
-                                                class="form-control">
+                                                class="form-control custom-input">
                                         </div>
                                         <div class="mb-3">
                                             <!--google-->
                                             <label class="form-label">CMS Google Link</label>
                                             <input type="hidden" value="type_google" name="type_google">
                                             <input type="text" value="{{ readConfig('type_google') }}" name="google"
-                                                class="form-control">
+                                                class="form-control custom-input">
                                         </div>
                                         <div class="mb-3">
                                             <!--Number-->
                                             <label class="form-label">CMS Number </label>
                                             <input type="hidden" value="type_number" name="type_number">
                                             <input type="text" value="{{ readConfig('type_number') }}" name="number"
-                                                class="form-control">
+                                                class="form-control custom-input">
                                         </div>
 
 
@@ -631,7 +631,7 @@
                 
                                         <div class="form-group md-2 ">
                                             <label class="col-form-label">@translate(Progressive Web Apps background color)</label>
-                                            <input class="form-control" name="background_color" type="color"
+                                            <input class="form-control custom-input" name="background_color" type="color"
                                                 value="{{ config('laravelpwa.manifest.background_color') }}">
                                         </div>
                 
@@ -661,7 +661,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 128x128 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x128x128_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x128x128_icon" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="128" height="128" src="{{ filePathRoot(config('laravelpwa.manifest.icons.128x128.path')) }}">
                                             </div>
@@ -669,7 +669,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 144x144 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x144x144_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x144x144_icon" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="144" height="144" src="{{ filePathRoot(config('laravelpwa.manifest.icons.144x144.path')) }}">
                                             </div>
@@ -677,7 +677,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 152x152 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x152x152_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x152x152_icon" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="152" height="152" src="{{ filePathRoot(config('laravelpwa.manifest.icons.152x152.path')) }}">
                                             </div>
@@ -685,7 +685,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 192x192 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x192x192_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x192x192_icon" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="192" height="192" src="{{ filePathRoot(config('laravelpwa.manifest.icons.192x192.path')) }}">
                                             </div>
@@ -693,7 +693,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 384x384 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x384x384_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x384x384_icon" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="384" height="384" src="{{ filePathRoot(config('laravelpwa.manifest.icons.384x384.path')) }}">
                                             </div>
@@ -701,7 +701,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 512x512 Icon)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x512x512_icon" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x512x512_icon" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="512" height="512" src="{{ filePathRoot(config('laravelpwa.manifest.icons.512x512.path')) }}">
                                             </div>
@@ -709,7 +709,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 640x1136 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x640x1136_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x640x1136_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="640" height="1136" src="{{ filePathRoot(config('laravelpwa.manifest.splash.640x1136')) }}">
                                             </div>
@@ -717,7 +717,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 750x1334 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x750x1334_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x750x1334_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="750" height="1334" src="{{ filePathRoot(config('laravelpwa.manifest.splash.750x1334')) }}">
                                             </div>
@@ -725,7 +725,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 828x1792 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x828x1792_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x828x1792_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="828" height="1792" src="{{ filePathRoot(config('laravelpwa.manifest.splash.828x1792')) }}">
                                             </div>
@@ -733,7 +733,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1536x2048 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x1536x2048_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x1536x2048_splash" type="file">
                                             
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1536" height="2048" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1536x2048')) }}">
@@ -748,7 +748,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1125x2436 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x1125x2436_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x1125x2436_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1125" height="2436" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1125x2436')) }}">
                                             </div>
@@ -756,7 +756,7 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1242x2208 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x1242x2208_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x1242x2208_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1242" height="2208" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1242x2208')) }}">
                                             </div>
@@ -764,28 +764,28 @@
                 
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1242x2688_splash Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x1242x2688_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x1242x2688_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1242" height="2688" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1242x2688')) }}">
                                             </div>
                                         </div>
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1668x2224 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x1668x2224_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x1668x2224_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1668" height="2224" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1668x2224')) }}">
                                             </div>
                                         </div>
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 1668x2388 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x1668x2388_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x1668x2388_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="1668" height="2388" src="{{ filePathRoot(config('laravelpwa.manifest.splash.1668x2388')) }}">
                                             </div>
                                         </div>
                                         <div class="form-group card p-2 my-2">
                                             <label class="col-form-label">@translate(Progressive Web Apps 2048x2732 Splash Screen)</label>
-                                            <input class="form-control" accept="image/png, image/jpeg" name="x2048x2732_splash" type="file">
+                                            <input class="form-control custom-input" accept="image/png, image/jpeg" name="x2048x2732_splash" type="file">
                                             <div class="text-center m-2">
                                                 <img class="img-fluid" width="2048" height="2732" src="{{ filePathRoot(config('laravelpwa.manifest.splash.2048x2732')) }}">
                                             </div>

@@ -76,7 +76,7 @@ class SettingController extends Controller
 
     public function smtpStore(Request $request)
     {
-        
+
         foreach ($request->types as $key => $type) {
             overWriteEnvFile($type, $request[$type]);
         }
@@ -105,6 +105,7 @@ class SettingController extends Controller
 
         if ($request->has('name')) {
             writeConfig($request->type_name, $request->name);
+            writeConfig('name', $request->name);
         }
 
         if ($request->has('footer')) {
