@@ -358,7 +358,7 @@
                                     </li>
                                 </ul>
                                 <div class="d-grid">
-                                    <a href="" class="btn-subscribe text-center text-white"> Subscribe </a>
+                                    <a href="{{route('plan.purchase',$item->id)}}" class="btn-subscribe text-center text-white"> Subscribe </a>
                                 </div>
                             </div>
 

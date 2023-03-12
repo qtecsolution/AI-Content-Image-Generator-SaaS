@@ -10,4 +10,4 @@ s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
-<!--End of Tawk.to Script-->;<?php /**PATH /opt/lampp/htdocs/AI_writter_laravel/core/resources/views/layouts/tawk_to.blade.php ENDPATH**/ ?>
+<!--End of Tawk.to Script-->;;;<?php /**PATH /opt/lampp/htdocs/AI_writter_laravel/core/resources/views/layouts/tawk_to.blade.php ENDPATH**/ ?>

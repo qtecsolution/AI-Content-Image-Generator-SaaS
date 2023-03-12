@@ -12,12 +12,6 @@
                 <div class="my-projects">
                     <div class="my-projects-header border-bottom">
                         <h5 class="header-title">Plan Purchase and Expanses Informations</h5>
-                        <div class="project-button pull-right">
-                            <a href="{{ route('plan.userIndex') }}" class="btn btn-light btn-xs">
-                                <i class="fa fa-add"></i>
-                                See Plans
-                            </a>
-                        </div>
                     </div>
 
                     <div class="my-projects-body mt-4">
@@ -55,18 +49,18 @@
                                     <div class="m-2">
                                         <h4>Your Service Expanses summary</h4>
                                         <ul class="list-group mt-3">
-                                            <li class="list-group-item">Total API Call: {{ $expanse->call_api_count }}</li>
+                                            <li class="list-group-item">Total API Call: {{ $expanse->current_api_count }}</li>
                                             <li class="list-group-item">Rest of API Call:
                                                 {{ $expanse->call_api_count - $expanse->current_api_count }}</li>
                                             <li class="list-group-item">Total Document Save Count:
-                                                {{ $expanse->documet_count }}
+                                                {{ $expanse->current_documet_count }}
                                             </li>
-                                            <li class="list-group-item">Rest Of Documet Save Count:
-                                                {{ $expanse->current_documet_count }}</li>
-                                            <li class="list-group-item">Total Image Save Count: {{ $expanse->image_count }}
+                                            <li class="list-group-item">Rest of Documet Save Count:
+                                                {{ $expanse->documet_count - $expanse->current_documet_count }}</li>
+                                            <li class="list-group-item">Total Image: {{ $expanse->current_image_count }}
                                             </li>
-                                            <li class="list-group-item">Rest Of Image Save Count:
-                                                {{ $expanse->current_image_count }}</li>
+                                            <li class="list-group-item">Rest of Image:
+                                                {{ $expanse->image_count - $expanse->current_image_count }}</li>
                                             <li class="list-group-item">Activated Date:
                                                 {{ dateTimeFormat($expanse->activated_at) }}</li>
                                             <li class="list-group-item">Expire Date:

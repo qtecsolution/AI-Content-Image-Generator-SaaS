@@ -1,6 +1,8 @@
+<?php $__env->startSection('title','Use Case'); ?>
 <?php $__env->startSection('breadcrumb'); ?>
     <li class="breadcrumb-item active">Use Case</li>
 <?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('content'); ?>
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">

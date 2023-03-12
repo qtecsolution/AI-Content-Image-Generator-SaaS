@@ -37,7 +37,7 @@
     <!-- SIDEBAR MENU START -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h3 class="logo-name text-center"><?php echo e(readConfig('name')); ?></h3>
+            <h3 class="logo-name text-center"><a href="<?php echo e(route('home')); ?>"> <?php echo e(readConfig('name')); ?> </a> </h3>
         </div>
         <div class="sidebar-body">
             <!-- user  -->
@@ -230,10 +230,12 @@
                     <div class="collapse" id="settings">
                         <div class="sidebar-drop">
                             <ul>
-                                <li><a href="#">General Settings</a></li>
-                                <li><a href="<?php echo e(route('setting')); ?>">PWA Settings</a></li>
-                                <li><a href="<?php echo e(route('setting')); ?>">SEO Settings</a></li>
-                                <li><a href="<?php echo e(route('setting')); ?>">Mail Configure</a></li>
+                                <li><a href="<?php echo e(route('setting')); ?>?tab=cms">General Settings</a></li>
+                                <li><a href="<?php echo e(route('setting')); ?>?tab=smtp">Mail Configure</a></li>
+                                <li><a href="<?php echo e(route('setting')); ?>?tab=seo">SEO Settings</a></li>
+                                <li><a href="<?php echo e(route('setting')); ?>?tab=login">Social Login</a></li>
+                                <li><a href="<?php echo e(route('setting')); ?>?tab=tawkto">Tawk (Live chat)</a></li>
+                                <li><a href="<?php echo e(route('setting')); ?>?tab=pwa">PWA Settings</a></li>
                             </ul>
                         </div>
                     </div>

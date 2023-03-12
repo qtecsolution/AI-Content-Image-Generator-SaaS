@@ -1,3 +1,4 @@
+<?php $__env->startSection('title','Contents'); ?>
 <?php $__env->startSection('breadcrumb'); ?>
     <li class="breadcrumb-item active">Contents</li>
 <?php $__env->stopSection(); ?>

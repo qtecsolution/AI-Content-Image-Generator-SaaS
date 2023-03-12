@@ -24,7 +24,7 @@ class PlanController extends Controller
     public function userIndex()
     {
         $user = Auth::user();
-        $plans = Plan::where('is_published', true)->latest()->get();
+        $plans = Plan::where('is_published', true)->orderBy('id','ASC')->get();
         return view('plan.userIndex', compact('plans', 'user'));
     }
 

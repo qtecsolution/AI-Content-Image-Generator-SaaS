@@ -1,3 +1,7 @@
+<?php $__env->startSection('title', 'Checkout'); ?>
+<?php $__env->startSection('breadcrumb'); ?>
+    <li class="breadcrumb-item active">Checkout</li>
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="main-content p-2 p-md-4 pt-0">
 
@@ -403,6 +407,19 @@ unset($__errorArgs, $__bag); ?>
             }
 
         }
+
+        <?php if($plan->price <= 0): ?>
+          
+            $(document).ready(function() {
+
+                $('#paymentMethod').val('Free');
+                $('#paymentAmount').val(<?php echo e($plan->price); ?>);
+                $('#paymentTID').val('');
+                $('#value_1').val('');
+                $('#order_payment_done').submit();
+
+            });
+        <?php endif; ?>
     </script>
 
     <?php if(readConfig('PAYPAL_ACTIVE') == 'on'): ?>

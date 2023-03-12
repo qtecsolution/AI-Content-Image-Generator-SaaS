@@ -37,7 +37,7 @@
     <!-- SIDEBAR MENU START -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h3 class="logo-name text-center">{{readConfig('name')}}</h3>
+            <h3 class="logo-name text-center"><a href="{{route('home')}}"> {{readConfig('name')}} </a> </h3>
         </div>
         <div class="sidebar-body">
             <!-- user  -->

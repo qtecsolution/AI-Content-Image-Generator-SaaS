@@ -1,16 +1,20 @@
+<?php $__env->startSection('title','All Plans'); ?>
+<?php $__env->startSection('breadcrumb'); ?>
+    <li class="breadcrumb-item active">All Plans</li>
+<?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
           
             <div class="col-md-12">
-                <div class="card custom">
-                    <div class="card-header bg-info">
-                        <h5 class="card-title no-margin color-white">All Plans</h5>
+                <div class="my-projects">
+                    <div class="my-projects-header border-bottom">
+                        <h5 class="header-title">All Plans</h5>
                       
                     </div>
-                    <div class="card-body">
+                    <div class="my-projects-body">
 
-                        <div class="pricing-body">
+                        <div class="pricing-body mt-3">
 
                             <div class="pricing-cards">
                                 <!-- single  card free  -->
@@ -61,7 +65,7 @@
                                         </ul>
                                         <div class="d-grid">
                                             <?php if($user->plan_id == $item->id): ?>
-                                            <button type="button" class="btn-subscribe subscribed" onclick="redirectUrl('<?php echo e(route('plan.expanse.2',$item->id)); ?>')"> 
+                                            <button type="button" class="btn-subscribe subscribed" onclick="redirectUrl('<?php echo e(route('plan.userExpanse')); ?>')"> 
                                                 See The Expanses
                                             </button>
                                             <?php else: ?>
