@@ -184,7 +184,7 @@
                                 <li><a href="<?php echo e(route('plan.index')); ?>">Manage Plan</a></li>
                                 <li><a href="<?php echo e(route('payment.method')); ?>">Payment Methods</a></li>
                                 <li><a href="<?php echo e(route('order.index')); ?>">All Transections</a></li>
-                                <li><a href="<?php echo e(route('order.pending')); ?>">Pending Transections</a></li>
+                                <li><a href="<?php echo e(route('order.index')); ?>?status=0">Pending Transections</a></li>
                             </ul>
                         </div>
                     </div>
