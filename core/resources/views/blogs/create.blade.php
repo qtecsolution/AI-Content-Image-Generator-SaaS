@@ -66,6 +66,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Image</label>
+                                                
                                                 <div>
                                                     <input  type="file" name="image" class="form-control custom-input" >
                                                      @error('image')
@@ -74,6 +75,7 @@
                                                          </div>
                                                      @enderror
                                                 </div>
+                                                <small>Recommended Image Size 1200X675 </small>
                                             </div>
                                         </div>
                                     </div>

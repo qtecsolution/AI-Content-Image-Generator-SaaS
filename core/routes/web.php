@@ -24,6 +24,7 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/blog/category/{slug}', 'FrontendController@categoryWaysBlog')->name('blog.category');
     
     Route::get('/blogs/{slug}', 'FrontendController@blogDetails')->name('blogs.show');
+    Route::get('page/{slug}','FrontendController@pageDetails')->name('page');
 });
 Auth::routes();
 

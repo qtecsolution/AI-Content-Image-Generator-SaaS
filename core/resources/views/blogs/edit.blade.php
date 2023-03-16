@@ -66,6 +66,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="title" class="form-label">Image</label>
+                                               
                                                 @if($data->image != '' && file_exists($data->image))
                                                 <div class="mb-1">
                                                     <img src="{{asset($data->image)}}" width="100px">
@@ -79,6 +80,7 @@
                                                          </div>
                                                      @enderror
                                                 </div>
+                                                <small>Recommended Image Size 1200X675 </small>
                                             </div>
                                         </div>
                                     </div>

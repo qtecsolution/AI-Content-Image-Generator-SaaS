@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use App\Models\Faq;
+use App\Models\Page;
 use App\Models\Plan;
 use App\Models\UseCase;
 use Illuminate\Http\Request;
+use Whoops\Run;
 
 class FrontendController extends Controller
 {
@@ -49,11 +51,36 @@ class FrontendController extends Controller
 
         return view('frontend.blog',compact('blogs','allFaq','categories'));
     }
+
     public function blogDetails($slug)
     {
         $blog = Blog::where('is_published',true)->where('slug',$slug)->firstOrFail();
 
         return view('frontend.blogDetails',compact('blog'));
         
+    }
+
+    public static function footerBlog()
+    {
+        $blogs = Blog::where('is_published',true)->take(3)->get();
+        return $blogs;
+    }
+
+
+    public static function pages()
+    {
+        return Page::where('active',true)->get();
+    }
+
+    public static function footerUseCase()
+    {
+        return UseCase::where('is_published',1)->limit(3)->get();
+    }
+
+    public function pageDetails($slug)
+    {
+        $page = Page::where('slug',$slug)->with('content')->firstOrFail();
+        // return $page;
+        return view('frontend.pageDetails',compact('page'));
     }
 }

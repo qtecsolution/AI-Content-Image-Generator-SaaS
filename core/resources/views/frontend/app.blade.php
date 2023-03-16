@@ -170,18 +170,20 @@
             <div class="footer-content" data-aos="fade-up" data-aos-duration="1000">
                 <div class="row g-4">
                     <div class="col-lg-2">
-                        <a href="index.html">
-                            <h3 class="logo-name ">{{ readConfig('name') }} </h3>
+                        <a href="{{url('/')}}">
+                            <h3 class="logo-name">{{ readConfig('name') }} </h3>
+                            <p></p>
                         </a>
                     </div>
 
                     <div class=" col-sm-6 col-lg-2">
                         <div class="footerlinks">
-                            <h5 class="footerlinks-title">Product</h5>
+                            <h5 class="footerlinks-title">Use Full Links</h5>
                             <div class="footerlink">
-                                <a href="" class="link">Pricing</a>
-                                <a href="" class="link">Start Writing For Free</a>
-                                <a href="" class="link"> User Dashboard</a>
+                                @foreach(App\Http\Controllers\Frontend\FrontendController::pages() as $item)
+                                <a href="{{route('page',$item->slug)}}" class="link">{{$item->title}}</a>
+                                @endforeach
+                            
                             </div>
                         </div>
                     </div>
@@ -190,22 +192,23 @@
                         <div class="footerlinks">
                             <h5 class="footerlinks-title">Use Cases</h5>
                             <div class="footerlink">
-                                <a href="" class="link">Blog Idea & Outline</a>
-                                <a href="" class="link">Googe Search Ads</a>
-                                <a href="" class="link"> Blog Section Writing</a>
-                                <a href="" class="link"> Business Ideas</a>
+                                @foreach(App\Http\Controllers\Frontend\FrontendController::footerUseCase() as $fUseCase)
+                                <a href="{{ route('content.create') }}?case={{ $fUseCase->id }}" class="link">
+                                    {{ $fUseCase->title }}
+                                </a>
+                                @endforeach
+                          
                             </div>
                         </div>
                     </div>
 
                     <div class="col-sm-6 col-lg-2">
                         <div class="footerlinks">
-                            <h5 class="footerlinks-title">Support</h5>
+                            <h5 class="footerlinks-title">Others</h5>
                             <div class="footerlink">
-                                <a href="" class="link">Contact Us</a>
+                                <a href="{{route('blogs.index')}}" class="link">Blogs</a>
                                 <a href="{{route('register')}}" class="link"> Register</a>
                                 <a href="{{route('login')}}" class="link"> Login</a>
-                                <a href="" class="link"> SEO Meta Description</a>
                             </div>
                         </div>
                     </div>
@@ -214,12 +217,10 @@
                         <div class="footerlinks">
                             <h5 class="footerlinks-title">Blogs</h5>
                             <div class="footerlink">
-                                <a href="" class="link">AI for Sales Teams: How It Works, and How to Get
-                                    Started</a>
-                                <a href="" class="link"> Automated Product Descriptions for Large E-commerce
-                                    Retailers</a>
-                                <a href="" class="link"> AI for Advertising: The Tools, Tips, & Examples You
-                                    Need</a>
+                                @foreach(App\Http\Controllers\Frontend\FrontendController::footerBlog() as $blog)
+                                <a href="{{route('blogs.show',$blog->slug)}}" class="link">{{$blog->title}}</a>
+                                @endforeach
+                                
                             </div>
                         </div>
                     </div>
