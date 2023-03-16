@@ -37,7 +37,7 @@
     <!-- SIDEBAR MENU START -->
     <aside class="sidebar">
         <div class="sidebar-header">
-            <h3 class="logo-name text-center">{{readConfig('name')}}</h3>
+            <h3 class="logo-name text-center"><a href="{{route('home')}}"> {{readConfig('name')}} </a> </h3>
         </div>
         <div class="sidebar-body">
             <!-- user  -->
@@ -184,7 +184,7 @@
                                 <li><a href="{{ route('plan.index') }}">Manage Plan</a></li>
                                 <li><a href="{{ route('payment.method') }}">Payment Methods</a></li>
                                 <li><a href="{{route('order.index')}}">All Transections</a></li>
-                                <li><a href="{{route('order.pending')}}">Pending Transections</a></li>
+                                <li><a href="{{route('order.index')}}?status=0">Pending Transections</a></li>
                             </ul>
                         </div>
                     </div>
@@ -230,10 +230,12 @@
                     <div class="collapse" id="settings">
                         <div class="sidebar-drop">
                             <ul>
-                                <li><a href="#">General Settings</a></li>
-                                <li><a href="{{ route('setting') }}">PWA Settings</a></li>
-                                <li><a href="{{ route('setting') }}">SEO Settings</a></li>
-                                <li><a href="{{ route('setting') }}">Mail Configure</a></li>
+                                <li><a href="{{ route('setting') }}?tab=cms">General Settings</a></li>
+                                <li><a href="{{ route('setting') }}?tab=smtp">Mail Configure</a></li>
+                                <li><a href="{{ route('setting') }}?tab=seo">SEO Settings</a></li>
+                                <li><a href="{{ route('setting') }}?tab=login">Social Login</a></li>
+                                <li><a href="{{ route('setting') }}?tab=tawkto">Tawk (Live chat)</a></li>
+                                <li><a href="{{ route('setting') }}?tab=pwa">PWA Settings</a></li>
                             </ul>
                         </div>
                     </div>

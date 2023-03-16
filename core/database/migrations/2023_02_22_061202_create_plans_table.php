@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); //who created
             $table->string('name');
-            $table->integer('word_count')->default(0); // 0 mins Work Count limit per request 
+            $table->integer('word_count')->default(0); // 0 mins Word Count limit per request 
             $table->integer('call_api_count')->default(0); 
             $table->integer('documet_count')->default(0);
             $table->enum('lang',['all','english'])->default('english');

@@ -312,9 +312,9 @@ class PurchaseController extends Controller
         return view('plan.expanse', compact('plan', 'expanse', 'order'));
     }
 
-    public function expanseBasePlan($id)
+    // User Plan expense
+    public function expanseBasePlan()
     {
-        //id is plan id
 
         $user = Auth::user();
         $plan = Plan::where('id', $user->plan_id)->first();

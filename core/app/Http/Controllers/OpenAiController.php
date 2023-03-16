@@ -16,6 +16,13 @@ class OpenAiController extends Controller
 {
     public function content(Request $request)
     {
+        if(showBalance()==''){
+            myAlert('error', 'Subscribe any plan first!');
+            return redirect()->route('plan.userIndex');
+        }elseif(showBalance()->api_call==0){
+            myAlert('error', 'Your Api call limit: 0');
+            return redirect()->route('plan.userIndex');
+        }
         $cases = UseCase::where('is_published', 1)->pluck('title', 'id');
         $inputFields = [];
         if (isset($request->case)) {
@@ -86,7 +93,7 @@ class OpenAiController extends Controller
                 'use_case_id' => $request->use_case,
                 'user_id' => Auth::user()->id
             ]);
-
+            balanceDeduction('call_api');
             return response()->json($results, 200);
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
@@ -101,6 +108,13 @@ class OpenAiController extends Controller
     // View for generate image
     public function image(Request $request)
     {
+        if(showBalance()==''){
+            myAlert('error', 'Subscribe any plan first!');
+            return redirect()->route('plan.userIndex');
+        }elseif(showBalance()->image==0){
+            myAlert('error', 'You have reached your image generate limit');
+            return redirect()->route('plan.userIndex');
+        }
         $images = [];
         if (isset($request->id)) {
             $id = explode(',', $request->id);
@@ -127,9 +141,14 @@ class OpenAiController extends Controller
             'quantity' => 'required',
             'image_size' => 'required',
         ]);
+        $qty = intval($request->quantity);
+        if(showBalance()->image<$qty){
+            myAlert('error', 'Your image generate limit: '.showBalance()->image);
+            return back();
+        }
         $response = OpenAI::images()->create([
             'prompt' => $request->prompt,
-            'n' => intval($request->quantity),
+            'n' => $qty,
             'size' => $request->image_size,
             'response_format' => 'url',
         ]);
@@ -146,12 +165,20 @@ class OpenAiController extends Controller
             }
         }
         $id = implode(',', $imageId);
+        balanceDeduction('image',$qty);
         myAlert('success', 'Image Generated successfully.');
         return redirect()->route('image.create', ['id' => $id]);
     }
     // Image Re-Generate
     public function imageReGenerate($oldId)
     {
+        if(showBalance()==''){
+            myAlert('error', 'Subscribe any plan first!');
+            return redirect()->route('plan.userIndex');
+        }elseif(showBalance()->image==0){
+            myAlert('error', 'You have reached your image generate limit');
+            return redirect()->route('plan.userIndex');
+        }
         $oldImage = Images::where('id', $oldId)->where('user_id', Auth::user()->id)->firstOrFail();
         $response = OpenAI::images()->create([
             'prompt' => $oldImage->prompt,
@@ -172,12 +199,19 @@ class OpenAiController extends Controller
             }
         }
         $id = implode(',', $imageId);
+        
+        balanceDeduction('image');
+
         myAlert('success', 'Image Generated successfully.');
         return redirect()->route('image.create', ['id' => $id]);
     }
 
     public function imageVariation(Request $request)
     {
+        if(showBalance()==''){
+            myAlert('error', 'Subscribe any plan first!');
+            return redirect()->route('plan.userIndex');
+        }
         $images = [];
         if (isset($request->id)) {
             $id = explode(',', $request->id);
@@ -191,11 +225,16 @@ class OpenAiController extends Controller
             'old_image' => 'required|image|mimes:png|max:4096',
             'image_size' => 'required',
         ]);
-        return $request->all();
         // Open Ai Image Edit
+        $qty = intval($request->quantity ?? 1);
+        // Balance check
+        if(showBalance()->image<$qty){
+            myAlert('error', 'Your image generate limit: '.showBalance()->image);
+            return back();
+        }
         $response = OpenAI::images()->variation([
             'image' => fopen($request->file('old_image'), 'r'),
-            'n' => intval($request->quantity ?? 1),
+            'n' => $qty,
             'size' => $request->image_size,
             'response_format' => 'url',
         ]);
@@ -210,6 +249,7 @@ class OpenAiController extends Controller
             ])->id;
         }
         $id = implode(',', $imageId);
+        balanceDeduction('image',$qty);
         myAlert('success', 'Image Variation Generated successfully.');
         return redirect()->route('image.variation', ['id' => $id]);
     }

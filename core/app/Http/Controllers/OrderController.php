@@ -8,18 +8,50 @@ use App\Models\PlanExpanse;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $sales = Order::where('is_paid',true)->latest()->paginate(10);
-        return view('order.index', compact('sales'));
+
+        if (request()->ajax()) {
+            $allData = Order::with(['user', 'plan'])->orderBy('id', 'DESC');
+            if(isset($request->status)){
+                if($request->status==0){
+                    $allData = $allData->where('is_paid', false);
+                }
+            }
+            return DataTables::of($allData)
+                ->addIndexColumn()
+                ->addColumn('user_name', function ($data) {
+                    return $data->user->name ?? '';
+                })
+                ->addColumn('plan_name', function ($data) {
+                    return $data->plan->name ?? '';
+                })
+                ->addColumn('added_date', function ($data) {
+                    return dateTimeFormat($data->created_at);
+                })
+                ->addColumn('payment_status','
+                    @if ($is_paid)
+                        <a href="{{ route(\'plan.expanse\', $id) }}"
+                            class="btn btn-sm btn-primary">Expanses</a>
+                    @else
+                        <a href="{{ route(\'order.approved\', $id) }}"
+                            class="btn btn-sm btn-success">Approved</a>
+                    @endif')
+                ->rawColumns(['payment_status','added_date'])
+                ->toJson();
+        }
+
+
+        return view('order.index', compact('request'));
     }
 
     function pending()
     {
-        $sales = Order::where('is_paid',false)->latest()->paginate(10);
+        $sales = Order::where('is_paid', false)->latest()->paginate(10);
         return view('order.index', compact('sales'));
     }
 
@@ -62,12 +94,10 @@ class OrderController extends Controller
         // return $expanse;
         $user->plan_expanse_id = $expanse->id;
         $user->save();
-      
+
         $order->save();
 
         toast('This Order is approved', 'success');
         return redirect()->route('plan.expanse', $order->id);
     }
-
-
 }

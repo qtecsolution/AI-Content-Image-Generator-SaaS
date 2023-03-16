@@ -9,7 +9,7 @@
 
             <div class="col-md-12">
                 <div class="my-projects">
-                    <div class="my-projects-header border-bottom">
+                    <div class="my-projects-header border-bottom mb-3">
                         <h5 class="header-title">All Plans</h5>
                         <div class="project-button pull-right">
                             <a href="{{ route('plan.create') }}" class="btn btn-light btn-xs">

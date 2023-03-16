@@ -18,7 +18,7 @@ class FrontendController extends Controller
         $restUseCases = UseCase::where('is_published',1)->skip(9)->limit(PHP_INT_MAX)->get();
         $totalUseCase = count($restUseCases)+count($firstUseCases); 
         // Get plans 
-        $plans = Plan::where('is_published', true)->latest()->get();
+        $plans = Plan::where('is_published', true)->orderBy('id','ASC')->get();
         // get faq
         $allFaq = Faq::where('is_published', true)->orderBy('priority','ASC')->get();
         return view('frontend.index',compact('firstUseCases','restUseCases','totalUseCase','plans','allFaq'));

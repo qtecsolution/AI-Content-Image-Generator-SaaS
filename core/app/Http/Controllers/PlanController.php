@@ -24,7 +24,7 @@ class PlanController extends Controller
     public function userIndex()
     {
         $user = Auth::user();
-        $plans = Plan::where('is_published', true)->latest()->get();
+        $plans = Plan::where('is_published', true)->orderBy('id','ASC')->get();
         return view('plan.userIndex', compact('plans', 'user'));
     }
 
@@ -48,10 +48,8 @@ class PlanController extends Controller
         $plan->word_count = $request->word_count;
         $plan->call_api_count = $request->call_api_count;
         $plan->documet_count = $request->documet_count;
-        $plan->lang = $request->lang;
         $plan->image_count = $request->image_count;
         $plan->price = $request->price;
-        $plan->duration = $request->duration;
         $plan->save();
         myAlert('success', 'Plan Created Succssfully');
         return back();

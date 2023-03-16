@@ -70,8 +70,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('paypal/pay/cancle/{id}', 'PurchaseController@payCancle')->name('paypal.pay.error');
     Route::get('/plan/user/index', 'PlanController@userIndex')->name('plan.userIndex');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
-    Route::get('/plan/expanse/{id}', 'PurchaseController@expanse')->name('plan.expanse');
-    Route::get('/plan/expanse/base/{id}', 'PurchaseController@expanseBasePlan')->name('plan.expanse.2');
+    Route::get('/plan/expanse', 'PurchaseController@expanseBasePlan')->name('plan.userExpanse');
 
     Route::post('/plan/purchase', 'PurchaseController@purchaseDone')->name('plan.purchase.store');
 });
@@ -89,6 +88,7 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('plan', 'PlanController');
     Route::get('plan/{id}/edit', 'PlanController@edit')->name('plan.edit');
     Route::get('/plan/status/{id}/{status}', 'PlanController@status')->name('plan.status');
+    Route::get('/plan/expanse/{id}', 'PurchaseController@expanse')->name('plan.expanse');
 
     Route::get('/payment/method', 'PaymentMethodController@index')->name('payment.method');
     Route::post('payment/paypal/store', 'PaymentMethodController@paypalSettingStore')->name('payment.paypal.store');
