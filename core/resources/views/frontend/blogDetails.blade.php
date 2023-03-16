@@ -2,8 +2,13 @@
 @section('content')
     <section class="blog-detail">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-10">
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-12">
+                    <figure class="blog-detail-image">
+                        <img src="{{filePath($blog->image)}}" alt="blogdetail" height="864">
+                    </figure>
+                </div>
+                <div class="col-lg-9">
                     <div class="blogdetail-row">
 
 
@@ -13,12 +18,14 @@
                                     <img src="{{asset('assets/icons/calendar.svg')}}">
                                 </span>
                                 {{ date('jS F, Y', strtotime($blog->created_at)) }}
-                                <a href="#" class="mx-3">
+                                @if($blog->category != null)
+                                <a href="{{route('blog.category',$blog->category->slug)}}" class="mx-3">
                                 <span class="icon">
                                     <img src="{{asset('assets/icons/folder.svg')}}">
                                 </span>
                                 {{$blog->category->name ?? ''}}
                                 </a>
+                                @endif
                             </p>
 
                             <h1 class="blog-title"> {{ $blog->title }} </h1>

@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Auth;
 Route::group(['namespace' => 'Frontend'], function () {
     Route::get('/', 'FrontendController@index')->name('/');
     Route::get('/blogs', 'FrontendController@blogs')->name('blogs.index');
+    Route::get('/blog/category/{slug}', 'FrontendController@categoryWaysBlog')->name('blog.category');
+    
     Route::get('/blogs/{slug}', 'FrontendController@blogDetails')->name('blogs.show');
 });
 Auth::routes();

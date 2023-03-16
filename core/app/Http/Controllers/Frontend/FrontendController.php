@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\BlogCategory;
 use App\Models\Faq;
 use App\Models\Plan;
 use App\Models\UseCase;
@@ -28,9 +29,25 @@ class FrontendController extends Controller
     {
         $blogs = Blog::where('is_published',true)->simplePaginate(12);
         $allFaq = Faq::where('is_published', true)->orderBy('priority','ASC')->get();
+        $categories = BlogCategory::all();
 
-        return view('frontend.blog',compact('blogs','allFaq'));
+        return view('frontend.blog',compact('blogs','allFaq','categories'));
         
+    }
+
+    public function categoryWaysBlog($slug)
+    {
+        $cat = BlogCategory::where('slug',$slug)->first();
+        if($cat != null){
+            $blogs = Blog::where('is_published',true)->where('category_id',$cat->id)->simplePaginate(12);
+        }else{
+            $blogs = Blog::where('is_published',true)->simplePaginate(12);
+        }
+      
+        $allFaq = Faq::where('is_published', true)->orderBy('priority','ASC')->get();
+        $categories = BlogCategory::all();
+
+        return view('frontend.blog',compact('blogs','allFaq','categories'));
     }
     public function blogDetails($slug)
     {

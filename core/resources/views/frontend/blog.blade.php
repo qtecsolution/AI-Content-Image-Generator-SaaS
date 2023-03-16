@@ -1,27 +1,25 @@
 @extends('frontend.app')
 @section('content')
     <!-- ===================hero  start======================= -->
-    <section class="hero">
+    <section class="hero bg-blog pb-4">
         <div class="container">
             <div class="row g-4">
                 <div class="col-12">
                     <div class="hero-content pt-5">
-                        <h1 class="hero-title">Welcome to the <br>
-                            <span class="logo-name"> {{ readConfig('name') }} </span> blog
-                        </h1>
-                        <p class="hero-des">{{ readConfig('name') }} is designed to help you streamline your writing process,
-                            <br>
-                            increase your productivity, and create high-quality content.
-                        </p>
-
+                        <h1 class="hero-title">Welcome to the  <br>
+                            <span class="logo-name">{{ readConfig('name') }}</span> blog
+                            </h1>
+                        <p class="hero-des">{{ readConfig('name') }} is designed to help you streamline your writing process, <br>
+                            increase your productivity, and create high-quality content.</p>
                     </div>
                 </div>
 
-
+            
 
             </div>
         </div>
     </section>
+
     <!-- ===================hero end ======================= -->
 
     <!-- ===================blogs================= -->
@@ -32,32 +30,45 @@
             <!-- cards -->
             <div class="row m-0">
 
+                  <!-- blog category buttons -->
+
+                  <ul class="category-list">
+                    <li class="category-list-item {{ Route::currentRouteName() == 'blogs.index' ? 'active' : 'rumon' }}"><a href="{{route('blogs.index')}}" class="category-list-link">All</a></li>
+                    @foreach($categories as $cat)
+                    <li class="category-list-item {{ Request::url() == route('blog.category',$cat->slug)  ? 'active' : 'rumon' }}">
+                        <a href="{{route('blog.category',$cat->slug)}}" 
+                            class="category-list-link ">{{$cat->name}}</a>
+                    </li>
+                    @endforeach
+                    
+                </ul>
+          
+            <!-- blog category cards -->
 
                 <div class="blog-cards">
                     @foreach ($blogs as $blog)
-                        <a class="blogcard" href="{{route('blogs.show',$blog->slug)}}">
-                            <div class="blogcard-header">
-                                <p class="date"> {{date('jS F, Y',strtotime($blog->created_at))}} </p>
-                            </div>
-                            <div class="blogcard-body">
-                                <h3 class="title"> {{$blog->title}} </h3>
-                                <p class="content">
-                                   {{$blog->meta_description}}
-                                </p>
-                            </div>
-                            <div class="blogcard-footer d-flex justify-content-end">
+                    <a href="{{route('blogs.show',$blog->slug)}}" class="blog-category-card">
+                        <figure class="blog-thumb">
+                            <img src="{{filePath($blog->image)}}" alt="">
+                        </figure>
+                        <div class="right">
+                            <p class="date">{{date('jS F, Y',strtotime($blog->created_at))}}</p>
+                            <h2 class="titel">{{$blog->title}}</h2>
+                            <p class="content">{{$blog->meta_description}} ...read more</p>
+                            
+
+                            <div class="blogcard-footer d-flex justify-content-end"> 
                                 <button class="go-btn">
-                                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.8125 9H15.1875" stroke="#2C4CAC" stroke-width="1.5"
-                                            stroke-linecap="round" stroke-linejoin="round" />
-                                        <path d="M10.125 3.9375L15.1875 9L10.125 14.0625" stroke="#2C4CAC"
-                                            stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                    </svg>
+                                    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.8125 9H15.1875" stroke="#2C4CAC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M10.125 3.9375L15.1875 9L10.125 14.0625" stroke="#2C4CAC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg> 
                                 </button>
                             </div>
+                        </div>
+                    </a>
 
-                        </a>
+                       
                     @endforeach
                 </div>
 
