@@ -231,18 +231,29 @@
 
                 <div class="footer-social">
                     <ul class="socilmenu">
+                        @if(readConfig('type_fb') !== '')
                         <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="{{asset('assets/icons/social/facebook.svg')}}"
+                            <a href="{{readConfig('type_fb')}}" class="socialmenu-link">
+                                <img src="{{asset('assets/icons/social/facebook.svg')}}"
+                                    alt="">
+                                </a>
+                        </li>
+                        @endif
+                        @if(readConfig('type_tw') !== '')
+                        <li class="socialmenu-item">
+                            <a href="{{readConfig('type_tw')}}" class="socialmenu-link">
+                                <img src="{{asset('assets/icons/social/twitter.svg')}}"
                                     alt=""></a>
                         </li>
+                        @endif
+                        @if(readConfig('type_insta') !== '')
                         <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="{{asset('assets/icons/social/twitter.svg')}}"
-                                    alt=""></a>
+                            <a href="{{readConfig('type_insta')}}" class="socialmenu-link">
+                                <img src="{{asset('assets/icons/social/linkdin.svg')}}"
+                                    alt="">
+                                </a>
                         </li>
-                        <li class="socialmenu-item">
-                            <a href="" class="socialmenu-link"><img src="{{asset('assets/icons/social/linkdin.svg')}}"
-                                    alt=""></a>
-                        </li>
+                        @endif
                     </ul>
                 </div>
 

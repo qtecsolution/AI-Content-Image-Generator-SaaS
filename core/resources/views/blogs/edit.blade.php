@@ -43,7 +43,9 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="description" class="form-label">Blog Description</label>
-                                                        <textarea id="summernote" name="description">@purify($data->description)</textarea>
+                                                        <textarea id="summernote" name="description">
+                                                            @purify($data->description)
+                                                        </textarea>
                                                         @error('description')
                                                             <div class="invalid-feedback">
                                                                 {{ $message }}

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use Stevebauman\Purify\Facades\Purify;
+// use Stevebauman\Purify\Facades\Purify;
 
 class PurifyServiceProvider extends ServiceProvider
 {
@@ -21,8 +22,8 @@ class PurifyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Blade::directive('purify', function ($expression) {
-            return Purify::clear($expression);
+        Blade::directive('purify', function ($key) {
+            return "<?php echo strip_tags($key); ?>";
         });
     }
 }
