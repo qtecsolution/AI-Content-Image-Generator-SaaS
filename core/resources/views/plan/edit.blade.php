@@ -11,7 +11,7 @@
            
             <div class="col-md-12">
                 <div class="my-projects">
-                    <div class="my-projects-header bg-info">
+                    <div class="my-projects-header">
                         <h5 class="header-title">Update Plan</h5>
                         <div class="project-button pull-right">
                             <a href="{{route('plan.index')}}" class="btn btn-light btn-xs"> 
