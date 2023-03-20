@@ -16,7 +16,7 @@
                     <div class="my-projects-body">
                         <div class="row">
                             <div class="col-md-5" id="useCaseForm">
-                                <form method="post" class="p-2 border-lite bg-light" action="{{ route('use-case.store') }}" id="save-form"
+                                <form method="post" class="p-2 " action="{{ route('use-case.store') }}" id="save-form"
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="col-12 mb-3">
@@ -110,7 +110,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-7 border-start">
                                 <div class="project-table-wrapper  p-3 no-default-search">
 
                                     <table id="datatables" class="project-table table">

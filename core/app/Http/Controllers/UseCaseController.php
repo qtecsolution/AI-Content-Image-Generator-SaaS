@@ -13,7 +13,7 @@ class UseCaseController extends Controller
      */
     public function index()
     {
-        $allData = UseCase::paginate(12);
+        $allData = UseCase::paginate(2);
         return view('useCase.index', compact('allData'));
     }
 
