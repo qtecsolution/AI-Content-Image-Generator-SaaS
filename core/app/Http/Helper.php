@@ -234,3 +234,15 @@ function translate($data)
 {
     return $data;
 }
+function menuActive($data)
+{
+    if(!is_array($data)){
+        $data = explode(', ', $data);
+    }
+    foreach($data as $value){
+        if(request()->routeIs($value)){
+            return true;
+        }
+    }
+    return false;
+}

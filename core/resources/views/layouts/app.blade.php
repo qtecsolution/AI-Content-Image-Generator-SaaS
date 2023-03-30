@@ -48,8 +48,8 @@
         </div>
         <div class="sidebar-body">
             <!-- admin menu -->
-            <div class="dashboard-menu ">
-                <a href="{{route('dashboard')}}" class="dashboard-link gray-800 d-flex align-items-center fz-14">
+            <div class="dashboard-menu">
+                <a href="{{route('dashboard')}}" class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive('dashboard') ? 'active' : '' }}">
                     <span class="icon">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -68,7 +68,7 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button {{ (menuActive('use-case.*') || (menuActive('setting') && request()->input('tab') === 'openai')) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#manageAi" aria-expanded="true" aria-controls="collapseOne">
                                     <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -108,16 +108,12 @@
                                     <span class="title fz-16"> Manage AI</span>
                                 </button>
                             </h2>
-                            <div id="manageAi" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            <div id="manageAi" class="accordion-collapse collapse {{ (menuActive('use-case.*') || (menuActive('setting') && request()->input('tab') === 'openai')) ? 'show' : '' }} " aria-labelledby="headingOne"
                                 data-bs-parent="#menuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
-                                        <a href="{{ route('use-case.index') }}"
-                                            class="menu-item {{ request()->routeIs('use-case.*') ? 'active' : '' }}">Use
-                                            Case Templates</a>
-                                        <a href="{{ route('admin.all') }}?tab=openai"
-                                            class="menu-item {{ request()->routeIs('setting') && request()->input('tab') === 'openai' ? 'active' : '' }}">AI
-                                            Settings</a>
+                                        <a href="{{ route('use-case.index') }}" class="menu-item {{ menuActive('use-case.*') ? 'active' : '' }}">Use Case Templates</a>
+                                        <a href="{{ route('setting') }}?tab=openai" class="menu-item {{ menuActive('setting') && request()->input('tab') === 'openai' ? 'active' : '' }}">AI Settings</a>
                                     </div>
                                 </div>
                             </div>
@@ -125,7 +121,7 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button {{menuActive(['users.*','admin.*'])?'':'collapsed'}}" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#manageUsers" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -160,15 +156,15 @@
                                     <span class="title fz-16">Manage Users</span>
                                 </button>
                             </h2>
-                            <div id="manageUsers" class="accordion-collapse collapse " aria-labelledby="headingThree"
+                            <div id="manageUsers" class="accordion-collapse collapse {{menuActive(['users.*','admin.*'])?'show':''}}" aria-labelledby="headingThree"
                                 data-bs-parent="#menuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
                                         <a href="{{ route('users.index') }}"
-                                            class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">Customer
+                                            class="menu-item {{ menuActive('users.*') ? 'active' : '' }}">Customer
                                             List</a>
                                         <a href="{{ route('admin.all') }}"
-                                            class=" menu-item  {{ request()->routeIs('admin.*') ? 'active' : '' }}">Admin
+                                            class=" menu-item  {{ menuActive('admin.*') ? 'active' : '' }}">Admin
                                             List</a>
                                     </div>
                                 </div>
@@ -177,7 +173,7 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button {{menuActive(['payment.*','order.*','plan.*']) ? '' : 'collapsed'}}" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#finanCial" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -203,15 +199,16 @@
                                     <span class="title fz-16">Financial</span>
                                 </button>
                             </h2>
-                            <div id="finanCial" class="accordion-collapse collapse " aria-labelledby="headingThree"
+                            <div id="finanCial" class="accordion-collapse collapse {{menuActive(['payment.*','order.*','plan.*']) ? 'show' : ''}} " aria-labelledby="headingThree"
                                 data-bs-parent="#menuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
 
 
-                                        <a href="{{ route('payment.method') }}" class="menu-item">Payment Methods</a>
-                                        <a href="{{route('order.index')}}" class="menu-item">All Transections</a>
-                                        <a href="{{route('order.index')}}?status=0" class="menu-item">Pending
+                                        <a href="{{ route('plan.index') }}" class="menu-item {{menuActive('plan.*')?'active':''}}">Manage Plan</a>
+                                        <a href="{{ route('payment.method') }}" class="menu-item {{menuActive('payment.*')?'active':''}}">Payment Methods</a>
+                                        <a href="{{route('order.index')}}" class="menu-item {{menuActive('order.*') && request()->input('status') == null?'active':''}}">All Transections</a>
+                                        <a href="{{route('order.index')}}?status=0" class="menu-item {{menuActive('order.index') && request()->input('status') == "0"?'active':''}}">Pending
                                             Transections</a>
 
                                     </div>
@@ -221,7 +218,7 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button {{menuActive(['manage-blogs.*','blog-category.*','manage-faq.*','pages.*'])? '' : 'collapsed'}}" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#frontend" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -240,16 +237,14 @@
                                     <span class="title fz-16">Frontend</span>
                                 </button>
                             </h2>
-                            <div id="frontend" class="accordion-collapse collapse " aria-labelledby="headingThree"
+                            <div id="frontend" class="accordion-collapse collapse {{menuActive(['manage-blogs.*','blog-category.*','manage-faq.*','pages.*'])? 'show' : ''}}" aria-labelledby="headingThree"
                                 data-bs-parent="#menuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
-                                        <a href="{{ route('setting') }}?tab=cms" class="menu-item">Front-end
-                                            settings</a>
-                                        <a href="{{ route('manage-blogs.index') }}" class="menu-item">Blog Manager</a>
-                                        <a href="{{ route('blog-category.index') }}" class="menu-item">Blog Category</a>
-                                        <a href="{{ route('manage-faq.index') }}" class="menu-item">FAQ Manager</a>
-                                        <a href="{{ route('pages.index') }}" class="menu-item">Page Builder</a>
+                                        <a href="{{ route('manage-blogs.index') }}" class="menu-item {{menuActive("manage-blogs.*")?'active':''}}">Blog Manager</a>
+                                        <a href="{{ route('blog-category.index') }}" class="menu-item {{menuActive("blog-category.*")?'active':''}}">Blog Category</a>
+                                        <a href="{{ route('manage-faq.index') }}" class="menu-item {{menuActive("manage-faq.*")?'active':''}}">FAQ Manager</a>
+                                        <a href="{{ route('pages.index') }}" class="menu-item {{menuActive("pages.*")?'active':''}}">Page Builder</a>
 
                                     </div>
                                 </div>
@@ -258,7 +253,7 @@
 
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button {{(menuActive("setting") && request()->input('tab') != 'openai')?'':'collapsed'}}" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#settingMenu" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -286,17 +281,17 @@
                                     <span class="title fz-16">Settings</span>
                                 </button>
                             </h2>
-                            <div id="settingMenu" class="accordion-collapse collapse " aria-labelledby="headingThree"
+                            <div id="settingMenu" class="accordion-collapse collapse {{(menuActive("setting") && request()->input('tab') != 'openai')?'show':''}}" aria-labelledby="headingThree"
                                 data-bs-parent="#menuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
-                                        <a href="{{ route('setting') }}?tab=cms" class="menu-item">General Settings</a>
-                                        <a href="{{ route('setting') }}?tab=smtp" class="menu-item">Mail Configure</a>
-                                        <a href="{{ route('setting') }}?tab=seo" class="menu-item">SEO Settings</a>
-                                        <a href="{{ route('setting') }}?tab=login" class="menu-item">Social Login</a>
-                                        <a href="{{ route('setting') }}?tab=tawkto" class="menu-item">Tawk (Live
+                                        <a href="{{ route('setting') }}?tab=cms" class="menu-item {{ menuActive('setting') && request()->input('tab') == 'cms' ? 'active' : '' }}">General Settings</a>
+                                        <a href="{{ route('setting') }}?tab=smtp" class="menu-item {{ menuActive('setting') && request()->input('tab') == 'smtp' ? 'active' : '' }}">Mail Configure</a>
+                                        <a href="{{ route('setting') }}?tab=seo" class="menu-item {{ menuActive('setting') && request()->input('tab') == 'seo' ? 'active' : '' }}">SEO Settings</a>
+                                        <a href="{{ route('setting') }}?tab=login" class="menu-item {{ menuActive('setting') && request()->input('tab') == 'login' ? 'active' : '' }}">Social Login</a>
+                                        <a href="{{ route('setting') }}?tab=tawkto" class="menu-item {{ menuActive('setting') && request()->input('tab') == 'tawkto' ? 'active' : '' }}">Tawk (Live
                                             chat)</a>
-                                        <a href="{{ route('setting') }}?tab=pwa" class="menu-item">PWA Settings</a>
+                                        <a href="{{ route('setting') }}?tab=pwa" class="menu-item {{ menuActive('setting') && request()->input('tab') == 'pwa' ? 'active' : '' }}">PWA Settings</a>
 
 
                                     </div>
@@ -312,7 +307,7 @@
             </div>
             <!-- user menu  menu -->
             <div class="dashboard-menu  ">
-                <a href="{{route('home')}}" class="dashboard-link gray-800 d-flex align-items-center fz-14">
+                <a href="{{route('home')}}" class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive('home') ? 'active' : '' }}">
                     <span class="icon">
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -328,7 +323,7 @@
                         <!-- ai content  -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                <button class="accordion-button {{ menuActive(['content.*','contents.*','content-history.*']) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse"
                                     data-bs-target="#aiContent" aria-expanded="true" aria-controls="collapseOne">
                                     <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
@@ -352,14 +347,13 @@
                                     <span class="title fz-16"> AI Content</span>
                                 </button>
                             </h2>
-                            <div id="aiContent" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                            <div id="aiContent" class="accordion-collapse collapse {{ menuActive(['content.*','contents.*','content-history.*']) ? 'show' : '' }}" aria-labelledby="headingOne"
                                 data-bs-parent="#userMenuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
-                                        <a href="{{ route('content.create') }}" class="menu-item">Content Generate</a>
-                                        <a href="{{ route('contents.index') }}" class="menu-item">Saved Content</a>
-                                        <a href="{{ route('content-history.index') }}" class="menu-item">Content
-                                            History</a>
+                                        <a href="{{ route('content.create') }}" class="menu-item {{menuActive("content.*") ? 'active' : ''}}">Content Generate</a>
+                                        <a href="{{ route('contents.index') }}" class="menu-item {{menuActive("contents.*") ? 'active' : ''}}">Saved Content</a>
+                                        <a href="{{ route('content-history.index') }}" class="menu-item {{menuActive("content-history.*") ? 'active' : ''}}">Content History</a>
                                     </div>
                                 </div>
                             </div>
@@ -367,8 +361,8 @@
                         <!-- ai images -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#manageUsers" aria-expanded="false" aria-controls="collapseThree">
+                                <button class="accordion-button {{ menuActive(['image.*']) ? '' : 'collapsed' }}" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#aiImage" aria-expanded="false" aria-controls="collapseThree">
                                     <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                             xmlns="http://www.w3.org/2000/svg">
@@ -389,14 +383,14 @@
                                     <span class="title fz-16">AI Image</span>
                                 </button>
                             </h2>
-                            <div id="manageUsers" class="accordion-collapse collapse " aria-labelledby="headingThree"
+                            <div id="aiImage" class="accordion-collapse collapse {{ menuActive(['image.*']) ? 'show' : '' }}" aria-labelledby="headingThree"
                                 data-bs-parent="#userMenuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
 
-                                        <a href="{{ route('image.create') }}" class="menu-item ">New Image</a>
-                                        <a href="{{ route('image.variation') }}" class="menu-item ">Image Variation</a>
-                                        <a href="{{ route('image.all') }}" class="menu-item ">All Images</a>
+                                        <a href="{{ route('image.create') }}" class="menu-item {{ menuActive(['image.create']) ? 'active' : '' }}">New Image</a>
+                                        <a href="{{ route('image.variation') }}" class="menu-item {{ menuActive(['image.variation']) ? 'active' : '' }}">Image Variation</a>
+                                        <a href="{{ route('image.all') }}" class="menu-item {{ menuActive(['image.all']) ? 'active' : '' }}">All Images</a>
                                     </div>
                                 </div>
                             </div>
@@ -406,7 +400,7 @@
 
                 </div>
 
-                <a href="{{ route('plan.userIndex') }}" class="dashboard-link gray-800 d-flex align-items-center fz-14">
+                <a href="{{ route('plan.userIndex') }}" class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['plan.userIndex']) ? 'active' : '' }}">
                     <span class="icon">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_532_21535)">
