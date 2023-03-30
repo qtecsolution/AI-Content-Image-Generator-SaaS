@@ -51,3 +51,48 @@ $pagination-link-color: #333;
     }
   }
   
+
+  .custom-pagination {
+    @include list-horizontal;
+    justify-content: flex-end;
+    gap: size(10);
+    padding-bottom: size(70);
+    li {
+      @include border(solid,1,$gray-300);
+      display: inline-block;
+      @include radius(8);
+      width: size(40);
+      height: size(36);
+      overflow: hidden;
+      @include flex-center;
+
+      @include transitionsall;
+
+      &:not(.disabled):hover {
+        background: rgba(44, 76, 172, 0.05);
+      }
+
+      &.active {
+        background: rgba(44, 76, 172, 0.05);
+
+        span {
+          color: $main;
+          @include font($primaryFont,14,medium,normal,20);
+        }
+        
+      }
+
+      &.disabled {
+        background-color: #dddddd;
+      }
+      a {
+        display: block;
+        @include wh100;
+        text-align: center;
+        line-height: 2.1;
+        color: $gray-700;
+      
+      }
+    }
+  }
+  
