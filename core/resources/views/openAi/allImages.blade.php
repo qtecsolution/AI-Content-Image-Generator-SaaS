@@ -186,7 +186,7 @@
             </div>
             <div class="row g-2">
                 <div class="col mt-3">
-                    {{ $images->links('vendor.pagination.bootstrap-5') }}
+                    {{ $images->links('vendor.pagination.default') }}
                 </div>
             </div>
         </div>
