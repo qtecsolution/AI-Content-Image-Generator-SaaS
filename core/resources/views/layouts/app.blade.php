@@ -316,7 +316,7 @@
                         </svg>
 
                     </span>
-                    <span class="fz-16">Dashboard</span>
+                    <span class="fz-16">Home</span>
                 </a>
                 <div class="menu-accordion">
                     <div class="accordion" id="userMenuAccordion">
