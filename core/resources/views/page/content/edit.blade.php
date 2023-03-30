@@ -14,10 +14,23 @@
                         <div class="header-title">@translate(Page Section Content)</div>
                         
                         <div class="project-button pull-right">
-                            <a class="btn btn-light btn-xs"
-                                href="{{ route('pages.content.index', $content->page_id) }}">
-                                <i class="fa fa-plus-circle"></i> @translate(Content List)
-                            </a>
+                            
+                            <a  href="{{ route('pages.content.index', $content->page_id) }}" class="seeall-btn d-flex">
+                            <span class="icon">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.33301 4H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M5.33301 8H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M5.33301 12H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 4H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 8H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 12H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                             </svg>
+
+
+                            </span>
+                            <span class="mt-1"> @translate(Content List))</span>
+                        </a>
+                            
                         </div>
                     </div>
 

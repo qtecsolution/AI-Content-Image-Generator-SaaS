@@ -30,7 +30,11 @@ class PlanController extends Controller
 
     public function index()
     {
+<<<<<<< HEAD
         $plans = Plan::orderBy('id','ASC')->get();
+=======
+        $plans = Plan::latest()->get();
+>>>>>>> origin/kawsar
         return view('plan.index', compact('plans'));
     }
 

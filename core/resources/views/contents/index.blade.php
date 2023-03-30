@@ -61,7 +61,11 @@
 
 
                                         <div class="customcheck mb-2">
+<<<<<<< HEAD
                                             <input type="checkbox" id="allSelect" class="customcheck-box"
+=======
+                                            <input type="checkbox" id="allSelect" class="input-checkbox customcheck-box"
+>>>>>>> origin/kawsar
                                                 name="row-check" hidden>
                                             <label for="allSelect" class="customcheck-label"></label>
                                         </div>

@@ -14,8 +14,20 @@
                     <div class="header-title">@translate(Page Content)</div>
 
                     <div class="project-button pull-right">
-                        <a class="btn btn-light btn-xs" href="{{ route('pages.content.index', $id) }}">
-                            <i class="fa fa-list"></i> @translate(Content List)
+                       
+                        <a href="{{ route('pages.content.index', $id) }}" class="seeall-btn d-flex">
+                            <span class="icon">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5.33301 4H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M5.33301 8H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M5.33301 12H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 4H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 8H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    <path d="M2 12H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                </svg>
+
+                            </span>
+                            <span class="mt-1"> @translate(Content List)</span>
                         </a>
                     </div>
                 </div>
@@ -28,11 +40,11 @@
                         @csrf
                         <input name="page_id" type="hidden" value="{{ $id }}">
                         <div class="form-group mb-2">
-                            <label class="col-form-label">@translate(Content Title) <span
+                            <label class="col-form-label" for="content-title">@translate(Content Title) <span
                                     class="text-danger">*</span></label>
                             <input placeholder="@translate(Enter Content Title)"
                                 class="form-control custom-input @error('title') is-invalid @enderror" type="text"
-                                value="{{ old('title') }}" name="title">
+                                value="{{ old('title') }}" name="title" id="content-title">
                         </div>
 
                         <div class="form-group mb-2">
