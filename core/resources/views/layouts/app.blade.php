@@ -551,8 +551,8 @@
         </div>
 
         <div class="offcanvas-body">
-              <!-- admin menu -->
-              <div class="dashboard-menu ">
+            <!-- admin menu -->
+            <div class="dashboard-menu ">
                 <a href="{{route('dashboard')}}" class="dashboard-link gray-800 d-flex align-items-center fz-14">
                     <span class="icon">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -953,7 +953,7 @@
                     </span>
                     <span class="fz-16">Reports</span>
                 </a>
-            </div> 
+            </div>
 
         </div>
     </div>

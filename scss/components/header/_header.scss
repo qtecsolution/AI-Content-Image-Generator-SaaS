@@ -60,6 +60,21 @@
                        @include square(32);
                        overflow: hidden;
                        @include circle;
+                       position: relative;
+
+                       &::after {
+                        position: absolute;
+                        content: '';
+                       bottom: 0;
+                       left: 0;
+                        @include square(10);
+                        @include circle;
+                        background: green;
+                        z-index: 1;
+                        transform: translate(-50%,-50%);
+
+                       }
+
 
                        img {
                            @include wh100;

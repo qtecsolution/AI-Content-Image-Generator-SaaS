@@ -81,11 +81,11 @@
 
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail" class="form-label">User Save Documets limit <span
+                                <label for="inputEmail8" class="form-label">User Save Documets limit <span
                                         class="text-danger">*</span> </label>
 
                                 <input type="number" min="0" value="{{ $plan->documet_count }}" required
-                                    name="documet_count" class="form-control custom-input" id="inputEmail3"
+                                    name="documet_count" class="form-control custom-input" id="inputEmail8"
                                     placeholder="0">
                                 <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be
                                     unlimited</small>
@@ -93,11 +93,11 @@
 
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail3" class="form-label">How many image can generate
+                                <label for="inputEmail9" class="form-label">How many image can generate
                                     user <span class="text-danger">*</span> </label>
 
                                 <input type="number" min="0" value="{{ $plan->image_count }}" required
-                                    name="image_count" class="form-control custom-input" id="inputEmail3"
+                                    name="image_count" class="form-control custom-input" id="inputEmail9"
                                     placeholder="0">
 
                                 <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be
@@ -105,10 +105,10 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail3" class="form-label">Price <span class="text-danger">*</span>
+                                <label for="inputEmail10" class="form-label">Price <span class="text-danger">*</span>
                                 </label>
                                 <input type="number" value="{{ $plan->price }}" min="0" step="0.01" required
-                                    name="price" class="form-control custom-input" id="inputEmail3" placeholder="0">
+                                    name="price" class="form-control custom-input" id="inputEmail10" placeholder="0">
                                 <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be free</small>
                             </div>
 
