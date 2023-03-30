@@ -1,0 +1,140 @@
+
+@use '../global' as *;
+@use './mixins' as m;
+
+/**=====================================================**
+                ANIMATION-STYLES
+=======================================================**/
+
+%animation {
+	animation-duration: $time;
+	animation-fill-mode: both;
+}
+
+@keyframes slideDownIn {
+	0% {
+		@include m.transform(translateY(-100%));
+	}
+
+	100% {
+		@include m.transform(translateY(0));
+	}
+
+	0% {
+		@include m.transform(translateY(-100%));
+	}
+}
+
+%slideDownIn {
+	animation-name: slideDownIn;
+}
+
+@keyframes slideDownInMobile {
+	0% {
+		@include m.transform(translateY(m.size(-20)));
+	}
+
+	100% {
+		@include m.transform(translateY(m.size(10)));
+	}
+
+	0% {
+		@include m.transform(translateY(m.size(-20)));
+	}
+}
+
+%slideDownInMobile {
+	animation-name: slideDownInMobile;
+}
+
+@keyframes slideUpIn {
+	0% {
+		@include m.transform(translateY(m.size(-20)));
+	}
+
+	100% {
+		@include m.transform(translateY(0));
+	}
+
+	0% {
+		@include m.transform(translateY(m.size(20)));
+	}
+}
+
+%slideUpIn {
+	animation-name: slideUpIn;
+}
+
+@keyframes slideUpInMobile {
+	0% {
+		@include m.transform(translateY(m.size(40)));
+	}
+
+	100% {
+		@include m.transform(translateY(m.size(25)));
+	}
+
+	0% {
+		@include m.transform(translateY(m.size(40)));
+	}
+}
+
+%slideUpInMobile {
+	animation-name: slideUpInMobile;
+}
+
+@keyframes slideLeftIn {
+	0% {
+		@include m.transform(translateX(m.size(100)));
+	}
+
+	100% {
+		@include m.transform(translateX(0));
+	}
+
+	0% {
+		@include m.transform(translateX(m.size(-100)));
+	}
+}
+
+%slideLeftIn {
+	animation-name: slideLeftIn;
+}
+
+@keyframes slideRightIn {
+	0% {
+		@include m.transform(translateX(m.size(100)));
+	}
+
+	100% {
+		@include m.transform(translateX(0));
+	}
+
+	0% {
+		@include m.transform(translateX(m.size(100)));
+	}
+}
+
+%slideRightIn {
+	animation-name: slideRightIn;
+}
+
+%floating {
+	animation-name: floating;
+	animation-duration: 2s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes floating {
+	0% {
+		@include m.transform(translateY(0%));
+	}
+
+	50% {
+		@include m.transform(translateY(1%));
+	}
+
+	100% {
+		@include m.transform(translateY(0%));
+	}
+}

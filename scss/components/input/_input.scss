@@ -1,0 +1,139 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+.form-group {
+    position: relative;
+    .col-form-label {
+        @include font($primaryFont,14,medium,normal,20);
+        color: $gray-800;
+        
+    }
+    .form-label {
+        @include font($primaryFont,14,medium,normal,24);
+        color: $gray-700;
+        
+    }
+    .form-control {
+           @include font($primaryFont,14,normal,normal,24);
+           color: $gray-600;
+           box-shadow: none;
+
+        &.custom-input {
+            @include font($primaryFont,14,normal,normal,24);
+            padding:size(8) size(14);
+            // box-shadow: $boxshadow-1;
+           
+            @include breakpoint(mobile576) {
+              @include font($primaryFont,14,normal,normal,24);
+            }
+
+            &:focus {
+                box-shadow: none ;
+                
+            }
+
+            &::placeholder {
+             @include font($primaryFont,14,normal,normal,24);
+
+            
+
+            }
+        }
+    }
+
+    .show-hide {
+        position: absolute;
+        right: size(30);
+        top:size(43);
+        cursor: pointer;
+        i.fa {
+            color: #D0D5DD!important;
+        }
+        
+    }
+
+}
+
+
+.submitbox {
+    @include flex;
+    @include border(solid,1,$gray-200); 
+    background: $gray-100;
+    @include radius(100);
+    overflow: hidden;
+    padding: size(2);
+    justify-content: space-between;
+    @include transitionsall;
+    @include breakpoint(tab992) {
+        min-width: size(670);
+    }
+    &:focus-within {
+        border-color: lighten($main,20%);
+    }
+    &-input {
+    background: transparent;
+    padding:size(9) size(10);
+    @include font($primaryFont,14,normal,normal,24);
+    flex: 1;
+    }
+    &-button {
+        border: none;
+        background: linear-gradient(110.99deg, #97ABFF -6.41%, #123597 106.7%);
+        @include radius(100);
+        padding: size(0) size(30);
+        color: $white;
+        @include font($primaryFont,14,medium,normal,20);
+
+    }
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+
+.image-search-box {
+    @include flex-between;
+    margin-bottom: size(10);
+    @include border-single(bottom,solid,1,$gray-300);
+    padding-bottom: size(10);
+    input {
+        flex-grow: 1;
+        padding-left: size(10);
+        color: $gray-600;
+        @include font($primaryFont,14,medium,normal,20);
+        &::placeholder {
+            color: $gray-300;
+            @include font($primaryFont,14,medium,normal,20);
+        }
+    }
+
+    .right-icons {
+        @include flex;
+        gap: size(10);
+        padding-right: size(8);
+
+        span {
+            svg {
+                path {
+                    @include transitionsall;
+                }
+        
+            }
+            @include hover {
+                svg {
+                    path {
+                        stroke: $gray-600;
+                    }
+                }
+            }
+        }
+    }
+    
+}
+
+.col-form-label {
+    @include font($primaryFont,14,medium,normal,20);
+    color: $gray-800;
+ 
+}

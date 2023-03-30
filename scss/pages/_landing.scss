@@ -1,0 +1,230 @@
+@use '../global' as *;
+@use '../partials' as *;
+
+.body-landing {
+    background-image: url('../../assets/images/landing/small-bg.svg');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: size(1000);
+   
+    @include breakpoint(tab992) {
+        background-size: contain;
+    }
+ 
+    
+}
+
+.body-blog {
+    background: #F5F7FB;
+  
+   
+}
+
+.hero-content {
+   @include flex-column;
+   align-items: center;
+   gap: size(24); 
+   text-align: center;
+   
+    
+   .hero-title {
+    color: $gray-800;
+    @include font($primaryFont,26,bold,normal,36);
+    .logo-name {
+      @include font($primaryFont,26,bold,normal,36);
+
+    }
+    @include breakpoint(mobile576) {
+        @include font($primaryFont,36,bold,normal,50);
+        .logo-name {
+             @include font($primaryFont,36,bold,normal,50);
+
+        }
+
+    }
+   
+    @include breakpoint(tab992) {
+    @include font($primaryFont,48,bold,normal,70);
+    .logo-name {
+        @include font($primaryFont,48,bold,normal,70);
+
+   }
+
+    }
+
+   }
+   .hero-des {
+    color: $gray-800;
+    @include font($primaryFont,14,normal,normal,22);
+    @include breakpoint(mobile576) {
+        @include font($primaryFont,16,normal,normal,24);
+    }
+   }
+
+   .credit {
+    color: $gray-800;
+    @include font($primaryFont,14,normal,normal,22);
+    @include breakpoint(mobile576) {
+        @include font($primaryFont,16,normal,normal,24);
+    }
+   }
+}
+
+.preview-image {
+    @include w100;
+    max-height: size(958);
+
+    img {
+        @include wh100;
+        object-fit: contain;
+    }
+} 
+
+
+
+.benifits {
+    padding: size(30) size(0);
+
+    @include breakpoint(tab992) {
+        padding: size(100) size(0);
+    }
+
+    &-header {
+        
+
+
+    } 
+
+    &-container {
+        background: linear-gradient(135deg, rgba(151, 171, 255, 0.1) 0%, rgba(18, 53, 151, 0.1) 100%);
+        @include radius(30);
+        padding: size(30);
+        @include breakpoint(mobile576) {
+            padding: size(50);
+        }
+        @include breakpoint(mobile768) {
+            padding: size(70);
+        }
+        @include breakpoint(tab992) {
+            padding: size(100);
+        }
+    }
+}
+
+.section-header {
+    @include flex-column;
+        align-items: center;
+        text-align: center;
+        gap: size(14);
+        padding-bottom: size(36);
+
+        @include breakpoint(mobile576) {
+            gap: size(36);
+        }
+
+        .benifits-title {
+            @include font($primaryFont, 32, bold, normal, 40);
+
+            @include breakpoint(mobile576) {
+                @include font($primaryFont, 46, bold, normal, 60);
+
+            }
+
+            span {
+                &:first-child {
+                    background: $linear-main;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    text-fill-color: transparent;
+                }
+
+                &:last-child {
+                    background: linear-gradient(110.99deg, #F6D242 -6.41%, #FF52E5 106.7%);
+                    ;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    text-fill-color: transparent;
+                } 
+
+                &.logo-color {
+                    background: $linear-main;
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                    text-fill-color: transparent;
+            }
+            }
+
+
+
+        }
+
+        .des {
+            color: $gray-800;
+        }
+}
+.benifits-cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(size(300), 1fr));
+    gap: size(20);
+}
+
+.steps-wrapper {
+    @include flex;
+    flex-wrap: wrap;
+    gap: size(60);
+    justify-content: center;
+    padding: size(100) size(0);
+
+
+    @include breakpoint(tab992) {
+        gap: size(80);
+        .step {
+       
+            width: 40%;
+         }
+    }
+}
+
+
+.works-immage {
+    height: size(370);
+    @include w100;
+
+    img {
+        @include wh100;
+        object-fit: contain;
+    }
+}
+
+.generate-image1 {
+    @include w100;
+    
+    overflow: hidden;
+   
+    
+    img {
+        @include wh100;
+        height: auto;
+        object-fit: contain;
+    }
+}
+.generate-image2 {
+    @include w100;
+   
+    overflow: hidden;
+    
+   
+    img {
+        @include wh100;
+        height: auto;
+        object-fit: contain;
+    }
+} 
+
+
+
+
+

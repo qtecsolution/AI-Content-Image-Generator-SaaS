@@ -1,0 +1,121 @@
+// DISPLAY FLEX
+@mixin flex {
+	display: flex;
+}
+
+// FLEX ROW
+@mixin flex-row {
+	@include flex;
+	flex-direction: row;
+}
+
+// FLEX START
+@mixin flex-start {
+	@include flex;
+	align-items: flex-start;
+}
+
+// FLEX COLUMN
+@mixin flex-column {
+	@include flex;
+	flex-direction: column;
+}
+
+// FLEX CENTER VERTICLE
+@mixin flex-center-vert {
+	@include flex;
+	align-items: center;
+}
+
+// FLEX BASELINE
+@mixin flex-baseline {
+	@include flex;
+	align-items: baseline;
+}
+
+// FLEX ALIGNEND
+@mixin flex-align-end {
+	@include flex;
+	align-items: flex-end;
+}
+
+// FLEX ALIGNEND
+@mixin flex-align-end-justifycenter {
+	@include flex-align-end;
+	justify-content: center;
+}
+
+// FLEX CENTER BASELINE
+@mixin flex-center-baseline {
+	@include flex;
+	align-items: baseline;
+	justify-content: center;
+}
+
+// FLEX CENTER ROW
+@mixin flex-center {
+	@include flex-center-vert;
+	justify-content: center;
+}
+
+// FLEX BETWEEN
+@mixin flex-between {
+	@include flex;
+	justify-content: space-between;
+}
+
+// FLEX CENTER
+@mixin flex-between {
+	@include flex-center-vert;
+	justify-content: space-between;
+}
+
+// FLEX CENTER COLUMN
+@mixin flex-center-column {
+	@include flex-center;
+	flex-direction: column;
+}
+
+// FLEX CENTER VERTICLE
+@mixin flex-baseline {
+	display: flex;
+	align-items: baseline;
+}
+
+// FLEX CENTER HORIZONTAL
+@mixin flex-center-horiz {
+	display: flex;
+	justify-content: center;
+}
+
+@mixin flex-end {
+	display: flex;
+	justify-content: flex-end;
+}
+
+@mixin flex-center-between {
+	@include flex-between;
+	align-items: center;
+}
+
+@mixin flex-center-around {
+	@include flex-center-vert;
+	justify-content: space-around;
+}
+
+// RESET LIST
+@mixin reset-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+@mixin list-vertical {
+	@include reset-list;
+	@include flex-column;
+}
+
+@mixin list-horizontal {
+	@include reset-list;
+	@include flex-center-vert;
+}

@@ -1,0 +1,32 @@
+
+$linear-main: linear-gradient(135deg, hsl(228, 100%, 80%) 0%, hsl(224, 79%, 33%) 100%);
+
+$white :hsl(0, 0%, 100%);
+$gray-50 :hsl(0, 0%, 98%); //#F9FAFB
+$gray-100 :hsl(216, 24%, 96%); //#F9FAFB
+$gray-200: hsl(220, 17%, 93%); //#EAECF0
+$gray-300:hsl(217, 16%, 84%); //#D0D5DD
+$gray-500 : hsl(221, 13%, 46%); //#667085
+
+$gray-600: hsl(216, 18%, 34%); //#475467 primary
+$gray-700:hsl(218, 24%, 27%);  // #344054
+$gray-800: hsl(214, 33%, 17%); //#1D2939
+$gray-900: hsl(220, 43%, 11%);  // #101828
+
+$main :hsl(225, 59%, 42%);  //#2C4CAC
+$danger: hsl(4, 74%, 49%); //#D92D20
+
+$border-bold :hsl(234, 100%, 95%);   //#E3E6FF
+
+$green-text :hsl(225, 59%, 42%); //#2C4CAC
+
+$checkbox:hsl(217, 16%, 84%); //#D0D5DD
+
+// THEME COLORS
+
+$shadow-1: hsla(220, 43%, 11%, 0.05);
+
+
+// BOX SHADOWS
+$boxshadow-1: 0 0.0625rem 0.125rem $shadow-1;
+$boxshadow-2: 0rem 1.25rem 1.5rem -0.25rem rgba(16, 24, 40, 0.08), 0rem 0.5rem 0.5rem -0.25rem rgba(16, 24, 40, 0.03);

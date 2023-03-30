@@ -1,0 +1,73 @@
+@use '../global' as *;
+@use '../partials' as *;
+
+.create-post {
+  display: none;
+    height: 100%;
+    @include flex-column;
+    
+    // form title herer
+    &-header {
+       padding: size(24) 0;
+       @include font($primaryFont,16,bold,normal,28);
+       color: $gray-800;
+
+       @include breakpoint(mobile576) {
+         @include font($primaryFont,18,bold,normal,28);
+
+       }
+       
+    }
+
+    // form inputs
+    .createpost-form {
+
+        .upload-group {
+            @include flex-column;
+            gap: size(6);
+
+            .upload-box {
+                @include border(dashed,1,$gray-300);
+                @include radius(8);
+                padding: size(16);
+                @include flex;
+                align-items: center;
+                gap: size(22);
+                i.fa {
+                    color: $gray-300;
+                }
+                span {
+                    @include font($primaryFont,12,medium,normal,20);
+                    color: $gray-300;
+        
+                    @include breakpoint(mobile576) {
+                      @include font($primaryFont,14,medium,normal,20);
+        
+                    }
+
+                    &.browse {
+                        @include border(solid,1,$gray-300); 
+                        @include radius(23);
+                        padding: size(6) size(12);
+                        line-height: 1.2;
+                    }
+                }
+            }
+        }
+    }
+
+  
+}
+
+   
+        
+    
+// general buttons
+.generate-btn-wrapper {
+    padding-bottom: size(60);
+    padding-top: size(10);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+

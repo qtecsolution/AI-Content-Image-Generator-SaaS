@@ -1,0 +1,42 @@
+@use '../../global'as *;
+@use '../../partials'as *;
+
+.tooltip {
+    &-inner {
+      background: $main;
+      font-size: size(12);
+    }
+  
+    &.bs-tooltip-auto[data-popper-placement^="top"] {
+      .tooltip-arrow {
+        &::before {
+          border-top-color: $main;
+        }
+      }
+    }
+  
+    &.bs-tooltip-auto[data-popper-placement^="bottom"] {
+      .tooltip-arrow {
+        &::before {
+          border-bottom-color: $main;
+        }
+      }
+    }
+  
+    &.bs-tooltip-auto[data-popper-placement^="left"] {
+      .tooltip-arrow {
+        &::before {
+          border-left-color: $main;
+        }
+      }
+    }
+  
+    &.bs-tooltip-auto[data-popper-placement^="right"] {
+      .tooltip-arrow {
+        &::before {
+          border-right-color: $main;
+        }
+      }
+    }
+  }
+

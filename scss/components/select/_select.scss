@@ -1,0 +1,104 @@
+@use '../../global'as *;
+@use '../../partials'as *;
+
+// .select-wrapper {
+//   position: relative;
+//   user-select: none;
+//   @include w100;
+ 
+
+
+//   .select {
+//     position: relative;
+
+//     &-trigger {
+//       position: relative;
+//       @include flex-center-between;
+//       cursor: pointer;
+//       height: size(40);
+//       overflow: hidden;
+
+//       .selectedvalue {
+//         color: $black;
+//         @include font($primaryFont, 14, normal, normal, 20);
+//         opacity: 0;
+//       }
+
+//       .arrow {
+//         background: $green;
+//         @include square(40);
+//         @include flex-center;
+//         overflow: hidden;
+//         @include double-radius(top, right, 6, bottom, right, 6);
+
+//         svg {
+//           @include transitiontransform;
+//         }
+//       }
+//     }
+
+//     .custom-options {
+//       position: absolute;
+//       display: block;
+//       top: 100%;
+//       left: 0;
+//       right: 0;
+//       @include border(solid, 1, $secondary);
+//       @include double-radius(bottom, left, 6, bottom, right, 6);
+//       @include radius(6);
+//       background: $white;
+//       @include transitionsall;
+//       opacity: 0;
+//       visibility: hidden;
+//       pointer-events: none;
+//       z-index: 2;
+//       overflow-y: scroll;
+//       max-height: size(240);
+
+//       &::-webkit-scrollbar {
+//         background: transparent;
+//         width: size(4);
+//       }
+  
+//       &::-webkit-scrollbar-thumb {
+//         background: $grayBg;
+//         @include radius(4);
+//       }
+
+//       .custom-option {
+//         position: relative;
+//         display: block;
+//         cursor: pointer;
+//         padding: size(8);
+//         @include transitionsall;
+
+//         &:hover {
+//           cursor: pointer;
+//           @include setBgColor(lighten($labelText, 50%), $black);
+//         }
+
+//         &.selected {
+//           @include setBgColor(lighten($primary, 15%), $black);
+//         }
+//       }
+//     }
+
+//     &.open {
+//       .select-trigger {
+//         .arrow {
+//           svg {
+//             @include rotate(180);
+//           }
+//         }
+//       }
+
+//       .custom-options {
+//         opacity: 1;
+//         visibility: visible;
+//         pointer-events: all;
+//       }
+//     }
+//   }
+// }
+
+

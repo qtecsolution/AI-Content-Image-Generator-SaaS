@@ -1,0 +1,289 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+
+.authentication-wrapper {
+    min-height: 100vh;
+     @include w100;
+     display: flex;
+     align-items: center;
+     
+     
+    .authentication-form {
+        flex-shrink: 0;
+        @include w100;
+
+        @include flex-column;
+        gap: size(30);
+        &-header {
+            @include flex-center-column;
+            align-items: center;
+            text-align: center;
+            gap: size(10);
+        }
+
+        &-body {
+            @include flex-column;
+            gap: size(12);
+
+            .or {
+                @include flex;
+                align-items: center;
+                gap: size(10);
+                .line {
+                    height: size(1);
+                    background: $gray-200;
+                    flex: 1;
+                    color: $gray-500;
+
+                }
+            }
+
+            .remember-forgot {
+                @include flex-between;
+                align-items: center;
+                padding: size(20) size(0);
+
+                .form-check {
+                    label {
+                        color: $gray-700;
+                        @include font($primaryFont,14,medium,normal,20);
+                    }
+
+                  
+                }
+                a {
+                    color: $main;
+                    @include font($primaryFont,14,semibold,normal,20);
+                    @include hover {
+                        text-decoration: underline;
+                    }
+                }
+            } 
+
+
+        }
+
+        .authentication-bottom {
+            color: $gray-500;
+            @include font($primaryFont,14,normal,normal,20);
+            text-align: center;
+          
+
+            a {
+                color: $main;
+                font-weight: 700;
+
+                @include hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+
+.logo-name {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    background-image: $linear-main;
+    -webkit-background-image:$linear-main;
+
+    @include font($primaryFont,30,bold,normal,41);
+
+    @include breakpoint(mobile576) {
+        @include font($primaryFont,33,bold,normal,41);
+    }
+}
+
+.section-title {
+    color: $gray-900;
+    @include font($primaryFont,28,semibold,normal,41);
+
+    @include breakpoint(mobile576) {
+        @include font($primaryFont,30,semibold,normal,41);
+      }
+}
+
+.form-des {
+    color: $gray-500;
+    @include font($primaryFont,14,normal,normal,24);
+
+}
+
+
+// profile page  form 
+
+.myprofile {
+    max-width: size(660);
+    
+
+    @include flex-column;
+    gap: size(10);
+
+    &-header {
+        @include border-single(bottom,solid,1,$gray-200);
+        padding: size(30) size(10) size(10);
+        @include flex-column;
+        gap: size(4);
+
+        .profile-title {
+            @include font($primaryFont,16,medium,normal,28);
+            color: $gray-900;
+
+            @include breakpoint(mobile576) {
+              @include font($primaryFont,18,medium,normal,28);
+
+            }
+        }
+        .profile-content {
+            @include font($primaryFont,12,normal,normal,28);
+            color: $gray-500;
+
+            @include breakpoint(mobile576) {
+              @include font($primaryFont,14,normal,normal,28);
+
+            }
+        }
+
+
+
+    }
+
+   
+    .profile-form {
+        box-shadow: $boxshadow-1;
+        padding: size(10);
+        @include breakpoint(tab992) {
+            padding: size(24);
+        }
+        @include transitionsall;
+        @include hover {
+           box-shadow: $boxshadow-2;
+
+        }
+         
+        .form-group {
+            .form-label {
+                @include font($primaryFont,12,medium,normal,20);
+                color: $gray-700;
+    
+                @include breakpoint(mobile576) {
+                  @include font($primaryFont,14,medium,normal,20);
+    
+                }
+            }
+            .form-control {
+                @include font($primaryFont,12,medium,normal,20);
+                color: $gray-900;
+    
+                @include breakpoint(mobile576) {
+                  @include font($primaryFont,14,medium,normal,24);
+    
+                }
+
+                &::placeholder {
+                    @include font($primaryFont,12,medium,normal,20);
+                    color: $gray-500;
+        
+                    @include breakpoint(mobile576) {
+                      @include font($primaryFont,14,medium,normal,24);
+        
+                    }
+                }
+            }
+        } 
+
+        .button-wrapper {
+            @include border-single(top,solid,1,$gray-200);
+            padding: size(16) size(0);
+            @include flex-end;
+            gap: size(12);
+
+
+        }
+    }
+ 
+
+    // email icon field
+    .form-group.email-icon {
+        position: relative;
+        input {
+            padding-left: size(35) ;
+        }
+        i.fa {
+            position: absolute;
+            top: size(41);
+            left: size(10);
+        
+        }
+    }
+}
+
+
+
+// upload boxes
+
+.profile-upload {
+    @include flex; 
+    gap: size(20);
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .profile-thumb {
+        @include square(64);
+        @include circle;
+        overflow: hidden;
+        @include transitionsall;
+        @include hover {
+            transform: translateY(size(-3))
+        }
+        
+        img {
+            @include wh100; 
+            object-fit: cover;
+        }
+    }
+
+    .upload-box {
+        @include border(solid,1,$gray-200);
+        padding: size(12) size(20);
+        @include radius(8);
+        @include flex-center;
+        flex-direction: column;
+        gap: size(4);
+        flex-grow: 1;
+
+        @include breakpoint(mobile576) {
+            padding: size(16) size(20);
+        }
+
+    }
+
+    .icon-wrapper  {
+        @include square(48);
+        background: $gray-100;
+        @include flex-center;
+        @include circle;
+        @include border(solid,6,$gray-50);
+    }
+
+    .upload-text {
+        color: $gray-500;
+        @include font($primaryFont,12,normal,normal,20);
+            @include breakpoint(mobile576) {
+              @include font($primaryFont,14,normal,normal,20);
+
+            }
+        span {
+            color: $main;
+            @include font($primaryFont,12,semibold,normal,20);
+            @include breakpoint(mobile576) {
+              @include font($primaryFont,14,semibold,normal,20);
+
+            }
+        }
+    }
+
+}

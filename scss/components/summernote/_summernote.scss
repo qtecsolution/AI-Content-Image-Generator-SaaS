@@ -1,0 +1,89 @@
+@use '../../global'as *;
+@use '../../partials'as *;
+
+.panel-heading.note-toolbar {
+    @include border(solid,1,$gray-300);
+   
+    border-right: 0;
+    border-left: 0;
+    background: transparent !important;
+}
+
+.note-toolbar {
+    background: transparent !important;
+    // @include border-single(top,solid,1,$gray-300);
+}
+
+.note-editor.note-airframe,
+ .note-editor.note-frame {
+   border: none !important;
+}
+
+.note-editable {
+    height: 80vh;
+}
+
+.title-box  {
+    @include border-single(bottom,solid,1,$gray-300);
+    input {
+        padding: size(10);
+        @include w100;
+        font-size: size(14);
+        font-weight:500;
+    }
+}
+
+.count {
+    background: $white;
+    @include flex-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: size(10) size(30);
+    @include border-single(top,solid,1,$gray-300);
+    padding-bottom: size(30);
+    gap: size(10);
+
+    .left {
+        @include font($primaryFont,12,medium,normal,20);
+            color: $gray-800;
+            @include flex;
+            gap: size(40);
+           
+
+           span {
+            position: relative;
+            &::before {
+                position: absolute;
+                content: '';
+                @include square(8);
+                background: $gray-800;
+                 @include circle;
+                 top: 50%;
+                 left: size(-14);
+                 transform: translateY(-50%);
+
+                 
+            }
+           }
+    }
+
+    .right {
+        button {
+            border: none;
+            background: transparent;
+            @include font($primaryFont,12,medium,normal,20);
+            color: $gray-800;
+            @include transitionsall;
+            @include hover {
+                box-shadow: $boxshadow-1;
+            }
+            @include breakpoint(tab992) {
+            @include font($primaryFont,14,medium,normal,20);
+
+            }
+
+        }
+    }
+
+
+}

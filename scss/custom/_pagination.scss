@@ -1,0 +1,53 @@
+@use '../global' as *;
+@use '../partials' as *;
+
+$pagination-font-size: 14px;
+$pagination-font-weight: 500;
+$pagination-link-color: #333;
+
+
+#custom-pagination {
+  
+    li {
+      display: inline-block;
+      margin-right: 10px;
+      a {
+        font-size: $pagination-font-size;
+        font-weight: $pagination-font-weight;
+        color: $pagination-link-color;
+        border-radius: 4px;
+        border-color: $gray-300;
+        box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+        &:hover,
+        &:focus {
+          text-decoration: none;
+        }
+      }
+    }
+    .active {
+       
+        color: $main;
+
+        
+        
+      a {
+        background: transparent;
+        border-color: transparent;
+        background: rgba(44, 76, 172, 0.05);
+        &:hover,
+        &:focus {
+         
+        }
+      }
+    }
+    .disabled {
+      a {
+        color: #ccc;
+        &:hover,
+        &:focus {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+  

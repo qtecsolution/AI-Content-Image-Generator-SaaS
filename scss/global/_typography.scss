@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+$primaryFont:  'Inter', sans-serif;
+$secondaryFont: 'Lexend', sans-serif;
+
+// FONT SIZE PIXEL TO REM
+@function calculateRem($size, $base: 16) {
+  $remSize: calc($size / $base);
+  @return $remSize * 1rem;
+}
+
+// FONT STYLE FUNCTION
+@function style($keyword) {
+  $conversion-map: (
+    normal: normal,
+    italic: italic,
+    oblique: oblique
+  );
+
+  @if not map-has-key($conversion-map, $keyword) {
+    @error "Unsupported `font-weight` keyword `#{$keyword}`";
+    @return null;
+  }
+
+  @return map-get($conversion-map, $keyword);
+}
+
+// FONT WEIGHT FUNCTION
+@function weight($keyword) {
+  $conversion-map: (
+    light: 300,
+    normal: 400,
+    medium: 500,
+    semibold: 600,
+    bold: 700
+  );
+
+  @if not map-has-key($conversion-map, $keyword) {
+    @error "Unsupported `font-weight` keyword `#{$keyword}`";
+    @return null;
+  }
+
+  @return map-get($conversion-map, $keyword);
+}
+
+@mixin font($name, $size, $weight, $style, $lh) {
+  font: {
+    family: $name;
+    size: calculateRem($size);
+    weight: weight($weight);
+    style: style($style)
+  }
+  line-height: calc($lh / $size);
+}
