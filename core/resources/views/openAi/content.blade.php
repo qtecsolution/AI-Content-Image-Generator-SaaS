@@ -170,34 +170,54 @@
                             <textarea id="summernote" name="generated_content"></textarea>
                         </form>
 
-                    </div>
-
-                </div>
-
-                <!-- coutn -->
-                <div id="content-control" class="count sticky-bottom" style="display: none">
+                         <!-- coutn -->
+                <div id="content-control" class="count" style="display: none">
                     <div class="left">
                         <span class="words"> <span id="words-count"> 0 </span> Words</span>
                         <span class="charecters"> <span id="charecters-count"> 0 </span> Characters</span>
                     </div>
 
                     <div class="right">
-                        <button type="button" onclick="regenerate()">
-                            <i class="fa fa-refresh fa-spin content-generate-preloader" style="display: none"></i>
-                            <i class="fa fa-random content-regenerate" aria-hidden="true"></i>
+                        <button type="button" onclick="regenerate()" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Regenerate content">
+                            
+                            <span>
+                            <svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M8.20833 1.04175L10.375 3.20841M10.375 3.20841L8.20833 5.37508M10.375 3.20841H2.79167C2.21703 3.20841 1.66593 3.43669 1.2596 3.84302C0.853273 4.24935 0.625 4.80045 0.625 5.37508V6.45841M2.79167 12.9584L0.625 10.7917M0.625 10.7917L2.79167 8.62508M0.625 10.7917H8.20833C8.78297 10.7917 9.33407 10.5635 9.7404 10.1571C10.1467 9.75082 10.375 9.19972 10.375 8.62508V7.54175" stroke="#1D2939" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+
+                            </span>
                             <span>Regenerate</span>
                         </button>
                         <button type="button" class="copy-button" onclick="copyText()" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="Copy to clipboard">
-                            <i class="fa fa-copy"></i>
+                          <span>
+                          <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M2.70825 7.62492H2.16659C1.87927 7.62492 1.60372 7.51078 1.40055 7.30762C1.19739 7.10445 1.08325 6.8289 1.08325 6.54159V1.66659C1.08325 1.37927 1.19739 1.10372 1.40055 0.900553C1.60372 0.697388 1.87927 0.583252 2.16659 0.583252H7.04159C7.3289 0.583252 7.60445 0.697388 7.80762 0.900553C8.01078 1.10372 8.12492 1.37927 8.12492 1.66659V2.20825M5.95825 4.37492H10.8333C11.4316 4.37492 11.9166 4.85994 11.9166 5.45825V10.3333C11.9166 10.9316 11.4316 11.4166 10.8333 11.4166H5.95825C5.35994 11.4166 4.87492 10.9316 4.87492 10.3333V5.45825C4.87492 4.85994 5.35994 4.37492 5.95825 4.37492Z" stroke="#1D2939" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                          </span>
+
                             <span>copy</span>
                         </button>
-                        <button type="button" onclick="contentSave()">
-                            <i class="fa fa-save"></i>
+                        <button type="button" onclick="contentSave()" data-bs-toggle="tooltip"
+                            data-bs-placement="top" title="Save content">
+                        <span>
+                            <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M6.04175 0.583252H2.25008C1.96276 0.583252 1.68721 0.697388 1.48405 0.900553C1.28088 1.10372 1.16675 1.37927 1.16675 1.66659V10.3333C1.16675 10.6206 1.28088 10.8961 1.48405 11.0993C1.68721 11.3024 1.96276 11.4166 2.25008 11.4166H8.75008C9.0374 11.4166 9.31295 11.3024 9.51611 11.0993C9.71928 10.8961 9.83341 10.6206 9.83341 10.3333V4.37492M6.04175 0.583252L9.83341 4.37492M6.04175 0.583252V4.37492H9.83341" stroke="#1D2939" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                            </span>
                             <span>save</span>
                         </button>
                     </div>
                 </div>
+                
+
+                    </div>
+
+                </div>
+
+               
             </div>
         </section>
     </div>

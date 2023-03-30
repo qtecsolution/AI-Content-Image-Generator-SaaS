@@ -39,7 +39,7 @@
     border-right: 2px solid #999;
     content: "";
     display: block;
-    height: 5px;
+    height: 8px;
     margin-top: -4px;
     pointer-events: none;
     position: absolute;
@@ -48,7 +48,7 @@
     transform-origin: 66% 66%;
     transform: rotate(45deg);
     transition: all .15s ease-in-out;
-    width: 5px
+    width: 8px
 }
 
 .nice-select.open:after {

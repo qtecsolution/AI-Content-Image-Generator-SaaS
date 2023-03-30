@@ -40,15 +40,52 @@
             </div>
 
             <div>
-                <ul class="pagination">
+
+            <ul class="pagination custom-pagination" id="custom-pagination">
+                  <li class="page-item"><a class="page-link" href="#">
+                    <span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.8332 6.99996H1.1665M1.1665 6.99996L6.99984 12.8333M1.1665 6.99996L6.99984 1.16663" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                            
+                    </span>
+                  </a></li>
+                  <li class="page-item active"><a class="page-link " href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">
+                    <span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.16699 6.99996H12.8337M12.8337 6.99996L7.00033 1.16663M12.8337 6.99996L7.00033 12.8333" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>    
+                    </span>
+                  </a></li>
+                </ul>
+                
+                <ul class="pagination d-none " >
                     {{-- Previous Page Link --}}
                     @if ($paginator->onFirstPage())
-                        <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                            <span class="page-link" aria-hidden="true">&lsaquo;</span>
+                        <li class="page-item disabled d-none" aria-disabled="true" aria-label="@lang('pagination.previous')">
+                            <span class="page-link" aria-hidden="true">
+                          
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.8332 6.99996H1.1665M1.1665 6.99996L6.99984 12.8333M1.1665 6.99996L6.99984 1.16663" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                    
+                            </span>
+                        
                         </li>
                     @else
                         <li class="page-item">
-                            <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">&lsaquo;</a>
+                            <a class="page-link" href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
+                                    <span class="page-link" aria-hidden="true">
+                                
+                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12.8332 6.99996H1.1665M1.1665 6.99996L6.99984 12.8333M1.1665 6.99996L6.99984 1.16663" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                    
+                            </span>
+                            </a>
                         </li>
                     @endif
 
@@ -78,10 +115,16 @@
                         </li>
                     @else
                         <li class="page-item disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
-                            <span class="page-link" aria-hidden="true">&rsaquo;</span>
+                            <span class="page-link" aria-hidden="true">
+                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.16699 6.99996H12.8337M12.8337 6.99996L7.00033 1.16663M12.8337 6.99996L7.00033 12.8333" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+
+                            </span>
                         </li>
                     @endif
                 </ul>
+                
             </div>
         </div>
     </nav>

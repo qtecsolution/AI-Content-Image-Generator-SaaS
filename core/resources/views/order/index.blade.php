@@ -12,14 +12,36 @@
                         <h5 class="header-title">All @if(isset($request->status) && $request->status==0) Pending @endif Tranzactions</h5>
                         <div class="project-button pull-right">
                             @if(isset($request->status) && $request->status==0)
-                            <a href="{{ route('order.index') }}" class="btn btn-light btn-xs">
-                                <i class="fa fa-list"></i>
-                                All Transections
+                            
+                            <a href="{{ route('order.index') }}" class="seeall-btn d-flex">
+                                <span class="icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.33301 4H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M5.33301 8H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M5.33301 12H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M2 4H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M2 8H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M2 12H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+
+                                </span>
+                                <span class="mt-1"> All Transections</span>
                             </a>
                             @else 
-                            <a href="{{ route('order.index') }}?status=0" class="btn btn-light btn-xs">
-                                <i class="fa fa-list"></i>
-                                Pending Transections
+                            
+                            <a href="{{ route('order.index') }}?status=0" class="seeall-btn d-flex">
+                                <span class="icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5.33301 4H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M5.33301 8H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M5.33301 12H13.9997" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M2 4H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M2 8H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        <path d="M2 12H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                    </svg>
+
+                                </span>
+                                <span class="mt-1"> Pending Transections</span>
                             </a>
                             @endif
                         </div>
@@ -30,21 +52,24 @@
 
                             <div class="searchbox">
                                 <span class="search-icon">
-                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19 19L14.65 14.65M17 9C17 13.4183 13.4183 17 9 17C4.58172 17 1 13.4183 1 9C1 4.58172 4.58172 1 9 1C13.4183 1 17 4.58172 17 9Z" stroke="#D0D5DD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
                                 </span>
-                                <input type="text" name="" id="search-datatable">
+                                <input type="text" name="" id="search-datatable" placeholder="Search post here">
                             </div>
 
 
                             <table class="project-table table" id="datatables">
                                 <thead>
-                                    <tr>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Invoice</th>
-                                        <th scope="col">User</th>
-                                        <th scope="col">Plan</th>
-                                        <th scope="col">Method</th>
-                                        <th scope="col" width="10%">Status</th>
+                                    
+                                    <tr class="bg-white">
+                                    <td>Date</td>
+                                    <td>Invoice</td>
+                                    <td>User</td>
+                                    <td>Plan</td>
+                                    <td>Method</td>
+                                    <td width="10%">Status</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -65,6 +90,18 @@
                 processing: true,
                 serverSide: true,
                 ordering: true,
+                language: {
+                    paginate: {
+                        next: ` <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1.16699 7.00008H12.8337M12.8337 7.00008L7.00033 1.16675M12.8337 7.00008L7.00033 12.8334" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg> `,
+                        previous: `<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.8337 7.00008H1.16699M1.16699 7.00008L7.00033 12.8334M1.16699 7.00008L7.00033 1.16675" stroke="#344054" stroke-width="1.67" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>`,
+                    },
+                    "lengthMenu": "Show _MENU_ entries ",
+                    pageLength: 10,
+                },
                 ajax: {
                     url: "{{ route('order.index') }}?<?php echo http_build_query($request->all()) ?>"
                 },

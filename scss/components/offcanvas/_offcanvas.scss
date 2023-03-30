@@ -1,0 +1,100 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+.offcanvas {
+    
+    &.offcanvas-start {
+      border-right: 0;
+      // width: size(280);
+    }
+  
+    &-header {
+      @include border-single(bottom,solid,1,$gray-300);
+      padding-top: size(20);
+      .logo {
+        width: size(120);
+        height: size(30);
+        @include flex-center;
+        overflow: hidden;
+  
+        img {
+          @include wh100;
+          object-fit: cover;
+        }
+      }
+  
+      .btn-close {
+        @include radius(0);
+        @include transitionsall;
+        padding: 0;
+        margin: 0;
+        @include square(20);
+        @include flex-center;
+        overflow: hidden;
+  
+        svg {
+          @include wh100;
+        }
+  
+        @include hover {
+          opacity: 1;
+          @include rotate(180);
+  
+          svg {
+            path {
+              fill: $danger;
+            }
+          }
+        }
+      }
+    }
+  
+    &-body {
+      @include flex-column;
+      padding: size(0);
+      gap:size(30);
+      .mobilelist {
+        @include list-vertical;
+        // padding-left: size(16);
+       
+        @include w100;
+        
+        &-link {
+          position: relative;
+          display: block;
+          color: $gray-800;
+          @include font($secondaryFont, 16, medium, normal, 24);
+          overflow: hidden;
+          @include w100;
+          padding: size(10) size(14);
+          
+          width: 100%;
+          &.active {
+            @include setBgColor($main,$white);
+          }
+  
+          @include hover {
+            color: $white;
+            background: $linear-main;
+  
+          }
+        }
+      }
+  
+      .mobilelist-loged {
+          @include border-single(top,solid,1,$gray-200);
+          padding-top: size(20);
+      }
+  
+          &::-webkit-scrollbar {
+              background: transparent;
+              width: size(8);
+          }
+  
+          &::-webkit-scrollbar-thumb {
+              background: $gray-300;
+            @include radius(8);
+          }
+      
+    }
+  }

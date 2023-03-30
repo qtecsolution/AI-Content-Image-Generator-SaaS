@@ -1,0 +1,243 @@
+@use '../global' as *;
+
+// CONVERT PIXEL TO REM
+@function size($size, $base: 16) {
+  @return calc($size / $base) + rem;
+}
+
+// SQUARE
+@mixin square($width, $height: $width) {
+  width: size($width);
+  height: size($height);
+}
+
+@mixin setBgColor($background, $color) {
+	background: $background;
+	color: $color;
+}
+
+@mixin border($style, $width, $color, $base: 16) {
+	border: $style ((calc($width / $base) + rem)) $color;
+}
+
+@mixin border-single($direction, $style, $width, $color, $base: 16) {
+	border-#{$direction}: $style ((calc($width / $base) + rem)) $color;
+}
+
+// DEFINE BORDER-RADIUS-ALL MIXIN
+@mixin radius($radius) {
+	border-radius: size($radius);
+	-webkit-border-radius: size($radius);
+	-moz-border-radius: size($radius);
+	-ms-border-radius: size($radius);
+	-o-border-radius: size($radius);
+	border-radius: size($radius);
+}
+
+@mixin percentradius($percentage) {
+	-webkit-border-radius: $percentage;
+	-moz-border-radius: $percentage;
+	-ms-border-radius: $percentage;
+	-o-border-radius: $percentage;
+	border-radius: $percentage;
+}
+
+@mixin circle {
+	@include percentradius(100%);
+}
+
+// DEFINE INDIVIDUAL BORDER-RADIUS MIXIN
+@mixin single-radius($dir1, $dir2, $radius) {
+	-webkit-border-#{$dir1}-#{$dir2}-radius: size($radius);
+	-moz-border-#{$dir1}-#{$dir2}-radius: size($radius);
+	-ms-border-#{$dir1}-#{$dir2}-radius: size($radius);
+	-o-border-#{$dir1}-#{$dir2}-radius: size($radius);
+	border-#{$dir1}-#{$dir2}-radius: size($radius);
+}
+
+// DEFINE CROSS BORDER-RADIUS
+@mixin double-radius($dir1, $dir2, $r1, $dir3, $dir4, $r2) {
+	border-#{$dir1}-#{$dir2}-radius: size($r1);
+	border-#{$dir3}-#{$dir4}-radius: size($r2);
+}
+
+@mixin hover {
+	&:not([disabled]):hover {
+		@content;
+	}
+}
+
+@mixin line-clamp {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 2;
+}
+
+@mixin line-clamp-4 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 4;
+}
+
+@mixin line-clamp-3 {
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 3;
+}
+
+@mixin text-overflow {
+	max-width: 99%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+@mixin w100 {
+	width: 100%;
+}
+
+@mixin h100 {
+	height: 100%;
+}
+
+@mixin wh100 {
+	width: 100%;
+	height: 100%;
+}
+
+@mixin vwh100 {
+	width: 100vw;
+	height: 100vh;
+}
+
+@mixin ratio($width, $r1, $r2) {
+	width: size($width);
+	aspect-ratio: $r1 / $r2;
+}
+
+@mixin transparent-button {
+	background: transparent;
+	border: none;
+}
+
+@mixin position($position, $args) {
+  position: $position;
+  @each $o in top right bottom left {
+    $i: index($args, $o);
+ 
+    @if $i and $i + 1<= length($args) and type-of(nth($args, $i + 1)) == number  {
+      #{$o}: nth($args, $i + 1);
+    }
+  }
+}
+
+@mixin absolute($args) {
+  @include position(absolute, $args);
+}
+ 
+@mixin fixed($args) {
+  @include position(fixed, $args);
+}
+ 
+@mixin relative($args) {
+  @include position(relative, $args);
+}
+
+@mixin transform($transforms) {
+	-webkit-transform: $transforms;
+	-moz-transform: $transforms;
+	-ms-transform: $transforms;
+	transform: $transforms;
+}
+
+@mixin rotate($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+@mixin rotateX($deg) {
+  @include transform(rotateX(#{$deg}deg));
+}
+
+@mixin rotateY($deg) {
+  @include transform(rotateY(#{$deg}deg));
+}
+
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+
+@mixin scaleX($scale) {
+  @include transform(scaleX($scale));
+}
+
+@mixin scaleY($scale) {
+  @include transform(scaleY($scale));
+}
+
+@mixin translate($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+@mixin translateX($x) {
+  @include transform(translateX($x));
+}
+
+@mixin translateY($y) {
+  @include transform(translateY($y));
+}
+
+@mixin skew($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+
+@mixin cover-background {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+@mixin transition($args...) {
+	-webkit-transition: $args;
+	-moz-transition: $args;
+	-ms-transition: $args;
+	-o-transition: $args;
+	transition: $args;
+}
+
+@mixin transitionsall {
+	@include transition(all $time ease-in-out);
+}
+
+@mixin transitionscolor {
+	@include transition(color $time ease-in-out);
+}
+
+@mixin transitionsbackground {
+	@include transition(background $time ease-in-out);
+}
+
+@mixin transitionsopacity {
+	@include transition(background $time ease-in-out);
+}
+
+@mixin transitiontransform {
+	@include transition(transform $time ease-in-out);
+}
+
+@mixin hideScrollbar {
+
+	&::-webkit-scrollbar {
+	  width: 0 !important
+	}
+
+	-ms-overflow-style: none;
+	
+
+	scrollbar-width: none;
+  }

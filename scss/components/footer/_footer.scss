@@ -1,0 +1,75 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+.landing-footer {
+
+    padding-bottom: size(100);
+    .footer-content {
+        background: linear-gradient(135deg, rgba(151, 171, 255, 0.1) 0%, rgba(18, 53, 151, 0.1) 100%);
+        @include radius(30);
+        padding: size(30) size(50);
+    }
+
+    .footerlinks {
+        @include flex-column;
+        gap: size(14);
+        padding: size(10);
+
+        &-title {
+            color: $gray-700;
+            @include font($primaryFont,16,medium,normal,24);
+        }
+        .footerlink {
+            @include flex-column;
+            .link {
+                color: $gray-700;
+                @include font($primaryFont,12,normal,normal,24);
+                @include hover {
+                    color: $gray-600;
+                    text-decoration: underline;
+                }
+            }
+        }
+    } 
+
+    .footer-social {
+        padding: size(20);
+        display: flex;
+        justify-content: center;
+
+    }
+    .socilmenu {
+        @include list-horizontal;
+        gap: size(12);
+
+        &-item {
+
+        }
+        .socialmenu-link{
+            display: inline-block;
+            @include square(44);
+            @include circle;
+            @include flex-center;
+            border: 1px solid rgba(44, 76, 172, 0.3);
+            @include transitionsall;
+
+            @include hover {
+                border-color: $main;
+                
+                
+
+            }
+        }
+
+
+    }
+    .copyright {
+        text-align: center;
+
+        &-text {
+            color: $gray-800;
+            @include font($primaryFont,14,normal,normal,20);
+        }
+    }
+}
+

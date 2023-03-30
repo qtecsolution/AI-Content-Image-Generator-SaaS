@@ -1,0 +1,211 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+.header {
+    background: $white;
+    @include border-single(bottom, solid, 1, $gray-300);
+    @include flex-between;
+    align-items: center;
+    padding: size(10) size(16);
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 2;
+  
+    @include breakpoint(tab992) {
+      padding: (0) size(16);
+      justify-content: flex-end;
+    }
+  
+  
+    // .logo {
+    //   width: size(125);
+    //   height: size(36);
+    //   @include flex-center;
+    //   overflow: hidden;
+  
+    //   @include breakpoint(tab992) {
+    //     display: none;
+    //   }
+  
+    //   img {
+    //     @include wh100;
+    //     object-fit: cover;
+    //   }
+    // }
+  
+   &-nav {
+
+       .headermenu {
+           @include list-horizontal;
+           gap: size(10);
+
+           &-item {
+               position: relative;
+               @include breakpoint(tab992) {
+                padding: size(16) size(0) size(16) size(0);
+               }
+
+               @include hover {
+                   .userdropdown {
+                       display: block;
+                   }
+               }
+
+               .user-info {
+                   @include flex;
+                   gap: size(20);
+
+                   .user-thumb {
+                       @include square(32);
+                       overflow: hidden;
+                       @include circle;
+
+                       img {
+                           @include wh100;
+                           object-fit: cover;
+                       }
+                   }
+
+                   .name-email {
+                       @include flex-column;
+                       display: none;
+                       @include breakpoint(tab992) {
+                        display: flex;
+                       }
+
+                       .name {
+                           color: $gray-700;
+                           @include font($primaryFont, 14, semibold, normal, 20);
+                       }
+
+                       .email {
+                           color: $gray-500;
+                           @include font($primaryFont, 12, normal, normal, 20);
+
+                       }
+
+                   }
+               }
+
+               .userdropdown {
+                   position: absolute;
+                   top: calc(100% - size(8));
+                   right: 0;
+                   background: $white;
+                   box-shadow: $boxshadow-2;
+                   display: none;
+                   @extend %animation;
+                   @extend %slideUpIn;
+                   width: size(160);
+                   @include border(solid,1,$gray-100); 
+                   @include radius(8);
+
+                   .name-email-mobile {
+                    @include flex-column;
+                    align-items: center;
+                    padding: size(20) size(0);
+                    
+                    @include breakpoint(tab992) {
+                     display: none;
+                    }
+
+                    .name {
+                        color: $gray-700;
+                        @include font($primaryFont, 14, semibold, normal, 20);
+                    }
+
+                    .email {
+                        color: $gray-500;
+                        @include font($primaryFont, 12, normal, normal, 20);
+
+                    }
+                   }
+                   .userlist {
+                    @include list-vertical;
+                  
+                    &-item {
+
+                    }
+                    &-link {
+                        color: $gray-900;
+                        padding: size(10) size(14);
+                        @include transitionsall;
+                        @include font($primaryFont,14,medium,normal,20);
+                        display:block;
+                        text-align: center;
+                        @include breakpoint(tab992) {
+                            text-align: left;
+                        }
+                        @include hover {
+                            @include setBgColor($gray-50,$gray-700)
+                        }
+                    }
+                   }
+               }
+           }
+       }
+   }
+  
+
+  }
+
+  .landing-header {
+   padding: size(18) size(0);
+   position: sticky;
+   top: 0;
+   left: 0;
+   transition: background-color 0.3s ease-in-out;
+   
+   z-index: 100;
+    .header-desk {
+        @include flex-between;
+        align-items: center;
+
+        .header-logo {
+
+        }
+    }
+    .header-left {
+        @include flex;
+        align-items: center;
+        gap: size(60);
+    }
+    .header-right {
+        
+    }
+
+    .desk-menu {
+        @include list-horizontal;
+        gap:size(36);
+
+        &-link {
+            position: relative;
+            padding: size(10) ;
+            color: $gray-700;
+            @include font($primaryFont,16,medium,normal,24);
+          
+               &::after {
+                    position: absolute;
+                    content: '';
+                    width: 0;
+                    height: size(2);
+                    top: 110%;
+                    background: black;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    @include transitionsall;
+            } 
+            @include hover {
+                color: $gray-600;
+                &::after {
+                    @include w100;
+                }
+            }
+           
+        }
+
+       
+    }
+  }
+

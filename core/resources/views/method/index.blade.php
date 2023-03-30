@@ -42,7 +42,7 @@
 
 
         </ul>
-        <div class="tab-content mt-5 setting-tab-content" id="myTabContent">
+        <div class="tab-content mt-3 setting-tab-content" id="myTabContent">
             <div class="tab-pane fade @if (isset($tab) && $tab == 'paypal') show active @endif " id="Papal-tab-pane"
                 role="tabpanel" aria-labelledby="Papal-tab" tabindex="0">
                 <div class="row">
@@ -60,21 +60,23 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="form-group mb-2">
-                                <label class="col-form-label">Paypal Client Id</label>
-                                <input class="form-control custom-input" name="PAYPAL_CLIENT_ID"
+
+                            <div class="form-group  mb-2">
+                                <label class="col-form-label" for="paypalId">Paypal Client Id</label>
+                                <input class="form-control custom-input" name="PAYPAL_CLIENT_ID" id="paypalId"
                                     value="{{ readConfig('PAYPAL_CLIENT_ID') }}" placeholder="PAYPAL_CLIENT_ID">
                             </div>
 
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Paypal App Secret </label>
-                                <input class="form-control custom-input" name="PAYPAL_APP_SECRET"
+                                <label class="col-form-label" for="paypalSecret">Paypal App Secret </label>
+                                <input class="form-control custom-input" name="PAYPAL_APP_SECRET" id="paypalSecret"
                                     value="{{ readConfig('PAYPAL_APP_SECRET') }}" placeholder="PAYPAL_APP_SECRET">
                             </div>
 
                             <div class="text-center">
-                                <button class="btn btn-primary " type="submit" name="action"
-                                    value="published">Save</button>
+                                <div class="generate-btn-wrapper">
+                                        <button type="submit" class="generate-btn px-4">Save</button>
+                                    </div>
                             </div>
 
 
@@ -82,7 +84,7 @@
                     </div>
                     <div class="col-md-5">
                         <h6>Here are the general steps to get PayPal client ID and app secret:</h6>
-                        <ol class="m-4">
+                        <ol class="m-4 fz-14 gray-800">
                             <li>Log in to your PayPal developer account. If you don't have one, create a new account at <a
                                     href="https://developer.paypal.com/" target="_new">https://developer.paypal.com/</a>.
                             </li>
@@ -97,7 +99,7 @@
                             <li>Copy the client ID and secret and save them in a secure location. These will be used to
                                 authenticate your PayPal API requests.</li>
                         </ol>
-                        <p>Note that the steps above are for obtaining PayPal REST API credentials, which are used for
+                        <p class="fz-14">Note that the steps above are for obtaining PayPal REST API credentials, which are used for
                             integrating PayPal payment functionality into your web or mobile application. If you need to
                             obtain other types of PayPal credentials, such as the Classic API credentials, the process may
                             be different. Be sure to consult the PayPal documentation or support resources for more detailed
@@ -115,7 +117,7 @@
                             @csrf
 
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Stripe Active<span class="text-danger">*</span></label>
+                                <label class="col-form-label gray-800 font-500 fz-14 ">Stripe Active<span class="text-danger">*</span></label>
                                 <select class="form-control custom-input select2 w-100" name="STRIPE_ACTIVE">
                                     <option value="on" {{ readConfig('STRIPE_ACTIVE') == 'on' ? 'selected' : null }}>ON
                                     </option>
@@ -125,21 +127,22 @@
                                 </select>
                             </div>
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Stripe Key </label>
+                                <label class="col-form-label gray-800 font-500 fz-14" for="stripeKey">Stripe Key </label>
                                 <input class="form-control custom-input" name="STRIPE_KEY" value="{{ readConfig('STRIPE_KEY') }}"
-                                    placeholder="STRIPE_KEY">
+                                    placeholder="STRIPE_KEY" id="stripeKey">
                             </div>
 
                             <div class="form-group mb-2">
-                                <label class="col-form-label">Stripe Secret</label>
+                                <label class="col-form-label gray-800 font-500 fz-14" for="stripe-secret">Stripe Secret</label>
                                 <input class="form-control custom-input" name="STRIPE_SECRET"
-                                    value="{{ readConfig('STRIPE_SECRET') }}" placeholder="STRIPE_SECRET">
+                                    value="{{ readConfig('STRIPE_SECRET') }}" placeholder="STRIPE_SECRET"  id="stripe-secret">
                             </div>
 
 
                             <div class="text-center mt-2">
-                                <button class="btn btn-primary float-left" type="submit" name="action"
-                                    value="published">Save</button>
+                                <div class="generate-btn-wrapper">
+                                    <button type="submit" class="generate-btn px-4">Save</button>
+                                </div>
                             </div>
 
 
@@ -147,7 +150,7 @@
                     </div>
                     <div class="col-md-5">
                         <h6>Here are the general steps to get Stripe client ID and secret:</h6>
-                        <ol class="m-4">
+                        <ol class="m-4 fz-14">
                             <li>Log in to your Stripe account. If you don't have one, sign up for a new account at <a
                                     href="https://dashboard.stripe.com/register"
                                     target="_new">https://dashboard.stripe.com/register</a>.</li>
@@ -165,7 +168,7 @@
                             <li>Copy the publishable key, secret key, and restricted API key and save them in a secure
                                 location. These will be used to authenticate your Stripe API requests.</li>
                         </ol>
-                        <p>Note that the steps above are for obtaining Stripe REST API credentials, which are used for
+                        <p class="fz-14">Note that the steps above are for obtaining Stripe REST API credentials, which are used for
                             integrating Stripe payment functionality into your web or mobile application. If you need to
                             obtain other types of Stripe credentials, such as the Connect platform credentials, the process
                             may be different. Be sure to consult the Stripe documentation or support resources for more
@@ -184,7 +187,7 @@
                             @csrf
 
                             <div class="form-group mb-2">
-                                <label class="col-form-label">RAZORPAY_ACTIVE <span class="text-danger">*</span></label>
+                                <label class="col-form-label" >RAZORPAY_ACTIVE <span class="text-danger">*</span></label>
                                 <select class="form-control select2 w-100" name="RAZORPAY_ACTIVE">
                                     <option value="on"
                                         {{ readConfig('RAZORPAY_ACTIVE') == 'on' ? 'selected' : null }}>ON
@@ -195,21 +198,22 @@
                                 </select>
                             </div>
                             <div class="form-group mb-2">
-                                <label class="col-form-label">RAZORPAY_KEY</label>
+                                <label class="col-form-label" for="razorpayKey">RAZORPAY_KEY</label>
                                 <input class="form-control" name="RAZORPAY_KEY" value="{{ readConfig('RAZORPAY_KEY') }}"
-                                    placeholder="RAZORPAY_KEY">
+                                    placeholder="RAZORPAY_KEY" id="razorpayKey">
                             </div>
 
                             <div class="form-group mb-2">
-                                <label class="col-form-label">RAZORPAY_SECRET</label>
+                                <label class="col-form-label" for="razorpaySecret">RAZORPAY_SECRET</label>
                                 <input class="form-control" name="RAZORPAY_SECRET"
-                                    value="{{ readConfig('RAZORPAY_SECRET') }}" placeholder="RAZORPAY_SECRET">
+                                    value="{{ readConfig('RAZORPAY_SECRET') }}" placeholder="RAZORPAY_SECRET" id="razorpaySecret">
                             </div>
 
 
                             <div class="text-center">
-                                <button class="btn btn-success float-left" type="submit" name="action"
-                                    value="published">Save</button>
+                            <div class="generate-btn-wrapper">
+                                    <button type="submit" class="generate-btn px-4">Save</button>
+                                </div>
                             </div>
 
 
@@ -217,7 +221,7 @@
                     </div>
                     <div class="col-md-5">
                         <h6>Here are the general steps to get Stripe client ID and secret:</h6>
-                        <ol class="m-4">
+                        <ol class="m-4 fz-14">
                             <li>Log in to your Stripe account. If you don't have one, sign up for a new account at <a
                                     href="https://dashboard.stripe.com/register"
                                     target="_new">https://dashboard.stripe.com/register</a>.</li>
@@ -235,7 +239,7 @@
                             <li>Copy the publishable key, secret key, and restricted API key and save them in a secure
                                 location. These will be used to authenticate your Stripe API requests.</li>
                         </ol>
-                        <p>Note that the steps above are for obtaining Stripe REST API credentials, which are used for
+                        <p class="fz-14">Note that the steps above are for obtaining Stripe REST API credentials, which are used for
                             integrating Stripe payment functionality into your web or mobile application. If you need to
                             obtain other types of Stripe credentials, such as the Connect platform credentials, the process
                             may be different. Be sure to consult the Stripe documentation or support resources for more
@@ -284,8 +288,9 @@
 
 
                             <div class="text-center">
-                                <button class="btn btn-success float-left" type="submit" name="action"
-                                    value="published">Save</button>
+                                <div class="generate-btn-wrapper">
+                                    <button type="submit" class="generate-btn px-4">Save</button>
+                                </div>
                             </div>
 
 
@@ -309,8 +314,8 @@
                         @csrf
 
                         <div class="form-group mb-2">
-                            <label class="col-form-label">Bank Payment Active <span class="text-danger">*</span></label>
-                            <select class="form-control select2 w-100" name="bank_status">
+                            <label class="col-form-label" for="bankPayment">Bank Payment Active <span class="text-danger">*</span></label>
+                            <select class="form-control select2 w-100" name="bank_status" id="bankPayment">
                                 <option value="on" {{ readConfig('bank_status') == 'on' ? 'selected' : null }}>
                                     ON
                                 </option>
@@ -320,47 +325,48 @@
                             </select>
                         </div>
                         <div class="form-group mb-2">
-                            <label class="col-form-label">About the Bank</label>
+                            <label class="col-form-label" for="aboutBank">About the Bank</label>
                             <input class="form-control" name="about_bank" value="{{ readConfig('about_bank') }}"
-                                placeholder="About the Bank">
+                                placeholder="About the Bank" id="aboutBank">
                         </div>
 
                         <div class="form-group mb-2">
-                            <label class="col-form-label">Bank Name</label>
+                            <label class="col-form-label" for="bankName">Bank Name</label>
                             <input class="form-control" name="bank_name"
-                                value="{{ readConfig('bank_name') }}" placeholder="Bank Name">
+                                value="{{ readConfig('bank_name') }}" placeholder="Bank Name" id="bankName">
                         </div>
 
 
                         <div class="form-group mb-2">
-                            <label class="col-form-label">Account Number</label>
+                            <label class="col-form-label" for="bankNumber">Account Number</label>
                             <input class="form-control" name="account_number"
-                                value="{{ readConfig('account_number') }}" placeholder="Account Number">
+                                value="{{ readConfig('account_number') }}" placeholder="Account Number" id="bankNumber">
                         </div>
 
 
                         <div class="form-group mb-2">
-                            <label class="col-form-label">Account Name</label>
+                            <label class="col-form-label" for="accountName">Account Name</label>
                             <input class="form-control" name="account_name"
-                                value="{{ readConfig('account_name') }}" placeholder="Account Name">
+                                value="{{ readConfig('account_name') }}" placeholder="Account Name" id="accountName">
                         </div>
 
                         <div class="form-group mb-2">
-                            <label class="col-form-label">Swift Code</label>
+                            <label class="col-form-label" for="swiftCode">Swift Code</label>
                             <input class="form-control" name="swift_code"
-                                value="{{ readConfig('swift_code') }}" placeholder="Swift Code">
+                                value="{{ readConfig('swift_code') }}" placeholder="Swift Code" id="swiftCode">
                         </div>
 
                         <div class="form-group mb-2">
-                            <label class="col-form-label">Routing number</label>
+                            <label class="col-form-label" for="routingNumber">Routing number</label>
                             <input class="form-control" name="routing_number"
-                                value="{{ readConfig('routing_number') }}" placeholder="Routing Number">
+                                value="{{ readConfig('routing_number') }}" placeholder="Routing Number" id="routingNumber">
                         </div>
 
 
                         <div class="text-center">
-                            <button class="btn btn-success float-left" type="submit" name="action"
-                                value="published">Save</button>
+                            <div class="generate-btn-wrapper">
+                                        <button type="submit" class="generate-btn px-4">Save</button>
+                            </div>
                         </div>
 
 

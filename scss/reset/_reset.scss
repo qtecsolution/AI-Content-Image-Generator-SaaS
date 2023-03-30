@@ -1,0 +1,199 @@
+@use '../global' as *;
+@use '../partials' as *;
+
+html {
+  box-sizing: border-box;
+  font-size: 100%;
+  // overflow-x: hidden;
+  scroll-behavior: smooth;
+
+  &:focus-within {
+    scroll-behavior: inherit;
+  } 
+  
+    @media (min-height: 300px) {
+      scroll-padding-top: 70px; // 1
+    }
+  
+  
+}
+
+* {
+  box-sizing: inherit;
+
+  &::before,
+  &::after {
+    box-sizing: inherit;
+  }
+}
+
+body {
+  background: $white;
+  @include font($primaryFont, 14, normal, normal, 20);
+  color: $gray-700 ;
+  margin: 0;
+  text-rendering: optimizeSpeed;
+  // overflow-x: hidden;
+  
+  @include breakpoint(mobile576) {
+   @include font($primaryFont, 16, normal, normal, 20);
+
+  }
+
+}
+
+a,
+abbr,
+acronym,
+address,
+applet,
+article,
+aside,
+audio,
+b,
+big,
+blockquote,
+body,
+canvas,
+caption,
+center,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+embed,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+hgroup,
+html,
+i,
+input,
+iframe,
+img,
+ins,
+kbd,
+label,
+legend,
+li,
+mark,
+menu,
+main,
+nav,
+object,
+ol,
+output,
+option,
+p,
+pre,
+q,
+ruby,
+s,
+samp,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+select,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+tt,
+u,
+ul,
+var,
+video {
+	margin: 0;
+  padding: 0;
+
+	&::selection {
+		@include setBgColor($main, $white);
+	}
+}
+
+input, select, textarea {
+  border: none;
+  outline: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea {
+  resize: none;
+}
+
+// HIDE INPUT ARROWS
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+// FIREFOX
+input[type=number] {
+	-moz-appearance: textfield;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+	display: none;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+::-webkit-datetime-edit-year-field:not([aria-valuenow]),
+::-webkit-datetime-edit-month-field:not([aria-valuenow]),
+::-webkit-datetime-edit-day-field:not([aria-valuenow]) {
+	color: transparent;
+}
+
+input[type="date"]::before {
+	content: attr(data-placeholder);
+	@include w100;
+}
+
+input[type="date"]:focus::before,
+input[type="date"]:valid::before {
+	display: none
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a,
+a:visited,
+a:active {
+  text-decoration: none;
+}

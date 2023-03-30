@@ -1,0 +1,22 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+
+// .commentinput {
+//   // @include setBgColor($white, $textPrimary);
+//   // @include border(solid, 1, $checkborder);
+//   @include radius(15);
+//   @include font($primaryFont, 14, normal, normal, 20);
+//   letter-spacing: size(0.04);
+//   @include w100;
+//   padding: size(14) size(16);
+//   @include transitionsall;
+
+//   &::placeholder {
+//     color: $textPlaceholder;
+//   }
+
+//   &:focus {
+//     border-color: $primary;
+//   }
+// }

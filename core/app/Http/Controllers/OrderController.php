@@ -36,10 +36,12 @@ class OrderController extends Controller
                 ->addColumn('payment_status','
                     @if ($is_paid)
                         <a href="{{ route(\'plan.expanse\', $id) }}"
-                            class="btn btn-sm btn-primary">Expanses</a>
+                            class="status-expanses">Expanses</a>
                     @else
                         <a href="{{ route(\'order.approved\', $id) }}"
-                            class="btn btn-sm btn-success">Approved</a>
+                            class="status-approved">Approved</a>
+                        <a href="{{ route(\'order.approved\', $id) }}"
+                            class="status-panding">Pending</a>
                     @endif')
                 ->rawColumns(['payment_status','added_date'])
                 ->toJson();

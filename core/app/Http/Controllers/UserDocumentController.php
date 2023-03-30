@@ -28,7 +28,11 @@ class UserDocumentController extends Controller
         return DataTables::of($allData)
             ->addIndexColumn()
             ->addColumn('checkbox', '
-            <input type="checkbox" value="{{$id}}" name="row-check" class="input-checkbox custom-input form-check-input check-lg">
+            <div class="customcheck mb-2">
+                                    <input type="checkbox"  value="{{$id}}" id="checkbox-{{$id}}" class="input-checkbox customcheck-box" name="row-check"
+                                        hidden>
+                                    <label for="checkbox-{{$id}}" class="customcheck-label"></label>
+                                </div>
             ')
             ->addColumn('use_case_title', function ($data) {
                 return $data->useCase->title ?? '';

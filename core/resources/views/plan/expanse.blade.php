@@ -15,7 +15,8 @@
                     </div>
 
                     <div class="my-projects-body mt-4">
-                        <div class="row">
+
+                        <div class="row d-none">
                             <div class="col-md-4">
                                 <div class="m-2">
 
@@ -77,6 +78,50 @@
                                 </div>
                             @endif
                         </div>
+
+                        <div class="row g-4 g-4">
+                            <div class="col-lg-4">
+                                <div class="purches-info-box pe-lg-4">
+                                    <h4 class="title">Plan Information</h4>
+                                    <ul class="purchesinfo-list">
+                                        <li>Word Count: 300</li>
+                                        <li>API Call: 10</li>
+                                        <li>Document Save Count: 10</li>
+                                        <li>Image Save Count: 2</li>
+                                        <li>Language: English</li>
+                                        <li>Price: 10</li>
+                                    </ul>
+                                </div>    
+                            </div>   
+                            <div class="col-lg-4">
+                                <div class="purches-info-box pe-lg-4">
+                                    <h4 class="title">Purchase Information</h4>
+                                    <ul class="purchesinfo-list">
+                                        <li>Date: 2023-03-13 15:23:18</li>
+                                        <li>Invoice: 1678699398-19445</li>
+                                        <li>Paid Amount: 10</li>
+                                        <li>Image Save Count: 2</li>
+                                        <li>Language: English</li>
+                                        <li>Payment Method: bank</li>
+                                    </ul>
+                                </div>    
+                            </div>   
+                            <div class="col-lg-4">
+                                <div class="purches-info-box pe-lg-4">
+                                    <h4 class="title">Plan Information</h4>
+                                    <ul class="purchesinfo-list">
+                                        <li>Total API Call: 0</li>
+                                        <li>Rest of API Call: 881</li>
+                                        <li>Total Document Save Count: 0</li>
+                                        <li>Rest of Document Save Count: 48</li>
+                                        <li>Rest of Image: 7</li>
+                                        <li>Activated Date: 2023-03-19 17:24:26</li>
+                                        <li>Expire Date: 2023-04-18 17:24:26</li>
+                                    </ul>
+                                </div>    
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

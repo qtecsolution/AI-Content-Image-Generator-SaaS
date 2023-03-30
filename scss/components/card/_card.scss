@@ -1,0 +1,679 @@
+@use '../../global'as *;
+@use '../../partials'as *;
+
+.template-card {
+    @include border(solid, 1, $gray-300);
+    padding: size(16);
+    @include radius(10);
+    @include flex-column;
+    gap: size(10);
+    @include transitionsall;
+    // min-width: size(180); 
+    min-width: size(170);
+    max-width: size(290);
+
+    @include breakpoint(tab992) {
+        padding: size(20);
+    }
+
+    .card-img {
+        @include square(30);
+        overflow: hidden;
+
+        img {
+            @include wh100;
+            object-fit: cover;
+        }
+
+
+    }
+
+    .card-title {
+        color: $gray-800;
+        @include font($primaryFont, 14, bold, normal, 20);
+    }
+
+    .card-des {
+        color: $gray-600;
+        @include font($primaryFont, 14, normal, normal, 18);
+        @include line-clamp;
+        
+    }
+
+    @include hover {
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+
+
+}
+
+
+
+.pricing-card {
+    @include border(solid, 1, $gray-300);
+    @include radius(16);
+    padding: size(14);
+    @include flex-column;
+    gap: size(10);
+    flex-grow: 1;
+    @include transitionsall;
+
+    @include breakpoint(mobile576) {
+        padding: size(30);
+
+    }
+
+    @include breakpoint(tab992) {
+        flex-grow: 0;
+    }
+
+    &-header {
+        @include border-single(bottom, solid, 1, $gray-300);
+        @include flex-column;
+        align-items: center;
+        padding-bottom: size(20);
+        gap: size(10);
+
+
+        .price {
+            color: $gray-900;
+            @include font($primaryFont, 34, semibold, normal, 60);
+            @include flex;
+            align-items: center;
+
+            .currency,
+            .plane-time {
+                font-size: size(20)
+            }
+        }
+
+        .name {
+            color: $gray-900;
+            @include font($primaryFont, 20, semibold, normal, 30);
+
+        }
+
+        .info {
+            color: $main;
+        }
+    }
+
+    &-body {
+
+        .facility-list {
+            @include list-vertical;
+            gap: size(10);
+            padding-block: size(20);
+
+            @include breakpoint(mobile576) {
+                gap: size(16);
+            }
+
+            li {
+                @include flex;
+                gap: size(8);
+                align-items: center;
+                color: $gray-500;
+                font-size: size(12);
+
+                @include breakpoint(mobile576) {
+                    font-size: size(14);
+
+                }
+            }
+
+            .icon-wrapper {
+                @include square(24);
+                @include circle;
+                background: $main;
+                @include flex-center;
+
+                &.cross-icon {
+                    background: $danger;
+                }
+
+                i {
+                    color: $white;
+
+                }
+            }
+        }
+    }
+
+    @include hover {
+        border-color: $main;
+        transform: translateY(-4px);
+    }
+
+
+}
+
+.benifits-card {
+    background: linear-gradient(135deg, rgba(151, 171, 255, 0.1) 0%, rgba(18, 53, 151, 0.1) 100%);
+    @include radius(30);
+    @include border(solid, 2, $white);
+    padding: size(24);
+    color: $gray-800;
+    @include flex;
+    gap: size(16);
+    @include transitionsall;
+    transition-duration: .5s !important;
+
+    @include breakpoint(mobile576) {
+        gap: size(24);
+    }
+
+
+    .left {
+        .card-icon-wrapper {
+            @include square(58);
+            background: $white;
+            @include circle;
+            @include flex-center;
+        }
+    }
+
+    .right {
+        @include flex-column;
+        gap: size(12);
+
+        .title {
+            color: $gray-800;
+            @include font($primaryFont, 16, medium, normal, 22);
+
+            @include breakpoint(mobile576) {
+                @include font($primaryFont, 18, medium, normal, 22);
+
+            }
+        }
+
+        .text {
+            color: $gray-800;
+            @include font($primaryFont, 10, normal, normal, 18);
+
+            @include breakpoint(mobile576) {
+                @include font($primaryFont, 12, normal, normal, 19);
+
+            }
+        }
+
+        .card-link {
+            @include flex;
+            gap: size(12);
+            @include transitionsall;
+
+            span {
+                color: $main;
+                @include font($primaryFont, 10, medium, normal, 16);
+
+                @include breakpoint(mobile576) {
+                    @include font($primaryFont, 12, medium, normal, 18);
+
+                }
+            }
+
+            @include hover {
+                gap: size(16);
+                text-decoration: underline;
+            }
+        }
+    }
+
+    @include hover {
+        transform: translateY(size(-8)) !important;
+
+    }
+}
+
+.benifit-col {
+    @include flex-column;
+    align-items: center;
+    text-align: center;
+    gap: size(16);
+    @include transitiontransform;
+    padding: size(10);
+
+    .title {
+        color: $main;
+        @include font($primaryFont, 18, semibold, normal, 22);
+    }
+
+    .content {
+        color: $gray-800;
+        @include font($primaryFont, 14, normal, normal, 20);
+    }
+
+    @include hover {
+        transform: translateY(-4px);
+    }
+}
+
+
+.card-divider {
+    // border-top: 2px solid transparent;
+    // border-image: linear-gradient(to right, #3a519b, #97abff 30%, #97abff 70%, #123597) 1;
+    // opacity: 0.5;
+    border-top: 2px solid rgba(44, 76, 172, 0.1)
+}
+.card-divider-faq {
+    // border-top: 2px solid transparent;
+    // border-image: linear-gradient(to right, #3a519b, #97abff 30%, #97abff 70%, #123597) 1;
+    // opacity: 0.5;
+    border-top: 1px solid rgba(44, 76, 172, 0.1);
+    padding-bottom: size(10);
+}
+
+.step {
+    @include flex;
+    gap: size(20);
+
+    .left {
+        .count-number {
+            @include square(58);
+            background: $gray-100;
+            @include flex-center;
+            @include circle;
+        }
+    }
+
+    .right {
+        @include flex-column;
+        gap: size(10);
+
+        .title {
+            @include font($primaryFont, 18, medium, normal, 22);
+            color: $gray-800;
+        }
+
+        .content {
+            @include font($primaryFont, 12, normal, normal, 18);
+            color: $gray-800;
+        }
+    }
+}
+
+.getstarted-box {
+    @include flex;
+    align-items: center;
+    gap: size(24);
+    padding: size(10) size(0);
+
+    .long-check-wrapper {
+        @include square(58);
+        background: $gray-100;
+        @include circle;
+        @include flex-center;
+
+    }
+}
+
+
+.blogcard {
+    background: linear-gradient(135deg, rgba(151, 171, 255, 0.1) 0%, rgba(18, 53, 151, 0.1) 100%);
+    @include radius(30);
+    padding: size(26);
+    @include border(solid, 2, transparent);
+    @include transitionsall;
+    color: $gray-800;
+    @include flex-column;
+    gap: size(20);
+
+    &-header {
+        .date {
+            color: $gray-500;
+            @include font($primaryFont, 12, normal, normal, 18);
+        }
+
+
+    }
+
+    &-body {
+        padding-top: size(20);
+        @include flex-column;
+        gap: size(12);
+        .title {
+            color: $gray-800;
+            @include font($primaryFont, 16, semibold, normal, 22);
+        }
+
+        .content {
+            color: $gray-800;
+            @include line-clamp-3;
+            @include font($primaryFont, 12, normal, normal, 18);
+        }
+
+    }
+
+    &-footer {
+        padding-top: size(30);
+        .go-btn {
+            @include square(45);
+            background: $white;
+            display: inline-block;
+            @include circle;
+            @include flex-center;
+            transition: background-color 0.3s ease;
+            border: none;
+
+        }
+    }
+
+
+    @include hover {
+
+        border-color: lighten($main, 40%);
+        cursor: pointer;
+
+        .go-btn {
+
+            background: linear-gradient(135deg, #97ABFF 0%, #123597 100%);
+
+            svg {
+                path {
+                    stroke: $white;
+                }
+            }
+
+        }
+
+    }
+
+
+}
+
+.blog-category-card {
+    @include flex;
+    background: linear-gradient(135deg, rgba(151, 171, 255, 0.05) 0%, rgba(18, 53, 151, 0.05) 100%);
+    @include radius(30);
+    @include transitionsall;
+    max-height: size(270);
+    position: relative;
+    overflow: hidden;
+    border: 2px solid rgba(18, 53, 151, 0.08);
+  
+
+    .blog-thumb {
+        width: 40%;
+        height: 100%;
+        border-top-left-radius: size(30);
+        border-bottom-left-radius: size(30);
+        overflow: hidden;
+        @include transitionsall;
+        img {
+            @include wh100; 
+            object-fit: cover;
+        }
+    }
+
+    .right {
+        width: 50%;
+        flex: 1;
+        height: 100%;
+        padding-left: size(20);
+        @include flex-column;
+        gap: size(0);
+        padding: size(20) size(20);
+        &:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.3s ease-out;
+          }
+          &:hover:before {
+            opacity: 1;
+          }
+
+        .date {
+            color: $gray-500;
+            @include font($primaryFont, 14, medium, normal, 20);
+            padding-bottom: size(14);
+          }
+      
+          .titel {
+            color: $gray-800;
+            @include font($primaryFont, 18, semibold, normal, 24);
+            @include line-clamp;
+            padding-bottom: size(10);
+          }
+      
+          .content {
+            color: $gray-800;
+            @include font($primaryFont, 12, normal, normal, 20);
+            @include line-clamp-4; 
+            z-index: 2;
+          }
+      
+         
+            .go-btn {
+                @include square(32);
+                background: $white;
+                display: inline-block;
+                @include circle;
+                @include flex-center;
+                transition: background-color 0.3s ease;
+                border: none;
+                text-align: right;
+                z-index: 2;
+           
+          }
+        }
+      
+      
+        @include hover {
+
+            border-color: lighten($main, 30%);
+            cursor: pointer;
+            .blog-thumb {
+                transform: scale(1.05);
+              }
+    
+            .go-btn {
+    
+                background: linear-gradient(135deg, #97ABFF 0%, #123597 100%);
+    
+                svg {
+                    path {
+                        stroke: $white;
+                    }
+                }
+    
+            }
+    
+        }
+      
+      
+      
+      
+    
+}
+
+.small-box {
+    @include flex;
+    
+    @include radius(10);
+    justify-content: space-between;
+    align-items: center;
+    height: size(150);
+    padding: size(14);
+    @include breakpoint(mobile576) {
+        padding: size(30);
+    }
+
+    @include transitionsall;
+
+    .icon-wrapper {
+        background-color: #E0EAFF;
+        @include square(50);
+        @include circle;
+        @include flex-center;
+        svg {
+            @include square(20);
+        }
+        
+        @include breakpoint(mobile576) {
+            @include square(70);
+            svg {
+                @include square(24);
+            }
+        }
+
+    }
+    .total-number{
+        @include font($primaryFont,30,bold,normal,40);
+        color: $gray-800;
+        @include breakpoint(mobile576) {
+           @include font($primaryFont,40,bold,normal,46);
+
+        }
+    }
+
+    .total-text {
+        @include font($primaryFont,14,medium,normal,26);
+        color: $gray-800;
+        @include breakpoint(mobile576) {
+           @include font($primaryFont,18,medium,normal,28);
+
+        }
+    }
+
+    &.user-box{
+        background: #F2F4F7;
+
+        .icon-wrapper {
+            background: #EAECF5;
+        }
+    }
+
+    &.usecases-box {
+        background: #EEF4FF;
+
+        .icon-wrapper {
+            background: #E0EAFF;
+        }
+    }
+
+    &.transiction {
+        background: #FFFAEB;
+
+        .icon-wrapper {
+            background: #FEF0C7;
+        }
+    }
+
+    &.revenue {
+        background: #F9F5FF;
+
+        .icon-wrapper {
+            background: #F4EBFF;
+        }
+
+      
+    }
+
+    @include hover {
+        background: $main;
+        box-shadow: 0px 21px 11px -10px rgba(44, 76, 172, 0.25);
+        .total-number{
+            color: $white;
+          
+        }
+
+        .total-text {
+            color: $white;
+         
+        }
+    }
+
+}
+
+.purches-info-box {
+
+    .title {
+        @include font($primaryFont,14,medium,normal,20);
+        color: $gray-900;
+        font-weight: 600;
+        padding: size(12) size(10);
+
+    }
+    .purchesinfo-list {
+        @include list-vertical;
+
+        li {
+            @include border-single(bottom,solid,1,$gray-200);
+            padding: size(12) size(10);
+            color: $gray-600;
+            @include font($primaryFont,12,medium,normal,20);
+
+            @include breakpoint(mobile576) {
+                @include font($primaryFont,14,medium,normal,20);
+
+
+            }
+
+        } 
+
+    }
+}
+
+.purchesinfo-list {
+    @include list-vertical;
+
+    li {
+        @include border-single(bottom,solid,1,$gray-200);
+        padding: size(12) size(10);
+        color: $gray-600;
+        @include font($primaryFont,12,medium,normal,20);
+        @include flex;
+        gap: size(10);
+
+        span {
+            @include line-clamp;
+            &:nth-child(1) {
+                color: $gray-800;
+                min-width: size(100);
+                font-weight: 600;
+            }
+        }
+
+       
+
+        @include breakpoint(mobile576) {
+            @include font($primaryFont,14,medium,normal,20);
+
+
+        }
+
+    } 
+    .blog-image {
+        @include square(100);
+
+
+    } 
+
+}
+
+
+.generated-image-card {
+    @include flex-column;
+    padding: size(20);
+    @include border(solid,1,$gray-300);
+    @include radius(20);
+    .generated-thumb {
+        width: 100%;
+        height: size(256);
+        overflow: hidden;
+        @include radius(20);
+
+        img {
+            @include wh100;
+            object-fit: cover;
+        }
+    }
+}
+

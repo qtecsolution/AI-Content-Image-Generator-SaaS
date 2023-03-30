@@ -1,0 +1,28 @@
+.title-style {
+    color: #1D2939 !important;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    line-height: 20px !important;
+
+}
+
+.ai-breadcrumb{
+    
+    padding-left: 20px;
+    color: #667085;
+    padding-top: 20px;
+}
+
+.custom-input {
+    
+}
+.custom-input::placeholder {
+    color: #D0D5DD !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .ai-breadcrumb{
+        padding-left: 10px;
+    }
+}
+

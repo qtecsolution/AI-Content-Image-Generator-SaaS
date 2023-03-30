@@ -1,0 +1,86 @@
+@use '../global' as *;
+@use '../partials' as *;
+
+
+.card {
+    &-header {
+        background-color: #fff;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 0;
+        padding: 0.75rem 1.25rem;
+    }
+
+    &-footer {
+        background-color: #fff;
+        border-bottom: 1px solid #f0f0f0;
+        margin-bottom: 0;
+        padding: 0.75rem 1.25rem;
+    }
+}
+
+
+.customradio{
+  &-box{
+    &:checked ~ .customradio-label{
+      color: $gray-800;
+      &::before{
+        background-color: $white;
+        @include border(solid ,1 ,$main);
+      }
+      &::after{
+        opacity: 1;
+        visibility: visible;
+        
+      }
+    }
+
+  }
+  &-label{
+    position: relative;
+    color: $gray-600;
+    padding-left: size(30);
+    cursor: pointer;
+    @include transitionscolor;
+    @include font($secondaryFont,14,medium,normal,18);
+    @include breakpoint(mobile576){
+      @include font($secondaryFont,14,medium,normal,20);
+    } 
+    @include hover {
+      color: $gray-700;
+    }
+
+    &::before,
+    &::after{
+      content: '';
+      @include absolute(top 50% left 0);
+     
+    }
+    &::before{
+      @include square(20);
+      @include border(solid ,1 ,#ddd);
+      background: $white;
+      @include radius(50);
+      @include translateY(-50%);
+      @include transitionsall;
+      
+    }
+    &::after{
+      width: size(14);
+      height: size(14);
+      @include border(solid,2,#fff);
+      @include transform(translateY(-50%));
+      background-color: $main;
+      left: 3px;
+      @include circle;
+      opacity: 0;
+      visibility: hidden;
+      @include transitionsall;
+      
+    }
+
+    div:first-child {
+        padding: size(4) size(0);
+    }
+  }
+}
+

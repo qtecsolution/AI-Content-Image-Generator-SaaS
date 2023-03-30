@@ -1,0 +1,120 @@
+@use '../../global'as *;
+@use '../../partials'as *;
+
+.sidebar {
+    background: $white;
+    width: size(220);
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: none;
+    @include border-single(right, solid, 1, $gray-300);
+    @include breakpoint(tab992) {
+      @include flex-column;
+      gap: size(60);
+      padding: size(16) size(16);
+      padding-left: size(0);
+      padding-right: size(0);
+    }
+
+    &-header {
+
+    }
+
+    &-body {
+      @include flex-column;
+      align-items: flex-start;
+      gap: size(40);
+      overflow-y: auto;
+      @include  hideScrollbar;
+      padding-inline: size(8);
+     
+
+      .dashboard {
+        padding-left: size(20);
+        color: $gray-600;
+      }
+    } 
+
+    &-menu {
+      @include list-vertical;
+      gap: size(20);
+      align-items: flex-start;
+      
+     
+      li  {
+        @include w100;
+       
+      }
+      &-link {
+        @include flex;
+        gap: size(10);
+        color: $gray-700;
+        @include font($primaryFont,14,normal,normal,18);
+        align-items: flex-start;
+        
+        width: 100%;
+        padding: size(10) size(0);
+        padding-left: size(20);
+        padding-right: size(10);
+        @include radius(4);
+
+        &.active{
+          background: darken(#ECF2FF,5%);
+        }
+      }
+    }
+
+   
+  }
+
+  .sidebar-drop {
+    @include flex-column;
+   
+   
+    background-color: #ECF2FF;
+
+    ul {
+      @include list-vertical;
+       
+      
+      li {
+        
+      }
+      a {
+        color: $gray-700;
+        display: block;
+        padding: size(10);
+        @include font($primaryFont,14,normal,normal,18);
+        padding-left: size(44);
+        @include transitionsall;
+        
+        @include hover {
+          background: darken(#ECF2FF,5%);
+        }
+      }
+
+    }
+  }
+
+  .user-menu  {
+    @include flex-column;
+    li {
+     
+    }
+
+    .sidebar-menu-link {
+      &.active {
+        
+      }
+    }
+  } 
+
+
+  .dashboard-link {
+    padding: size(20) size(10);
+    display: flex;
+    gap: size(10);
+  }

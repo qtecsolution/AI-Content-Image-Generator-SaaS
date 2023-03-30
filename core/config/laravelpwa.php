@@ -7,7 +7,7 @@ return [
         'short_name' => 'R',
         'start_url' => '/',
         'background_color' => '#ffffff',
-        'theme_color' => '#000000',
+        'theme_color' => '#d33636',
         'display' => 'standalone',
         'orientation' => 'any',
         'status_bar' => 'black',

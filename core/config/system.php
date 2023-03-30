@@ -21,7 +21,7 @@ return [
     "meta_keys" => "XOXO CMS",
     "meta_desc" => 'Creaify',
     "meta_title" => 'Creaify',
-    "meta_image" => 'assets/uploads/seo/2023/03/07/202303073932.png',
+    "meta_image" => 'assets/uploads/seo/2023/03/28/202303288343.png',
     'PAYPAL_ACTIVE' => 'on',
     'PAYPAL_CLIENT_ID' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',
     'PAYPAL_APP_SECRET' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',

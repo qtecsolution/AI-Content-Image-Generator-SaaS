@@ -106,7 +106,7 @@
                                                         </div>
                                                     </div>
                                                     <div class='row '>
-                                                        <div class='col-md-12 error form-group d-none'>
+                                                        <div class='col-md-12 error form-group mt-4 d-none'>
                                                             <div class='alert-danger alert'>Please correct the
                                                                 errors and
                                                                 try

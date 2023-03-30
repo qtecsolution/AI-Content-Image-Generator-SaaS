@@ -1,0 +1,20 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+    // admin info list 
+.info-list {
+    
+    li {
+        border-color: $gray-300 !important;
+        @include font($primaryFont,14,medium,normal,20);
+        color: $gray-600;
+        padding: size(12) size(25);
+        @include flex;
+        gap: size(8);
+        b ,span {
+            color: $gray-800;
+            font-weight: 600;
+            margin-right: size(10);
+        }
+    }
+}

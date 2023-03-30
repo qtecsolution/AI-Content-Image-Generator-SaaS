@@ -1,0 +1,115 @@
+@use '../global' as *;
+@use '../partials' as *;
+
+
+.customcheck {
+  &-box {
+    &:checked ~ .customcheck-label {
+      &::before {
+        background: $main;
+        border-color:$main;
+      }
+
+      &::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+
+  &-label {
+    position: relative;
+    color: teal;
+    @include font($primaryFont, 16, normal, normal, 24);
+    padding-left: size(36);
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      content: '';
+      @include absolute(top 50% left 0);
+    }
+
+    &::before {
+      @include square(18);
+      @include border(solid, 1, $gray-300);
+      @include radius(6);
+      @include translateY(-50%);
+      @include transitionsall;
+    }
+
+    &::after {
+      width: size(5);
+      height: size(10);
+      @include border(solid, 2, $white);
+      border-top: 0;
+      border-left: 0;
+      left: size(7);
+      @include transform(translateY(-70%) rotate(45deg));
+      opacity: 0;
+      visibility: hidden;
+      @include transitionsall;
+    }
+
+    &::selection {
+      @include setBgColor(transparent, tan);
+    }
+  }
+}
+
+.checkWithLable {
+
+    &-box {
+      &:checked ~ .checkWithLable-label {
+        &::before {
+          background: $main;
+          border-color:$main;
+        }
+  
+        &::after {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+    }
+  
+    &-label {
+      position: relative;
+      color: $gray-700;
+      @include font($primaryFont, 14, normal, normal, 24);
+      padding-left: size(22);
+      cursor: pointer;
+  
+      &::before,
+      &::after {
+        content: '';
+        @include absolute(top 50% left 0);
+      }
+  
+      &::before {
+        @include square(18);
+        @include border(solid, 1, $gray-300);
+        @include radius(6);
+        @include translateY(-50%);
+        @include transitionsall;
+      }
+  
+      &::after {
+        width: size(5);
+        height: size(10);
+        @include border(solid, 2, $white);
+        border-top: 0;
+        border-left: 0;
+        left: size(7);
+        @include transform(translateY(-70%) rotate(45deg));
+        opacity: 0;
+        visibility: hidden;
+        @include transitionsall;
+      }
+  
+      &::selection {
+        @include setBgColor(transparent, tan);
+      }
+    }
+}
+

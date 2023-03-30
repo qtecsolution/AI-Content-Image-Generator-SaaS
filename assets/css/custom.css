@@ -85,15 +85,18 @@
 
 .placeholder-text {
     padding: 2px 5px;
-    background: #eee;
+    background-color: transparent;
     border-radius: 2px;
-    margin: 2px;
     float: left;
     cursor: pointer;
+    transition: all .3s ease;
+    color: #667085;
+    font-weight: 400;
+    font-size: 14px !important;
 }
 
 .placeholder-text:hover {
-    background: #f7f4aa;
+    background: #d3e1ff;
 }
 
 .border-lite {
@@ -105,18 +108,45 @@
     border-right: solid 0.0625rem #eaecf0;
 }
 
+.sitelogos-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 38px;
+}
+.logo-box {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.logo-box .box-title {
+    color: #1D2939;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+
 /*avatar*/
 .avatar-upload {
     position: relative;
-    max-width: 205px;
-    margin: 50px auto;
+    max-width: 170px;
+    
+}
+.avatar-upload:hover.avatar-upload .avatar-edit {
+    opacity: 1;
+    visibility: visible;
 }
 
 .avatar-upload .avatar-edit {
     position: absolute;
-    right: 12px;
+    transform: translate(-50%,-50%);
     z-index: 1;
-    top: 10px;
+    top :50%;
+    left: 50%;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s ease-in-out;
 }
 
 .avatar-upload .avatar-edit input {
@@ -135,6 +165,9 @@
     cursor: pointer;
     font-weight: normal;
     transition: all 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .avatar-upload .avatar-edit input+label:hover {
@@ -143,11 +176,13 @@
 }
 
 .avatar-upload .avatar-edit input+label:after {
-    content: "✎";
-    /* font-family: 'FontAwesome'; */
+    
     color: #757575;
+
+    content: url('data:image/svg+xml;utf8,<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M8 13.3334H14" stroke="%2398A2B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 2.33328C11.2652 2.06806 11.6249 1.91907 12 1.91907C12.1857 1.91907 12.3696 1.95565 12.5412 2.02672C12.7128 2.09779 12.8687 2.20196 13 2.33328C13.1313 2.4646 13.2355 2.6205 13.3066 2.79208C13.3776 2.96367 13.4142 3.14756 13.4142 3.33328C13.4142 3.519 13.3776 3.7029 13.3066 3.87448C13.2355 4.04606 13.1313 4.20196 13 4.33328L4.66667 12.6666L2 13.3333L2.66667 10.6666L11 2.33328Z" stroke="%2398A2B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>');
+      
+      
     position: absolute;
-    top: 5px;
     left: 0;
     right: 0;
     text-align: center;
@@ -215,4 +250,5 @@
 }
 .form-control.custom-input:focus {
     box-shadow: none;
-}
+} 
+

@@ -1,0 +1,312 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+
+
+.gradient-btn {
+  background-image: $linear-main;
+  background-size: 120% 100%;
+  padding: size(10) 0;
+  @include radius(8);
+  @include w100;
+  color: $white;
+  @include font($primaryFont, 14, semibold, normal, 24);
+  border: none;
+  @include breakpoint (mobile576) {
+    @include font($primaryFont, 16, semibold, normal, 24);
+    @include transitionsall;
+  }
+
+  @include hover {
+    background-position: 100% 0;
+    @include transitionsall;
+  }
+}
+
+.social-btn {
+  @include border(solid,1,$gray-300);
+  @include w100;
+  padding: size(10) 0;
+  @include radius(8);
+  @include font($primaryFont, 14, semibold, normal, 24); 
+  box-shadow: $boxshadow-1;
+  @include flex-center-horiz;
+  gap: size(10);
+  background: $white;
+  color: $gray-700;
+
+  @include breakpoint (mobile576) {
+    @include font($primaryFont, 16, semibold, normal, 24);
+    @include transitionsall;
+  }
+
+  @include hover {
+    background: darken($white,3%);
+  }
+
+} 
+.add-btn {
+  background-image: $linear-main;
+  color: $white;
+  @include square(46);
+  @include radius(14);
+  @include flex-center;
+  @include border(solid,5, hsl(234, 100%, 95%));
+  @include font($primaryFont,23,normal,normal,27);
+  @include transitionsall;
+  @include hover {
+    border-color: lighten($main,45%);
+    color: $white;
+  }
+
+  &.mobile-fixed {
+    position: fixed;
+    bottom: size(20);
+    right: size(20);
+    z-index: 4;
+    @include breakpoint(tab992) {
+      display: none;
+    }
+  }
+}
+
+.home-btn {
+  svg {
+    path {
+      @include transitionsall;
+    }
+  }
+  &.active {
+    svg {
+      path {
+        stroke:$main ;
+      }
+    }
+  }
+}
+
+
+.generate-btn {
+  background-image: $linear-main;
+  color: $white;
+  @include radius(14);
+  @include flex-center;
+  @include border(solid, 5, hsl(234, 100%, 95%));
+  @include font($primaryFont, 16, medium, normal, 24);
+  @include transitionsall;
+  padding: size(8);
+
+  @include hover {
+    border-color: lighten($main, 45%);
+    color: $white;
+  }
+}
+
+
+.btn-savechange {
+  border: none;
+  background: transparent;
+  padding: size(6) size(16);
+  background: $linear-main;
+  color: $white;
+  @include radius(8);
+  @include transitionsall;
+  
+  @include font($primaryFont,14,medium,normal,28);
+
+  @include breakpoint(mobile576) {
+    @include font($primaryFont,16,medium,normal,28);
+    padding: size(10) size(16);
+
+  }
+
+}
+
+.btn-cancel-change {
+  border: none;
+  background: $white;
+  @include border(solid,1,$gray-300);
+  @include radius(8);
+  padding: size(6) size(16);
+  box-shadow: $boxshadow-1;
+  @include transitionsall;
+  @include hover {
+      background: darken($white,5%);
+      
+  }
+
+      @include font($primaryFont,14,medium,normal,28);
+
+      @include breakpoint(mobile576) {
+        @include font($primaryFont,16,medium,normal,28);
+        padding: size(10) size(16);
+
+      }
+
+}
+
+.btn-subscribe {
+  @include setBgColor($main,$white);
+  @include radius(6);
+  padding: size(8) size(20);
+  border: none;
+  @include transitionsall;
+  @include hover {
+    background: darken($main,10%);
+  }
+
+  &.subscribed{
+    background: rgba(44, 76, 172, 0.3);
+    box-shadow: 0px 1px 2px rgba(16, 24, 40, 0.05);
+    @include hover {
+    background: rgba(44, 76, 172, 0.3);
+
+    }
+    
+  }
+
+  @include breakpoint(mobile576) {
+  @include radius(8);
+  padding: size(10) size(20);
+
+
+  }
+}
+
+
+// landign page 
+
+.primarybtn-landing {
+
+  background: $linear-main;
+  padding: size(10) size(20);
+  @include radius(24);
+  color: $white;
+  @include transitionsall;
+  transition: all .5s ease-in-out;
+  border: none;
+
+  @include hover {
+    color: $white;
+    transition: all .5s ease-in-out;
+     background: linear-gradient(135deg, darken(hsl(228, 100%, 80%), 0%) 0%, darken(hsl(224, 79%, 33%), 100%) 95%);
+      
+
+  }
+}
+
+.section-btn {
+  background-color: rgba(44, 76, 172, 0.05);
+   padding: size(10) size(25);
+   @include radius(100);
+   border: none;
+  
+   transition: all 0.5s ease-out;
+   background-size: 200% auto;
+   background-position: 0 50%;
+   .text {
+    background-image: $linear-main;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    @include font($primaryFont,14,medium,normal,20);
+   }
+}
+
+.all-template-btn {
+  border: none;
+  @include flex;
+  background: rgba(44, 76, 172, 0.05);
+  padding: size(12) size(20);
+  color: $main;
+  @include radius(40);
+  @include font($primaryFont,12,medium,normal,18);
+  @include transitionsall;
+  @include hover {
+    background: darken(rgba(44, 76, 172, 0.09),20%);
+    
+  }
+
+}
+
+.seeall-btn {
+  @include setBgColor(#EAECF5, $gray-800);
+  padding: size(8) size(12);
+  @include radius(8);
+  @include transitionsall;
+  @include font($primaryFont, 14, medium, normal,20 );
+  @include flex;
+  align-items: center;
+  gap: size(6);
+
+  @include hover {
+    @include setBgColor(darken($gray-100, 10%), $gray-800);
+  }
+
+}
+
+
+.btn-deactive-plan {
+
+  background: #D92D20;
+  color: $white;
+  padding: size(12) size(20);
+  @include radius(8);
+  border: none;
+  @include transitionsall;
+  @include font($primaryFont, 14, medium, normal,20 );
+  font-weight: 600;
+
+  @include breakpoint(mobile576) {
+  @include font($primaryFont, 16, medium, normal,20 );
+    font-weight: 600;
+  }
+
+  @include hover {
+    @include setBgColor(darken(#D92D20, 10%), $white);
+  }
+
+}
+
+.btn-active-plan {
+
+  background: #039855;
+  color: $white;
+  padding: size(12) size(20);
+  @include radius(8);
+  border: none;
+  @include transitionsall;
+  @include font($primaryFont, 14, medium, normal,20 );
+  font-weight: 600;
+
+  @include breakpoint(mobile576) {
+  @include font($primaryFont, 16, medium, normal,20 );
+    font-weight: 600;
+  }
+
+  @include hover {
+    @include setBgColor(darken(#039855, 10%), $white);
+  }
+
+}
+.btn-edit-plan {
+  background: $main;
+  color: $white;
+  padding: size(12) size(20);
+  @include radius(8);
+  border: none;
+  @include transitionsall;
+  @include font($primaryFont, 14, medium, normal,20 );
+  font-weight: 600;
+
+  @include breakpoint(mobile576) {
+  @include font($primaryFont, 16, medium, normal,20 );
+    font-weight: 600;
+  }
+
+  @include hover {
+    @include setBgColor(darken($main, 10%), $white);
+  }
+
+}
+

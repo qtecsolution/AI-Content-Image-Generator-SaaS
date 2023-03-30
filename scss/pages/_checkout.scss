@@ -1,0 +1,67 @@
+@use '../global' as *;
+@use '../partials' as *;
+
+.width-3 {
+ width: 6px;
+}
+
+.height-3{
+    width: 6px;
+}
+
+
+
+
+.payment-name {
+    color: $gray-800 ;
+    @include font($primaryFont,14,medium,normal,22);
+
+    @include breakpoint(mobile576) {
+    @include font($primaryFont,16,medium,normal,22);
+
+    }
+}
+.payment-way{
+    color: $gray-500;
+    @include font($primaryFont,14,normal,normal,22);
+    @include breakpoint(mobile576) {
+        @include font($primaryFont,16,medium,normal,22);
+    
+        }
+}
+
+
+.copybox {
+    @include flex;
+    align-items: center;
+    gap: size(4);
+    input {
+        flex: 1;
+        padding: size(6) !important;
+
+    }
+    button {
+        background: $main;
+        color: $white !important;
+        border: none;
+        @include transitionsall;
+
+        @include hover {
+            background: darken($main,20%);
+        }
+
+    }
+}
+
+.custom-control {
+    display: flex;
+    gap:10px;
+}
+
+.width-6 {
+    width: 1.5rem!important;
+}
+
+.list-group-flush>.list-group-item {
+    border-color: $gray-200;
+}
