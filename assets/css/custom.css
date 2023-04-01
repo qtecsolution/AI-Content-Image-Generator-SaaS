@@ -251,4 +251,6 @@
 .form-control.custom-input:focus {
     box-shadow: none;
 } 
-
+.purchesinfo-list .blog-image{
+    height: auto;
+}

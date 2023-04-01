@@ -61,7 +61,7 @@
 
 
                                         <div class="customcheck mb-2">
-                                            <input type="checkbox" id="allSelect" class="input-checkbox customcheck-box"
+                                            <input type="checkbox" id="allSelect" class="customcheck-box"
                                                 name="row-check" hidden>
                                             <label for="allSelect" class="customcheck-label"></label>
                                         </div>

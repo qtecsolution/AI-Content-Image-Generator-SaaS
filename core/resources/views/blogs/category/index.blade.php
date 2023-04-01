@@ -132,7 +132,7 @@
                                 </div>
                                 <div class="row g-2">
                                     <div class="col mt-3">
-                                        {{ $allData->links('vendor.pagination.bootstrap-5') }}
+                                        {{ $allData->links('vendor.pagination.default') }}
                                     </div>
                                 </div>
                             </div>
