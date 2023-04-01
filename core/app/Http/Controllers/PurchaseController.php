@@ -31,6 +31,13 @@ class PurchaseController extends Controller
     {
         $plan = Plan::where('id', $id)->first();
         $user = Auth::user();
+        if($plan->price <= 0){
+            $oldPurchase = PlanExpanse::where(['user_id'=>$user->id,'plan_id'=>$plan->id])->first();
+            if($oldPurchase!=''){
+                myAlert('success', "You've already taken advantage of this free package");
+                return redirect()->route('plan.userIndex');
+            }
+        }
         return view('plan.purchase', compact('plan', 'user'));
     }
     public function stripeLoad($id)

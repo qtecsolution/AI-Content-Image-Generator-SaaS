@@ -87,7 +87,7 @@
                                         <div class="form-group">
                                             <label for="promt-body" class="form-label">Open AI Resuest Prompt </label>
                                             <textarea class="form-control custom-input @error('prompt') is-invalid @enderror" id="promt-body" autocomplete="off"
-                                                name="prompt" placeholder="Prompt" rows="4">{{ old('prompt') ?? 'Write me content with this keywords: [keywords]. The title is "[title]" and the description: [description]' }}</textarea>
+                                                name="prompt" placeholder="Prompt" rows="6">{{ old('prompt') ?? 'Write me content with this keywords: [keywords]. The title is "[title]" and the description: [description]' }}</textarea>
                                             <div class="valid-feedback">
                                                 Awesome! You're one step closer to greatness.
                                             </div>
@@ -139,7 +139,7 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($allData as $data)
-                                                <tr>
+                                                <tr title="Prompt: {{$data->prompt}}">
                                                     <td>
                                                         @if ($data->icon != '' && file_exists($data->icon))
                                                             <img src="{{ asset($data->icon) }}" alt="Icon"

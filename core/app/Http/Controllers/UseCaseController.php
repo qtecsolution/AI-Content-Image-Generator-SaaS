@@ -5,15 +5,44 @@ namespace App\Http\Controllers;
 use App\Models\UseCase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UseCaseController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $allData = UseCase::paginate(2);
+        
+        try{
+            if(isset($request->import_from_json)){
+                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+                UseCase::truncate();
+                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+                $jsonUrl = asset('assets/utils/prompt.json');
+                $jsonData = file_get_contents($jsonUrl);
+                $jsonData = json_decode($jsonData);
+                foreach($jsonData as $data){
+                    UseCase::create([
+                        'title' => $data->title,
+                        'icon' => $data->icon,
+                        'details' => $data->details,
+                        'input_fields' => $data->input_fields,
+                        'prompt' => $data->prompt,
+                        'is_published' => 1
+                    ]);
+                }
+                myAlert('success', 'Use case imported successfully.');
+                return redirect()->route('use-case.index');
+            }
+        }catch(\Exception $e){
+            $errorMessage = $e->getMessage();
+            myAlert('error',$errorMessage);
+            return redirect()->route('use-case.index');
+        }
+        
+        $allData = UseCase::paginate(12);
         return view('useCase.index', compact('allData'));
     }
 

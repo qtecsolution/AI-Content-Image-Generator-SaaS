@@ -92,15 +92,15 @@
                                                             <label class='control-label'>CVC</label> <input
                                                                 autocomplete='off'
                                                                 class='form-control custom-input card-cvc'
-                                                                placeholder='ex. 311' size='4' type='text'>
+                                                                placeholder='Ex: 311' size='4' type='text'>
                                                         </div>
                                                         <div class='col-xs-12 col-md-2 form-group expiration required'>
-                                                            <label class='control-label'>Expiration Month</label>
+                                                            <label class='control-label'>Exp. Month</label>
                                                             <input class='form-control custom-input card-expiry-month'
                                                                 placeholder='MM' size='2' type='text'>
                                                         </div>
                                                         <div class='col-xs-12 col-md-2 form-group expiration required'>
-                                                            <label class='control-label'>Expiration Year</label>
+                                                            <label class='control-label'>Exp. Year</label>
                                                             <input class='form-control custom-input card-expiry-year'
                                                                 placeholder='YYYY' size='4' type='text'>
                                                         </div>
