@@ -68,95 +68,80 @@
                                                     @enderror
                                                 </div>
                                             </div>
-                                            <div class="col-12">
-                                                <div class="row m-0 p-0">
-                                                    <div class="col-lg-6">
-
-                                                        <div class="form-group">
-                                                            <label for="title" class="form-label">Image</label>
-
-                                                            <div>
-                                                                <input type="file" name="image"
-                                                                    class="form-control custom-input">
-                                                                @error('image')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
-
-                                                            <small>Recommended Image Size 1200X675 </small>
-                                                        </div>
-                                                        <div class="form-group pt-2">
-                                                            <label for="keywords" class="form-label">Category</label>
-                                                            {!! Form::select('category_id', $category, '', ['class' => 'w-100 nice-select','placeholder'=>'-select category-','required']) !!}
-                                                            @error('category_id')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                            @enderror
-                                                        </div> 
-                                                        <br>
-                                                    
-                                                     
-                                                     
-                                           
-                                                        <div class="form-group mt-4">
-                                                                <label for="tags" class="form-label">Tags</label>
-                                                                <textarea class="form-control custom-input" id="tags" autocomplete="off"
-                                                                    name="tags" placeholder="Tags sapareted by comma"
-                                                                    rows="2">{{ old('tags') }}</textarea>
-                                                                @error('tags')
-                                                                <div class="invalid-feedback">
-                                                                    {{ $message }}
-                                                                </div>
-                                                                @enderror
-                                                            </div>
-
-                                                       
-
-
-                                                    </div>
-
-                                                    <div class="col-lg-6">
-                                                        <!-- description  -->
-                                                        <div class="form-group">
-                                                            <label for="meta_description" class="form-label">Meta
-                                                                Description</label>
-                                                            <textarea class="form-control custom-input" id="meta_description"
-                                                                autocomplete="off" name="meta_description"
-                                                                placeholder="Meta Description"
-                                                                rows="5">{{ old('meta_description') }}</textarea>
-                                                            @error('meta_description')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                            @enderror
-                                                        </div>
-                                                       
-                                                        <div class="form-group pt-2">
-                                                            <label for="is_published" class="form-label col-md-12"> Status : </label>
-                                                            {!! Form::select('is_published', [1=>'Published',2=>'Draft'], '1',
-                                                            ['class'=>'nice-select']) !!}
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="col-12">
-                                            <div class="generate-btn-wrapper">
-                                                <button type="submit" class="generate-btn"> <i class="fa fa-save"> </i> &nbsp;
-                                                    Submit</button>
-                                            </div>
-                                            </div>
-
                                         </div>
                                     </div>
                                 </div>
 
                             </div>
+                            <div class="col-lg-4 border-start mt-0">
+                                <!-- keywords -->
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="title" class="form-label">Image</label>
+                                            <div>
+                                                <input  type="file" name="image" class="form-control custom-input" >
+                                                 @error('image')
+                                                     <div class="invalid-feedback">
+                                                         {{ $message }}
+                                                     </div>
+                                                 @enderror
+                                            </div>
+                                            <small class="fz-12 mt-2 gray-500">Recommended Image Size 1200X675 </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mb-3">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label for="keywords" class="form-label">Category</label>
+                                            {!! Form::select('category_id', $category, '', ['class' => 'w-100 nice-select','placeholder'=>'-select category-','required']) !!}
+                                            @error('category_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                    </div>
 
+                                </div>
+                                <div class="col-12 mb-3">
+                                    <div class="form-group">
+                                        <label for="tags" class="form-label">Tags</label>
+                                        <textarea class="form-control custom-input" id="tags" autocomplete="off" name="tags"
+                                            placeholder="Tags sapareted by comma" rows="2"></textarea>
+                                        @error('tags')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <!-- description -->
+                                <div class="col-12">
+                                    <!-- description  -->
+                                    <div class="form-group">
+                                        <label for="meta_description" class="form-label">Meta Description</label>
+                                        <textarea class="form-control custom-input" id="meta_description" autocomplete="off" name="meta_description"
+                                            placeholder="Meta Description" rows="4"></textarea>
+                                        @error('meta_description')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="is_published" class="form-label col-md-12"> Status : </label>
+                                        {!! Form::select('is_published', [1=>'Published',2=>'Draft'], 1, ['class'=>'nice-select']) !!}
+                                    </div>
+                                </div>
+                                <div class="generate-btn-wrapper">
+                                    <button type="submit" class="generate-btn px-4">Submit</button>
+                                </div>
+                            </div>
                           
 
                         </div>

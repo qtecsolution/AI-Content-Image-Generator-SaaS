@@ -57,15 +57,6 @@
                                                 </span>
                                                 <span>Store {{$item->image_count}} Generate Image on server</span>
                                             </li>
-<<<<<<< HEAD
-=======
-                                            <li>
-                                                <span class="icon-wrapper cross-icon">
-                                                    <img src="{{asset('assets/images/icons/check.svg')}}" alt="cross  icon ">
-                                                </span>
-                                                <span>Support {{Str::upper($item->lang)}} Languages</span>
-                                            </li>
->>>>>>> origin/kawsar
                                         </ul>
                                         <div class="d-grid">
                                             @if($user->plan_id == $item->id)

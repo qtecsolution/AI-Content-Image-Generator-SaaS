@@ -39,7 +39,7 @@
                                         <span>:</span>
                                         <figure class="blog-image">
                                             @if ($data->image != '' && file_exists($data->image))
-                                                <img src="{{ asset($data->image) }}">
+                                                <img class="img-fluid" src="{{ asset($data->image) }}">
                                             @endif
                                         </figure>
                                         
@@ -85,7 +85,9 @@
                                 </li>
                                 <li> Description</li>
                                 <li>
-                                    @php echo $data->description @endphp
+                                    <div>
+                                        @php echo $data->description @endphp
+                                    </div>
                                 </li>
                             </div>
                         </div>
