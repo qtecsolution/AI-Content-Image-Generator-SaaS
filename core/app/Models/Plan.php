@@ -17,6 +17,6 @@ class Plan extends Model
 
     // public function userHasThisPlan()
     // {
-    //     return $this->hasOneThrough(User::class, PlanExpanse::class,'plan_id','plan_expanse_id');
+    //     return $this->hasOneThrough(User::class, PlanExpense::class,'plan_id','plan_expense_id');
     // }
 }

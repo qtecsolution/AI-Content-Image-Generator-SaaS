@@ -23,7 +23,7 @@ class ContentHistoryController extends Controller
     public function viewAll()
     {
         $allData = ContentHistory::with(['useCase'])->where('user_id', Auth::user()->id)
-        ->orderBy('id', 'DESC');
+        ->orderBy('content_histories.id', 'DESC');
     return DataTables::of($allData)
         ->addIndexColumn()
         ->addColumn('checkbox', '

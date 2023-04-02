@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Plan;
-use App\Models\PlanExpanse;
+use App\Models\PlanExpense;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +16,7 @@ class OrderController extends Controller
     {
 
         if (request()->ajax()) {
-            $allData = Order::with(['user', 'plan'])->orderBy('id', 'DESC');
+            $allData = Order::with(['user', 'plan'])->orderBy('orders.id', 'DESC');
             if(isset($request->status)){
                 if($request->status==0){
                     $allData = $allData->where('is_paid', false);
@@ -35,12 +35,10 @@ class OrderController extends Controller
                 })
                 ->addColumn('payment_status','
                     @if ($is_paid)
-                        <a href="{{ route(\'plan.expanse\', $id) }}"
-                            class="status-expanses">Expanses</a>
+                        <a href="{{ route(\'plan.expense\', $id) }}"
+                            class="status-expenses">Expenses</a>
                     @else
-                        <a href="{{ route(\'order.approved\', $id) }}"
-                            class="status-approved">Approved</a>
-                        <a href="{{ route(\'order.approved\', $id) }}"
+                    <a href="{{ route(\'plan.expense\', $id) }}"
                             class="status-panding">Pending</a>
                     @endif')
                 ->rawColumns(['payment_status','added_date'])
@@ -64,42 +62,55 @@ class OrderController extends Controller
         $plan = Plan::where('id', $order->plan_id)->first();
         $order->is_paid = true;
         //get old expnase
-        $oldExpanse = PlanExpanse::where('id', $user->plan_expanse_id)->first();
+        $oldexpense = PlanExpense::where('id', $user->plan_expense_id)->first();
 
-        if ($oldExpanse != null) {
-            //eassign the plan expanse
-            $expanse = new PlanExpanse();
-            $expanse->user_id = $user->id;
-            $expanse->order_id = $order->id;
-            $expanse->plan_id = $plan->id;
-            $expanse->word_count = $plan->word_count;
-            $expanse->call_api_count = $plan->call_api_count + ($oldExpanse->call_api_count - $oldExpanse->current_api_count);
-            $expanse->documet_count = $plan->documet_count + ($oldExpanse->documet_count - $oldExpanse->current_documet_count);
-            $expanse->image_count = $plan->image_count + ($oldExpanse->image_count - $oldExpanse->current_image_count);
-            $expanse->activated_at = Carbon::now();
-            $expanse->expire_at =  Carbon::now()->addDay(30);
-            $expanse->save();
+        if ($oldexpense != null) {
+            //eassign the plan expense
+            $expense = new PlanExpense();
+            $expense->user_id = $user->id;
+            $expense->order_id = $order->id;
+            $expense->plan_id = $plan->id;
+            $expense->word_count = $plan->word_count;
+            $expense->call_api_count = $plan->call_api_count + ($oldexpense->call_api_count - $oldexpense->current_api_count);
+            $expense->documet_count = $plan->documet_count + ($oldexpense->documet_count - $oldexpense->current_documet_count);
+            $expense->image_count = $plan->image_count + ($oldexpense->image_count - $oldexpense->current_image_count);
+            $expense->activated_at = Carbon::now();
+            $expense->expire_at =  Carbon::now()->addDay(30);
+            $expense->save();
         } else {
-            //eassign the plan expanse
-            $expanse = new PlanExpanse();
-            $expanse->user_id = $user->id;
-            $expanse->order_id = $order->id;
-            $expanse->plan_id = $plan->id;
-            $expanse->word_count = $plan->word_count;
-            $expanse->call_api_count = $plan->call_api_count;
-            $expanse->documet_count = $plan->documet_count;
-            $expanse->image_count = $plan->image_count;
-            $expanse->activated_at = Carbon::now();
-            $expanse->expire_at =  Carbon::now()->addDay(30);
-            $expanse->save();
+            //eassign the plan expense
+            $expense = new PlanExpense();
+            $expense->user_id = $user->id;
+            $expense->order_id = $order->id;
+            $expense->plan_id = $plan->id;
+            $expense->word_count = $plan->word_count;
+            $expense->call_api_count = $plan->call_api_count;
+            $expense->documet_count = $plan->documet_count;
+            $expense->image_count = $plan->image_count;
+            $expense->activated_at = Carbon::now();
+            $expense->expire_at =  Carbon::now()->addDay(30);
+            $expense->save();
         }
-        // return $expanse;
-        $user->plan_expanse_id = $expanse->id;
+        // return $expense;
+        $user->plan_expense_id = $expense->id;
         $user->save();
 
         $order->save();
 
         toast('This Order is approved', 'success');
-        return redirect()->route('plan.expanse', $order->id);
+        return redirect()->route('plan.expense', $order->id);
+    }
+
+    // User Transaction History
+    public function userTransactions(){
+        $user = Auth::user();
+        $allData = Order::with(['user', 'plan'])->where('user_id',$user->id)->orderBy('orders.id', 'DESC')->paginate(12);
+        return view('userArea.purchase.transactions',compact('allData'));
+    }
+    public function userTransactionDetails($orderId){
+        $order = Order::where(['id'=> $orderId,'user_id'=>Auth::user()->id])->firstOrFail();
+        $plan = Plan::where('id', $order->plan_id)->first();
+        $expense = PlanExpense::where('order_id', $order->id)->first();
+        return view('userArea.purchase.transactionDetails', compact('plan', 'expense', 'order'));
     }
 }

@@ -12,9 +12,9 @@
             <div class="col-12">
                 <ul class="nav nav-tabs setting-tab" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link @if (isset($tab) && $tab == 'openai') active @endif" id="Papal-tab"
-                            data-bs-toggle="tab" data-bs-target="#Papal-tab-pane" type="button" role="tab"
-                            aria-controls="Papal-tab-pane" aria-selected="true">Open Ai Setup</button>
+                        <button class="nav-link @if (isset($tab) && $tab == 'openai') active @endif" id="paypal-tab"
+                            data-bs-toggle="tab" data-bs-target="#paypal-tab-pane" type="button" role="tab"
+                            aria-controls="paypal-tab-pane" aria-selected="true">Open Ai Setup</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link @if (isset($tab) && $tab == 'tawkto') active @endif" id="Stripe-tab"
@@ -33,7 +33,7 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link @if (isset($tab) && $tab == 'seo') active @endif" id="seo-tab"
                             data-bs-toggle="tab" data-bs-target="#seo-tab-pane" type="button" role="tab"
-                            aria-controls="seo-tab-pane" aria-selected="false">Seo
+                            aria-controls="seo-tab-pane" aria-selected="false">SEO
                             Tools</button>
                     </li>
 
@@ -47,15 +47,15 @@
                     <li class="nav-item" role="presentation">
                         <button class="nav-link @if (isset($tab) && $tab == 'cms') active @endif" id="FlutterWave-tab"
                             data-bs-toggle="tab" data-bs-target="#FlutterWave-tab-pane" type="button" role="tab"
-                            aria-controls="FlutterWave-tab-pane" aria-selected="false">Cms
-                            setting</button>
+                            aria-controls="FlutterWave-tab-pane" aria-selected="false">CMS
+                            Settings</button>
                     </li>
 
                     <li class="nav-item" role="presentation">
                         <button class="nav-link @if (isset($tab) && $tab == 'pwa') active @endif" id="pwa-tab"
                             data-bs-toggle="tab" data-bs-target="#pwa-tab-pane" type="button" role="tab"
                             aria-controls="pwa-tab-pane" aria-selected="false">Progressive Web Apps
-                            Configer</button>
+                            Configure</button>
                     </li>
 
 
@@ -63,7 +63,7 @@
 
                 <div class="tab-content mt-5 setting-tab-content" id="myTabContent">
                     <div class="tab-pane fade @if (isset($tab) && $tab == 'openai') show active @endif"
-                        id="Papal-tab-pane" role="tabpanel" aria-labelledby="Papal-tab" tabindex="0">
+                        id="paypal-tab-pane" role="tabpanel" aria-labelledby="paypal-tab" tabindex="0">
 
                         <div class="row">
                             <div class="col-lg-7">
@@ -488,23 +488,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- footer logo  -->
-                                <div class="logo-box">
-                                    <span class="box-title">Footer Logo</span>
-                                    <div class="avatar-upload">
-                                        <div class="avatar-edit">
-                                            <input type='file' name="f_logo" id="imageUpload_f_logo"
-                                                accept=".png, .jpg, .jpeg" />
-                                            <label for="imageUpload_f_logo"></label>
-                                        </div>
-                                        <div class="avatar-preview">
-                                            <div id="imagePreview_f_logo"
-                                                style="background-image: url({{ filePath(readConfig('footer_logo')) }});">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
                                 <!-- favicon    -->
                                 <div class="logo-box">
                                      <span class="box-title">Favicon Icon </span>
@@ -517,7 +500,7 @@
                                         </div>
                                         <div class="avatar-preview">
                                             <div id="imagePreview_f_icon"
-                                                style="background-image: url({{ filePath(readConfig('favicon_icon')) }}">
+                                                style="background-image: url({{ filePath(readConfig('favicon_icon')) }})">
                                             </div>
                                         </div>
                                     </div>

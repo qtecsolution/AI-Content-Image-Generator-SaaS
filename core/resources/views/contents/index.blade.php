@@ -69,9 +69,9 @@
                                     </td>
                                     <td>Title</td>
                                     <td>Keywords </td>
-                                    <td> Use case </td>
+                                    <td> Use Case </td>
                                     <td>Words </td>
-                                    <td>last Modified</td>
+                                    <td>Last Modified</td>
                                     <td data-orderable="false"></td>
                                 </tr>
                             </thead>

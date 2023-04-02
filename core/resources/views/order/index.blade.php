@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('title', 'Tranzactions')
+@section('title', 'Transactions')
 @section('breadcrumb')
-    <li class="breadcrumb-item">Tranzactions</li>
+    <li class="breadcrumb-item">Transactions</li>
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="my-projects">
                     <div class="my-projects-header border-bottom mb-3">
-                        <h5 class="header-title">All @if(isset($request->status) && $request->status==0) Pending @endif Tranzactions</h5>
+                        <h5 class="header-title">All @if(isset($request->status) && $request->status==0) Pending @endif Transactions</h5>
                         <div class="project-button pull-right">
                             @if(isset($request->status) && $request->status==0)
                             
@@ -69,7 +69,7 @@
                                     <td>User</td>
                                     <td>Plan</td>
                                     <td>Method</td>
-                                    <td width="10%">Status</th>
+                                    <td width="10%"></th>
                                     </tr>
                                 </thead>
                             </table>

@@ -24,7 +24,7 @@ class User extends Authenticatable
         'phone',
         'plan_id',
         'order_id',
-        'plan_expanse_id',
+        'plan_expense_id',
         'type',
         'password',
         'address'

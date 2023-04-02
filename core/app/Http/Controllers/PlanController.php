@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Charts\ExpansesChart;
+use App\Charts\expensesChart;
 use App\Models\Order;
 use App\Models\Plan;
-use App\Models\PlanExpanse;
+use App\Models\PlanExpense;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,11 +21,11 @@ class PlanController extends Controller
     //
 
 
-    public function userIndex()
+    public function userPurchase()
     {
         $user = Auth::user();
         $plans = Plan::where('is_published', true)->orderBy('id','ASC')->get();
-        return view('plan.userIndex', compact('plans', 'user'));
+        return view('userArea.purchase.userPurchase', compact('plans', 'user'));
     }
 
     public function index()
@@ -102,15 +102,15 @@ class PlanController extends Controller
 
 
    
-    public function expanse($id,ExpansesChart $expanseChart)
+    public function expense($id,expensesChart $expenseChart)
     {
 
-        $expanseChart = $expanseChart->build();
+        $expenseChart = $expenseChart->build();
         $user = Auth::user();
         $plan = Plan::where('id', $id)->first();
         $order = Order::where('user_id', $user->id)->where('plan_id', $id)->first();
-        $expanse = PlanExpanse::where('user_id', $user->id)
+        $expense = PlanExpense::where('user_id', $user->id)
             ->where('plan_id', $id)->where('order_id', $order->id)->first();
-        return view('plan.expanse', compact('plan', 'expanse', 'order','expanseChart'));
+        return view('plan.expense', compact('plan', 'expense', 'order','expenseChart'));
     }
 }

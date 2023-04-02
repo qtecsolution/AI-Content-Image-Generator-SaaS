@@ -91,7 +91,7 @@
 
                                             @if ($item->is_published)
                                             <button type="button" class="btn-deactive-plan"><a class="dropdown-item"
-                                                    href="{{ route('plan.status', [$item->id, 'deactive']) }}">Deactive
+                                                    href="{{ route('plan.status', [$item->id, 'deactive']) }}">Inactive
                                                     Now</a></button>
                                             @else
                                             <button type="button" class="btn-active-plan"><a class="dropdown-item"

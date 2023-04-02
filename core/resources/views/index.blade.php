@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h3 class="welcome-title">👋 Hi, {{ Auth::user()->name }} </h3>
-                <p class="welcome-text">"Welcome Type.ez! We're glad to have you here. Our platform is designed
+                <p class="welcome-text">"Welcome to {{readConfig('name')}}! We're glad to have you here. Our platform is designed
                     to help you streamline <br> your writing process, increase your productivity, and create
                     high-quality content. <br> We're confident you'll find the tools and features here to be
                     user-friendly and effective.</p>
@@ -80,9 +80,9 @@
                             </td>
                             <td>Title</td>
                             <td>Keywords </td>
-                            <td> Use case </td>
+                            <td> Use Case </td>
                             <td>Words </td>
-                            <td>last Modified</td>
+                            <td>Last Modified</td>
                             <td data-orderable="false"></td>
                         </tr>
                     </thead>
@@ -94,6 +94,21 @@
 
     </section>
     <!-- MY PROJECT  SECTION END -->
+    <!-- Free Plan Subscribe in first time registration -->
+    <form action="{{ route('plan.purchase.store') }}" method="post" id="order_payment_done">
+        @csrf
+        <input type="hidden" name="plan_id" value="{{ freePlan()->id }}">
+        <input type="hidden" name="paymentMethod" value="Free">
+        <input type="hidden" name="paymentAmount" value="{{ freePlan()->price }}">
+        <input type="hidden" name="paymentTID" value="">
+        <input type="hidden" name="value_1" value="">
+
+        <input type="hidden" name="name" value="{{ Auth::user()->name }}">
+        <input type="hidden" name="email" value="{{ Auth::user()->email }}">
+        <input type="hidden" name="address" value="{{ Auth::user()->address }}">
+        <input type="hidden" name="phone" value="{{ Auth::user()->phone }}">
+    </form>
+    
 </div>
 @endsection
 @section('script')
@@ -219,5 +234,8 @@ $(function() {
 
     })
 });
+if("{{$noPlan}}"==1){
+    $('#order_payment_done').submit();
+}
 </script>
 @endsection

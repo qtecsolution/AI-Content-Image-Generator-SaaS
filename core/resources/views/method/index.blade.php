@@ -7,9 +7,9 @@
     <div class="main-content p-2 p-md-4 pt-0">
         <ul class="nav nav-tabs setting-tab" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link @if (isset($tab) && $tab == 'paypal') active @endif" id="Papal-tab" data-bs-toggle="tab"
-                    data-bs-target="#Papal-tab-pane" type="button" role="tab" aria-controls="Papal-tab-pane"
-                    aria-selected="true">Papal Setup</button>
+                <button class="nav-link @if (isset($tab) && $tab == 'paypal') active @endif" id="paypal-tab" data-bs-toggle="tab"
+                    data-bs-target="#paypal-tab-pane" type="button" role="tab" aria-controls="paypal-tab-pane"
+                    aria-selected="true">Paypal Setup</button>
             </li>
             <li class="nav-item" role="presentation">
                 <button class="nav-link @if (isset($tab) && $tab == 'stripe') active @endif" id="Stripe-tab"
@@ -43,8 +43,8 @@
 
         </ul>
         <div class="tab-content mt-3 setting-tab-content" id="myTabContent">
-            <div class="tab-pane fade @if (isset($tab) && $tab == 'paypal') show active @endif " id="Papal-tab-pane"
-                role="tabpanel" aria-labelledby="Papal-tab" tabindex="0">
+            <div class="tab-pane fade @if (isset($tab) && $tab == 'paypal') show active @endif " id="paypal-tab-pane"
+                role="tabpanel" aria-labelledby="paypal-tab" tabindex="0">
                 <div class="row">
                     <div class="col-md-7">
                         <form action="{{ route('payment.paypal.store') }}" method="post" enctype="multipart/form-data">

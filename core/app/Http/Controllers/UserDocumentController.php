@@ -24,7 +24,7 @@ class UserDocumentController extends Controller
     public function create()
     {
         $allData = UserDocument::with(['useCase'])->where('user_id', Auth::user()->id)
-            ->orderBy('id', 'DESC');
+            ->orderBy('user_documents.id', 'DESC');
         return DataTables::of($allData)
             ->addIndexColumn()
             ->addColumn('checkbox', '

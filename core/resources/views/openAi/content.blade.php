@@ -26,7 +26,7 @@
                                         <div class="col-7">
                                             <div class="form-group">
                                                 <label for="case" class="form-label">Choose Use Case</label>
-                                                {{ Form::select('case', $cases, $request->case ?? '', ['class' => 'w-100 nice-select', 'required', 'id' => 'useCase']) }}
+                                                {{ Form::select('case', $cases, $request->case ?? '', ['class' => 'w-100 nice-select', 'required', 'id' => 'useCase','searchable'=>"true"]) }}
                                             </div>
                                         </div>
                                         <!-- select tone  -->
@@ -139,7 +139,7 @@
                                                         data-bs-placement="top"
                                                         data-bs-title="Maximum words can generate."></i> </label>
                                                         <input type="number" class="form-control custom-input" id="max_words"
-                                                        autocomplete="off" name="max_words" placeholder="Max Length" min="5" max="500" value="200">
+                                                        autocomplete="off" name="max_words" placeholder="Max Length" min="5" max="{{showBalance()->word}}" value="{{showBalance()->word}}">
                                             </div>
                                         </div>
                                     </div>

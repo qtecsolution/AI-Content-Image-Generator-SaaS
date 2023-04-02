@@ -1,14 +1,14 @@
 <?php
 
 return [
-    'name' => 'Type.ez',
+    'name' => 'Creaify',
     'type_logo' => 'uploads/site/own-site7189.png',
-    'type_name' => 'Type.ez',
-    'type_footer' => 'Type.ez',
+    'type_name' => 'Creaify',
+    'type_footer' => 'All rights reserved by Creaify',
     'type_mail' => 'example@mail.com',
     'type_address' => 'United state',
     'footer_logo' => 'uploads/site/footer-logo4574.jpg',
-    'favicon_icon' => 'uploads/site/f-icon1290.png',
+    'favicon_icon' => 'assets/uploads/site/2023/04/02/f-icon181.png',
     'type_fb' => 'facebook.com/a',
     'type_tw' => 'facebook.com',
     'type_google' => 'facebook.com',
@@ -47,4 +47,5 @@ return [
     'currency_sambol' => '$',
     'pwa_active' => 'yes',
     'open_ai_model' => 'text-davinci-003',
+    'demo' => true,
 ];

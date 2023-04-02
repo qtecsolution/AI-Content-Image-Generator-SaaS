@@ -31,7 +31,11 @@ class HomeController extends Controller
     public function index()
     {
         $cases = UseCase::where('is_published', 1)->get();
-        return view('index', compact('cases'));
+        $noPlan = 0;
+        if(showBalance()==''){
+            $noPlan = 1;
+        }
+        return view('index', compact('cases','noPlan'));
     }
     public function dashboard()
     {

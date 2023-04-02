@@ -15,13 +15,13 @@ use Validator;
 class OpenAiController extends Controller
 {
     public function content(Request $request)
-    {
+    { 
         if(showBalance()==''){
             myAlert('error', 'Subscribe any plan first!');
-            return redirect()->route('plan.userIndex');
+            return redirect()->route('user.purchase');
         }elseif(showBalance()->api_call==0){
             myAlert('error', 'Your Api call limit: 0');
-            return redirect()->route('plan.userIndex');
+            return redirect()->route('user.purchase');
         }
         $cases = UseCase::where('is_published', 1)->pluck('title', 'id');
         $inputFields = [];
@@ -110,10 +110,10 @@ class OpenAiController extends Controller
     {
         if(showBalance()==''){
             myAlert('error', 'Subscribe any plan first!');
-            return redirect()->route('plan.userIndex');
+            return redirect()->route('user.purchase');
         }elseif(showBalance()->image==0){
             myAlert('error', 'You have reached your image generate limit');
-            return redirect()->route('plan.userIndex');
+            return redirect()->route('user.purchase');
         }
         $images = [];
         if (isset($request->id)) {
@@ -174,10 +174,10 @@ class OpenAiController extends Controller
     {
         if(showBalance()==''){
             myAlert('error', 'Subscribe any plan first!');
-            return redirect()->route('plan.userIndex');
+            return redirect()->route('user.purchase');
         }elseif(showBalance()->image==0){
             myAlert('error', 'You have reached your image generate limit');
-            return redirect()->route('plan.userIndex');
+            return redirect()->route('user.purchase');
         }
         $oldImage = Images::where('id', $oldId)->where('user_id', Auth::user()->id)->firstOrFail();
         $response = OpenAI::images()->create([
@@ -210,7 +210,7 @@ class OpenAiController extends Controller
     {
         if(showBalance()==''){
             myAlert('error', 'Subscribe any plan first!');
-            return redirect()->route('plan.userIndex');
+            return redirect()->route('user.purchase');
         }
         $images = [];
         if (isset($request->id)) {

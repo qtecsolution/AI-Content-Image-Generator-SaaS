@@ -1,6 +1,7 @@
 <?php
 
-use App\Models\PlanExpanse;
+use App\Models\Plan;
+use App\Models\PlanExpense;
 use App\Models\UseCase;
 use Illuminate\Support\Str;
 use Winter\LaravelConfigWriter\ArrayFile;
@@ -112,8 +113,8 @@ function dateTimeFormat($data)
 function showBalance()
 {
     $user = Auth::user();
-    if(isset($user->plan_expanse_id)){
-        $expense = PlanExpanse::where('id', $user->plan_expanse_id)
+    if(isset($user->plan_expense_id)){
+        $expense = PlanExpense::where('id', $user->plan_expense_id)
              ->where('activated_at', '<=', now())
              ->where(function ($query) {
                  $query->whereNull('expire_at')
@@ -127,6 +128,7 @@ function showBalance()
                 'api_call'=> $restApiCall,
                 'image'=> $restImage,
                 'document'=> $restDoc,
+                'word'=> $expense->word_count,
             ];
         }else{
             return "";
@@ -141,21 +143,21 @@ function balanceDeduction($type, $n=1)
     // call_api,document,image
     $status = false;
     $user = Auth::user();
-    $planExpanses = PlanExpanse::where('id', $user->plan_expanse_id)
+    $planExpenses = PlanExpense::where('id', $user->plan_expense_id)
         ->where('activated_at', '<=', now())
         ->where(function ($query) {
             $query->whereNull('expire_at')
                 ->orWhere('expire_at', '>', now());
         })
         ->where('user_id', $user->id)->first();
-    if ($planExpanses == null) {
+    if ($planExpenses == null) {
         return false;
     } else {
         switch ($type) {
             case 'call_api':
-                if ($planExpanses->call_api_count > $planExpanses->current_api_count) {
-                    $planExpanses->current_api_count++;
-                    $planExpanses->save();
+                if ($planExpenses->call_api_count > $planExpenses->current_api_count) {
+                    $planExpenses->current_api_count++;
+                    $planExpenses->save();
                     $status =  true;
                 } else {
                     $status = false;
@@ -163,18 +165,18 @@ function balanceDeduction($type, $n=1)
                 break;
 
             case 'document':
-                if ($planExpanses->documet_count > $planExpanses->current_documet_count) {
-                    $planExpanses->current_documet_count++;
-                    $planExpanses->save();
+                if ($planExpenses->documet_count > $planExpenses->current_documet_count) {
+                    $planExpenses->current_documet_count++;
+                    $planExpenses->save();
                     $status =  true;
                 } else {
                     $status = false;
                 }
                 break;
             case 'document-delete':
-                if ($$planExpanses->current_documet_count>0) {
-                    $planExpanses->current_documet_count--;
-                    $planExpanses->save();
+                if ($$planExpenses->current_documet_count>0) {
+                    $planExpenses->current_documet_count--;
+                    $planExpenses->save();
                     $status =  true;
                 } else {
                     $status = false;
@@ -182,9 +184,9 @@ function balanceDeduction($type, $n=1)
                 break;
 
             case 'image':
-                if ($planExpanses->image_count > $planExpanses->current_image_count) {
-                    $planExpanses->current_image_count += $n;
-                    $planExpanses->save();
+                if ($planExpenses->image_count > $planExpenses->current_image_count) {
+                    $planExpenses->current_image_count += $n;
+                    $planExpenses->save();
                     $status =  true;
                 } else {
                     $status = false;
@@ -245,4 +247,19 @@ function menuActive($data)
         }
     }
     return false;
+}
+function freePlan(){
+   return Plan::where('price','<=', 0)->first();
+}
+function demoPlan(){
+    if(readConfig('demo')){
+        return (object) [
+            'api_call'=> 10,
+            'image'=> 5,
+            'document'=> 5,
+            'word'=> 500,
+        ];
+    }else{
+        return "";
+    }
 }

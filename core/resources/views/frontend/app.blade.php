@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/images/favicon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ filePath(readConfig('favicon_icon')) }}">
     <title>{{ readConfig('name') }} </title>
 
     <!-- Link Swiper's CSS -->
@@ -258,7 +258,7 @@
                 </div>
 
                 <div class="copyright">
-                    <p class="copyright-text">© {{date('Y')}} {{ readConfig('name') }}  </p>
+                    <p class="copyright-text">  Copyright  © {{date('Y')}}. {{ readConfig('type_footer') }}  </p>
                 </div>
             </div>
         </div>
@@ -269,7 +269,7 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenu">
         <div class="offcanvas-header">
             <a href="{{route('/')}}">
-                <h3 class="logo-name text-center header-logo">type.ez</h3>
+                <h3 class="logo-name text-center header-logo">{{ readConfig('name') }}</h3>
             </a>
 
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">

@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'name' => 'Type.ez',
+    'name' => readConfig('name'),
     'manifest' => [
-        'name' => env('APP_NAME', 'My PWA App'),
+        'name' => readConfig('name'),
         'short_name' => 'R',
         'start_url' => '/',
         'background_color' => '#ffffff',

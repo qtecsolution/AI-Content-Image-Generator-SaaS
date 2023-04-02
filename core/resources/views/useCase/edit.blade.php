@@ -60,7 +60,7 @@
     <!-- Promt -->
     <div class="col-12 mb-3">
         <div class="form-group">
-            <label for="promt-body" class="form-label">Open AI Resuest Prompt : </label>
+            <label for="promt-body" class="form-label">Open AI Request Prompt : </label>
             <textarea class="form-control custom-input @error('prompt') is-invalid @enderror" id="promt-body" autocomplete="off"
                 name="prompt" placeholder="Prompt" rows="6">@purify( $data->prompt ?? 'Write me content with this keywords: [keywords]. The title is "[title]" and the description: [description]')</textarea>
             <div class="valid-feedback">
