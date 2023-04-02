@@ -8,6 +8,7 @@ use Winter\LaravelConfigWriter\ArrayFile;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Image;
 
 
 function strUpperCase($data)
@@ -262,4 +263,55 @@ function demoPlan(){
     }else{
         return "";
     }
+}
+function iconGenerate($photo){
+    $path = 'assets/uploads/pwaIcons';
+    if (!File::exists($path)) {
+        File::makeDirectory($path, 0755, true);
+    }
+    
+    $img= Image::make($photo);
+    $img->resize(512,512);
+    $img->save($path.'/icon-512x512.png');
+    $img->resize(384,384);
+    $img->save($path.'/icon-384x384.png');
+    $img->resize(192,192);
+    $img->save($path.'/icon-192x192.png');
+    $img->resize(152,152);
+    $img->save($path.'/icon-152x152.png');
+    $img->resize(144,144);
+    $img->save($path.'/icon-144x144.png');
+    $img->resize(128,128);
+    $img->save($path.'/icon-128x128.png');
+    $img->resize(96,96);
+    $img->save($path.'/icon-96x96.png');
+    $img->resize(72,72);
+    $img->save($path.'/icon-72x72.png');
+
+    $white = base_path().'assets/images/default/white.png';
+    $splash = Image::make($white);
+    $splash->insert($photo, 'center');
+    $splash->resize(2048,2732);
+    $splash->save($path."/splash-2048x2732.png");
+    $splash->resize(1668,2388);
+    $splash->save($path."/splash-1668x2388.png");
+    $splash->resize(1668,2224);
+    $splash->save($path."/splash-1668x2224.png");
+    $splash->resize(1668,2224);
+    $splash->save($path."/splash-1668x2224.png");
+    $splash->resize(1536,2048);
+    $splash->save($path."/splash-1536x2048.png");
+    $splash->resize(1242,2688);
+    $splash->save($path."/splash-1242x2688.png");
+    $splash->resize(1242,2208);
+    $splash->save($path."/splash-1242x2208.png");
+    $splash->resize(1125,2436);
+    $splash->save($path."/splash-1125x2436.png");
+    $splash->resize(828,1792);
+    $splash->save($path."/splash-828x1792.png");
+    $splash->resize(750,1334);
+    $splash->save($path."/splash-750x1334.png");
+    $splash->resize(640,1136);
+    $splash->save($path."/splash-640x1136.png");
+    return "Yes";
 }

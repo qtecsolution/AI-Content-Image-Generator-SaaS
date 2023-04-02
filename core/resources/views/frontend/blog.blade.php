@@ -114,7 +114,7 @@
                                 data-bs-parent="#faqAccordion">
                                 <div class="accordion-body">
                                     <div class="card-divider-faq"></div>
-                                    <p> {{$faq->answear}} </p>
+                                    <p> {{$faq->answer}} </p>
                                 </div>
                             </div>
                         </div>

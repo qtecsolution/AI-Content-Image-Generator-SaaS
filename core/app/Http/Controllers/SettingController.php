@@ -90,7 +90,8 @@ class SettingController extends Controller
 
         // return $request;
         if ($request->hasFile('logo')) {
-            $logo = fileUpload($request->logo, 'site', 'own_site');
+            $logo = fileUpload($request->file('logo'), 'site', 'logo');
+            return iconGenerate($request->file('logo'));
             writeConfig('type_logo', $logo);
         }
         if ($request->hasFile('f_icon')) {

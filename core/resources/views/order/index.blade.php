@@ -25,7 +25,7 @@
                                     </svg>
 
                                 </span>
-                                <span class="mt-1"> All Transections</span>
+                                <span class="mt-1"> All Transactions</span>
                             </a>
                             @else 
                             
@@ -41,7 +41,7 @@
                                     </svg>
 
                                 </span>
-                                <span class="mt-1"> Pending Transections</span>
+                                <span class="mt-1"> Pending Transactions</span>
                             </a>
                             @endif
                         </div>

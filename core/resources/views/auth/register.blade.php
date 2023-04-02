@@ -8,7 +8,7 @@
     @csrf
 
     <div class="authentication-form-header align-items-start">
-        <h3 class="logo-name">{{readConfig('type_name')}}</h3>
+        <h3 class="logo-name"> <a href="{{route('/')}}"> {{readConfig('type_name')}} </a> </h3>
         <h3 class="section-title">Sign up</h3>
         <p class="form-des">{{readConfig('type_register_title')}}</p>
     </div>

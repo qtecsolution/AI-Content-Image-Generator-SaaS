@@ -24,6 +24,7 @@ class FaqController extends Controller
     {
         $request->validate([
             'question' => 'required|unique:faqs',
+            'answer' => 'required',
         ]);
 
         try {

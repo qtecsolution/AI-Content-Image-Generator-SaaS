@@ -36,10 +36,10 @@
                                     <!-- description -->
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
-                                            <label for="answear" class="form-label"> Answear : </label>
-                                            <textarea class="form-control custom-input @error('answear') is-invalid @enderror" id="answear"
-                                                autocomplete="off" name="answear" placeholder="Answear" rows="8">{{ old('answear') }}</textarea>
-                                                @error('answear')
+                                            <label for="answer" class="form-label"> Answer : </label>
+                                            <textarea class="form-control custom-input @error('answer') is-invalid @enderror" id="answer"
+                                                autocomplete="off" name="answer" placeholder="Answer" rows="8">{{ old('answer') }}</textarea>
+                                                @error('answer')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>

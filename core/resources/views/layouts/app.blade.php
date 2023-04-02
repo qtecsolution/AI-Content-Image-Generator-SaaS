@@ -348,9 +348,9 @@
 
                                         <a href="{{ route('plan.index') }}" class="menu-item {{menuActive('plan.*')?'active':''}}">Manage Plan</a>
                                         <a href="{{ route('payment.method') }}" class="menu-item {{menuActive('payment.*')?'active':''}}">Payment Methods</a>
-                                        <a href="{{route('order.index')}}" class="menu-item {{menuActive('order.*') && request()->input('status') == null?'active':''}}">All Transections</a>
+                                        <a href="{{route('order.index')}}" class="menu-item {{menuActive('order.*') && request()->input('status') == null?'active':''}}">All Transactions</a>
                                         <a href="{{route('order.index')}}?status=0" class="menu-item {{menuActive('order.index') && request()->input('status') == "0"?'active':''}}">Pending
-                                            Transections</a>
+                                            Transactions</a>
 
                                     </div>
                                 </div>
@@ -853,9 +853,9 @@
 
                                         <a href="{{ route('plan.index') }}" class="menu-item {{menuActive('plan.*')?'active':''}}">Manage Plan</a>
                                         <a href="{{ route('payment.method') }}" class="menu-item {{menuActive('payment.*')?'active':''}}">Payment Methods</a>
-                                        <a href="{{route('order.index')}}" class="menu-item {{menuActive('order.*') && request()->input('status') == null?'active':''}}">All Transections</a>
+                                        <a href="{{route('order.index')}}" class="menu-item {{menuActive('order.*') && request()->input('status') == null?'active':''}}">All Transactions</a>
                                         <a href="{{route('order.index')}}?status=0" class="menu-item {{menuActive('order.index') && request()->input('status') == "0"?'active':''}}">Pending
-                                            Transections</a>
+                                            Transactions</a>
 
                                     </div>
                                 </div>
