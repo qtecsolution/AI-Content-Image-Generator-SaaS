@@ -30,6 +30,7 @@
 
 .sidebar-body {
     overflow-y: auto;
+    gap: .5rem;
 }
 
 
@@ -253,4 +254,7 @@
 } 
 .purchesinfo-list .blog-image{
     height: auto;
+}
+.dashboard-link.active {
+    color: #2c4caa !important;
 }
