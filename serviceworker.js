@@ -2,14 +2,14 @@ var staticCacheName = "pwa-v" + new Date().getTime();
 var filesToCache = [
     '/offline',
     '/assets/css/style.min.css',
-    '/assets/pwaIcons/icon-72x72.png',
-    '/assets/pwaIcons/icon-96x96.png',
-    '/assets/pwaIcons/icon-128x128.png',
-    '/assets/pwaIcons/icon-144x144.png',
-    '/assets/pwaIcons/icon-152x152.png',
-    '/assets/pwaIcons/icon-192x192.png',
-    '/assets/pwaIcons/icon-384x384.png',
-    '/assets/pwaIcons/icon-512x512.png',
+    '/assets/uploads/pwaIcons/icon-72x72.png',
+    '/assets/uploads/pwaIcons/icon-96x96.png',
+    '/assets/uploads/pwaIcons/icon-128x128.png',
+    '/assets/uploads/pwaIcons/icon-144x144.png',
+    '/assets/uploads/pwaIcons/icon-152x152.png',
+    '/assets/uploads/pwaIcons/icon-192x192.png',
+    '/assets/uploads/pwaIcons/icon-384x384.png',
+    '/assets/uploads/pwaIcons/icon-512x512.png',
 ];
 
 // Cache on install

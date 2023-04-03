@@ -1,0 +1,742 @@
+/*
+Easy Installer by ViserLab
+Laravel Software Setup Module By viserlab.com
+*/
+
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+
+html {
+    font-size: 18px
+}
+
+body {
+    color: #1D2939;
+    line-height: 26px;
+    font-family: 'Inter', sans-serif;
+    background:  #EAECF5;
+   
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.3;
+    color: #1D2939;
+}
+
+h2 {
+    font-size: 36px
+}
+
+h3 {
+    font-size: 28px
+}
+
+h4 {
+    font-size: 24px
+}
+
+h5 {
+    font-size: 20px
+}
+
+h6 {
+    font-size: 18px
+}
+
+p {
+    margin-top: -8px
+}
+
+p:last-child {
+    margin-bottom: -7px !important
+}
+
+@media (min-width:768px) {
+    h2 {
+        font-size: 48px;
+        line-height: 50px
+    }
+
+    h3 {
+        font-size: 36px
+    }
+
+    h4 {
+        font-size: 30px
+    }
+
+    h5 {
+        font-size: 24px
+    }
+
+    h6 {
+        font-size: 22px
+    }
+    
+}
+
+
+
+
+input {
+    border-radius: 5px;
+    color: #fff
+}
+
+input::placeholder {
+    color: #ddd
+}
+
+.installation-menu {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+}
+
+.padding-top {
+    padding-top: 100px
+}
+
+.padding-bottom {
+    padding-bottom: 100px
+}
+
+.section-bg {
+    background: #fff;
+}
+
+.installation-wrapper {
+    background: #FFFFFF;
+    border-radius: 10px;
+    margin-bottom: 40px
+}
+
+.installation-wrapper:last-child {
+    margin-bottom: 0
+}
+
+@media (max-width:991px) {
+    .installation-wrapper {
+        padding: 40px 30px;
+        background: #FFFFFF;
+    }
+}
+
+@media (max-width:767px) {
+    .installation-wrapper {
+        padding: 0;
+        background: #FFFFFF;
+    }
+}
+
+.installation-menu {
+    justify-content: center;
+    text-align: center;
+    max-width: 860px;
+    margin: 0 auto;
+    position: relative;
+    margin-bottom: 30px;
+    
+}
+
+@media (max-width:767px) {
+    .installation-menu {
+        margin: 0 -15px
+    }
+}
+
+.installation-menu .steps {
+    padding: 0 15px 30px;
+    width: calc(100% / 4);
+    position: relative
+}
+
+.installation-menu .steps::after,
+.installation-menu .steps::before {
+    position: absolute;
+    height: 8px;
+    width: 100%;
+    content: "";
+    background: #D5D9EB;
+    left: 50%;
+    top: 38px
+}
+
+.installation-menu .steps::after {
+    z-index: 1;
+    background:#2C4CAC;
+    transform-origin: left;
+    display: none
+}
+
+.installation-menu .steps .thumb {
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    border-radius: 50%;
+    background: #D5D9EB;
+    font-size: 30px;
+    margin: 0 auto 15px;
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.installation-menu .steps .content {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #344054;
+}
+
+.installation-menu .steps.running .thumb {
+    background: #2C4CAC
+}
+
+.installation-menu .steps.running .thumb::after,
+.installation-menu .steps.running .thumb::before {
+    position: absolute;
+    content: "";
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    border-radius: 74px;
+    background: #2C4CAC;
+    opacity: .15;
+    z-index: 1
+}
+
+.installation-menu .steps.running .thumb i {
+    position: relative;
+    z-index: 3
+}
+
+.installation-menu .steps.running .thumb::before {
+    -webkit-animation: inner-ripple 2s linear infinite;
+    -moz-animation: inner-ripple 2s linear infinite;
+    animation: inner-ripple 2s linear infinite
+}
+
+.installation-menu .steps.running .thumb::after {
+    -webkit-animation: outer-ripple 2s linear infinite;
+    -moz-animation: outer-ripple 2s linear infinite;
+    animation: outer-ripple 2s linear infinite
+}
+
+.installation-menu .steps.done .thumb {
+    background: #2C4CAC;
+}
+
+.installation-menu .steps.done::after {
+    display: block
+}
+
+.installation-menu .steps:last-child::after,
+.installation-menu .steps:last-child::before {
+    display: none
+}
+
+@media (max-width:991px) {
+    .installation-menu .steps .thumb {
+        width: 80px;
+        height: 80px;
+        line-height: 80px
+    }
+
+    .installation-menu .steps.done .thumb::before {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        font-size: 14px
+    }
+
+    .installation-menu .steps::after,
+    .installation-menu .steps::before {
+        top: 36px
+    }
+}
+
+@media (max-width:767px) {
+    .installation-menu .steps {
+        width: 50%
+    }
+
+    .installation-menu .steps:nth-child(even)::after,
+    .installation-menu .steps:nth-child(even)::before {
+        display: none
+    }
+}
+
+.box-item {
+    border: 1px solid rgba(255, 255, 255, .1);
+    padding: 30px;
+    border-radius: 0 0 15px 15px;
+    padding-top: 0;
+}
+
+@media (max-width:575px) {
+    .box-item {
+        padding: 30px 15px
+    }
+}
+
+.install-item .title {
+    padding: 20px 0 20px 0;
+    border-radius: 10px 10px 0 0;
+    background: #FFFFFF;
+    text-transform: uppercase;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 28px;
+    text-align: left;
+
+
+/* Gray/900 */
+
+color: #101828;
+}
+
+.install-item .item {
+    margin-bottom: 50px
+}
+
+.install-item .item:last-child {
+    margin-bottom: 0
+}
+
+.install-item .item .subtitle {
+    font-weight: 400;
+    margin-bottom: 20px;
+    color: #1D2939;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+
+}
+
+.install-item .item p {
+    margin: 0;
+    margin-bottom: 20px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+    color: #1D2939;
+
+}
+
+.install-item .item .check-list {
+    margin-bottom: 25px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 30px;
+
+
+    color: #1D2939;
+    
+}
+
+.install-item .item .check-list:last-child {
+    margin-bottom: 0 !important
+}
+
+.install-item .item .check-list li:first-child {
+    padding-top: 0
+}
+
+.install-item .item .check-list li:last-child {
+    padding-bottom: 0
+}
+
+/* .install-item .item .check-list li::before {
+    content: "\f00c";
+    color: #27ae60;
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    font-size: 14px;
+    margin-right: 5px
+} */
+
+
+
+.install-item .item .info {
+    margin-bottom: 25px
+}
+
+.install-item .item .info:last-child {
+    margin-bottom: 0 !important
+}
+
+.install-item .item .info img {
+    width: 20px;
+    margin-right: 5px
+}
+
+.install-item .item .info a {
+    margin: 0 5px
+}
+
+@media (max-width:575px) {
+    .install-item .item {
+        margin-bottom: 40px
+    }
+
+    .install-item .item .subtitle {
+        margin-bottom: 15px
+    }
+
+    .install-item .item .check-list,
+    .install-item .item .info,
+    .install-item .item p {
+        margin-bottom: 20px
+    }
+}
+
+.requirment-table {
+    width: 100%
+}
+
+.requirment-table tr {
+    border-left: 1px solid rgba(255, 255, 255, .1);
+    border-right: 1px solid rgba(255, 255, 255, .1);
+    
+}
+
+.requirment-table tr {
+
+    border-top: 1px solid #D0D5DD;
+}
+
+.requirment-table tr td {
+    padding: 10px;
+    border-bottom: 1px solid #D0D5DD;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #475467;
+ 
+}
+
+.requirment-table tr td:last-child {
+    text-align: center
+}
+
+.requirment-table tr td i {
+    color: #e84118
+}
+
+.requirment-table tr td i[class*=check] {
+    color: #27ae60
+}
+
+.requirment-table tr:nth-child(even) {
+ 
+}
+
+.table-area.item {
+    margin-bottom: 30px
+}
+
+@media (max-width:767px) {
+    .table-area {
+        overflow-x: auto
+    }
+
+    .table-area .requirment-table {
+        width: 700px
+    }
+}
+
+.info-item {
+    
+}
+
+.info-item:last-child {
+    margin-bottom: 0 !important
+}
+
+.info-item .subtitle {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 18px;
+    margin-bottom: 10px
+}
+
+@media (max-width:575px) {
+    .info-item {
+        margin-bottom: 30px
+    }
+}
+
+.mb--20 {
+    margin-bottom: -20px
+}
+
+.information-form-group {
+    margin-bottom: 20px
+}
+
+.information-form-group input {
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, .2);
+    background: #071a2c;
+    padding: 10px 14px;
+    background: #FFFFFF;
+    border: 1px solid #D0D5DD;
+    border-radius: 8px;
+     color: #475467;
+     font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    outline: 0;
+    transition: all .3s ease-in-out;
+}
+.information-form-group input:focus {
+ 
+ border-color: #97ABFF;
+}
+
+
+
+.information-form-group input::placeholder {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: #D0D5DD;
+}
+
+@media (max-width:575px) {
+    .information-form-group input {
+        
+    }
+}
+
+.success-area {
+    padding: 30px 0
+}
+
+.success-area .subtitle {
+    text-transform: uppercase;
+    margin-bottom: 70px
+}
+
+.success-area .info {
+    display: block;
+    color: #27ae60;
+    margin-bottom: 30px
+}
+
+.success-area .warning {
+    margin-top: 20px
+}
+
+@media (max-width:575px) {
+    .success-area .subtitle {
+        margin-bottom: 40px
+    }
+
+    .success-area .info {
+        margin-bottom: 20px
+    }
+
+    .success-area .warning {
+        margin-top: 40px
+    }
+}
+
+header .logo {
+    width: 180px
+}
+
+.theme-button {
+    
+    color: #fff;
+    background: linear-gradient(135deg, #97ABFF 0%, #123597 100%);
+    position: relative;
+    z-index: 1;
+    border: 6px solid #E3E6FF;
+    border-radius: 14px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+}
+
+.theme-button::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #27ae60;
+    transition: all .45s;
+    z-index: -1;
+    border-radius: 5px
+}
+
+.theme-button:hover::before {
+    width: 0
+}
+
+.theme-button i:last-child {
+    margin-left: 7px
+}
+
+.theme-button i:first-child {
+    margin-right: 7px
+}
+
+.theme-button:hover {
+    
+    text-decoration: none;
+    color: white;
+
+}
+
+.theme-button.choto {
+    padding: 10px 30px
+}
+
+button.theme-button {
+    height: 60px;
+    padding: 0 30px;
+    border: none
+}
+
+button.theme-button.choto {
+    height: 50px
+}
+
+@keyframes outer-ripple {
+    0% {
+        transform: scale(1);
+        opacity: .5;
+        -webkit-transform: scale(1)
+    }
+
+    80% {
+        transform: scale(1.5);
+        opacity: 0;
+        -webkit-transform: scale(1.5)
+    }
+
+    100% {
+        transform: scale(2.5);
+        opacity: 0;
+        -webkit-transform: scale(2.5)
+    }
+}
+
+@keyframes inner-ripple {
+    0% {
+        transform: scale(1);
+        opacity: .5;
+        -webkit-transform: scale(1)
+    }
+
+    30% {
+        transform: scale(1);
+        opacity: .5;
+        -webkit-transform: scale(1)
+    }
+
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+        -webkit-transform: scale(1.5)
+    }
+}
+
+.installation-section {
+    min-height: calc(100vh - 119px)
+}
+.footer-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 22px;
+
+    text-align: center;
+    color: #667085;
+
+}
+
+.form-label {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #1D2939;
+    margin-bottom: 4px;
+}
+
+.succes-size {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.error-text {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #D92D20;
+} 
+
+.warning-text {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    color: #DC6803;
+}
+
+.buttons-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 50px;
+}
+
+.go-btn {
+    background: #D0D5DD;
+    border: 6px solid #EAECF0;
+    color:#344054;
+}
+
+.go-btn:hover {
+    color:#344054;
+}

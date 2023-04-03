@@ -90,16 +90,22 @@ class SettingController extends Controller
 
         // return $request;
         if ($request->hasFile('logo')) {
+            $oldFile = readConfig('type_logo');
+            fileDelete($oldFile);
             $logo = fileUpload($request->file('logo'), 'site', 'logo');
-            return iconGenerate($request->file('logo'));
+            iconGenerate($logo);
             writeConfig('type_logo', $logo);
         }
         if ($request->hasFile('f_icon')) {
+            $oldFile = readConfig('favicon_icon');
+            fileDelete($oldFile);
             $f_icon = fileUpload($request->f_icon, 'site', 'f_icon');
             writeConfig('favicon_icon', $f_icon);
         }
 
         if ($request->hasFile('f_logo')) {
+            $oldFile = readConfig('footer_logo');
+            fileDelete($oldFile);
             $f_logo = fileUpload($request->f_logo, 'site', 'footer_logo');
             writeConfig('footer_logo', $f_logo);
         }

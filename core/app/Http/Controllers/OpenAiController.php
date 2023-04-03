@@ -15,11 +15,11 @@ use Validator;
 class OpenAiController extends Controller
 {
     public function content(Request $request)
-    { 
-        if(showBalance()==''){
+    {
+        if (showBalance() == '') {
             myAlert('error', 'Subscribe any plan first!');
             return redirect()->route('user.purchase');
-        }elseif(showBalance()->api_call==0){
+        } elseif (showBalance()->api_call == 0) {
             myAlert('error', 'Your Api call limit: 0');
             return redirect()->route('user.purchase');
         }
@@ -33,8 +33,8 @@ class OpenAiController extends Controller
         if (isset($defaultCase->input_fields)) {
             $inputFields = explode(',', $defaultCase->input_fields);
         }
-        $languages = Language::where('status',1)->pluck('language','language');
-        return view('openAi.content', compact('cases', 'request', 'inputFields','languages'));
+        $languages = Language::where('status', 1)->pluck('language', 'language');
+        return view('openAi.content', compact('cases', 'request', 'inputFields', 'languages'));
     }
     /* Open AI Content Generate */
     public function contentGenerate(Request $request)
@@ -57,8 +57,8 @@ class OpenAiController extends Controller
         try {
             // Get use case prompt & generate prompt by replacing placeholder
             $case = UseCase::findOrFail($request->use_case);
-            $placeholder = array("[keywords]", "[title]", "[description]","[tone]","[language]");
-            $replaceBy = array($request->keywords??'', $request->title??'', $request->description??'',$request->tone,$request->language);
+            $placeholder = array("[keywords]", "[title]", "[description]", "[tone]", "[language]");
+            $replaceBy = array($request->keywords ?? '', $request->title ?? '', $request->description ?? '', $request->tone, $request->language);
             $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
 
             $temp = floatval($request->temp ?? 0.7);
@@ -75,8 +75,8 @@ class OpenAiController extends Controller
                 'n' => (int)$request->quantity
             ]);
             $content =  $result['choices'][0]['text'] ?? '';
-            $wordCount = str_word_count($content)??0;
-            $charCount = strlen($content)??0;
+            $wordCount = str_word_count($content) ?? 0;
+            $charCount = strlen($content) ?? 0;
             $results = [
                 'content' => $content,
                 'words' => $wordCount,
@@ -108,10 +108,10 @@ class OpenAiController extends Controller
     // View for generate image
     public function image(Request $request)
     {
-        if(showBalance()==''){
+        if (showBalance() == '') {
             myAlert('error', 'Subscribe any plan first!');
             return redirect()->route('user.purchase');
-        }elseif(showBalance()->image==0){
+        } elseif (showBalance()->image == 0) {
             myAlert('error', 'You have reached your image generate limit');
             return redirect()->route('user.purchase');
         }
@@ -141,74 +141,86 @@ class OpenAiController extends Controller
             'quantity' => 'required',
             'image_size' => 'required',
         ]);
-        $qty = intval($request->quantity);
-        if(showBalance()->image<$qty){
-            myAlert('error', 'Your image generate limit: '.showBalance()->image);
-            return back();
-        }
-        $response = OpenAI::images()->create([
-            'prompt' => $request->prompt,
-            'n' => $qty,
-            'size' => $request->image_size,
-            'response_format' => 'url',
-        ]);
-        $imageId = [];
-        if (isset($response->data)) {
-            foreach ($response->data as $data) {
-                $image = fileUploadFromUrl($data->url, "ai_images/", '');
-                $imageId[] = Images::create([
-                    'prompt' => $request->prompt,
-                    'size' => $request->image_size,
-                    'image_path' => $image,
-                    'user_id' => Auth::user()->id
-                ])->id;
+        try {
+            $qty = intval($request->quantity);
+            if (showBalance()->image < $qty) {
+                myAlert('error', 'Your image generate limit: ' . showBalance()->image);
+                return back();
             }
+            $response = OpenAI::images()->create([
+                'prompt' => $request->prompt,
+                'n' => $qty,
+                'size' => $request->image_size,
+                'response_format' => 'url',
+            ]);
+            $imageId = [];
+            if (isset($response->data)) {
+                foreach ($response->data as $data) {
+                    $image = fileUploadFromUrl($data->url, "ai_images/", '');
+                    $imageId[] = Images::create([
+                        'prompt' => $request->prompt,
+                        'size' => $request->image_size,
+                        'image_path' => $image,
+                        'user_id' => Auth::user()->id
+                    ])->id;
+                }
+            }
+            $id = implode(',', $imageId);
+            balanceDeduction('image', $qty);
+            myAlert('success', 'Image Generated successfully.');
+            return redirect()->route('image.create', ['id' => $id]);
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            myAlert('error', "Open AI error: " . $errorMessage);
+            return redirect()->back();
         }
-        $id = implode(',', $imageId);
-        balanceDeduction('image',$qty);
-        myAlert('success', 'Image Generated successfully.');
-        return redirect()->route('image.create', ['id' => $id]);
     }
     // Image Re-Generate
     public function imageReGenerate($oldId)
     {
-        if(showBalance()==''){
-            myAlert('error', 'Subscribe any plan first!');
-            return redirect()->route('user.purchase');
-        }elseif(showBalance()->image==0){
-            myAlert('error', 'You have reached your image generate limit');
-            return redirect()->route('user.purchase');
-        }
-        $oldImage = Images::where('id', $oldId)->where('user_id', Auth::user()->id)->firstOrFail();
-        $response = OpenAI::images()->create([
-            'prompt' => $oldImage->prompt,
-            'n' => 1,
-            'size' => "$oldImage->size",
-            'response_format' => 'url',
-        ]);
-        $imageId = [$oldId];
-        if (isset($response->data)) {
-            foreach ($response->data as $data) {
-                $image = fileUploadFromUrl($data->url, "ai_images/", '');
-                $imageId[] = Images::create([
-                    'prompt' => $oldImage->prompt,
-                    'size' => $oldImage->size,
-                    'image_path' => $image,
-                    'user_id' => Auth::user()->id
-                ])->id;
+        try {
+            if (showBalance() == '') {
+                myAlert('error', 'Subscribe any plan first!');
+                return redirect()->route('user.purchase');
+            } elseif (showBalance()->image == 0) {
+                myAlert('error', 'You have reached your image generate limit');
+                return redirect()->route('user.purchase');
             }
-        }
-        $id = implode(',', $imageId);
-        
-        balanceDeduction('image');
+            $oldImage = Images::where('id', $oldId)->where('user_id', Auth::user()->id)->firstOrFail();
+            $response = OpenAI::images()->create([
+                'prompt' => $oldImage->prompt,
+                'n' => 1,
+                'size' => "$oldImage->size",
+                'response_format' => 'url',
+            ]);
+            $imageId = [$oldId];
+            if (isset($response->data)) {
+                foreach ($response->data as $data) {
+                    $image = fileUploadFromUrl($data->url, "ai_images/", '');
+                    $imageId[] = Images::create([
+                        'prompt' => $oldImage->prompt,
+                        'size' => $oldImage->size,
+                        'image_path' => $image,
+                        'user_id' => Auth::user()->id
+                    ])->id;
+                }
+            }
+            $id = implode(',', $imageId);
 
-        myAlert('success', 'Image Generated successfully.');
-        return redirect()->route('image.create', ['id' => $id]);
+            balanceDeduction('image');
+
+            myAlert('success', 'Image Generated successfully.');
+            return redirect()->route('image.create', ['id' => $id]);
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            myAlert('error', "Open AI error: " . $errorMessage);
+            return redirect()->back();
+        }
     }
 
     public function imageVariation(Request $request)
     {
-        if(showBalance()==''){
+        if (showBalance() == '') {
             myAlert('error', 'Subscribe any plan first!');
             return redirect()->route('user.purchase');
         }
@@ -225,33 +237,39 @@ class OpenAiController extends Controller
             'old_image' => 'required|image|mimes:png|max:4096',
             'image_size' => 'required',
         ]);
-        // Open Ai Image Edit
-        $qty = intval($request->quantity ?? 1);
-        // Balance check
-        if(showBalance()->image<$qty){
-            myAlert('error', 'Your image generate limit: '.showBalance()->image);
-            return back();
-        }
-        $response = OpenAI::images()->variation([
-            'image' => fopen($request->file('old_image'), 'r'),
-            'n' => $qty,
-            'size' => $request->image_size,
-            'response_format' => 'url',
-        ]);
-        $imageId = [];
-        foreach ($response->data as $data) {
-            $image = fileUploadFromUrl($data->url, "ai_images/", '');
-            $imageId[] = Images::create([
-                'old_image' => fileUpload($request->file('old_image'), 'ai_images/local'),
+        try {
+            // Open Ai Image Edit
+            $qty = intval($request->quantity ?? 1);
+            // Balance check
+            if (showBalance()->image < $qty) {
+                myAlert('error', 'Your image generate limit: ' . showBalance()->image);
+                return back();
+            }
+            $response = OpenAI::images()->variation([
+                'image' => fopen($request->file('old_image'), 'r'),
+                'n' => $qty,
                 'size' => $request->image_size,
-                'image_path' => $image,
-                'user_id' => Auth::user()->id
-            ])->id;
+                'response_format' => 'url',
+            ]);
+            $imageId = [];
+            foreach ($response->data as $data) {
+                $image = fileUploadFromUrl($data->url, "ai_images/", '');
+                $imageId[] = Images::create([
+                    'old_image' => fileUpload($request->file('old_image'), 'ai_images/local'),
+                    'size' => $request->image_size,
+                    'image_path' => $image,
+                    'user_id' => Auth::user()->id
+                ])->id;
+            }
+            $id = implode(',', $imageId);
+            balanceDeduction('image', $qty);
+            myAlert('success', 'Image Variation Generated successfully.');
+            return redirect()->route('image.variation', ['id' => $id]);
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            myAlert('error', "Open AI error: " . $errorMessage);
+            return redirect()->back();
         }
-        $id = implode(',', $imageId);
-        balanceDeduction('image',$qty);
-        myAlert('success', 'Image Variation Generated successfully.');
-        return redirect()->route('image.variation', ['id' => $id]);
     }
 
     public function imageDelete($id)

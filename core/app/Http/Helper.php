@@ -8,7 +8,7 @@ use Winter\LaravelConfigWriter\ArrayFile;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Image;
+use Intervention\Image\Facades\Image;
 
 
 function strUpperCase($data)
@@ -42,7 +42,7 @@ function fileUpload($file, $folder, $name = null)
     $imageName = Str::slug($name) . rand(0, 9999) . '.' . $file->extension();
     $path = 'assets/uploads/' . $folder . date('/Y/m/d');
     if (!File::exists($path)) {
-        File::makeDirectory($path, 0755, true);
+        File::makeDirectory($path, 0777, true,true);
     }
     $file->move($path, $imageName);
     return $path . '/' . $imageName;
@@ -267,7 +267,7 @@ function demoPlan(){
 function iconGenerate($photo){
     $path = 'assets/uploads/pwaIcons';
     if (!File::exists($path)) {
-        File::makeDirectory($path, 0755, true);
+        File::makeDirectory($path, 0755, true, true);
     }
     
     $img= Image::make($photo);
@@ -288,7 +288,7 @@ function iconGenerate($photo){
     $img->resize(72,72);
     $img->save($path.'/icon-72x72.png');
 
-    $white = base_path().'assets/images/default/white.png';
+    $white = 'assets/images/default/white.png';
     $splash = Image::make($white);
     $splash->insert($photo, 'center');
     $splash->resize(2048,2732);

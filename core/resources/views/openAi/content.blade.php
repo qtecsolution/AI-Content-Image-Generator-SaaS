@@ -33,7 +33,7 @@
                                         <div class="col-5">
                                             <div class="form-group">
                                                 <label for="language" class="form-label">Select Language</label>
-                                                {{ Form::select('language', $languages, 'English (USA)', ['class' => 'w-100 nice-select', 'required', 'id' => 'language']) }}
+                                                {{ Form::select('language', $languages, 'English (USA)', ['class' => 'w-100 nice-select', 'required', 'id' => 'language','searchable'=>"true"]) }}
                                             </div>
                                         </div>
                                     </div>
@@ -144,12 +144,19 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-md-12">
+                                    <p class="text-danger" id="openai-error" style="display: none">
+                                        <small> Don't worry, you can contact with admin. </small>
+                                        <br>
+                                         <small> <b>Open AI Error:</b>  <span></span> </small>
+                                    </p>
+                                </div>
                                 <div class="generate-btn-wrapper">
                                     <span id="content-generate-preloader" style="display: none" class="lh-50 me-2"> <i
                                             class="fa fa-circle-o-notch fa-spin fs-4" aria-hidden="true"></i> </span>
                                     <button type="submit" class="generate-btn">Generate post</button>
                                 </div>
+                                
 
 
                             </form>
@@ -262,6 +269,7 @@
         });
 
         function contentGenerate() {
+            $('#openai-error').hide();
             let title = $('#title').val();
             let keywords = $('#keywords').val();
             let description = $('#description').val();
@@ -301,8 +309,9 @@
                 error: function(msg) {
                     $('#content-generate-preloader').hide();
                     $('#content-control').hide();
-                    console.log(msg);
                     var errors = msg.responseJSON;
+                    $('#openai-error').show();
+                    $('#openai-error span').html(errors?.error);
                     console.log(errors)
                 }
             });
