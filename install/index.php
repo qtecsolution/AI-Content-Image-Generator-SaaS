@@ -69,6 +69,7 @@
 				}
 				if($key=='app_name'){
 					writeEnv("APP_NAME",$value);
+					writeEnv("APP_ENV","production");
 					writeConfig("name",$value);
 					writeConfig("type_name",$value);
 					writeConfig("demo",false);
