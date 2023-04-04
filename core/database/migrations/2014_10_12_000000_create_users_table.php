@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('google_id')->nullable();
             $table->unsignedBigInteger('plan_expense_id')->nullable();
             $table->string('password');
+            $table->tinyInteger('pass_changed')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();
 

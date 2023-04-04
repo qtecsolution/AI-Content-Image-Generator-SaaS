@@ -43,8 +43,8 @@
                                     @csrf
 
                                     <div class="authentication-form-body">
-
-                                        <!-- Name   -->
+                                    @if($user->google_id=='' || $user->pass_changed == 1)
+                                        <!-- Current Pass   -->
                                         <div class="form-group mb-3">
                                             <label for="current_password" class="form-label">Current Password *</label>
                                             <input id="current_password" type="password"
@@ -59,8 +59,9 @@
                                             @enderror
 
                                         </div>
+                                    @endif
 
-                                        <!-- Email    -->
+                                        <!-- New Pass    -->
                                         <div class="form-group mb-3">
                                             <label for="new_password" class="form-label">New Password* </label>
                                             <input id="new_password" type="password"

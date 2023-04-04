@@ -28,7 +28,8 @@ class User extends Authenticatable
         'plan_expense_id',
         'type',
         'password',
-        'address'
+        'address',
+        'pass_changed'
     ];
 
     /**

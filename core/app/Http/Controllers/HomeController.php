@@ -89,20 +89,26 @@ class HomeController extends Controller
     public function updatePassword(Request $request)
     {
         $request->validate([
-            'current_password' => 'required',
             'new_password' => 'required|min:8',
             'confirm_password' => 'required|same:new_password',
         ]);
         $user = auth()->user();
         // Check if the current password matches the user's password
-        if (!Hash::check($request->current_password, $user->password)) {
-            return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        if($user->google_id=='' || $user->pass_changed == 1){
+            if($request->current_password==''){
+                return redirect()->back()->withErrors(['current_password' => 'The current password is empty.']);
+            }
+            if (!Hash::check($request->current_password, $user->password)) {
+                return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
+            }
         }
+        
 
 
         try {
             // Update the user's password
             $user->password = Hash::make($request->new_password);
+            $user->pass_changed = 1;
             $user->save();
             myAlert('success', 'Password Changed successfully');
             return back();
