@@ -60,14 +60,15 @@
             <button class="gradient-btn">Sign in </button>
 
 
-
+            @if(env('GOOGLE_CLIENT_ID') != '' && env('GOOGLE_CLIENT_SECRET') != '')
             <!-- google  -->
             <button onclick="redirectUrl('{{ route('auth.google') }}')" class="social-btn" type="button">
                 <span class="icon">
                     <img src="{{asset('/assets/images/icons/google.svg')}}" width="25">
                 </span>
-                <span class="text">Sign up with Google</span>
+                <span class="text">Sign in with Google</span>
             </button>
+            @endif
 
 
             <p class="authentication-bottom">Don’t have an account? <a href="{{ route('register') }}">Sign up</a> </p>

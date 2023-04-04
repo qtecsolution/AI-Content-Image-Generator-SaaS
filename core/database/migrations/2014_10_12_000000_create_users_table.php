@@ -21,7 +21,7 @@ return new class extends Migration
             $table->enum('type',['admin','user'])->default('user');
             $table->unsignedBigInteger('plan_id')->nullable();
             $table->unsignedBigInteger('order_id')->nullable();
-            $table->unsignedBigInteger('google_id')->nullable();
+            $table->string('google_id')->nullable();
             $table->unsignedBigInteger('plan_expense_id')->nullable();
             $table->string('password');
             $table->timestamp('email_verified_at')->nullable();
