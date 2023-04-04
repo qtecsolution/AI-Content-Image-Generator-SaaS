@@ -267,24 +267,23 @@
                                     enctype="multipart/form-data">
                                     @csrf
                                     <div class="form-group mb-3">
-                                        <label for="metaKey" class="form-label">Meta Key</label>
-                                        <input type="text" class="form-control custom-input"
-                                            value="{{ readConfig('meta_key') }}" id="metaKey" name="meta_key"
-                                            aria-describedby="emailHelp">
-                                    </div>
-
-                                    <div class="form-group mb-3">
                                         <label for="metaTitle" class="form-label">Meta Title</label>
                                         <input type="text" class="form-control custom-input"
                                             value="{{ readConfig('meta_title') }}" id="metaTitle" name="meta_title"
                                             aria-describedby="emailHelp">
                                     </div>
+                                    <div class="form-group mb-3">
+                                        <label for="metaKey" class="form-label">Meta Keywords</label>
+                                        <textarea class="form-control custom-input" id="metaKey" name="meta_key"
+                                            aria-describedby="emailHelp">{{ readConfig('meta_key') }}</textarea>
+                                    </div>
+
+                                    
 
                                     <div class="form-group mb-3">
                                         <label for="metaDescription" class="form-label">Meta Description</label>
-                                        <input type="text" class="form-control custom-input"
-                                            value="{{ readConfig('meta_desc') }}" id="metaDescription" name="meta_desc"
-                                            aria-describedby="emailHelp">
+                                        <textarea class="form-control custom-input" id="metaDescription" name="meta_desc"
+                                            aria-describedby="emailHelp"> {{ readConfig('meta_desc') }} </textarea>
                                     </div>
 
                                     <div class="form-group mb-3">
@@ -540,7 +539,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <!--mail-->
-                                        <label class="form-label" for="cmsMail">CMS Mail</label>
+                                        <label class="form-label" for="cmsMail"> Mail</label>
                                         <input type="hidden" value="type_mail" name="type_mail">
                                         <input type="text" value="{{ readConfig('type_mail') }}" name="mail"
                                             class="form-control custom-input" id="cmsMail">
@@ -551,7 +550,7 @@
                                     <!--fb-->
 
                                     <div class="mb-3 form-group">
-                                        <label class="form-label" for="cmsFb">CMS Facebook Link</label>
+                                        <label class="form-label" for="cmsFb">Facebook Link</label>
                                         <input type="hidden" value="type_fb" name="type_fb">
                                         <input type="text" value="{{ readConfig('type_fb') }}" name="fb"
                                             class="form-control custom-input" id="cmsFb">
@@ -560,21 +559,21 @@
                                    
                                     <div class=" form-group mb-3">
                                         <!--tw-->
-                                        <label class="form-label" for="twitter">CMS Twitter Link</label>
+                                        <label class="form-label" for="twitter"> Twitter Link</label>
                                         <input type="hidden" value="type_tw" name="type_tw">
                                         <input type="text" value="{{ readConfig('type_tw') }}" name="tw"
                                             class="form-control custom-input" id="twitter">
                                     </div>
                                     <div class=" form-group mb-3">
                                         <!--google-->
-                                        <label class="form-label" for="cmsGoogle">CMS Google Link</label>
+                                        <label class="form-label" for="cmsGoogle"> Google Link</label>
                                         <input type="hidden" value="type_google" name="type_google">
                                         <input type="text" value="{{ readConfig('type_google') }}" name="google"
                                             class="form-control custom-input" id="cmsGoogle">
                                     </div>
                                     <div class="form-group mb-3 ">
                                         <!--Number-->
-                                        <label class="form-label" for="cmsNumber">CMS Number </label>
+                                        <label class="form-label" for="cmsNumber">Contact Number </label>
                                         <input type="hidden" value="type_number" name="type_number">
                                         <input type="text" value="{{ readConfig('type_number') }}" name="number"
                                             class="form-control custom-input" id="cmsNumber">
@@ -614,12 +613,12 @@
                                     </div>
 
                                     <!--name -->
-                                    <div class="form-group mb-3">
+                                    {{-- <div class="form-group mb-3">
                                         <label class="form-label" for="appname">@translate(Progressive Web Apps
                                             Name)</label>
                                         <input class="form-control custom-input" name="pwa_name" type="text"
                                             id="appname" value="{{ config('laravelpwa.name') }}">
-                                    </div>
+                                    </div> --}}
                                     <!-- short name  -->
                                     <div class="form-group mb-3">
                                         <label class="form-label" for="shortname">@translate(Progressive Web Apps Short

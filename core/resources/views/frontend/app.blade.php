@@ -6,6 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ filePath(readConfig('favicon_icon')) }}">
+    <meta name="description" content="{{readConfig('meta_desc')}}">
+	<meta name="author" content="{{ readConfig('name') }} ">
+	<meta name="keywords" content="{{readConfig('meta_key')}}">
+	<meta property="og:locale" content="en_US">
+	<!-- OPEN-GRAPH META TAGS -->
+	<meta property="og:title" content="{{readConfig('meta_title')}}">
+	<meta property="og:description" content="{{readConfig('meta_desc')}}">
+	<meta property="og:image" content="/{{readConfig('meta_image')}}">
+	<meta property="og:type" content="website">
     <title>{{ readConfig('name') }} </title>
 
     <!-- Link Swiper's CSS -->
@@ -18,6 +27,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
     <!-- aos scroll animation  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    @if(readConfig('pwa_active') == 'yes')
+    @laravelPWA
+    @endif
 </head>
 
 <body class="body-landing">

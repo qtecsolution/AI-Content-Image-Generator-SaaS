@@ -4,7 +4,7 @@ return [
     'name' => readConfig('name'),
     'manifest' => [
         'name' => readConfig('name'),
-        'short_name' => 'R',
+        'short_name' => 'Creaify',
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#d33636',
