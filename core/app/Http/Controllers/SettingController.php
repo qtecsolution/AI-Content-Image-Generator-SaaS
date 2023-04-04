@@ -17,21 +17,29 @@ class SettingController extends Controller
         } else {
             $tab = 'openai';
         }
-        return view('setting.setting', compact('tab'));
+        $aiModels = [
+            'text-ada-001'=>'Ada (GPT 3)',
+            'text-babbage-001'=>'Babbage (GPT 3)',
+            'text-curie-001'=>'Curie (GPT 3)',
+            'text-davinci-003'=>'Davinci (GPT 3)',
+            'gpt-3.5-turbo'=>'ChatGPT (3.5 Turbo)',
+            'gpt-4'=>'GPT 4 (8K)',
+            'gpt-4-32k'=>'GPT 4 (32K)',
+            ];
+        return view('setting.setting', compact('tab','aiModels'));
     }
 
     public function openAiStore(Request $request)
     {
         overWriteEnvFile('OPENAI_API_KEY', $request->OPENAI_API_KEY);
-        toast('Open Ai API key is saved', 'success');
+        writeConfig('open_ai_model', $request->open_ai_model);
+        toast('Open Ai API settings is saved', 'success');
         return redirect()->route('setting', ['tab' => "openai"]);
     }
 
     public function tawkToStore(Request $request)
     {
-
         writeConfig('tawk_to', $request->tawk_to);
-
         $fileName = 'tawk_to.blade.php';
         $fileContents = $request->code;
         File::put($fileName, $fileContents);

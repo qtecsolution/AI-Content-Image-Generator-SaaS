@@ -184,7 +184,7 @@
                         <div class="listtable-header">
                             <h3 class="title">Recent Users</h3>
 
-                            <a href="{{ route('users.all') }}" class="seeall-btn">
+                            <a href="{{ route('users.index') }}" class="seeall-btn">
                                 <span class="icon">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">

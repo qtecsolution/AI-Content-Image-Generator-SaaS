@@ -130,7 +130,7 @@ class OpenAiController extends Controller
         if (isset($request->q)) {
             $images = $images->where('prompt', 'like', "%$request->q%");
         }
-        $images = $images->latest()->paginate(4);
+        $images = $images->latest()->paginate(12);
         return view('openAi.allImages', compact('images', 'request'));
     }
     // Generate Image

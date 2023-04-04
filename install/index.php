@@ -1,3 +1,204 @@
+<?php
+	error_reporting(0);
+	
+	function writeConfig($key,$value){
+		$configUrl = "../core/config/system.php";
+		$config = require $configUrl;
+		if(isset($config[$key])){
+			$config[$key] = $value;
+		}
+		$content = "<?php\n\nreturn " . var_export($config,true) . ";\n";
+		file_put_contents($configUrl, $content);
+	}
+	
+	$ENVURL = "../core/.env";
+	function readEnv($key){
+		global $ENVURL;
+		$envFile = file_get_contents($ENVURL);
+		$envVars = explode("\n", $envFile);
+		foreach ($envVars as $envVar) {
+			$envVar = explode('=', $envVar);
+			if (count($envVar) == 2 && $envVar[0] === $key) {
+				return $envVar[1];
+			}
+		}
+		return "";
+	}
+	function writeEnv($key,$value){
+		global $ENVURL;
+		$envFile = file_get_contents($ENVURL);
+		$envVars = explode("\n", $envFile);
+
+		foreach ($envVars as $index => $envVar) {
+			$envVar = explode('=', $envVar);
+			if (count($envVar) == 2 && $envVar[0] === $key) {
+				$envVars[$index] = $key . '="' . $value.'"';
+			}
+		}
+
+		$envFile = implode("\n", $envVars);
+		file_put_contents($ENVURL, $envFile);
+	}
+	//check if already installed
+	if(readEnv("INSTALLED")==1 || readEnv("INSTALLED")=='"1"'){
+		$protocol = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http';
+		$domain = $_SERVER['SERVER_NAME'];
+		$port = $_SERVER['SERVER_PORT'] != '80' && $_SERVER['SERVER_PORT'] != '443' ? ':' . $_SERVER['SERVER_PORT'] : '';
+		$root_url = $protocol . '://' . $domain . $port;
+		header("Location: $root_url");
+		//echo $root_url;
+		exit;
+	}
+	function envSetup($allData){
+		try {
+			foreach($allData as $key => $value){
+				if($key=='db_host'){
+					writeEnv("DB_HOST",$value);
+				}
+				if($key=='db_name'){
+					writeEnv("DB_DATABASE",$value);
+				}
+				if($key=='db_user'){
+					writeEnv("DB_USERNAME",$value);
+				}
+				if($key=='db_pass'){
+					writeEnv("DB_PASSWORD",$value);
+				}
+				if($key=='url'){
+					writeEnv("APP_URL",$value);
+				}
+				if($key=='app_name'){
+					writeEnv("APP_NAME",$value);
+					writeConfig("name",$value);
+					writeConfig("type_name",$value);
+					writeConfig("demo",false);
+				}
+				writeEnv("INSTALLED",1);
+			}
+			return true;
+		} catch (Exception $e) {
+			return false;
+		}
+		
+		
+	}
+	function isExtensionAvailable($name)
+	{
+		if (!extension_loaded($name)) {
+			$response = false;
+		} else {
+			$response = true;
+		}
+		return $response;
+	}
+	function checkFolderPerm($name)
+	{
+		$perm = substr(sprintf('%o', fileperms($name)), -4);
+		if ($perm >= '0775') {
+			$response = true;
+		} else {
+			$response = false;
+		}
+		return $response;
+	}
+	function tableRow($name, $details, $status)
+	{
+		if ($status == '1') {
+			$pr = '<i class="fas fa-check"></i>';
+		} else {
+			$pr = '<i class="fas fa-times"></i>';
+		}
+		echo "<tr><td>$name</td><td>$details</td><td>$pr</td></tr>";
+	}
+	function getWebURL()
+	{
+		$base_url = (isset($_SERVER['HTTPS']) &&
+			$_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
+		$tmpURL = dirname(__FILE__);
+		$tmpURL = str_replace(chr(92), '/', $tmpURL);
+		$tmpURL = str_replace($_SERVER['DOCUMENT_ROOT'], '', $tmpURL);
+		$tmpURL = ltrim($tmpURL, '/');
+		$tmpURL = rtrim($tmpURL, '/');
+		$tmpURL = str_replace('install', '', $tmpURL);
+		$base_url .= $_SERVER['HTTP_HOST'] . '/' . $tmpURL;
+		if (substr("$base_url", -1 == "/")) {
+			$base_url = substr("$base_url", 0, -1);
+		}
+		return $base_url;
+	}
+	function curlContent($add)
+	{
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
+		curl_setopt($ch, CURLOPT_HEADER, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_URL, $add);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
+		$res = curl_exec($ch);
+		curl_close($ch);
+		return $res;
+	}
+	function getStatus($arr)
+	{
+		$url = 'https://license.qtecsolution.net/api';
+		$arr['product'] = 'creaify';
+		$call = $url . "?" . http_build_query($arr);
+		return curlContent($call);
+	}
+	function sendAcknoledgement($val)
+	{
+		$call = 'https://license.qtecsolution.net/done/' . $val->installcode;
+		return curlContent($call);
+	}
+	function replaceData($val, $arr)
+	{
+		foreach ($arr as $key => $value) {
+			$val = str_replace('{{' . $key . '}}', $value, $val);
+		}
+		return $val;
+	}
+	function setDataValue($val, $loc)
+	{
+		$file = fopen($loc, 'w');
+		fwrite($file, $val);
+		fclose($file);
+	}
+	function sysInstall($sr, $pt)
+	{
+		$pt['key'] = base64_encode(random_bytes(32));
+		setDataValue(replaceData($sr->data->body, $pt), $sr->data->location);
+		return true;
+	}
+	function importDatabase($pt)
+	{
+		$db = new PDO("mysql:host=$pt[db_host];dbname=$pt[db_name]", $pt['db_user'], $pt['db_pass']);
+		$query = file_get_contents("database.sql");
+		$stmt = $db->prepare($query);
+		if ($stmt->execute())
+			return true;
+		else
+			return false;
+	}
+	function setAdminEmail($pt)
+	{
+		$db = new PDO("mysql:host=$pt[db_host];dbname=$pt[db_name]", $pt['db_user'], $pt['db_pass']);
+		$res = $db->query("UPDATE users SET email='" . $pt['email'] . "', name='" . $pt['admin_user'] . "', password='" . password_hash($pt['admin_pass'], PASSWORD_DEFAULT) . "' WHERE id=1");
+		if ($res) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	//------------->> Extension & Permission
+	$requiredServerExtensions = [
+			'JSON', 'Mbstring', 'OpenSSL', 'PDO', 'pdo_mysql', 'cURL',  'GD'
+	];
+
+	$folderPermissions = [
+		'../core/bootstrap/cache/', '../core/storage/', '../core/storage/app/', '../core/storage/framework/', '../core/storage/logs/'
+	];
+	//------------->> Extension & Permission
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,208 +218,12 @@
 		<div class="container h-100 d-flex justify-content-center align-items-center">
 			<div class="d-flex justify-content-center align-items-center h-100 py-2">
 				<img src="assets/images/logo.svg" alt="logo">
-</div>
+			</div>
 		</div>
 	</header>
 	<div class="installation-section padding-bottom padding-top">
 		<div class="container">
 			<?php
-			error_reporting(0);
-			
-			function writeConfig($key,$value){
-				$configUrl = "../core/config/system.php";
-				$config = require $configUrl;
-				if(isset($config[$key])){
-					$config[$key] = $value;
-				}
-				$content = "<?php\n\nreturn " . var_export($config,true) . ";\n";
-				file_put_contents($configUrl, $content);
-			}
-			
-			$ENVURL = "../core/.env";
-			function readEnv($key){
-				global $ENVURL;
-				$envFile = file_get_contents($ENVURL);
-				$envVars = explode("\n", $envFile);
-				foreach ($envVars as $envVar) {
-					$envVar = explode('=', $envVar);
-					if (count($envVar) == 2 && $envVar[0] === $key) {
-						return $envVar[1];
-					}
-				}
-				return "";
-			}
-			function writeEnv($key,$value){
-				global $ENVURL;
-				$envFile = file_get_contents($ENVURL);
-				$envVars = explode("\n", $envFile);
-
-				foreach ($envVars as $index => $envVar) {
-					$envVar = explode('=', $envVar);
-					if (count($envVar) == 2 && $envVar[0] === $key) {
-						$envVars[$index] = $key . '="' . $value.'"';
-					}
-				}
-
-				$envFile = implode("\n", $envVars);
-				file_put_contents($ENVURL, $envFile);
-			}
-			//check if already installed
-			if(readEnv("INSTALLED")==1 || readEnv("INSTALLED")=='"1"'){
-				echo readEnv("INSTALLED");
-				header('Location: '.getWebURL());
-				exit;
-			}
-			function envSetup($allData){
-				try {
-					foreach($allData as $key => $value){
-						if($key=='db_host'){
-							writeEnv("DB_HOST",$value);
-						}
-						if($key=='db_name'){
-							writeEnv("DB_DATABASE",$value);
-						}
-						if($key=='db_user'){
-							writeEnv("DB_USERNAME",$value);
-						}
-						if($key=='db_pass'){
-							writeEnv("DB_PASSWORD",$value);
-						}
-						if($key=='url'){
-							writeEnv("APP_URL",$value);
-						}
-						if($key=='app_name'){
-							writeEnv("APP_NAME",$value);
-							writeConfig("name",$value);
-							writeConfig("type_name",$value);
-							writeConfig("demo",false);
-						}
-						writeEnv("INSTALLED",1);
-					}
-					return true;
-				} catch (Exception $e) {
-					return false;
-				}
-				
-				
-			}
-			function isExtensionAvailable($name)
-			{
-				if (!extension_loaded($name)) {
-					$response = false;
-				} else {
-					$response = true;
-				}
-				return $response;
-			}
-			function checkFolderPerm($name)
-			{
-				$perm = substr(sprintf('%o', fileperms($name)), -4);
-				if ($perm >= '0775') {
-					$response = true;
-				} else {
-					$response = false;
-				}
-				return $response;
-			}
-			function tableRow($name, $details, $status)
-			{
-				if ($status == '1') {
-					$pr = '<i class="fas fa-check"></i>';
-				} else {
-					$pr = '<i class="fas fa-times"></i>';
-				}
-				echo "<tr><td>$name</td><td>$details</td><td>$pr</td></tr>";
-			}
-			function getWebURL()
-			{
-				$base_url = (isset($_SERVER['HTTPS']) &&
-					$_SERVER['HTTPS'] != 'off') ? 'https://' : 'http://';
-				$tmpURL = dirname(__FILE__);
-				$tmpURL = str_replace(chr(92), '/', $tmpURL);
-				$tmpURL = str_replace($_SERVER['DOCUMENT_ROOT'], '', $tmpURL);
-				$tmpURL = ltrim($tmpURL, '/');
-				$tmpURL = rtrim($tmpURL, '/');
-				$tmpURL = str_replace('install', '', $tmpURL);
-				$base_url .= $_SERVER['HTTP_HOST'] . '/' . $tmpURL;
-				if (substr("$base_url", -1 == "/")) {
-					$base_url = substr("$base_url", 0, -1);
-				}
-				return $base_url;
-			}
-			function curlContent($add)
-			{
-				$ch = curl_init();
-				curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-				curl_setopt($ch, CURLOPT_HEADER, 0);
-				curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-				curl_setopt($ch, CURLOPT_URL, $add);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-				$res = curl_exec($ch);
-				curl_close($ch);
-				return $res;
-			}
-			function getStatus($arr)
-			{
-				$url = 'https://license.qtecsolution.net/api';
-				$arr['product'] = 'creaify';
-				$call = $url . "?" . http_build_query($arr);
-				return curlContent($call);
-			}
-			function sendAcknoledgement($val)
-			{
-				$call = 'https://license.qtecsolution.net/done/' . $val->installcode;
-				return curlContent($call);
-			}
-			function replaceData($val, $arr)
-			{
-				foreach ($arr as $key => $value) {
-					$val = str_replace('{{' . $key . '}}', $value, $val);
-				}
-				return $val;
-			}
-			function setDataValue($val, $loc)
-			{
-				$file = fopen($loc, 'w');
-				fwrite($file, $val);
-				fclose($file);
-			}
-			function sysInstall($sr, $pt)
-			{
-				$pt['key'] = base64_encode(random_bytes(32));
-				setDataValue(replaceData($sr->data->body, $pt), $sr->data->location);
-				return true;
-			}
-			function importDatabase($pt)
-			{
-				$db = new PDO("mysql:host=$pt[db_host];dbname=$pt[db_name]", $pt['db_user'], $pt['db_pass']);
-				$query = file_get_contents("database.sql");
-				$stmt = $db->prepare($query);
-				if ($stmt->execute())
-					return true;
-				else
-					return false;
-			}
-			function setAdminEmail($pt)
-			{
-				$db = new PDO("mysql:host=$pt[db_host];dbname=$pt[db_name]", $pt['db_user'], $pt['db_pass']);
-				$res = $db->query("UPDATE users SET email='" . $pt['email'] . "', name='" . $pt['admin_user'] . "', password='" . password_hash($pt['admin_pass'], PASSWORD_DEFAULT) . "' WHERE id=1");
-				if ($res) {
-					return true;
-				} else {
-					return false;
-				}
-			}
-			//------------->> Extension & Permission
-			$requiredServerExtensions = [
-				 'Fileinfo', 'JSON', 'Mbstring', 'OpenSSL', 'PDO', 'pdo_mysql', 'cURL',  'GD'
-			];
-
-			$folderPermissions = [
-				'../core/bootstrap/cache/', '../core/storage/', '../core/storage/app/', '../core/storage/framework/', '../core/storage/logs/'
-			];
-			//------------->> Extension & Permission
-
 			if (isset($_GET['action'])) {
 				$action = $_GET['action'];
 			} else {
@@ -307,7 +312,7 @@
 												echo '
 												<div class="warning">
 												<a href="'.getWebURL().'" class="theme-button choto">Go to website</a>
-												<a href="'.getWebURL().'/admin" class="theme-button choto">Go to Admin Panel</a>
+												<a href="'.getWebURL().'/home" class="theme-button choto">Go to Admin Panel</a>
 												</div>';
 											}
 										}
@@ -597,13 +602,13 @@
 									<table class="requirment-table">
 										<?php
 										$error = 0;
-										$phpversion = version_compare(PHP_VERSION, '8.0', '>=');
+										$phpversion = version_compare(PHP_VERSION, '8.1', '>=');
 										if ($phpversion == true) {
 											$error = $error + 0;
-											tableRow("PHP", "Required PHP version 8.0 or higher", 1);
+											tableRow("PHP", "Required PHP version 8.1 or higher", 1);
 										} else {
 											$error = $error + 1;
-											tableRow("PHP", "Required PHP version 8.0 or higher", 0);
+											tableRow("PHP", "Required PHP version 8.1 or higher", 0);
 										}
 										foreach ($requiredServerExtensions as $key) {
 											$extension = isExtensionAvailable($key);

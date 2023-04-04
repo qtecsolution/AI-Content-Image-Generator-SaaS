@@ -73,7 +73,10 @@
                                         <label for="api-key" class="form-label">OpenAi Api Key</label>
                                         <input type="text" id="api-key" name="OPENAI_API_KEY"
                                             value="{{ env('OPENAI_API_KEY') }}" class="form-control custom-input">
-
+                                    </div>
+                                    <div class="form-group mb-5">
+                                        <label for="open_ai_model" class="form-label">OpenAi Model</label>
+                                        {!! Form::select('open_ai_model', $aiModels, readConfig('open_ai_model'), ['class'=>'form-control custom-input w-100 nice-select']) !!}
                                     </div>
                                     <div class="generate-btn-wrapper">
                                         <button type="submit" class="generate-btn px-4">Save</button>

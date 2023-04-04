@@ -55,17 +55,17 @@
                                             <label for="details" class="form-label"> Input Fields</label>
                                             <div class="fz-14 d-flex gap-3">
                                                 <div class="checkWithLable mb-2">
-                                                    <input type="checkbox" id="useCaseTitle" class="checkWithLable-box" name="input_fields[]" value="1" checked
+                                                    <input type="checkbox" id="useCaseTitle" class="checkWithLable-box input-check-box" name="input_fields[]" value="1" checked
                                                         hidden>
                                                     <label for="useCaseTitle" class="checkWithLable-label">Title </label>
                                                 </div>
                                                 <div class="checkWithLable mb-2">
-                                                    <input type="checkbox" id="useCaseKeywords" class="checkWithLable-box" name="input_fields[]" value="2" checked
+                                                    <input type="checkbox" id="useCaseKeywords" class="checkWithLable-box input-check-box" name="input_fields[]" value="2" checked
                                                         hidden>
                                                     <label for="useCaseKeywords" class="checkWithLable-label">Keywords </label>
                                                 </div>
                                                 <div class="checkWithLable mb-2">
-                                                    <input type="checkbox" id="useCaseDescription" class="checkWithLable-box" name="input_fields[]" value="3" checked
+                                                    <input type="checkbox" id="useCaseDescription" class="checkWithLable-box input-check-box" name="input_fields[]" value="3" checked
                                                         hidden>
                                                     <label for="useCaseDescription" class="checkWithLable-label"> Description </label>
                                                 </div>
@@ -208,7 +208,7 @@
         $(document).ready(function(){
             // Create use case
             $(document).on("submit", "#save-form", function() {
-                let fieldsChecked = $('.input_fields:checked').length;
+                let fieldsChecked = $('.input-check-box:checked').length;
                 if(fieldsChecked == 0){
                     event.preventDefault();
                     $('#input_fields_check').show();
