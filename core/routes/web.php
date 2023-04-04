@@ -4,6 +4,7 @@ use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\PlanController;
 use Illuminate\Http\Client\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,6 +28,10 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('page/{slug}','FrontendController@pageDetails')->name('page');
 });
 Auth::routes();
+Route::get('clear-all',function(){
+    Artisan::call('optimize:clear');
+    return redirect()->back();
+});
 
 //  Backend Route
 Route::controller(GoogleController::class)->group(function () {
