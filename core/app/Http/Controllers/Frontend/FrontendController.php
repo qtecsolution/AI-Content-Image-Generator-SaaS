@@ -60,23 +60,6 @@ class FrontendController extends Controller
         
     }
 
-    public static function footerBlog()
-    {
-        $blogs = Blog::where('is_published',true)->take(3)->get();
-        return $blogs;
-    }
-
-
-    public static function pages()
-    {
-        return Page::where('active',true)->get();
-    }
-
-    public static function footerUseCase()
-    {
-        return UseCase::where('is_published',1)->limit(3)->get();
-    }
-
     public function pageDetails($slug)
     {
         $page = Page::where('slug',$slug)->with('content')->firstOrFail();

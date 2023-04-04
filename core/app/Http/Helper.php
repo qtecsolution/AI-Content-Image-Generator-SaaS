@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Blog;
+use App\Models\Page;
 use App\Models\Plan;
 use App\Models\PlanExpense;
 use App\Models\UseCase;
@@ -314,4 +316,20 @@ function iconGenerate($photo){
     $splash->resize(640,1136);
     $splash->save($path."/splash-640x1136.png");
     return "Yes";
+}
+function footerBlog()
+{
+    $blogs = Blog::where('is_published',true)->take(3)->get();
+    return $blogs;
+}
+
+
+function pages()
+{
+    return Page::where('active',true)->get();
+}
+
+function footerUseCase()
+{
+    return UseCase::where('is_published',1)->limit(3)->get();
 }

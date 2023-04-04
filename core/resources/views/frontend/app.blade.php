@@ -190,9 +190,9 @@
 
                     <div class=" col-sm-6 col-lg-2">
                         <div class="footerlinks">
-                            <h5 class="footerlinks-title">Use Full Links</h5>
+                            <h5 class="footerlinks-title">Pages</h5>
                             <div class="footerlink">
-                                @foreach(App\Http\Controllers\Frontend\FrontendController::pages() as $item)
+                                @foreach(pages() as $item)
                                 <a href="{{route('page',$item->slug)}}" class="link">{{$item->title}}</a>
                                 @endforeach
                             
@@ -204,7 +204,7 @@
                         <div class="footerlinks">
                             <h5 class="footerlinks-title">Use Cases</h5>
                             <div class="footerlink">
-                                @foreach(App\Http\Controllers\Frontend\FrontendController::footerUseCase() as $fUseCase)
+                                @foreach(footerUseCase() as $fUseCase)
                                 <a href="{{ route('content.create') }}?case={{ $fUseCase->id }}" class="link">
                                     {{ $fUseCase->title }}
                                 </a>
@@ -229,7 +229,7 @@
                         <div class="footerlinks">
                             <h5 class="footerlinks-title">Blogs</h5>
                             <div class="footerlink">
-                                @foreach(App\Http\Controllers\Frontend\FrontendController::footerBlog() as $blog)
+                                @foreach(footerBlog() as $blog)
                                 <a href="{{route('blogs.show',$blog->slug)}}" class="link">{{$blog->title}}</a>
                                 @endforeach
                                 
