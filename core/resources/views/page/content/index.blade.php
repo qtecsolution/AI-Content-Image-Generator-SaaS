@@ -46,7 +46,7 @@
                             <tr>
                                 <td>@translate(S/L)</td>
                                 <td>@translate(Title)</td>
-                                <td>@translate(Total Content)</td>
+                                <td>@translate(Content)</td>
 
                                 <td>@translate(Action)</td>
 

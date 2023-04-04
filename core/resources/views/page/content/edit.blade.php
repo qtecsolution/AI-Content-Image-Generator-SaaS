@@ -28,7 +28,7 @@
 
 
                             </span>
-                            <span class="mt-1"> @translate(Content List))</span>
+                            <span class="mt-1"> @translate(Content List)</span>
                         </a>
                             
                         </div>

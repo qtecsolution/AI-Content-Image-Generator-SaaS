@@ -44,7 +44,7 @@ class SettingController extends Controller
     {
         overWriteEnvFile('GOOGLE_CLIENT_ID', $request->GOOGLE_CLIENT_ID);
         overWriteEnvFile('GOOGLE_CLIENT_SECRET', $request->GOOGLE_CLIENT_SECRET);
-        overWriteEnvFile('GOOGLE_REDIRECT_URL', $request->GOOGLE_REDIRECT_URL);
+        //overWriteEnvFile('GOOGLE_REDIRECT_URL', $request->GOOGLE_REDIRECT_URL);
 
         toast('Google Login Credential is setup', 'success');
         return redirect()->route('setting', ['tab' => "login"]);

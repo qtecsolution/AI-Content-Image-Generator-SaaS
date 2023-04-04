@@ -7,10 +7,10 @@
             <input class="form-control custom-input" placeholder="@translate(Page Title)" type="text"  name="title" required>
         </div>
 
-        <div class="form-group mb-3">
+        {{-- <div class="form-group mb-3">
             <label class="form-label">@translate(Meta Title)</label>
             <input class="form-control custom-input" name="meta_title" type="text" max="100" placeholder="@translate(Meth Title)">
-        </div>
+        </div> --}}
 
         <div class="form-group mb-3">
             <label class="form-label">@translate(Meta Keywords)</label>

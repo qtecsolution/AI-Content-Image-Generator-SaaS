@@ -34,7 +34,7 @@
 
 
                             </span>
-                            <span class="mt-1">@translate(Add New Page)</span>
+                            <span class="mt-1">@translate(Add New)</span>
                         </a>
 
                     </div>
@@ -47,7 +47,7 @@
                                 <tr>
                                     <td>@translate(S / L)</td>
                                     <td>@translate(Title)</td>
-                                    <td>@translate(Total Content)</td>
+                                    <td>@translate(Total Section)</td>
                                     <td></td>
                                 </tr>
                             </thead>

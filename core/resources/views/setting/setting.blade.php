@@ -207,7 +207,8 @@
                                     </div>
 
                                     <div class="form-group mb-3">
-                                        <label for="googleCallback" class="form-label">Google Call back url</label>
+                                        <label for="googleCallback" class="form-label">Google Call back url <i data-bs-toggle="tooltip"
+                                            data-bs-placement="top" data-bs-title="Copy this link for use google call back url" class="fa fa-info-circle"></i> </label>
                                         <input type="text" class="form-control custom-input"
                                             value="{{route('auth.google.callback')}}" id="googleCallback"
                                             name="GOOGLE_REDIRECT_URL" aria-describedby="emailHelp">

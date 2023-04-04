@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    'name' => 'Babor',
+    'name' => 'Creaify',
     'type_logo' => 'assets/uploads/site/2023/04/03/logo7253.png',
     'type_name' => 'Creaify',
     'type_footer' => 'All rights reserved by Creaify',
