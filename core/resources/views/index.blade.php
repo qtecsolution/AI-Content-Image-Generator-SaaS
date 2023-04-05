@@ -83,7 +83,7 @@
                             <td> Use Case </td>
                             <td>Words </td>
                             <td>Last Modified</td>
-                            <td data-orderable="false"></td>
+                            <td data-orderable="false">...</td>
                         </tr>
                     </thead>
                     <tbody> </tbody>
@@ -118,11 +118,12 @@ var swiper = new Swiper(".templateSwiper", {
     spaceBetween: 10,
     pagination: {
         el: ".swiper-pagination",
-        clickable: true,
+        dynamicBullets: true,
+        clickable:true
     },
     breakpoints: {
         420: {
-            slidesPerView: 2,
+            slidesPerView: 1,
             spaceBetween: 20,
         },
         640: {

@@ -76,7 +76,7 @@
                                     <td>Keywords </td>
                                     <td> Use Case </td>
                                     <td>Words </td>
-                                    <td data-orderable="false"></td>
+                                    <td data-orderable="false">...</td>
                                 </tr>
                             </thead>
                             <tbody> </tbody>

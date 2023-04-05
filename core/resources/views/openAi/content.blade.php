@@ -23,21 +23,19 @@
                                     <div class="row g-4 mb-3">
 
                                         <!-- Type    -->
-                                        <div class="col-7">
+                                        <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="case" class="form-label">Choose Use Case</label>
                                                 {{ Form::select('case', $cases, $request->case ?? '', ['class' => 'w-100 nice-select', 'required', 'id' => 'useCase','searchable'=>"true"]) }}
                                             </div>
                                         </div>
                                         <!-- select tone  -->
-                                        <div class="col-5">
+                                        <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="language" class="form-label">Select Language</label>
                                                 {{ Form::select('language', $languages, 'English (USA)', ['class' => 'w-100 nice-select', 'required', 'id' => 'language','searchable'=>"true"]) }}
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row g-4">
                                         <!-- Title    -->
                                         <div class="col-12" id="title-field"
                                             @if (!in_array(1, $inputFields)) style="display: none" @endif>
@@ -76,9 +74,6 @@
                                             </div>
                                         </div>
 
-
-                                    </div>
-                                    <div class="row g-4">
                                         <div class="col-6 mt-4" id="selectPriority">
                                             <div class="form-group">
                                                 <label for="priority" class="form-label">Creativity <i
@@ -115,8 +110,6 @@
                                                 </select>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row g-4">
                                         <div class="col-6">
                                             <div class="form-group mt-3">
                                                 <label for="quantity" class="form-label">Number of results <i
