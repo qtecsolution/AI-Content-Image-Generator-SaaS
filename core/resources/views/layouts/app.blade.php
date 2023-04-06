@@ -94,12 +94,15 @@
                                 </button>
                             </h2>
                             <div id="aiContent"
-                                class="accordion-collapse collapse {{ menuActive(['content.*', 'contents.*', 'content-history.*']) ? 'show' : '' }}"
+                                class="accordion-collapse collapse {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? 'show' : '' }}"
                                 aria-labelledby="headingOne" data-bs-parent="#userMenuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
                                         <a href="{{ route('content.create') }}"
                                             class="menu-item {{ menuActive('content.*') ? 'active' : '' }}">Content
+                                            Generate</a>
+                                            <a href="{{ route('code.create') }}"
+                                            class="menu-item {{ menuActive('code.*') ? 'active' : '' }}">Code
                                             Generate</a>
                                         <a href="{{ route('contents.index') }}"
                                             class="menu-item {{ menuActive('contents.*') ? 'active' : '' }}">Saved

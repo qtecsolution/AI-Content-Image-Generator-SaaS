@@ -50,6 +50,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/content-create', 'OpenAiController@content')->name('content.create');
     Route::post('/content-generate', 'OpenAiController@contentGenerate')->name('content.generate');
+    
+    Route::get('/code-create', 'OpenAiController@code')->name('code.create');
+    Route::post('/code-generate', 'OpenAiController@codeGenerate')->name('code.generate');
 
     Route::get('/image-create','OpenAiController@image')->name('image.create');
     Route::post('/image-generate','OpenAiController@imageGenerate')->name('image.generate');

@@ -4,6 +4,7 @@
     <li class="breadcrumb-item active">Contents History Details</li>
 @endsection
 @section('content')
+    
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-0">
             <div class="col-md-12">

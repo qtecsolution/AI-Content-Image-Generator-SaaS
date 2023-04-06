@@ -64,7 +64,6 @@ class UserDocumentController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'use_case_id' => 'required',
             'generated_content' => 'required',
         ]);
         

@@ -288,6 +288,88 @@ class OpenAiController extends Controller
             return back();
         }
     }
+
+
+    // Code generate
+    public function code()
+    {
+        if (showBalance() == '') {
+            myAlert('error', 'Subscribe any plan first!');
+            return redirect()->route('user.purchase');
+        } elseif (showBalance()->api_call == 0) {
+            myAlert('error', 'Your Api call limit: 0');
+            return redirect()->route('user.purchase');
+        }
+        return view('openAi.code');
+    }
+    /* Open AI Content Generate */
+    public function codeGenerate(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+        try {
+
+            $plan = Plan::where('id', auth()->user()->plan_id)->first();
+            $max_tokens = ($plan->word_count < (int)$request->max_words) ? $plan->word_count : (int)$request->max_words;
+            $model = readConfig('open_ai_model');
+            // Open AI API call
+            $result = OpenAI::chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    [
+                        "role" => "system",
+                        "content" => "You are a helpful assistant that writes code."
+                    ],
+                    [
+                        "role" => "user",
+                        "content" => $request->description,
+                    ],
+                ],
+                'temperature' => 1,
+                'max_tokens' => 4000,
+            ]);
+            $content = $result['choices'][0]['message']['content'];
+            //$tokens = $result['usage']['total_tokens'];
+            $wordCount = str_word_count($content) ?? 0;
+            $charCount = strlen($content) ?? 0;
+            $results = [
+                'content' => $content,
+                'words' => $wordCount,
+                'characters' => $charCount
+            ];
+            // Content history create
+            ContentHistory::create([
+                'title'=>substr($request->description, 0, 200),
+                'description' => $request->description ?? '',
+                'temperature' => 1,
+                'generated_content' => $content,
+                'prompt' => "You are a helpful assistant that writes code.",
+                'use_case_id' => $request->use_case,
+                'user_id' => Auth::user()->id
+            ]);
+            balanceDeduction('call_api');
+            return response()->json($results, 200);
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong',
+                'error' => $errorMessage,
+            ], 400);
+            return response()->json($results, 200);
+        }
+    }
+
+
     public function default()
     {
         return view('default');
