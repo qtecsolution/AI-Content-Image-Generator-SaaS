@@ -39,13 +39,27 @@
     <div class="col-12 mb-3">
         <div class="form-group">
             <label for="details" class="form-label"> Input Fields : </label>
-            <div>
+            <div class="fz-14 d-flex gap-3">
                 @php 
                     $inputFields = explode(',',$data->input_fields);
                 @endphp
-                <label> <input class="input_fields" type="checkbox" value="1" name="input_fields[]" @if(in_array(1,$inputFields)) checked @endif > Title </label>
-                <label  class="mx-4"> <input class="input_fields" type="checkbox" value="2" name="input_fields[]" @if(in_array(2,$inputFields)) checked @endif> Keywords </label>
-                <label> <input class="input_fields" type="checkbox" value="3" name="input_fields[]" @if(in_array(3,$inputFields)) checked @endif> Description </label>
+
+                <div class="checkWithLable mb-2">
+                    <input type="checkbox" id="useCaseTitle" class="checkWithLable-box input-check-box" name="input_fields[]" value="1" @if(in_array(1,$inputFields)) checked @endif 
+                        hidden>
+                    <label for="useCaseTitle" class="checkWithLable-label">Title </label>
+                </div>
+                <div class="checkWithLable mb-2">
+                    <input type="checkbox" id="useCaseKeywords" class="checkWithLable-box input-check-box" name="input_fields[]" value="2" @if(in_array(2,$inputFields)) checked @endif
+                        hidden>
+                    <label for="useCaseKeywords" class="checkWithLable-label">Keywords </label>
+                </div>
+                <div class="checkWithLable mb-2">
+                    <input type="checkbox" id="useCaseDescription" class="checkWithLable-box input-check-box" name="input_fields[]" value="3" @if(in_array(3,$inputFields)) checked @endif
+                        hidden>
+                    <label for="useCaseDescription" class="checkWithLable-label"> Description </label>
+                </div>
+                
             </div>
             @error('input_fields')
             <div class="text-danger">

@@ -106,7 +106,6 @@ class UserDocumentController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
             'generated_content' => 'required',
         ]);
         try {

@@ -29,8 +29,10 @@
                                         <div class="form-content">
 
                                             <div class="row g-4">
-
-
+                                                @php 
+                                                    $inputFields = explode(',',$data->useCase->input_fields);
+                                                @endphp
+                                                @if(in_array(1,$inputFields))
                                                 <!-- Title    -->
                                                 <div class="col-12">
                                                     <div class="form-group">
@@ -46,7 +48,8 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                @endif
+                                                @if(in_array(2,$inputFields))
                                                 <!-- keywords -->
                                                 <div class="col-12">
                                                     <div class="form-group">
@@ -62,14 +65,15 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                @endif
+                                                @if(in_array(3,$inputFields))
                                                 <!-- description -->
                                                 <div class="col-12">
                                                     <!-- description  -->
                                                     <div class="form-group">
                                                         <label for="description" class="form-label">Description</label>
                                                         <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
-                                                            placeholder="Description">@purify($data->description)</textarea>
+                                                            placeholder="Description" rows="6">@purify($data->description)</textarea>
                                                         <div class="valid-feedback">
                                                             Awesome! You're one step closer to greatness.
                                                         </div>
@@ -78,6 +82,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @endif
 
                                             </div>
                                         </div>

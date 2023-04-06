@@ -33,21 +33,27 @@
                         <div class="row g-4">
                             <div class="col-lg-5">
                                 <table class="table fz-14">
+                                    @if($data->title!='')
                                     <tr>
                                         <td class="font-600"> Title </td>
                                         <td> : </th>
                                         <td> {{$data->title}} </td>
                                     </tr>
+                                    @endif
+                                    @if($data->keywords!='')
                                      <tr>
                                         <td class="font-600"> Keywords </td>
                                         <th> : </th>
                                         <td> {{$data->keywords}} </td>
                                     </tr>
+                                    @endif
+                                    @if($data->description!='')
                                     <tr>
                                         <td class="font-600">  Description </td>
                                         <th> : </th>
                                         <td> {{$data->description}}  </td>
                                     </tr>
+                                    @endif
                                     <tr>
                                         <td class="font-600"> Use Case </td>
                                         <th> : </th>

@@ -69,8 +69,6 @@
                                                         hidden>
                                                     <label for="useCaseDescription" class="checkWithLable-label"> Description </label>
                                                 </div>
-                                              
-                                           
                                             </div>
                                             @error('input_fields')
                                             <div class="text-danger">
