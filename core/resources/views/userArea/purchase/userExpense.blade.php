@@ -40,6 +40,9 @@
                                         <li>Invoice: {{ $order->invoice }}</li>
                                         <li>Paid Amount: {{readConfig('currency_sambol')}} {{ $order->total }} </li>
                                         <li>Payment Method: {{ $order->payment_method }}</li>
+                                        @if($order->other != '')
+                                        <li> <b> Attachment: </b>  <a href="{{filePath($order->other)}}" target="_blank"> <i class="fa fa-file"></i> Attach File </a> </li>
+                                        @endif
                                     </ul>
                                 </div>    
                             </div>   

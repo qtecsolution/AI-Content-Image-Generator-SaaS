@@ -91,6 +91,7 @@ Route::group(['middleware' => ['auth']], function () {
 Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
     Route::resource('/use-case', 'UseCaseController');
+    Route::resource('/use-case-category', 'UseCaseCategoryController');
     Route::resource('/manage-faq', 'FaqController');
     Route::resource('/blog-category', 'BlogCategoryController');
     Route::resource('/manage-blogs', 'BlogController');

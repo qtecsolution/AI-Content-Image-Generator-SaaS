@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('content_histories', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('use_case_id');
+            $table->unsignedBigInteger('use_case_id')->nullable();
             $table->string('temperature');
             $table->string('title')->nullable();
             $table->string('keywords')->nullable();

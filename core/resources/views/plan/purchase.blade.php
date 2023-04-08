@@ -182,36 +182,20 @@
                         </div>
                         <div class="card-body d-flex flex-column gap-3 form-methods">
                             <form action="{{ route('plan.purchase.store') }}" enctype="multipart/form-data"
-                                method="post" id="order_payment_done" class="mt-4">
-
+                                method="post" id="order_payment_done" class="mt-2">
                                 @csrf
-
-                                {{-- @if (readConfig('RAZORPAY_ACTIVE') == 'on')
-                                    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ readConfig('RAZORPAY_KEY') }}"
-                                        data-amount="{{ 100 * $plan->price }}" data-name="{{ readConfig('type_name') }}" data-description=""
-                                        data-image="{{ filePath(readConfig('type_logo')) }}" data-prefill.name="{{ $user->name }}"
-                                        data-prefill.email="{{ $user->email }}"></script>
-                                @endif --}}
-                                {{-- this is single form --}}
                                 <input type="hidden" id="plan_id" name="plan_id" value="{{ $plan->id }}">
                                 <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
                                 <input type="hidden" id="paymentAmount" name="paymentAmount"
                                     value="{{ $plan->price }}">
-                                <input type="hidden" id="paymentTID" name="paymentTID" value="">
+                                <input type="hidden" id="paymentID" name="payment_id" value="">
                                 <input type="hidden" id="value_1" name="value_1" value="">
 
-                                <div class="form-group">
-                                    <label for="name" class="form-label">Name
-                                    </label>
+                                <div class="form-group mb-3">
+                                    <label for="name" class="form-label">Name <span class="text-danger"> * </span> :</label>
                                     <input type="text" value="{{ $user->name }}"
                                         class="form-control custom-input shadow-none" id="name" name="name"
                                         autocomplete="off" placeholder="Enter your name">
-                                    <div class="valid-feedback">
-                                        Awesome! You're one step closer to greatness.
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please enter your name
-                                    </div>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong> Please enter your name </strong>
@@ -219,49 +203,26 @@
                                     @enderror
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="phone" class="form-label">Email
-                                    </label>
+                                <div class="form-group mb-3">
+                                    <label for="phone" class="form-label">Email <span class="text-danger"> * </span> :</label>
                                     <input type="email" name="email" value="{{ $user->email }}"
                                         class="form-control custom-input shadow-none" id="phone" autocomplete="off"
                                         placeholder="Enter your phone">
-                                    <div class="valid-feedback">
-                                        Awesome! You're one step closer to greatness.
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please enter your email
-                                    </div>
-
-
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="address" class="form-label">Address </label>
+                                <div class="form-group mb-3">
+                                    <label for="address" class="form-label">Address : </label>
                                     <input type="text" value="{{ $user->address }}"
                                         class="form-control custom-input shadow-none" name="address" id="address"
                                         autocomplete="off" placeholder="Enter your address">
-                                    <div class="valid-feedback">
-                                        Awesome! You're one step closer to greatness.
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please enter your address
-                                    </div>
-
 
                                 </div>
 
-                                <div class="form-group">
-                                    <label for="phone" class="form-label">Phone
-                                    </label>
+                                <div class="form-group mb-3">
+                                    <label for="phone" class="form-label">Phone :</label>
                                     <input type="tel" class="form-control custom-input shadow-none" id="phone"
                                         autocomplete="off" placeholder="Enter your phone" name="phone"
                                         value="{{ $user->phone }}">
-                                    <div class="valid-feedback">
-                                        Awesome! You're one step closer to greatness.
-                                    </div>
-                                    <div class="invalid-feedback">
-                                        Please enter your Phone
-                                    </div>
 
                                 </div>
                             </form>
@@ -295,8 +256,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class=" checkout-month d-inline-block">
-                                                {{ $plan->price }} <span
-                                                    class="text-muted">{{ readConfig('currency_sambol') }}</span>
+                                                <span class="text-muted">{{ readConfig('currency_sambol') }}</span>{{ $plan->price }} 
                                             </div>
 
                                         </div>
@@ -314,10 +274,10 @@
                                 </div>
                                 <div class="col-auto">
                                     <span class=" checkout-month d-inline-block">
-                                        {{ $plan->price }}
+                                        <span>{{ readConfig('currency_sambol') }}</span>{{ $plan->price }}
                                     </span>
 
-                                    <span>{{ readConfig('currency_sambol') }}</span>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -325,15 +285,8 @@
 
                     <div class="mt-3 px-2">
                         <span class="small text-muted">
-                            <span class="checkout-subscription d-block">
-                                By continuing, you agree with the terms
-                                of service</a> and authorize <strong>phpContent</strong> to charge your
-                                payment method on a recurring basis. You can cancel your subscription at any
-                                time.
-                            </span>
-                            <span class="checkout-one-time d-none">
-                                By continuing, you agree with the terms
-                                of service</a>.
+                            <span class="checkout-one-time">
+                                To proceed, you must accept the <a href="{{url('page/terms-condition')}}" target="_blank">terms of service.</a>.
                             </span>
                         </span>
                     </div>
@@ -342,7 +295,7 @@
                         <button type="button" onclick="checkOut()" name="submit"
                             class="btn btn-success btn-block my-3 w-100">
                             <span class=" checkout-month d-inline-block">
-                                Pay {{ $plan->price }} {{ readConfig('currency_sambol') }}
+                                Pay {{ readConfig('currency_sambol') }}{{ $plan->price }} 
                             </span>
 
                         </button>
@@ -373,7 +326,7 @@
                     paypalPayment();
                     break;
                 case 'stripe':
-                    $('.form-methods').load('{{ route('plan.stripe.load', $plan->id) }}');
+                    $('.form-methods').load("{{ route('plan.stripe.load', $plan->id) }}");
                     stripPaymnet();
                     break;
                 case 'razorpay':
@@ -383,34 +336,25 @@
                 case 'bank':
                     bankPayment()
                     break;
-                case 4:
-                    day = "Thursday";
-                    break;
-                case 5:
-                    day = "Friday";
-                    break;
-                case 6:
-                    day = "Saturday";
                 default:
                     $('.methodError').removeClass('invalid-feedback ')
                     break;
             }
 
         }
-
-        @if ($plan->price <= 0)
-          
-            $(document).ready(function() {
-
-                $('#paymentMethod').val('Free');
-                $('#paymentAmount').val({{ $plan->price }});
-                $('#paymentTID').val('');
-                $('#value_1').val('');
-                $('#order_payment_done').submit();
-
-            });
-        @endif
     </script>
+    @if($plan->price <= 0)
+    <script>
+        $(document).ready(function() {
+            $('#paymentMethod').val('Free');
+            $('#paymentAmount').val({{ $plan->price }});
+            $('#paymentID').val('');
+            $('#value_1').val('');
+            $('#order_payment_done').submit();
+        });
+    </script>
+    @endif
+    
 
     @if (readConfig('PAYPAL_ACTIVE') == 'on')
         <script>
@@ -419,7 +363,7 @@
             function paypalPayment() {
                 $('#paymentMethod').val('paypal');
                 $('#paymentAmount').val({{ $plan->price }});
-                $('#paymentTID').val('');
+                $('#paymentID').val('');
                 $('#value_1').val('');
                 $('#order_payment_done').submit();
             }
@@ -454,7 +398,7 @@
                 // e.preventDefault();
                 $('#paymentMethod').val('stripe');
                 $('#paymentAmount').val({{ $plan->price }});
-                $('#paymentTID').val('');
+                $('#paymentID').val('');
                 $('#value_1').val('');
 
                 // Stripe.setPublishableKey($('#order_payment_done').data('stripe-publishable-key'));
@@ -469,9 +413,6 @@
             }
 
             function stripeResponseHandler(status, response) {
-
-                console.log(response);
-                console.log(status);
                 if (response.error) {
                     $('.error')
                         .removeClass('d-none')
@@ -480,8 +421,8 @@
                 } else {
                     /* token contains id, last4, and card type */
                     var token = response['id'];
+                    $('#paymentID').val(token);
                     $('#order_payment_done').append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
-                    $('#order_payment_done').submit();
                     $('#order_payment_done').submit();
                 }
             }
@@ -495,10 +436,10 @@
         <script>
             "use strict"
 
-            function razorPaymnet() {
+            function razorPaymnet(e) {
 
-                debugger
-                var SITEURL = '{{ URL::to('/') }}';
+                $('#paymentMethod').val('razorpay');
+                $('#paymentAmount').val({{ $plan->price }});
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -507,16 +448,18 @@
                 var options = {
                     "key": "{{ readConfig('RAZORPAY_KEY') }}",
                     "amount": ({{ $plan->price }} * 100), // 2000 paise = INR 20
+                    "currency": "USD",
                     "name": "{{ $plan->name }}",
                     "description": "Payment",
                     "image": "{{ filePath(readConfig('type_logo')) }}",
                     "handler": function(response) {
-                        window.location.href = SITEURL + '/' + 'paysuccess?payment_id=' + response
-                            .razorpay_payment_id + '&product_id=' + product_id + '&amount=' + totalAmount;
+                        $('#paymentID').val(response.razorpay_payment_id);
+                        $('#order_payment_done').submit();
                     },
                     "prefill": {
-                        "contact": '{{ $user->phone }}',
+                        "name": '{{ $user->name }}',
                         "email": '{{ $user->email }}',
+                        "contact": '{{ $user->phone }}',
                     },
                     "theme": {
                         "color": "#528FF0"
@@ -524,19 +467,6 @@
                 };
                 var rzp1 = new Razorpay(options);
                 rzp1.open();
-                // e.preventDefault();
-
-                $('#order_payment_done').submit();
-            }
-        </script>
-    @endif
-
-    @if (readConfig('MOLLIE_ACTIVE') == 'on')
-        <script>
-            "use strict"
-            // MOLLIE_ACTIVE
-            function molliePaymnet() {
-                $('.molliePaymnet').submit();
             }
         </script>
     @endif

@@ -9,5 +9,10 @@ class UseCase extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','icon','details','input_fields','prompt','is_published'];
+    protected $fillable = ['title','icon','details','input_fields','prompt','use_case_category_id','is_popular','title_label','short_description_label','description_label','is_published'];
+
+    public function category()
+    {
+        return $this->belongsTo(UseCaseCategory::class,'use_case_category_id','id');
+    }
 }

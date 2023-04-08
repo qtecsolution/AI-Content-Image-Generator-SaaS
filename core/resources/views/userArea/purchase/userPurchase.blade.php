@@ -59,7 +59,7 @@
                                             </li>
                                         </ul>
                                         <div class="d-grid">
-                                            @if($user->plan_id == $item->id)
+                                            @if($user->plan_id == $item->id && $item->price == 0)
                                             <button type="button" class="btn-subscribe subscribed" onclick="redirectUrl('{{route('plan.userexpense')}}')"> 
                                                 See The expenses
                                             </button>

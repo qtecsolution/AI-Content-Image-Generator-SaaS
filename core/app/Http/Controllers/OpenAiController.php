@@ -34,7 +34,7 @@ class OpenAiController extends Controller
             $inputFields = explode(',', $defaultCase->input_fields);
         }
         $languages = Language::where('status', 1)->pluck('language', 'language');
-        return view('openAi.content', compact('cases', 'request', 'inputFields', 'languages'));
+        return view('openAi.content', compact('cases', 'request', 'inputFields', 'languages','defaultCase'));
     }
     /* Open AI Content Generate */
     public function contentGenerate(Request $request)

@@ -63,31 +63,31 @@
                                 <input type="number" min="0" required value="{{ $plan->word_count }}" name="word_count"
                                     class="form-control custom-input" id="inputEmail4" placeholder="0" placeholder="0">
 
-                                <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be
+                                <small class="text-muted mt-2 fz-12">If you input the 0, it's will be
                                     unlimited</small>
                             </div>
 
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail5" class="form-label">User request limit <span
+                                <label for="inputEmail5" class="form-label">Open AI API request limit <span
                                         class="text-danger">*</span> </label>
 
-                                <input type="number" min="0" value="{{ $plan->word_count }}" required
+                                <input type="number" min="0" value="{{ $plan->call_api_count }}" required
                                     name="call_api_count" class="form-control custom-input" id="inputEmail5"
                                     placeholder="0">
-                                <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be
+                                <small class="text-muted mt-2 fz-12">If you input the 0, it's will be
                                     unlimited</small>
                             </div>
 
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail8" class="form-label">User Save Documets limit <span
+                                <label for="inputEmail8" class="form-label">Save Documets limit <span
                                         class="text-danger">*</span> </label>
 
                                 <input type="number" min="0" value="{{ $plan->documet_count }}" required
                                     name="documet_count" class="form-control custom-input" id="inputEmail8"
                                     placeholder="0">
-                                <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be
+                                <small class="text-muted mt-2 fz-12">If you input the 0, it's will be
                                     unlimited</small>
                             </div>
 
@@ -100,7 +100,7 @@
                                     name="image_count" class="form-control custom-input" id="inputEmail9"
                                     placeholder="0">
 
-                                <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be
+                                <small class="text-muted mt-2 fz-12">If you input the 0, it's will be
                                     unlimited</small>
                             </div>
 
@@ -109,7 +109,7 @@
                                 </label>
                                 <input type="number" value="{{ $plan->price }}" min="0" step="0.01" required
                                     name="price" class="form-control custom-input" id="inputEmail10" placeholder="0">
-                                <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be free</small>
+                                <small class="text-muted mt-2 fz-12">If you input the 0, it's will be free</small>
                             </div>
 
                             <div class="generate-btn-wrapper">

@@ -38,17 +38,16 @@
                     </div>
                     <div class="my-projects-body">
                         <div class="row">
-                            <form method="post" class="p-2" action="{{ route('use-case.update', $data->id) }}" id="save-form"
+                            <form method="post" class="p-2 " action="{{ route('use-case.store') }}" id="save-form"
                                 enctype="multipart/form-data">
                                 @csrf
-                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-5" id="useCaseForm">
                                         <div class="row">
                                             <div class="col-12 mb-3">
                                                 <div class="form-group">
                                                     <label for="title" class="form-label title-style">Category</label>
-                                                    {!! Form::select('use_case_category_id', $category, $data->use_case_category_id??'', [
+                                                    {!! Form::select('use_case_category_id', $category, '', [
                                                         'class' => 'form-control w-100 nice-select',
                                                         'placeholder' => '-select category-',
                                                         'required',
@@ -67,7 +66,7 @@
                                                     <input type="text"
                                                         class="form-control custom-input @error('title') is-invalid @enderror"
                                                         id="title" required autocomplete="off" name="title"
-                                                        placeholder="Enter use case title here" value="{{$data->title}}">
+                                                        placeholder="Enter use case title here" value="{{ old('title') }}">
                                                 </div>
                                             </div>
 
@@ -76,7 +75,7 @@
                                                 <div class="form-group">
                                                     <label for="details" class="form-label">Use Case Details </label>
                                                     <textarea class="form-control custom-input @error('details') is-invalid @enderror" id="details" autocomplete="off"
-                                                        name="details" placeholder="Describe here" rows="4">{{$data->details}}</textarea>
+                                                        name="details" placeholder="Describe here" rows="4">{{ old('details') }}</textarea>
                                                     <div class="valid-feedback">
                                                         Awesome! You're one step closer to greatness.
                                                     </div>
@@ -93,11 +92,11 @@
                                                         <div class="checkWithLable mb-2 col-md-4">
                                                             <input type="checkbox" id="useCaseTitle"
                                                                 class="checkWithLable-box input-check-box"
-                                                                name="input_fields[]" value="1" @if($data->title_label!='') checked @endif hidden>
+                                                                name="input_fields[]" value="1" checked hidden>
                                                             <label for="useCaseTitle" class="checkWithLable-label">Title :</label>
                                                         </div>
                                                         <div class="input-box col-md-8">
-                                                            <input class="form-control" name="title_label" value="{{$data->title_label}}">
+                                                            <input class="form-control" name="title_label" value="Title">
                                                             @error('title_label')
                                                                 <div class="text-danger">
                                                                     {{ $message }}
@@ -109,11 +108,11 @@
                                                         <div class="checkWithLable mb-2 col-md-4">
                                                             <input type="checkbox" id="useCaseShort"
                                                                 class="checkWithLable-box input-check-box"
-                                                                name="input_fields[]" value="2" @if($data->short_description_label!='') checked @endif hidden>
+                                                                name="input_fields[]" value="2" hidden>
                                                             <label for="useCaseShort" class="checkWithLable-label">Short Description :</label>
                                                         </div>
                                                         <div class="input-box col-md-8">
-                                                            <input class="form-control" name="short_description_label" value="{{$data->short_description_label}}">
+                                                            <input class="form-control" name="short_description_label" value="Short Description">
                                                             @error('short_description_label')
                                                                 <div class="text-danger">
                                                                     {{ $message }}
@@ -125,11 +124,11 @@
                                                         <div class="checkWithLable mb-2 col-md-4">
                                                             <input type="checkbox" id="useCaseDescription"
                                                                 class="checkWithLable-box input-check-box"
-                                                                name="input_fields[]" value="3" @if($data->description_label!='') checked @endif hidden>
+                                                                name="input_fields[]" value="3" checked hidden>
                                                             <label for="useCaseDescription" class="checkWithLable-label">Description :</label>
                                                         </div>
                                                         <div class="input-box col-md-8">
-                                                            <input class="form-control" name="description_label" value="{{$data->description_label}}">
+                                                            <input class="form-control" name="description_label" value="Description">
                                                             @error('description_label')
                                                                 <div class="text-danger">
                                                                     {{ $message }}
@@ -150,9 +149,6 @@
                                             </div>
                                         </div>
 
-                                        <div class="generate-btn-wrapper">
-                                            <button type="submit" class="generate-btn px-4">Submit</button>
-                                        </div>
                                     </div>
                                     <div class="col-md-7 border-start">
                                         <div class="row">
@@ -160,8 +156,8 @@
                                                 <div class="form-group">
                                                     <label for="promt-body" class="form-label">Open AI Request Prompt
                                                     </label>
-                                                    <textarea class="form-control custom-input @error('prompt') is-invalid @enderror" id="promt-body" autocomplete="off"
-                                                        name="prompt" placeholder="Prompt" rows="6">@purify($data->prompt)</textarea>
+                                                    <textarea class="form-control custom-input resize-vertical @error('prompt') is-invalid @enderror" id="promt-body" autocomplete="off"
+                                                        name="prompt" placeholder="Prompt" rows="6">{{ old('prompt') ?? 'Write me content with this title "[title]" and the description: [description]' }}</textarea>
                                                     <div class="valid-feedback">
                                                         Awesome! You're one step closer to greatness.
                                                     </div>
@@ -179,14 +175,9 @@
                                             <div class="col-12 mb-3">
                                                 <div class="form-group">
                                                     <label for="icon" class="form-label">Icon</label>
-                                                    @if ($data->icon != '' && file_exists($data->icon))
-                                                        <div class="mb-1">
-                                                            <img src="{{ asset($data->icon) }}" alt="Icon" style="max-height:30px">
-                                                        </div>
-                                                    @endif
                                                     <input type="file"
                                                         class=" form-control fz-14  @error('icon') is-invalid @enderror"
-                                                        id="icon" autocomplete="off" name="icon"
+                                                        id="icon" required autocomplete="off" name="icon"
                                                         onchange="imageCheck(this)">
                                                     <span class="text-danger" id="fileNotSupported"
                                                         style="display: none"> File
@@ -199,6 +190,21 @@
                                                         Please enter a title
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="is_published" class="form-label"> Popularity : </label>
+                                                    {!! Form::select('is_popular', [1 => 'Popular', 0 => 'Normal'], '1', ['class' => 'nice-select w-100']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="is_published" class="form-label"> Status : </label>
+                                                    {!! Form::select('is_published', [1 => 'Active', 0 => 'Inactive'], '1', ['class' => 'nice-select w-100']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="generate-btn-wrapper">
+                                                <button type="submit" class="generate-btn px-4">Submit</button>
                                             </div>
                                         </div>
                                     </div>

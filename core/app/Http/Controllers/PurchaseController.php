@@ -95,6 +95,9 @@ class PurchaseController extends Controller
             $order->email = $request->email;
             $order->phone = $request->phone;
             $order->address = $request->address;
+            if(isset($request->payment_id) && $request->payment_id !== ''){
+                $order->payment_id = $request->payment_id;
+            }
             $order->save();
 
 
@@ -128,22 +131,7 @@ class PurchaseController extends Controller
                         $message = $e->getMessage();
                     }
                 }
-            } else if ($request->paymentMethod == 'mollie') {
-                $payment = Mollie::api()->payments->create([
-                    "amount" => [
-                        "currency" => "EUR",
-                        "value" => "10.00" // You must send the correct number of decimals, thus we enforce the use of strings
-                    ],
-                    "description" => '1 Method',
-                    "redirectUrl" => 'http://127.0.0.1:8000/payment/success',
-                    "webhookUrl" => 'http://127.0.0.1:8000/handle',
-                    "metadata" => [
-                        "order_id" => "1-rumon",
-                    ],
-                ]);
-                // redirect customer to Mollie checkout page
-                return redirect($payment->getCheckoutUrl(), 303);
-            } else if ($request->paymentMethod == 'paypal') {
+            }  else if ($request->paymentMethod == 'paypal') {
 
                 try {
 
@@ -188,7 +176,7 @@ class PurchaseController extends Controller
                 $order->save();
 
                 //get old expnase
-                $oldexpense = PlanExpense::where('id', $user->plan_expense_id)->first();
+                $oldexpense = showBalance();
                 if(isset(demoPlan()->word)){
                     $expense = new PlanExpense();
                     $expense->user_id = $user->id;
@@ -202,16 +190,16 @@ class PurchaseController extends Controller
                     $expense->expire_at =  Carbon::now()->addDay(30);
                     $expense->save();
                 }else{
-                    if ($oldexpense != null) {
+                    if ($oldexpense != "") {
                         //eassign the plan expense
                         $expense = new PlanExpense();
                         $expense->user_id = $user->id;
                         $expense->order_id = $order->id;
                         $expense->plan_id = $plan->id;
                         $expense->word_count = $plan->word_count;
-                        $expense->call_api_count = $plan->call_api_count + ($oldexpense->call_api_count - $oldexpense->current_api_count);
-                        $expense->documet_count = $plan->documet_count + ($oldexpense->documet_count - $oldexpense->current_documet_count);
-                        $expense->image_count = $plan->image_count + ($oldexpense->image_count - $oldexpense->current_image_count);
+                        $expense->call_api_count = $plan->call_api_count + $oldexpense->api_call;
+                        $expense->documet_count = $plan->documet_count + $oldexpense->document;
+                        $expense->image_count = $plan->image_count + $oldexpense->image;
                         $expense->activated_at = Carbon::now();
                         $expense->expire_at =  Carbon::now()->addDay(30);
                         $expense->save();
@@ -238,13 +226,13 @@ class PurchaseController extends Controller
                 $user->save();
 
                 myAlert('success', 'Plan is successfully subscribed  enjoy the service');
-                return redirect()->route('plan.expense', $order->id);
+                return redirect()->route('plan.userexpense');
             } else {
                 myAlert('error','There are some problem, please try again');
                 return back();
             }
         } else {
-            myAlert('error', 'Your payabol amount is lower the the plan purchase price, please try again');
+            myAlert('error', 'Your payable amount is lower the the plan purchase price, please try again');
             return back();
         }
     }

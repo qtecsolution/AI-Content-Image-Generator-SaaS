@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('details')->nullable();
             $table->text('prompt');
             $table->string('input_fields')->default('1,2,3');
+            $table->unsignedBigInteger('use_case_category_id')->nullable();
+            $table->foreign('use_case_category_id')->references('id')->on('use_case_categories')->onDelete('cascade');
             $table->boolean('is_published')->default(1);
             $table->timestamps();
         });

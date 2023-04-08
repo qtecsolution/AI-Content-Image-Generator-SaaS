@@ -33,8 +33,8 @@ return array(
     'swift_code' => 'City Bank',
     'routing_number' => '223123',
     'STRIPE_ACTIVE' => 'on',
-    'STRIPE_KEY' => 'pk_test_51MhAgUSFoGrMA7dvDe9FpEhOIw3NAJ5VTIn0qxFNqPwWxqbwC67ifgEjOxN0UeAuAFpObrAhXa2nD2MpERIQFql300FqL62ptY',
-    'STRIPE_SECRET' => 'sk_test_51MhAgUSFoGrMA7dvH4irwUdcN1MBj1FoSsN3cFFptA070eq6VIfTDH7wZNLOglbNQI7XqNzXJU3YahY2Oi02RmoK001ZqiaS7W',
+    'STRIPE_KEY' => 'pk_test_jdAIT8RDQfnjcMBLiLF6MvpD',
+    'STRIPE_SECRET' => 'sk_test_wpBQp1dlHFljKeyrhqLSXBlK',
     'RAZORPAY_ACTIVE' => 'on',
     'RAZORPAY_KEY' => 'rzp_test_qs2qz7KKUQbpgo',
     'RAZORPAY_SECRET' => 'PpcKi4Tlfx86Dtz2u9kDPxm1',
@@ -46,5 +46,5 @@ return array(
     'currency_sambol' => '$',
     'pwa_active' => 'yes',
     'open_ai_model' => 'text-davinci-003',
-    'demo' => true,
+    'demo' => false,
 );

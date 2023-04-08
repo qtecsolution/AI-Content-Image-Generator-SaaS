@@ -38,37 +38,31 @@
                                         </div>
                                         <!-- Title    -->
                                         <div class="col-12" id="title-field"
-                                            @if (!in_array(1, $inputFields)) style="display: none" @endif>
+                                            @if ($defaultCase->title_label=='') style="display: none" @endif>
                                             <div class="form-group">
-                                                <label for="title" class="form-label">Title</label>
+                                                <label for="title" class="form-label title_label"> {{$defaultCase->title_label}}: </label>
                                                 <input type="text" class="form-control custom-input" id="title"
-                                                    autocomplete="off" name="title" placeholder="Write here...">
-                                                <div class="valid-feedback">
-                                                    Awesome! You're one step closer to greatness.
-                                                </div>
-                                                <div class="invalid-feedback">
-                                                    Please enter a title
-                                                </div>
+                                                    autocomplete="off" name="title" placeholder="">
                                             </div>
                                         </div>
 
                                         <!-- keywords -->
                                         <div class="col-12" id="keywords-field"
-                                            @if (!in_array(2, $inputFields)) style="display: none" @endif>
+                                            @if ($defaultCase->short_description_label == '') style="display: none" @endif>
                                             <div class="form-group">
-                                                <label for="keywords" class="form-label">Keywords</label>
-                                                <input type="text" class="form-control custom-input" id="keywords"
-                                                    autocomplete="off" name="keywords" placeholder="Enter your keywords">
+                                                <label for="keywords" class="form-label">{{$defaultCase->short_description_label}}: </label>
+                                                <textarea class="form-control custom-input resize-varticle" id="short_description" autocomplete="off" name="short_description"
+                                                    placeholder="" rows="3"></textarea>
                                             </div>
                                         </div>
 
                                         <!-- description -->
                                         <div class="col-12 mb-2" id="description-field"
-                                            @if (!in_array(3, $inputFields)) style="display: none" @endif>
+                                            @if($defaultCase->description_label == '') style="display: none" @endif>
                                             <div class="form-group">
-                                                <label for="description" class="form-label">Description</label>
+                                                <label for="description" class="form-label"> {{$defaultCase->description_label}}: </label>
                                                 <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
-                                                    placeholder="Description" rows="6"></textarea>
+                                                    placeholder="" rows="6"></textarea>
                                                 <small class="text-mute"> Should describe your need for better result.
                                                 </small>
                                             </div>

@@ -263,3 +263,9 @@
         gap: 0.75rem;
     }
 }
+textarea.resize-auto{
+    resize: auto !important;
+}
+textarea.resize-vertical{
+    resize: vertical !important;
+}
