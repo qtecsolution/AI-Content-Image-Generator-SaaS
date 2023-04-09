@@ -30,7 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $cases = UseCase::where('is_published', 1)->get();
+        $cases = UseCase::where('is_published', 1)->where('is_popular', 1)->get();
         $noPlan = 0;
         if(showBalance()==''){
             $noPlan = 1;
@@ -105,5 +105,10 @@ class HomeController extends Controller
             myAlert('error', $errorMessage);
             return back();
         }
+    }
+
+    public function templates(){
+        $allData  = UseCase::where('is_published', 1)->get();
+        return view('user.templates.index', compact('allData'));
     }
 }

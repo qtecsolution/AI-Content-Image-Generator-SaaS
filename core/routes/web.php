@@ -45,9 +45,12 @@ Route::group(['middleware' => ['auth'],'prefix'=>'user','namespace' => 'User'], 
     Route::get('/profile/password', 'HomeController@password')->name('profile.password');
     Route::post('/profile/password', 'HomeController@updatePassword')->name('profile.password.update');
 
+    Route::get('/templates', 'HomeController@templates')->name('user.templates');
+
     Route::get('/content-create', 'OpenAiController@content')->name('content.create');
     Route::post('/content-generate', 'OpenAiController@contentGenerate')->name('content.generate');
     
+    Route::get('/chat', 'OpenAiController@chat')->name('chat.create');
     Route::get('/code-create', 'OpenAiController@code')->name('code.create');
     Route::post('/code-generate', 'OpenAiController@codeGenerate')->name('code.generate');
 
