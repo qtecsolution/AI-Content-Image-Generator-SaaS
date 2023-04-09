@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use App\Models\BlogCategory;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('blogs.index');
+        return view('admin.blogs.index');
     }
     public function viewAll()
     {
@@ -80,7 +81,7 @@ class BlogController extends Controller
     public function create()
     {
         $category = BlogCategory::pluck('name', 'id');
-        return view('blogs.create', compact('category'));
+        return view('admin.blogs.create', compact('category'));
     }
 
     /**
@@ -118,7 +119,7 @@ class BlogController extends Controller
     public function show($id)
     {
         $data = Blog::findOrFail($id);
-        return view('blogs.show', compact('data'));
+        return view('admin.blogs.show', compact('data'));
     }
 
     /**
@@ -128,7 +129,7 @@ class BlogController extends Controller
     {
         $data = Blog::findOrFail($id);
         $category = BlogCategory::pluck('name', 'id');
-        return view('blogs.edit', compact('data', 'category'));
+        return view('admin.blogs.edit', compact('data', 'category'));
     }
 
     /**

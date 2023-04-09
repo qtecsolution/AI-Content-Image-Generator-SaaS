@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\Charts\expensesChart;
 use App\Models\Order;
@@ -18,25 +20,16 @@ use function Termwind\render;
 
 class PlanController extends Controller
 {
-    //
-
-
-    public function userPurchase()
-    {
-        $user = Auth::user();
-        $plans = Plan::where('is_published', true)->orderBy('id','ASC')->get();
-        return view('userArea.purchase.userPurchase', compact('plans', 'user'));
-    }
 
     public function index()
     {
         $plans = Plan::orderBy('id','ASC')->get();
-        return view('plan.index', compact('plans'));
+        return view('admin.plan.index', compact('plans'));
     }
 
     public function create()
     {
-        return view('plan.create');
+        return view('admin.plan.create');
     }
 
 
@@ -59,7 +52,7 @@ class PlanController extends Controller
     public function edit($id)
     {
         $plan = Plan::where('id', $id)->first();
-        return view('plan.edit', compact('plan'));
+        return view('admin.plan.edit', compact('plan'));
     }
 
 
@@ -100,17 +93,13 @@ class PlanController extends Controller
         return back();
     }
 
-
-   
-    public function expense($id,expensesChart $expenseChart)
+    public function expense($id)
     {
+        //id is order id
+        $order = Order::where('id', $id)->first();
+        $plan = Plan::where('id', $order->plan_id)->first();
 
-        $expenseChart = $expenseChart->build();
-        $user = Auth::user();
-        $plan = Plan::where('id', $id)->first();
-        $order = Order::where('user_id', $user->id)->where('plan_id', $id)->first();
-        $expense = PlanExpense::where('user_id', $user->id)
-            ->where('plan_id', $id)->where('order_id', $order->id)->first();
-        return view('plan.expense', compact('plan', 'expense', 'order','expenseChart'));
+        $expense = PlanExpense::where('order_id', $order->id)->first();
+        return view('admin.plan.expense', compact('plan', 'expense', 'order'));
     }
 }

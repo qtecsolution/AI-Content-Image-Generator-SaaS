@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\PlanExpense;
@@ -26,7 +27,7 @@ class PurchaseController extends Controller
         $this->gateway->setSecret(env('PAYPAL_APP_SECRET'));
         $this->gateway->setTestMode(true);
     }
-
+    
     public function purchase($id)
     {
         $plan = Plan::where('id', $id)->first();
@@ -38,20 +39,20 @@ class PurchaseController extends Controller
                 return redirect()->route('user.purchase');
             }
         }
-        return view('plan.purchase', compact('plan', 'user'));
+        return view('user.purchase.purchase', compact('plan', 'user'));
     }
     public function stripeLoad($id)
     {
         $plan = Plan::where('id', $id)->first();
         $user = Auth::user();
-        return view('plan.stripePay', compact('plan', 'user'));
+        return view('user.purchase.stripePay', compact('plan', 'user'));
     }
 
     public function paypalPayLoad(Request $request)
     {
         $plan = Plan::where('id', $request->plan_id)->first();
         $user = Auth::user();
-        return view('plan.paypal', compact('plan', 'user'));
+        return view('user.purchase.paypal', compact('plan', 'user'));
     }
 
 
@@ -59,7 +60,7 @@ class PurchaseController extends Controller
     {
         $plan = Plan::where('id', $request->plan_id)->first();
         $user = Auth::user();
-        return view('plan.bank', compact('plan', 'user'));
+        return view('user.purchase.bank', compact('plan', 'user'));
     }
 
     public function purchaseDone(Request $request)
@@ -314,15 +315,6 @@ class PurchaseController extends Controller
         return back();
     }
 
-    public function expense($id)
-    {
-        //id is order id
-        $order = Order::where('id', $id)->first();
-        $plan = Plan::where('id', $order->plan_id)->first();
-
-        $expense = PlanExpense::where('order_id', $order->id)->first();
-        return view('plan.expense', compact('plan', 'expense', 'order'));
-    }
 
     // User Plan expense
     public function userexpense()
@@ -332,24 +324,26 @@ class PurchaseController extends Controller
         $plan = Plan::where('id', $user->plan_id)->first();
         $expense = PlanExpense::where('id', $user->plan_expense_id)->first();
         $order = Order::where('id', $expense->order_id)->first();
-        return view('userArea.purchase.userExpense', compact('plan', 'expense', 'order'));
+        return view('user.purchase.userExpense', compact('plan', 'expense', 'order'));
     }
-
-
-    /**
-     * After the customer has completed the transaction,
-     * you can fetch, check and process the payment.
-     * This logic typically goes into the controller handling the inbound webhook request.
-     * See the webhook docs in /docs and on mollie.com for more information.
-     */
-    public function handleWebhookNotification(Request $request)
+    public function userPurchase()
     {
-        $paymentId = $request->input('id');
-        $payment = Mollie::api()->payments->get($paymentId);
-
-        if ($payment->isPaid()) {
-            echo 'Payment received.';
-            // Do your thing ...
-        }
+        $user = Auth::user();
+        $plans = Plan::where('is_published', true)->orderBy('id','ASC')->get();
+        return view('user.purchase.userPurchase', compact('plans', 'user'));
     }
+
+    // User Transaction History
+    public function userTransactions(){
+        $user = Auth::user();
+        $allData = Order::with(['user', 'plan'])->where('user_id',$user->id)->orderBy('orders.id', 'DESC')->paginate(12);
+        return view('user.purchase.transactions',compact('allData'));
+    }
+    public function userTransactionDetails($orderId){
+        $order = Order::where(['id'=> $orderId,'user_id'=>Auth::user()->id])->firstOrFail();
+        $plan = Plan::where('id', $order->plan_id)->first();
+        $expense = PlanExpense::where('order_id', $order->id)->first();
+        return view('user.purchase.transactionDetails', compact('plan', 'expense', 'order'));
+    }
+
 }

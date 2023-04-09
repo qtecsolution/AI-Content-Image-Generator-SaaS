@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\UserDocument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class UserDocumentController extends Controller
      */
     public function index()
     {
-        return view('contents.index');
+        return view('user.contents.index');
     }
 
     /**
@@ -96,7 +97,7 @@ class UserDocumentController extends Controller
     public function edit($id)
     {
         $data = UserDocument::findOrFail($id);
-        return view('contents.edit',compact('data'));
+        return view('user.contents.edit',compact('data'));
     }
 
     /**

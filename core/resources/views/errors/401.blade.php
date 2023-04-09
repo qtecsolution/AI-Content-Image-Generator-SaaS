@@ -4,6 +4,6 @@
 @section('code', 'Unauthorized')
 <script>
     window.setTimeout(function(){
-        window.location.href='{{url("/home")}}';
+        window.location.href='{{route("/")}}';
     },5000)
 </script>

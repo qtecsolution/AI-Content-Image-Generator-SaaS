@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Artisan;
@@ -26,7 +28,7 @@ class SettingController extends Controller
             'gpt-4'=>'GPT 4 (8K)',
             'gpt-4-32k'=>'GPT 4 (32K)',
             ];
-        return view('setting.setting', compact('tab','aiModels'));
+        return view('admin.setting.setting', compact('tab','aiModels'));
     }
 
     public function openAiStore(Request $request)

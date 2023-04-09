@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\UseCase;
 use App\Models\User;
@@ -9,7 +10,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 
 class HomeController extends Controller
 {
@@ -35,26 +35,14 @@ class HomeController extends Controller
         if(showBalance()==''){
             $noPlan = 1;
         }
-        return view('index', compact('cases','noPlan'));
+        return view('user.home', compact('cases','noPlan'));
     }
-    public function dashboard()
-    {
-        $totalUser = User::where('type', 'user')->count();
-        $recentUsers = User::where('type', 'user')->limit(10)->latest()->get();
-        $orders = Order::limit(10)->latest()->get();
-
-        $currentMonthStart = Carbon::now()->startOfMonth();
-        $currentMonthEnd = Carbon::now()->endOfMonth();
-
-        $salesData = Order::whereBetween('created_at', [$currentMonthStart, $currentMonthEnd]);
-
-        return view('dashboard.index', compact('totalUser', 'orders', 'recentUsers','salesData'));
-    }
+    
 
     public function profile()
     {
         $user = User::findOrFail(Auth::user()->id);
-        return view('profile.profile', compact('user'));
+        return view('user.profile.profile', compact('user'));
     }
     public function profileUpdate(Request $request)
     {
@@ -84,7 +72,7 @@ class HomeController extends Controller
     public function password()
     {
         $user = User::findOrFail(Auth::user()->id);
-        return view('profile.password', compact('user'));
+        return view('user.profile.password', compact('user'));
     }
     public function updatePassword(Request $request)
     {

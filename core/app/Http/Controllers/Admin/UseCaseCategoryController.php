@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\UseCaseCategory;
 use Illuminate\Http\Request;
@@ -12,7 +14,7 @@ class UseCaseCategoryController extends Controller
     public function index()
     {
         $allData = UseCaseCategory::paginate(12);
-        return view('useCase.category.index', compact('allData'));
+        return view('admin.useCase.category.index', compact('allData'));
     }
 
 
@@ -45,7 +47,7 @@ class UseCaseCategoryController extends Controller
     public function edit($id)
     {
         $data = UseCaseCategory::findOrFail($id);
-        return view('useCase.category.edit', compact('data'));
+        return view('admin.useCase.category.edit', compact('data'));
     }
 
     /**

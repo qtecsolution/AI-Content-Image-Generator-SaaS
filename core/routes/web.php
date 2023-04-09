@@ -1,9 +1,6 @@
 <?php
 
-use App\Http\Controllers\GoogleController;
-use App\Http\Controllers\PageController;
-use App\Http\Controllers\PlanController;
-use Illuminate\Http\Client\Request;
+use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -28,20 +25,20 @@ Route::group(['namespace' => 'Frontend'], function () {
     Route::get('page/{slug}','FrontendController@pageDetails')->name('page');
 });
 Auth::routes();
+// Optimize clear by route
 Route::get('clear-all',function(){
     Artisan::call('optimize:clear');
     return redirect()->back();
 });
 
-//  Backend Route
+//  Google login or signup route
 Route::controller(GoogleController::class)->group(function () {
     Route::get('auth/google', 'redirectToGoogle')->name('auth.google');
     Route::get('auth/google/callback', 'handleGoogleCallback')->name('auth.google.callback');
 });
-
 // User Route
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'User\HomeController@index')->name('home')->middleware('auth');
+Route::group(['middleware' => ['auth'],'prefix'=>'user','namespace' => 'User'], function () {
     Route::get('/profile', 'HomeController@profile')->name('profile');
     Route::post('/profile', 'HomeController@profileUpdate')->name('profile.update');
 
@@ -79,17 +76,17 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('bank-pay-load', 'PurchaseController@bankPayLoad')->name('checkout.bank');
     Route::get('paypal/pay/success/{id}', 'PurchaseController@paySuccess')->name('paypal.pay.success');
     Route::get('paypal/pay/cancle/{id}', 'PurchaseController@payCancle')->name('paypal.pay.error');
-    Route::get('/plan/user/purchase', 'PlanController@userPurchase')->name('user.purchase');
+    Route::get('/plan/user/purchase', 'PurchaseController@userPurchase')->name('user.purchase');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
     Route::get('/plan/expense', 'PurchaseController@userexpense')->name('plan.userexpense');
     Route::post('/plan/purchase', 'PurchaseController@purchaseDone')->name('plan.purchase.store');
-    Route::get('/user/transactions', 'OrderController@userTransactions')->name('user.transactions');
-    Route::get('/user/transactions/{id}', 'OrderController@userTransactionDetails')->name('user.transactions.details');
+    Route::get('/transactions', 'PurchaseController@userTransactions')->name('user.transactions');
+    Route::get('/transactions/{id}', 'PurchaseController@userTransactionDetails')->name('user.transactions.details');
     
 });
 // Admin Route
-Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::get('/dashboard', 'HomeController@dashboard')->name('dashboard');
+Route::group(['middleware' => ['auth', 'admin'],'prefix'=>'admin','namespace' => 'Admin'], function () {
+    Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
     Route::resource('/use-case', 'UseCaseController');
     Route::resource('/use-case-category', 'UseCaseCategoryController');
     Route::resource('/manage-faq', 'FaqController');
@@ -102,14 +99,15 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::resource('plan', 'PlanController');
     Route::get('plan/{id}/edit', 'PlanController@edit')->name('plan.edit');
     Route::get('/plan/status/{id}/{status}', 'PlanController@status')->name('plan.status');
-    Route::get('/plan/expense/{id}', 'PurchaseController@expense')->name('plan.expense');
-
+    Route::get('/plan/expense/{id}', 'PlanController@expense')->name('plan.expense');
+    // Payment mathod settings
     Route::get('/payment/method', 'PaymentMethodController@index')->name('payment.method');
     Route::post('payment/paypal/store', 'PaymentMethodController@paypalSettingStore')->name('payment.paypal.store');
     Route::post('payment/stripe/store', 'PaymentMethodController@stripeSettingStore')->name('payment.stripe.store');
     Route::post('payment/rezor/store', 'PaymentMethodController@rezorSettingStore')->name('payment.rezor.store');
     Route::post('payment/bank/store', 'PaymentMethodController@bankSettingStore')->name('payment.bank.store');
     Route::post('payment/mollie/store', 'PaymentMethodController@mollieSettingStore')->name('payment.mollie.store');
+    // Settings
     Route::post('/seo/store', 'SettingController@seoStore')->name('seo.store');
     Route::get('/setting/setup', 'SettingController@setting')->name('setting');
     Route::post('/setting/setup/update', 'SettingController@siteSettingUpdate')->name('site.update');
@@ -123,26 +121,21 @@ Route::group(['middleware' => ['auth', 'admin']], function () {
     Route::get('orders','OrderController@index')->name('order.index');
     Route::get('order/pending','OrderController@pending')->name('order.pending');
     Route::get('order/approved/{id}','OrderController@approved')->name('order.approved');
-
-    Route::get('pages', [PageController::class, 'pageIndex'])->name('pages.index');
-    Route::get('pages/create', [PageController::class, 'pageCreate'])->name('pages.create');
-    Route::get('pages/delete/{id}', [PageController::class, 'pageDestroy'])->name('pages.destroy');
-    Route::post('pages/store', [PageController::class, 'pageStore'])->name('pages.store');
-    Route::get('pages/edit/{id}', [PageController::class, 'pageEdit'])->name('pages.edit');
-    Route::post('pages/update', [PageController::class, 'pageUpdate'])->name('pages.update');
-    Route::get('pages/active', [PageController::class, 'pageActive'])->name('pages.active');
-    Route::get('pages/authorize', [PageController::class, 'pageAuthorize'])->name('pages.authorize');
-    Route::get('content/{id}', [PageController::class, 'contentIndex'])->name('pages.content.index');
-    Route::get('pages/content/create/{id}', [PageController::class, 'contentCreate'])->name('pages.content.create');
-    Route::post('pages/content/store', [PageController::class, 'contentStore'])->name('pages.content.store');
-    Route::get('pages/content/active', [PageController::class, 'contentActive'])->name('pages.content.active');
-    Route::get('pages/content/edit/{id}', [PageController::class, 'contentEdit'])->name('pages.content.edit');
-    Route::post('pages/content/update', [PageController::class, 'contentUpdate'])->name('pages.content.update');
-    Route::get('pages/content/delete/{id}', [PageController::class, 'contentDestroy'])->name('pages.content.destroy');
+    // Page builder for frontend
+    Route::get('pages','PageController@pageIndex')->name('pages.index');
+    Route::get('pages/create', 'PageController@pageCreate')->name('pages.create');
+    Route::get('pages/delete/{id}', 'PageController@pageDestroy')->name('pages.destroy');
+    Route::post('pages/store', 'PageController@pageStore')->name('pages.store');
+    Route::get('pages/edit/{id}', 'PageController@pageEdit')->name('pages.edit');
+    Route::post('pages/update', 'PageController@pageUpdate')->name('pages.update');
+    Route::get('pages/active', 'PageController@pageActive')->name('pages.active');
+    Route::get('pages/authorize', 'PageController@pageAuthorize')->name('pages.authorize');
+    Route::get('content/{id}', 'PageController@contentIndex')->name('pages.content.index');
+    Route::get('pages/content/create/{id}', 'PageController@contentCreate')->name('pages.content.create');
+    Route::post('pages/content/store', 'PageController@contentStore')->name('pages.content.store');
+    Route::get('pages/content/active', 'PageController@contentActive')->name('pages.content.active');
+    Route::get('pages/content/edit/{id}', 'PageController@contentEdit')->name('pages.content.edit');
+    Route::post('pages/content/update', 'PageController@contentUpdate')->name('pages.content.update');
+    Route::get('pages/content/delete/{id}', 'PageController@contentDestroy')->name('pages.content.destroy');
 
 });
-
-Route::get('payment/success', function (Request $request) {
-    return $request;
-})->name('order.success');
-Route::get('handle', [PlanController::class, 'handleWebhookNotification'])->name('webhooks.mollie');

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -17,7 +19,7 @@ class UserController extends Controller
 
     public function index()
     {
-        return view('user.index');
+        return view('admin.user.index');
     }
     public function viewAll()
     {
@@ -72,7 +74,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('user.create');
+        return view('admin.user.create');
     }
 
     /**
@@ -111,7 +113,7 @@ class UserController extends Controller
     public function show($id)
     {
         $data = User::findOrFail($id);
-        return view('user.show', compact('data'));
+        return view('admin.user.show', compact('data'));
     }
 
     /**
@@ -120,7 +122,7 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('user.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**
@@ -172,6 +174,6 @@ class UserController extends Controller
     public function allAdmin()
     {
         $allData = User::where('type', 'admin')->orderBy('id', 'DESC')->paginate(20);
-        return view('user.admin',compact('allData'));
+        return view('admin.user.admin',compact('allData'));
     }
 }

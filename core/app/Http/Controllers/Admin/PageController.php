@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Page;
 use App\Models\PageContent;
@@ -13,14 +15,14 @@ class PageController extends Controller
     public function pageIndex()
     {
         $pages = Page::all();
-        return view('page.index', compact('pages'));
+        return view('admin.page.index', compact('pages'));
     }
 
     //create form
     public function pageCreate()
     {
         
-        return view('page.create');
+        return view('admin.page.create');
     }
 
     //store page
@@ -50,7 +52,7 @@ class PageController extends Controller
     {
        
         $page = Page::where('id', $id)->firstOrFail();
-        return view('page.edit', compact('page'));
+        return view('admin.page.edit', compact('page'));
     }
 
 
@@ -87,14 +89,14 @@ class PageController extends Controller
     public function contentIndex($id)
     {
         $content = PageContent::where('page_id', $id)->get();
-        return view('page.content.index', compact('content', 'id'));
+        return view('admin.page.content.index', compact('content', 'id'));
     }
 
 
     /*content create*/
     public function contentCreate($id)
     {
-        return view('page.content.create', compact('id'));
+        return view('admin.page.content.create', compact('id'));
     }
 
     /*Content Create*/
@@ -121,7 +123,7 @@ class PageController extends Controller
     {
         $content = PageContent::where('id', $id)->firstOrFail();
 
-        return view('page.content.edit', compact('content'));
+        return view('admin.page.content.edit', compact('content'));
     }
 
     /*Content Update*/

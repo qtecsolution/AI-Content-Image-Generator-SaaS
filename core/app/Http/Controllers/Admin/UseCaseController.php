@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\UseCase;
 use App\Models\UseCaseCategory;
@@ -69,7 +71,7 @@ class UseCaseController extends Controller
                 ->rawColumns(['action','case_icon'])
                 ->toJson();
         }
-        return view('useCase.index', compact('request'));
+        return view('admin.useCase.index', compact('request'));
     }
 
     /**
@@ -78,7 +80,7 @@ class UseCaseController extends Controller
     public function create()
     {
         $category = UseCaseCategory::where('is_published', 1)->pluck('name', 'id');
-        return view('useCase.create', compact('category'));
+        return view('admin.useCase.create', compact('category'));
     }
 
     /**
@@ -171,7 +173,7 @@ class UseCaseController extends Controller
     {
         $category = UseCaseCategory::where('is_published', 1)->pluck('name', 'id');
         $data = UseCase::findOrFail($id);
-        return view('useCase.edit', compact('data','category'));
+        return view('admin.useCase.edit', compact('data','category'));
     }
 
     /**

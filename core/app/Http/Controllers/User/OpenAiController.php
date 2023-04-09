@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\ContentHistory;
 use App\Models\Images;
 use App\Models\Language;
@@ -31,7 +32,7 @@ class OpenAiController extends Controller
             $defaultCase = UseCase::first();
         }
         $languages = Language::where('status', 1)->pluck('language', 'language');
-        return view('openAi.content', compact('cases', 'request', 'inputFields', 'languages','defaultCase'));
+        return view('user.openAi.content', compact('cases', 'request', 'inputFields', 'languages','defaultCase'));
     }
     /* Open AI Content Generate */
     public function contentGenerate(Request $request)
@@ -119,7 +120,7 @@ class OpenAiController extends Controller
             $images = Images::whereIn('id', $id)->where('user_id', Auth::user()->id)->get();
         }
 
-        return view('openAi.image', compact('images'));
+        return view('user.openAi.image', compact('images'));
     }
     // ALL Generated Images List
     public function allImages(Request $request)
@@ -129,7 +130,7 @@ class OpenAiController extends Controller
             $images = $images->where('prompt', 'like', "%$request->q%");
         }
         $images = $images->latest()->paginate(12);
-        return view('openAi.allImages', compact('images', 'request'));
+        return view('user.openAi.allImages', compact('images', 'request'));
     }
     // Generate Image
     public function imageGenerate(Request $request)
@@ -227,7 +228,7 @@ class OpenAiController extends Controller
             $id = explode(',', $request->id);
             $images = Images::whereIn('id', $id)->where('user_id', Auth::user()->id)->get();
         }
-        return view('openAi.imageVariation', compact('images'));
+        return view('user.openAi.imageVariation', compact('images'));
     }
     public function imageGenerateVariation(Request $request)
     {
@@ -298,7 +299,7 @@ class OpenAiController extends Controller
             myAlert('error', 'Your Api call limit: 0');
             return redirect()->route('user.purchase');
         }
-        return view('openAi.code');
+        return view('user.openAi.code');
     }
     /* Open AI Content Generate */
     public function codeGenerate(Request $request)
@@ -367,9 +368,4 @@ class OpenAiController extends Controller
         }
     }
 
-
-    public function default()
-    {
-        return view('default');
-    }
 }

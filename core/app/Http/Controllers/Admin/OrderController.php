@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use App\Models\Order;
 use App\Models\Plan;
@@ -46,13 +48,13 @@ class OrderController extends Controller
         }
 
 
-        return view('order.index', compact('request'));
+        return view('admin.order.index', compact('request'));
     }
 
     function pending()
     {
         $sales = Order::where('is_paid', false)->latest()->paginate(10);
-        return view('order.index', compact('sales'));
+        return view('admin.order.index', compact('sales'));
     }
 
     function approved($id)
@@ -101,16 +103,4 @@ class OrderController extends Controller
         return redirect()->route('plan.expense', $order->id);
     }
 
-    // User Transaction History
-    public function userTransactions(){
-        $user = Auth::user();
-        $allData = Order::with(['user', 'plan'])->where('user_id',$user->id)->orderBy('orders.id', 'DESC')->paginate(12);
-        return view('userArea.purchase.transactions',compact('allData'));
-    }
-    public function userTransactionDetails($orderId){
-        $order = Order::where(['id'=> $orderId,'user_id'=>Auth::user()->id])->firstOrFail();
-        $plan = Plan::where('id', $order->plan_id)->first();
-        $expense = PlanExpense::where('order_id', $order->id)->first();
-        return view('userArea.purchase.transactionDetails', compact('plan', 'expense', 'order'));
-    }
 }

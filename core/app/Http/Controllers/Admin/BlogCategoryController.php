@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Faq;
+use App\Http\Controllers\Controller;
+use App\Models\BlogCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class FaqController extends Controller
+class BlogCategoryController extends Controller
 {
     public function index()
     {
-        $allData = Faq::orderBy('priority','ASC')->paginate(12);
-        $maxPriority = Faq::max('priority')+1;
-        return view('faq.index', compact('allData','maxPriority'));
+        $allData = BlogCategory::paginate(12);
+        return view('admin.blogs.category.index', compact('allData'));
     }
 
 
@@ -23,15 +23,15 @@ class FaqController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'question' => 'required|unique:faqs',
-            'answer' => 'required',
+            'name' => 'required|unique:blog_categories',
         ]);
 
         try {
             $input = $request->except('_token');
+            $input['slug'] = Str::slug($request->name);
             $input['user_id'] = Auth::user()->id;
-            Faq::create($input);
-            myAlert('success','Faq Saved.');
+            BlogCategory::create($input);
+            myAlert('success','Catageory Saved.');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
@@ -46,8 +46,8 @@ class FaqController extends Controller
      */
     public function edit($id)
     {
-        $data = Faq::findOrFail($id);
-        return view('faq.edit', compact('data'));
+        $data = BlogCategory::findOrFail($id);
+        return view('admin.blogs.category.edit', compact('data'));
     }
 
     /**
@@ -56,15 +56,16 @@ class FaqController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'question' => "required|unique:faqs,question,$id",
+            'name' => "required|unique:blog_categories,name,$id",
         ]);
 
         try {
-            $data = Faq::findOrFail($id);
+            $data = BlogCategory::findOrFail($id);
             $input = $request->except(['_token', '_method']);
+            $input['slug'] = Str::slug($request->name);
             
             $data->update($input);
-            myAlert('success','Faq Updated.');
+            myAlert('success','Catageory Updated.');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
@@ -79,9 +80,9 @@ class FaqController extends Controller
     public function destroy($id)
     {
         try {
-            $data = Faq::findOrFail($id);
+            $data = BlogCategory::findOrFail($id);
             $data->delete();
-            myAlert('success','Faq is deleted.');
+            myAlert('success','Catageory is deleted.');
             return back();
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();

@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
 
+use App\Http\Controllers\Controller;
 use App\Models\ContentHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +15,7 @@ class ContentHistoryController extends Controller
      */
     public function index()
     {
-        return view('contentHistory.index');
+        return view('user.contentHistory.index');
     }
 
     /**
@@ -85,7 +86,7 @@ class ContentHistoryController extends Controller
             '0.9' => 'Formal',
             '1' => 'Respectful',
         ];
-        return view('contentHistory.show',compact('data','temperature'));
+        return view('user.contentHistory.show',compact('data','temperature'));
     }
 
 

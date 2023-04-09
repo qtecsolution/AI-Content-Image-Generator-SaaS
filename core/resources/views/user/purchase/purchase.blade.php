@@ -286,7 +286,7 @@
                     <div class="mt-3 px-2">
                         <span class="small text-muted">
                             <span class="checkout-one-time">
-                                To proceed, you must accept the <a href="{{url('page/terms-condition')}}" target="_blank">terms of service.</a>.
+                                To proceed, you must accept the <a href="{{route('page','terms-condition')}}" target="_blank">terms of service.</a>
                             </span>
                         </span>
                     </div>

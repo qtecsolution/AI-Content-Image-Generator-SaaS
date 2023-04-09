@@ -183,7 +183,7 @@
             <div class="footer-content" data-aos="fade-up" data-aos-duration="1000">
                 <div class="row g-4">
                     <div class="col-lg-2">
-                        <a href="{{url('/')}}">
+                        <a href="{{route('/')}}">
                             <h3 class="logo-name">{{ readConfig('name') }} </h3>
                             <p></p>
                         </a>

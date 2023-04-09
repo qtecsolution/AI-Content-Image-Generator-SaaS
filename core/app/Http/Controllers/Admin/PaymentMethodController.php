@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +16,7 @@ class PaymentMethodController extends Controller
         } else {
             $tab = 'paypal';
         }
-        return view('method.index',compact('tab'));
+        return view('admin.method.index',compact('tab'));
     }
 
     public function paypalSettingStore(Request $request)

@@ -20,7 +20,7 @@
     <h1>@yield('title')</h1>
     <h6> <b style="color:#000">@yield('code', __('Oh no'))</b> <br> {{chunk_split($exception->getMessage(), 70, ' ')}} <br> <small style="text-decoration:underline">{{Request::url()}}</small></h6>
     <br>
-    <a style="text-decoration:none;color:#fff;padding: 10px; background: linear-gradient(135deg, hsl(228, 100%, 80%) 0%, hsl(224, 79%, 33%) 100%);;border-radius: 1.5rem;" href="{{url('/')}}"> Go Back home </a>
+    <a style="text-decoration:none;color:#fff;padding: 10px; background: linear-gradient(135deg, hsl(228, 100%, 80%) 0%, hsl(224, 79%, 33%) 100%);;border-radius: 1.5rem;" href="{{route('/')}}"> Go Back home </a>
 </div>
 </body>
 </html>
