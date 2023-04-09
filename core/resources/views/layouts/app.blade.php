@@ -101,7 +101,7 @@
                                         <a href="{{ route('content.create') }}"
                                             class="menu-item {{ menuActive('content.*') ? 'active' : '' }}">Content
                                             Generate</a>
-                                            <a href="{{ route('code.create') }}"
+                                        <a href="{{ route('code.create') }}"
                                             class="menu-item {{ menuActive('code.*') ? 'active' : '' }}">Code
                                             Generate</a>
                                         <a href="{{ route('contents.index') }}"
@@ -286,13 +286,15 @@
                                     </button>
                                 </h2>
                                 <div id="manageAi"
-                                    class="accordion-collapse collapse {{ menuActive('use-case.*') || (menuActive('setting') && request()->input('tab') === 'openai') ? 'show' : '' }} "
+                                    class="accordion-collapse collapse {{ menuActive(['use-case.*','use-case-category.*']) || (menuActive('setting') && request()->input('tab') === 'openai') ? 'show' : '' }} "
                                     aria-labelledby="headingOne" data-bs-parent="#menuAccordion">
                                     <div class="accordion-body">
                                         <div class="menu-items">
                                             <a href="{{ route('use-case.index') }}"
                                                 class="menu-item {{ menuActive('use-case.*') ? 'active' : '' }}">Use
                                                 Case Templates</a>
+                                            <a href="{{ route('use-case-category.index') }}"
+                                                class="menu-item {{ menuActive('use-case-category.*') ? 'active' : '' }}">Template Category</a>
                                             <a href="{{ route('setting') }}?tab=openai"
                                                 class="menu-item {{ menuActive('setting') && request()->input('tab') === 'openai' ? 'active' : '' }}">AI
                                                 Settings</a>
@@ -684,12 +686,15 @@
                                 </button>
                             </h2>
                             <div id="aiContent"
-                                class="accordion-collapse collapse {{ menuActive(['content.*', 'contents.*', 'content-history.*']) ? 'show' : '' }}"
+                                class="accordion-collapse collapse {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? 'show' : '' }}"
                                 aria-labelledby="headingOne" data-bs-parent="#userMenuAccordion">
                                 <div class="accordion-body">
                                     <div class="menu-items">
                                         <a href="{{ route('content.create') }}"
                                             class="menu-item {{ menuActive('content.*') ? 'active' : '' }}">Content
+                                            Generate</a>
+                                        <a href="{{ route('code.create') }}"
+                                            class="menu-item {{ menuActive('code.*') ? 'active' : '' }}">Code
                                             Generate</a>
                                         <a href="{{ route('contents.index') }}"
                                             class="menu-item {{ menuActive('contents.*') ? 'active' : '' }}">Saved
@@ -873,7 +878,7 @@
                                     </button>
                                 </h2>
                                 <div id="manageAi"
-                                    class="accordion-collapse collapse {{ menuActive('use-case.*') || (menuActive('setting') && request()->input('tab') === 'openai') ? 'show' : '' }} "
+                                    class="accordion-collapse collapse {{ menuActive(['use-case.*','use-case-category.*']) || (menuActive('setting') && request()->input('tab') === 'openai') ? 'show' : '' }} "
                                     aria-labelledby="headingOne" data-bs-parent="#menuAccordion">
                                     <div class="accordion-body">
                                         <div class="menu-items">
@@ -881,6 +886,8 @@
                                                 class="menu-item {{ menuActive('use-case.*') ? 'active' : '' }}">Use
                                                 Case
                                                 Templates</a>
+                                            <a href="{{ route('use-case-category.index') }}"
+                                                class="menu-item {{ menuActive('use-case-category.*') ? 'active' : '' }}">Template Category</a>
                                             <a href="{{ route('setting') }}?tab=openai"
                                                 class="menu-item {{ menuActive('setting') && request()->input('tab') === 'openai' ? 'active' : '' }}">AI
                                                 Settings</a>

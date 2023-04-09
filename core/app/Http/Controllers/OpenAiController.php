@@ -30,9 +30,6 @@ class OpenAiController extends Controller
         } else {
             $defaultCase = UseCase::first();
         }
-        if (isset($defaultCase->input_fields)) {
-            $inputFields = explode(',', $defaultCase->input_fields);
-        }
         $languages = Language::where('status', 1)->pluck('language', 'language');
         return view('openAi.content', compact('cases', 'request', 'inputFields', 'languages','defaultCase'));
     }
@@ -57,9 +54,10 @@ class OpenAiController extends Controller
         try {
             // Get use case prompt & generate prompt by replacing placeholder
             $case = UseCase::findOrFail($request->use_case);
-            $placeholder = array("[keywords]", "[title]", "[description]", "[tone]", "[language]");
-            $replaceBy = array($request->keywords ?? '', $request->title ?? '', $request->description ?? '', $request->tone, $request->language);
+            $placeholder = array("[title]", "[short_description]", "[description]");
+            $replaceBy = array($request->title ?? '', $request->keywords ?? '', $request->description ?? '');
             $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
+            $prompt +=" The tone of voice must be $request->tone. Give me the response in $request->language language.";
 
             $temp = floatval($request->temp ?? 0.7);
 

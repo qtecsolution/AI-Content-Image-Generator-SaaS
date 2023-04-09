@@ -89,22 +89,19 @@
                                 <h6>Here are the step-by-step instructions on how to get an OpenAI API key:</h6>
 
                                 <ol class="m-4 fz-14 gray-800">
-                                    <li>Go to the OpenAI website: <a href="https://openai.com/" target="_new"
-                                            class="gray-800 text-decoration-underline fw-bold">https://openai.com/</a>
+                                    <li>Go to the OpenAI website: <a href="https://platform.openai.com/account/billing/overview" target="_new"
+                                            class="gray-800 text-decoration-underline fw-bold"> https://platform.openai.com/account/billing/overview </a>
                                     </li>
-                                    <li>Click on the "API" tab on the top of the page.</li>
-                                    <li>Scroll down to the "Sign up for the API" section and click the "Get started for
-                                        free" button.</li>
                                     <li>You will be prompted to create an account by providing your email address and a
                                         password. Once you have entered the required information, click the "Sign up"
                                         button.</li>
                                     <li>You will receive an email from OpenAI asking you to verify your email address.
                                         Follow the instructions in the email to verify your email address.</li>
                                     <li>Once you have verified your email address, log in to your OpenAI account.</li>
-                                    <li>Click on the "API" tab at the top of the page again.</li>
-                                    <li>Click the "Generate API key" button.</li>
-                                    <li>You will be asked to give your API key a name (for example, "My OpenAI API
-                                        key"). Enter a name and click the "Create API key" button.</li>
+                                    <li>Click on the "Set up paid account" button & follow the next step.</li>
+                                    <li> After complete purchase go to "API Keys" menu from left sidebar. </li>
+                                    
+                                    <li>Click on the " + Create new secreat key " button.</li>
                                     <li>Your API key will be generated and displayed on the screen. Make sure to copy it
                                         and keep it in a safe place, as you will need it to access the OpenAI API.</li>
                                 </ol>
@@ -477,7 +474,8 @@
                             <div class="sitelogos-wrapper">
                                 <!-- logo  -->
                                 <div class="logo-box">
-                                    <span class="box-title">logo</span>
+                                    <span class="box-title">Icon <i class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                        data-bs-placement="top" data-bs-title="Upload a 512 x 512px icon for your Favicon & PWA, which will be resized accordingly."></i></span>
                                     <div class="avatar-upload">
                                         <div class="avatar-edit">
                                             <input type='file' name="logo" id="imageUpload"
@@ -492,7 +490,7 @@
                                     </div>
                                 </div>
                                 <!-- favicon    -->
-                                <div class="logo-box">
+                                <div class="logo-box d-none">
                                      <span class="box-title">Favicon Icon </span>
                                     
                                     <div class="avatar-upload">

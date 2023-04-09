@@ -115,14 +115,13 @@ class UseCaseController extends Controller
 
         try {
             
-            $input['input_fields'] = implode(',', $request->input_fields);
             if ($request->hasFile('icon')) {
                 $input['icon'] = fileUpload($request->file('icon'), 'useCase', $request->title);
             }
             UseCase::create($input);
             myAlert('success', 'Use case saved successfully.');
             return back();
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $errorMessage = $e->getMessage();
             myAlert('error', $errorMessage);
             return back();
@@ -207,7 +206,6 @@ class UseCaseController extends Controller
 
         try {
             $data = UseCase::findOrFail($id);
-            $input['input_fields'] = implode(',', $request->input_fields);
             if ($request->hasFile('icon')) {
                 $input['icon'] = fileUpload($request->file('icon'), 'useCase', $request->title);
             }
@@ -243,11 +241,9 @@ class UseCaseController extends Controller
     }
     public function getInputFields(Request $request)
     {
-        $inputFields = [];
         if (isset($request->id)) {
             $data = UseCase::where('id', $request->id)->first();
-            $inputFields = explode(',', $data->input_fields);
         }
-        return response()->json($inputFields, 200);
+        return response()->json($data, 200);
     }
 }

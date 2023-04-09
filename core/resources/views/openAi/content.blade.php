@@ -22,14 +22,14 @@
                                 <div class="form-content">
                                     <div class="row g-4 mb-3">
 
-                                        <!-- Type    -->
+                                        <!-- Use Case    -->
                                         <div class="col-sm-7">
                                             <div class="form-group">
                                                 <label for="case" class="form-label">Choose Use Case</label>
                                                 {{ Form::select('case', $cases, $request->case ?? '', ['class' => 'w-100 nice-select', 'required', 'id' => 'useCase','searchable'=>"true"]) }}
                                             </div>
                                         </div>
-                                        <!-- select tone  -->
+                                        <!-- select Language  -->
                                         <div class="col-sm-5">
                                             <div class="form-group">
                                                 <label for="language" class="form-label">Select Language</label>
@@ -46,13 +46,13 @@
                                             </div>
                                         </div>
 
-                                        <!-- keywords -->
-                                        <div class="col-12" id="keywords-field"
+                                        <!-- short_description -->
+                                        <div class="col-12" id="short-description"
                                             @if ($defaultCase->short_description_label == '') style="display: none" @endif>
                                             <div class="form-group">
-                                                <label for="keywords" class="form-label">{{$defaultCase->short_description_label}}: </label>
-                                                <textarea class="form-control custom-input resize-varticle" id="short_description" autocomplete="off" name="short_description"
-                                                    placeholder="" rows="3"></textarea>
+                                                <label for="short_description" class="form-label">{{$defaultCase->short_description_label}}: </label>
+                                                <textarea class="form-control custom-input resize-vertical" id="short_description" autocomplete="off" name="short_description"
+                                                    placeholder="" rows="2"></textarea>
                                             </div>
                                         </div>
 
@@ -61,7 +61,7 @@
                                             @if($defaultCase->description_label == '') style="display: none" @endif>
                                             <div class="form-group">
                                                 <label for="description" class="form-label"> {{$defaultCase->description_label}}: </label>
-                                                <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
+                                                <textarea class="form-control custom-input resize-vertical" id="description" autocomplete="off" name="description"
                                                     placeholder="" rows="6"></textarea>
                                                 <small class="text-mute"> Should describe your need for better result.
                                                 </small>
@@ -222,16 +222,21 @@
             let id = $(this).val();
             $.get("{{ route('use-case.input-fields') }}?id=" + id, function(result) {
                 $('#title-field').hide();
-                $('#keywords-field').hide();
+                $('#short-description').hide();
                 $('#description-field').hide();
-                if (result.includes("1")) {
+                if (result.title_label != '' && result.title_label != null) {
                     $('#title-field').show();
+                    $('#title-field label').html(result.title_label+' :');
                 }
-                if (result.includes("2")) {
-                    $('#keywords-field').show();
+                if (result.short_description_label != '' && result.short_description_label != null) {
+                    $('#short-description').show();
+                    $('#short-description label').html(result.short_description_label+' :');
+
                 }
-                if (result.includes("3")) {
+                if (result.description_label != '' && result.description_label != null) {
                     $('#description-field').show();
+                    $('#description-field label').html(result.description_label+' :');
+
                 }
             })
         })
