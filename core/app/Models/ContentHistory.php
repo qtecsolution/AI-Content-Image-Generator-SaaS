@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContentHistory extends Model
 {
     use HasFactory;
-    protected $fillable = ['title','keywords','description','temperature','generated_content','use_case_id','user_id','prompt'];
+    protected $fillable = ['title','short_description','description','temperature','generated_content','use_case_id','user_id','prompt'];
 
     public function useCase(){
         return $this->belongsTo(UseCase::class,'use_case_id','id');

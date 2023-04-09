@@ -73,7 +73,6 @@
 
                                     </td>
                                     <td>Title</td>
-                                    <td>Keywords </td>
                                     <td> Use Case </td>
                                     <td>Words </td>
                                     <td data-orderable="false">...</td>
@@ -154,10 +153,6 @@ $(function() {
             {
                 data: 'title',
                 name: 'title'
-            },
-            {
-                data: 'keywords',
-                name: 'keywords'
             },
             {
                 data: 'use_case_title',

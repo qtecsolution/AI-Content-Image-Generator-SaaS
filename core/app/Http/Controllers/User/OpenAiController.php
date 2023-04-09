@@ -56,7 +56,7 @@ class OpenAiController extends Controller
             // Get use case prompt & generate prompt by replacing placeholder
             $case = UseCase::findOrFail($request->use_case);
             $placeholder = array("[title]", "[short_description]", "[description]");
-            $replaceBy = array($request->title ?? '', $request->keywords ?? '', $request->description ?? '');
+            $replaceBy = array($request->title ?? '', $request->short_description ?? '', $request->description ?? '');
             $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
             $prompt +=" The tone of voice must be $request->tone. Give me the response in $request->language language.";
 
@@ -84,7 +84,7 @@ class OpenAiController extends Controller
             // Content history create
             ContentHistory::create([
                 'title' => $request->title ?? '',
-                'keywords' => $request->keywords ?? '',
+                'short_description' => $request->short_description ?? '',
                 'description' => $request->description ?? '',
                 'temperature' => $temp,
                 'generated_content' => $content,

@@ -41,11 +41,11 @@
                                         <td> {{$data->title}} </td>
                                     </tr>
                                     @endif
-                                    @if($data->keywords!='')
+                                    @if($data->short_description!='')
                                      <tr>
-                                        <td class="font-600"> Keywords </td>
+                                        <td class="font-600"> Short Description </td>
                                         <th> : </th>
-                                        <td> {{$data->keywords}} </td>
+                                        <td> {{$data->short_description}} </td>
                                     </tr>
                                     @endif
                                     @if($data->description!='')

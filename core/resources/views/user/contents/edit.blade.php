@@ -50,19 +50,12 @@
                                                 </div>
                                                 @endif
                                                 @if(in_array(2,$inputFields))
-                                                <!-- keywords -->
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="keywords" class="form-label">Keywords</label>
+                                                        <label for="short_description" class="form-label">Short Description</label>
                                                         <input type="text" class="form-control custom-input"
-                                                            id="keywords" autocomplete="off" name="keywords"
-                                                            placeholder="Enter your keywords" value="{{ $data->keywords }}">
-                                                        <div class="valid-feedback">
-                                                            Awesome! You're one step closer to greatness.
-                                                        </div>
-                                                        <div class="invalid-feedback">
-                                                            Please enter keywords
-                                                        </div>
+                                                            id="short_description" autocomplete="off" name="short_description"
+                                                            placeholder="" value="{{ $data->short_description }}">
                                                     </div>
                                                 </div>
                                                 @endif

@@ -17,9 +17,12 @@ return new class extends Migration
             $table->string('icon');
             $table->string('details')->nullable();
             $table->text('prompt');
-            $table->string('input_fields')->default('1,2,3');
+            $table->string('title_label')->default('Title')->nullable();
+            $table->string('short_description_label')->default('Short Descreption')->nullable();
+            $table->string('description_label')->default('Descreption')->nullable();
             $table->unsignedBigInteger('use_case_category_id')->nullable();
             $table->foreign('use_case_category_id')->references('id')->on('use_case_categories')->onDelete('cascade');
+            $table->boolean('is_popular')->default(1);
             $table->boolean('is_published')->default(1);
             $table->timestamps();
         });

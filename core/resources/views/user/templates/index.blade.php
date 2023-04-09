@@ -8,12 +8,23 @@
     <div class="row">
 
         <div class="col-md-12">
-            <div class="my-projects">
+            <div class="my-projects all-templates">
                 <div class="my-projects-header border-bottom">
                     <h5 class="header-title text-capitalize"> Use Case Templates </h5>
                 </div>
-                <div class="my-projects-body mt-3">
+                <div class="my-projects-body">
                     <div class="row">
+                        <ul class="category-list">
+                            <li class="category-list-item {{ (Route::currentRouteName() == 'user.templates' && !request()->input('cat')) ? 'active' : '' }}">
+                                <a href="{{ route('user.templates') }}" class="category-list-link">All</a>
+                            </li>
+                            @foreach ($categories as $cat)
+                                <li class="category-list-item {{ Request::url() == route('user.templates') && request()->input('cat')==$cat->slug ? 'active' : '' }}">
+                                    <a href="{{ route('user.templates')."?cat=$cat->slug" }}"
+                                        class="category-list-link ">{{ $cat->name }}</a>
+                                </li>
+                            @endforeach
+                        </ul>
                         @foreach ($allData as $case)
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
                             <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card">

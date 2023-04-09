@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\UseCase;
+use App\Models\UseCaseCategory;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -107,8 +108,14 @@ class HomeController extends Controller
         }
     }
 
-    public function templates(){
-        $allData  = UseCase::where('is_published', 1)->get();
-        return view('user.templates.index', compact('allData'));
+    public function templates(Request $request){
+        $allData  = UseCase::where('is_published', 1);
+        if(request()->input('cat') != null){
+             $category = UseCaseCategory::where('slug',request()->input('cat'))->firstOrFail();
+             $allData = $allData->where('use_case_category_id',$category->id);
+        }
+        $allData = $allData->get();
+        $categories = UseCaseCategory::where('is_published', 1)->get();
+        return view('user.templates.index', compact('allData','categories'));
     }
 }

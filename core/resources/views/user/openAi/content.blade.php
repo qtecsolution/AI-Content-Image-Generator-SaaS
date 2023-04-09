@@ -158,7 +158,7 @@
                         <form method="post" action="{{ route('contents.store') }}" id="save-form">
                             @csrf
                             <input type="hidden" name="title" id="save-title">
-                            <input type="hidden" name="keywords" id="save-keywords">
+                            <input type="hidden" name="short_description" id="save-short_description">
                             <input type="hidden" name="use_case_id" id="save-case">
                             <input type="hidden" name="description" id="save-description">
                             <textarea id="summernote" name="generated_content"></textarea>
@@ -243,11 +243,11 @@
 
         function contentSave() {
             let title = $('#title').val();
-            let keywords = $('#keywords').val();
+            let shortDescription = $('#short_description').val();
             let description = $('#description').val();
             let useCaseVal = $('#useCase option:selected').val();
             $('#save-title').val(title);
-            $('#save-keywords').val(keywords);
+            $('#save-short_description').val(shortDescription);
             $('#save-description').val(description);
             $('#save-case').val(useCaseVal);
             $('form#save-form').submit();
@@ -263,7 +263,7 @@
         function contentGenerate() {
             $('#openai-error').hide();
             let title = $('#title').val();
-            let keywords = $('#keywords').val();
+            let shortDescription = $('#short_description').val();
             let description = $('#description').val();
             let useCaseVal = $('#useCase option:selected').val();
             let temp = $('#temp option:selected').val();
@@ -279,7 +279,7 @@
                 url: "{{ route('content.generate') }}",
                 data: {
                     title,
-                    keywords,
+                    shortDescription,
                     description,
                     temp,
                     use_case: useCaseVal,

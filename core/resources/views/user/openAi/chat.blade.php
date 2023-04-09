@@ -60,7 +60,6 @@
                         <form method="post" action="{{ route('contents.store') }}" id="save-form">
                             @csrf
                             <input type="hidden" name="title" id="save-title">
-                            <input type="hidden" name="keywords" id="save-keywords">
                             <input type="hidden" name="use_case_id" id="save-case">
                             <input type="hidden" name="description" id="save-description">
                             <textarea id="summernote" name="generated_content"></textarea>

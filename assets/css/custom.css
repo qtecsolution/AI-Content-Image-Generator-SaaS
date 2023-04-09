@@ -269,3 +269,6 @@ textarea.resize-auto{
 textarea.resize-vertical{
     resize: vertical !important;
 }
+.all-templates .template-card{
+    max-width: 100%;
+}

@@ -1047,7 +1047,6 @@
                                             <a href="{{ route('pages.index') }}"
                                                 class="menu-item {{ menuActive('pages.*') ? 'active' : '' }}">Page
                                                 Builder</a>
-
                                         </div>
                                     </div>
                                 </div>

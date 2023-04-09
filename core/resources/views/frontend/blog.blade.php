@@ -6,15 +6,16 @@
             <div class="row g-4">
                 <div class="col-12">
                     <div class="hero-content pt-5">
-                        <h1 class="hero-title">Welcome to the  <br>
+                        <h1 class="hero-title">Welcome to the <br>
                             <span class="logo-name">{{ readConfig('name') }}</span> blog
-                            </h1>
-                        <p class="hero-des">{{ readConfig('name') }} is designed to help you streamline your writing process, <br>
+                        </h1>
+                        <p class="hero-des">{{ readConfig('name') }} is designed to help you streamline your writing process,
+                            <br>
                             increase your productivity, and create high-quality content.</p>
                     </div>
                 </div>
 
-            
+
 
             </div>
         </div>
@@ -30,45 +31,47 @@
             <!-- cards -->
             <div class="row m-0">
 
-                  <!-- blog category buttons -->
+                <!-- blog category buttons -->
 
-                  <ul class="category-list">
-                    <li class="category-list-item {{ Route::currentRouteName() == 'blogs.index' ? 'active' : 'rumon' }}"><a href="{{route('blogs.index')}}" class="category-list-link">All</a></li>
-                    @foreach($categories as $cat)
-                    <li class="category-list-item {{ Request::url() == route('blog.category',$cat->slug)  ? 'active' : 'rumon' }}">
-                        <a href="{{route('blog.category',$cat->slug)}}" 
-                            class="category-list-link ">{{$cat->name}}</a>
-                    </li>
+                <ul class="category-list">
+                    <li class="category-list-item {{ Route::currentRouteName() == 'blogs.index' ? 'active' : '' }}"><a
+                            href="{{ route('blogs.index') }}" class="category-list-link">All</a></li>
+                    @foreach ($categories as $cat)
+                        <li
+                            class="category-list-item {{ Request::url() == route('blog.category', $cat->slug) ? 'active' : '' }}">
+                            <a href="{{ route('blog.category', $cat->slug) }}"
+                                class="category-list-link ">{{ $cat->name }}</a>
+                        </li>
                     @endforeach
-                    
                 </ul>
-          
-            <!-- blog category cards -->
+
+                <!-- blog category cards -->
 
                 <div class="blog-cards">
                     @foreach ($blogs as $blog)
-                    <a href="{{route('blogs.show',$blog->slug)}}" class="blog-category-card">
-                        <figure class="blog-thumb">
-                            <img src="{{filePath($blog->image)}}" alt="">
-                        </figure>
-                        <div class="right">
-                            <p class="date">{{date('jS F, Y',strtotime($blog->created_at))}}</p>
-                            <h2 class="titel">{{$blog->title}}</h2>
-                            <p class="content">{{$blog->meta_description}} ...read more</p>
-                            
+                        <a href="{{ route('blogs.show', $blog->slug) }}" class="blog-category-card">
+                            <figure class="blog-thumb">
+                                <img src="{{ filePath($blog->image) }}" alt="">
+                            </figure>
+                            <div class="right">
+                                <p class="date">{{ date('jS F, Y', strtotime($blog->created_at)) }}</p>
+                                <h2 class="titel">{{ $blog->title }}</h2>
+                                <p class="content">{{ $blog->meta_description }} ...read more</p>
 
-                            <div class="blogcard-footer d-flex justify-content-end"> 
-                                <button class="go-btn">
-                                    <svg width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M2.8125 9H15.1875" stroke="#2C4CAC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                        <path d="M10.125 3.9375L15.1875 9L10.125 14.0625" stroke="#2C4CAC" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
-                                    </svg> 
-                                </button>
+
+                                <div class="blogcard-footer d-flex justify-content-end">
+                                    <button class="go-btn">
+                                        <svg width="16" height="16" viewBox="0 0 18 18" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M2.8125 9H15.1875" stroke="#2C4CAC" stroke-width="1.5"
+                                                stroke-linecap="round" stroke-linejoin="round"></path>
+                                            <path d="M10.125 3.9375L15.1875 9L10.125 14.0625" stroke="#2C4CAC"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                                        </svg>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-
-                       
+                        </a>
                     @endforeach
                 </div>
 
@@ -102,22 +105,25 @@
                 <div class="col-lg-8 mx-auto">
                     <div class="accordion" id="faqAccordion">
                         <!-- accordion item  -->
-                        @foreach($allFaq as $faqIndex => $faq)
-                        <div class="accordion-item">
-                            <h2 class="accordion-header" id="heading-{{$faq->id}}">
-                                <button class="accordion-button @if($faqIndex>0) collapsed @endif" type="button" data-bs-toggle="collapse"
-                                    data-bs-target="#faqCollapse-{{$faq->id}}" aria-expanded="false" aria-controls="faqCollapse-{{$faq->id}}">
-                                    {{$faq->question}}
-                                </button>
-                            </h2>
-                            <div id="faqCollapse-{{$faq->id}}" class="accordion-collapse collapse @if($faqIndex==0) show @endif" aria-labelledby="heading-{{$faq->id}}"
-                                data-bs-parent="#faqAccordion">
-                                <div class="accordion-body">
-                                    <div class="card-divider-faq"></div>
-                                    <p> {{$faq->answer}} </p>
+                        @foreach ($allFaq as $faqIndex => $faq)
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="heading-{{ $faq->id }}">
+                                    <button class="accordion-button @if ($faqIndex > 0) collapsed @endif"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#faqCollapse-{{ $faq->id }}" aria-expanded="false"
+                                        aria-controls="faqCollapse-{{ $faq->id }}">
+                                        {{ $faq->question }}
+                                    </button>
+                                </h2>
+                                <div id="faqCollapse-{{ $faq->id }}"
+                                    class="accordion-collapse collapse @if ($faqIndex == 0) show @endif"
+                                    aria-labelledby="heading-{{ $faq->id }}" data-bs-parent="#faqAccordion">
+                                    <div class="accordion-body">
+                                        <div class="card-divider-faq"></div>
+                                        <p> {{ $faq->answer }} </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         @endforeach
                     </div>
                 </div>

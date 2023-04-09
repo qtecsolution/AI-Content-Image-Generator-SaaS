@@ -13,8 +13,8 @@
         </div> --}}
 
         <div class="form-group mb-3">
-            <label class="form-label">@translate(Meta Keywords)</label>
-            <input class="form-control custom-input" name="meta_keys" type="text" max="100" placeholder="@translate(Meth Keys)">
+            <label class="form-label">@translate(Keywords)</label>
+            <input class="form-control custom-input" name="meta_keys" type="text" max="100" placeholder="@translate(Meta Keywords)">
         </div>
 
         <div class="form-group mb-3">

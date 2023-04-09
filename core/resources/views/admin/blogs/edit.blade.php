@@ -78,7 +78,6 @@
 
                                 <!-- editor column -->
                                 <div class="col-lg-4 border-start mt-0">
-                                    <!-- keywords -->
                                     <div class="row mb-3">
                                         <div class="col-12">
                                             <div class="form-group">
@@ -104,7 +103,7 @@
                                     <div class="row mb-3">
                                         <div class="col-12">
                                             <div class="form-group">
-                                                <label for="keywords" class="form-label">Category</label>
+                                                <label for="category_id" class="form-label">Category</label>
                                                 {!! Form::select('category_id', $category, $data->category_id??'', ['class' => 'w-100 nice-select','placeholder'=>'-select category-','required']) !!}
                                                 @error('category_id')
                                                     <div class="invalid-feedback">
