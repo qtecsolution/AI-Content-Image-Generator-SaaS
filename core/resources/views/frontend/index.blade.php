@@ -71,7 +71,7 @@
                                         @if ($fUseCase->icon != '' && file_exists($fUseCase->icon))
                                             <img src="{{ asset($fUseCase->icon) }}" alt="">
                                         @else
-                                            <img src="assets/icons/cards-icons/NotePencil.svg" alt="">
+                                            <img src="assets/images/icons/cards-icons/NotePencil.svg" alt="">
                                         @endif
                                     </figure>
                                 </div>
@@ -80,7 +80,7 @@
                                     <p class="text">{{ $fUseCase->details }}</p>
                                     <a href="{{ route('content.create') }}?case={{ $fUseCase->id }}" class="card-link">
                                         <span class="text">Try {{ $fUseCase->title }} </span> <img
-                                            src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                            src="assets/images/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                 </div>
                             </div>
                         @endforeach
@@ -100,7 +100,7 @@
                                             @if ($rUseCase->icon != '' && file_exists($rUseCase->icon))
                                                 <img src="{{ asset($rUseCase->icon) }}" alt="">
                                             @else
-                                                <img src="assets/icons/cards-icons/NotePencil.svg" alt="">
+                                                <img src="assets/images/icons/cards-icons/NotePencil.svg" alt="">
                                             @endif
                                         </figure>
                                     </div>
@@ -109,7 +109,7 @@
                                         <p class="text">{{ $rUseCase->details }}</p>
                                         <a href="{{ route('content.create') }}?case={{ $rUseCase->id }}"
                                             class="card-link"> <span class="text">Try {{ $rUseCase->title }} </span> <img
-                                                src="assets/icons/cards-icons/right-arrow.svg" alt=""> </a>
+                                                src="assets/images/icons/cards-icons/right-arrow.svg" alt=""> </a>
                                     </div>
                                 </div>
                             @endforeach
@@ -121,7 +121,7 @@
                     <div class="d-flex  align-items-center justify-content-center py-5">
                         @if (count($restUseCases) > 0)
                             <button class="all-template-btn" data-bs-toggle="collapse" data-bs-target="#collapseExample">
-                                <span>See All templates </span> <img src="assets/icons/cards-icons/ArrowUpRight.svg"
+                                <span>See All templates </span> <img src="assets/images/icons/cards-icons/ArrowUpRight.svg"
                                     alt="arrow icon "> </button>
                         @endif
                     </div>

@@ -26,7 +26,7 @@
                     <div class="swiper-slide">
                         <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card">
                             <figure class="card-img">
-                                <img src="{{ asset($case->icon) }}" alt="{{ $case->title }}">
+                                <img src="{{ filePath($case->icon) }}" alt="{{ $case->title }}">
                             </figure>
                             <h3 class="card-title"> {{ $case->title }} </h3>
                             <p class="card-des">{{ $case->details }}</p>

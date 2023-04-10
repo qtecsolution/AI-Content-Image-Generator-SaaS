@@ -14,22 +14,24 @@
                 </div>
                 <div class="my-projects-body">
                     <div class="row">
-                        <ul class="category-list">
-                            <li class="category-list-item {{ (Route::currentRouteName() == 'user.templates' && !request()->input('cat')) ? 'active' : '' }}">
-                                <a href="{{ route('user.templates') }}" class="category-list-link">All</a>
-                            </li>
-                            @foreach ($categories as $cat)
-                                <li class="category-list-item {{ Request::url() == route('user.templates') && request()->input('cat')==$cat->slug ? 'active' : '' }}">
-                                    <a href="{{ route('user.templates')."?cat=$cat->slug" }}"
-                                        class="category-list-link ">{{ $cat->name }}</a>
+                        <div class="col-md-12">
+                            <ul class="category-list">
+                                <li class="category-list-item {{ (Route::currentRouteName() == 'user.templates' && !request()->input('cat')) ? 'active' : '' }}">
+                                    <a href="{{ route('user.templates') }}" class="category-list-link">All</a>
                                 </li>
-                            @endforeach
-                        </ul>
+                                @foreach ($categories as $cat)
+                                    <li class="category-list-item {{ Request::url() == route('user.templates') && request()->input('cat')==$cat->slug ? 'active' : '' }}">
+                                        <a href="{{ route('user.templates')."?cat=$cat->slug" }}"
+                                            class="category-list-link ">{{ $cat->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
                         @foreach ($allData as $case)
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
                             <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card">
                                 <figure class="card-img">
-                                    <img src="{{ asset($case->icon) }}" alt="{{ $case->title }}">
+                                    <img src="{{ filePath($case->icon) }}" alt="{{ $case->title }}">
                                 </figure>
                                 <h3 class="card-title"> {{ $case->title }} </h3>
                                 <p class="card-des">{{ $case->details }}</p>

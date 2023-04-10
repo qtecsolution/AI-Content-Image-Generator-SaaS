@@ -4,19 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Charts\expensesChart;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\PlanExpense;
-use Carbon\Carbon;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mollie\Laravel\Facades\Mollie;
-use Razorpay\Api\Api;
-use Stripe;
-
-use function Termwind\render;
 
 class PlanController extends Controller
 {

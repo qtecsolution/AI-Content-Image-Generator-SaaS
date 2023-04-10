@@ -116,7 +116,7 @@
                 <div class="col-lg-4">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
-                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                            <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
                         </div>
                         <span>No credit card required</span>
                     </div>
@@ -125,7 +125,7 @@
                 <div class="col-lg-4">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
-                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                            <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
                         </div>
                         <span>7-day trial of Standard plan</span>
                     </div>
@@ -134,7 +134,7 @@
                 <div class="col-lg-4">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
-                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                            <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
                         </div>
                         <span>{{totalUseCase()}}+ content types to explore</span>
                     </div>
@@ -142,7 +142,7 @@
                 <div class="col-lg-4">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
-                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                            <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
                         </div>
                         <span>AI Image generate</span>
                     </div>
@@ -150,7 +150,7 @@
                 <div class="col-lg-4">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
-                            <img src="{{asset('assets/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
+                            <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
                         </div>
                         <span>Progressive Web Apps</span>
                     </div>
@@ -247,7 +247,7 @@
                         @if(readConfig('type_fb') !== '')
                         <li class="socialmenu-item">
                             <a href="{{readConfig('type_fb')}}" class="socialmenu-link">
-                                <img src="{{asset('assets/icons/social/facebook.svg')}}"
+                                <img src="{{asset('assets/images/icons/social/facebook.svg')}}"
                                     alt="">
                                 </a>
                         </li>
@@ -255,14 +255,14 @@
                         @if(readConfig('type_tw') !== '')
                         <li class="socialmenu-item">
                             <a href="{{readConfig('type_tw')}}" class="socialmenu-link">
-                                <img src="{{asset('assets/icons/social/twitter.svg')}}"
+                                <img src="{{asset('assets/images/icons/social/twitter.svg')}}"
                                     alt=""></a>
                         </li>
                         @endif
                         @if(readConfig('type_insta') !== '')
                         <li class="socialmenu-item">
                             <a href="{{readConfig('type_insta')}}" class="socialmenu-link">
-                                <img src="{{asset('assets/icons/social/linkdin.svg')}}"
+                                <img src="{{asset('assets/images/icons/social/linkdin.svg')}}"
                                     alt="">
                                 </a>
                         </li>

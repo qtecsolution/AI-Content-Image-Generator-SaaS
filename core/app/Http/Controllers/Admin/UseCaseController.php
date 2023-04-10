@@ -123,7 +123,7 @@ class UseCaseController extends Controller
             UseCase::create($input);
             myAlert('success', 'Use case saved successfully.');
             return back();
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
             myAlert('error', $errorMessage);
             return back();
@@ -135,33 +135,6 @@ class UseCaseController extends Controller
      */
     public function show(Request $request, $id)
     {
-        // This code is for import template from a predefined json file
-        if (isset($request->import_from_json)) {
-            try {
-                DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-                UseCase::truncate();
-                DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-                $jsonUrl = asset('assets/utils/prompt.json');
-                $jsonData = file_get_contents($jsonUrl);
-                $jsonData = json_decode($jsonData);
-                foreach ($jsonData as $data) {
-                    UseCase::create([
-                        'title' => $data->title,
-                        'icon' => $data->icon,
-                        'details' => $data->details,
-                        'input_fields' => $data->input_fields,
-                        'prompt' => $data->prompt,
-                        'is_published' => 1
-                    ]);
-                }
-                myAlert('success', 'Use case imported successfully.');
-                return redirect()->route('use-case.index');
-            } catch (\Exception $e) {
-                $errorMessage = $e->getMessage();
-                myAlert('error', $errorMessage);
-                return redirect()->route('use-case.index');
-            }
-        }
         $data = UseCase::where('id', $id)->first();
         return response()->json($data, 200);
     }

@@ -47,11 +47,11 @@ class UserDocumentController extends Controller
             ->addColumn('action', '
             <div class="action-wrapper">
                 <a class="text-success" href="{{route(\'contents.edit\',$id)}}">
-                <img src="{{asset(\'assets/icons/edit.svg\')}}" alt="">
+                <img src="{{asset(\'assets/images/icons/edit.svg\')}}" alt="">
                 </a>
                 <a class="text-danger" title="Delete Contents" href="javascript:void(0)" type="button"
                     onclick="resourceDelete(\'{{ route(\'contents.destroy\', $id) }}\')">
-                    <img src="{{asset(\'assets/icons/delete.svg\')}}" alt="">
+                    <img src="{{asset(\'assets/images/icons/delete.svg\')}}" alt="">
                 </a>
             </div>
             ')

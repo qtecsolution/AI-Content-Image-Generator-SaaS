@@ -62,6 +62,27 @@
                     </span>
                     <span class="fz-16">Home</span>
                 </a>
+                <a href="{{ route('user.templates') }}"
+                            class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['user.templates']) ? 'active' : '' }}">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
+                                stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="fz-16">All Templates</span>
+                </a>
                 <div class="menu-accordion">
                     <div class="accordion" id="userMenuAccordion">
                         <!-- ai content  -->
@@ -114,6 +135,27 @@
                                 </div>
                             </div>
                         </div>
+                        <a href="{{ route('chat.create') }}"
+                            class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['chat.create']) ? 'active' : '' }}">
+                            <span class="icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
+                                        stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            <span class="fz-16">Chat With AI</span>
+                        </a>
                         <!-- ai images -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
@@ -188,6 +230,7 @@
                     </span>
                     <span class="fz-16">Purchase Plan</span>
                 </a>
+                @if (Auth::user()->type == 'user')
                 <a href="{{ route('user.transactions') }}"
                     class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['user.transactions', 'user.transactions.details']) ? 'active' : '' }}">
                     <span class="icon">
@@ -214,6 +257,7 @@
                     </span>
                     <span class="fz-16">My Transactions</span>
                 </a>
+                @endif
 
                 <!-- admin menu -->
                 @if (Auth::user()->type == 'admin')
@@ -544,7 +588,7 @@
         <header class="header">
             <!-- hamburger icon  -->
             <button class="btn d-lg-none" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu"><img
-                    src="{{ asset('assets/icons/menu.svg') }}" alt=""></button>
+                    src="{{ asset('assets/images/icons/menu.svg') }}" alt=""></button>
             <!-- MOBILE-LOGO -->
             <h3 class="logo-name d-lg-none ">{{ readConfig('type_name') }}</h3>
             <!-- ICON-MENU START -->
@@ -603,18 +647,8 @@
             <ol class="breadcrumb m-0 fz-12  font-500">
                 <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
                 @yield('breadcrumb')
-                {{-- <li class="breadcrumb-item fz-12 active ">Contents</li> --}}
             </ol>
         </nav>
-        <!-- <nav class="breadcrumb-nav bg-danger"
-            style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);"
-            aria-label="breadcrumb">
-            <ol class="breadcrumb mb-0 pr-2 pull-right">
-                <li class="breadcrumb-item"><a href="{{ route('home') }}"> <i class="fa fa-home"></i> Home </a></li>
-                @yield('breadcrumb')
-                {{-- <li class="breadcrumb-item active">Contents</li> --}}
-            </ol>
-        </nav> -->
         @yield('content')
     </main>
     <!-- MAIN SECTION END -->
@@ -654,6 +688,27 @@
                     </span>
                     <span class="fz-16">Home</span>
                 </a>
+                <a href="{{ route('user.templates') }}"
+                            class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['user.templates']) ? 'active' : '' }}">
+                    <span class="icon">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
+                                stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                    </span>
+                    <span class="fz-16">All Templates</span>
+                </a>
                 <div class="menu-accordion">
                     <div class="accordion" id="userMenuAccordion">
                         <!-- ai content  -->
@@ -691,21 +746,38 @@
                                 <div class="accordion-body">
                                     <div class="menu-items">
                                         <a href="{{ route('content.create') }}"
-                                            class="menu-item {{ menuActive('content.*') ? 'active' : '' }}">Content
-                                            Generate</a>
+                                            class="menu-item {{ menuActive('content.*') ? 'active' : '' }}">Content Generate</a>
                                         <a href="{{ route('code.create') }}"
-                                            class="menu-item {{ menuActive('code.*') ? 'active' : '' }}">Code
-                                            Generate</a>
+                                            class="menu-item {{ menuActive('code.*') ? 'active' : '' }}">Code Generate</a>
                                         <a href="{{ route('contents.index') }}"
-                                            class="menu-item {{ menuActive('contents.*') ? 'active' : '' }}">Saved
-                                            Content</a>
+                                            class="menu-item {{ menuActive('contents.*') ? 'active' : '' }}">Saved Content</a>
                                         <a href="{{ route('content-history.index') }}"
-                                            class="menu-item {{ menuActive('content-history.*') ? 'active' : '' }}">Content
-                                            History</a>
+                                            class="menu-item {{ menuActive('content-history.*') ? 'active' : '' }}">Content History</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <a href="{{ route('chat.create') }}"
+                            class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['chat.create']) ? 'active' : '' }}">
+                            <span class="icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
+                                        stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
+                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                    <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                            </span>
+                            <span class="fz-16">Chat With AI</span>
+                        </a>
                         <!-- ai images -->
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingThree">
