@@ -34,23 +34,23 @@
                         <div class="row g-4">
                             <div class="col-lg-5">
                                 <table class="table fz-14">
-                                    @if($data->title!='')
+                                    @if((isset($data->useCase->title_label) && $data->useCase->title_label!='') || $data->type=='code')
                                     <tr>
-                                        <td class="font-600"> Title </td>
+                                        <td class="font-600"> {{$data->useCase->title_label??'Title'}} </td>
                                         <td> : </th>
                                         <td> {{$data->title}} </td>
                                     </tr>
                                     @endif
-                                    @if($data->short_description!='')
+                                    @if(isset($data->useCase->short_description_label) && $data->useCase->short_description_label!='')
                                      <tr>
-                                        <td class="font-600"> Short Description </td>
+                                        <td class="font-600"> {{$data->useCase->short_description_label}} </td>
                                         <th> : </th>
                                         <td> {{$data->short_description}} </td>
                                     </tr>
                                     @endif
-                                    @if($data->description!='')
+                                    @if((isset($data->useCase->description_label) && $data->useCase->description_label!='') || $data->type=='code')
                                     <tr>
-                                        <td class="font-600">  Description </td>
+                                        <td class="font-600">  {{$data->useCase->description_label??'Instructions'}} </td>
                                         <th> : </th>
                                         <td> {{$data->description}}  </td>
                                     </tr>
@@ -58,7 +58,7 @@
                                     <tr>
                                         <td class="font-600"> Use Case </td>
                                         <th> : </th>
-                                        <td> {{$data->useCase->title ?? ''}} </td>
+                                        <td> {{$data->useCase->title ?? 'Code Generate'}} </td>
                                     </tr>
                                     <tr>
                                         <td class="font-600"> Tone </td>
@@ -70,7 +70,7 @@
                             <div class="col-lg-7 border-start">
                                 <h4 class="mt-3 fz-14 font-500"> Generated Content : </h4>
                                 <hr>
-                                <div class="fz-14">
+                                <div class="fz-14" id="generated-content">
                                     {!! $data->generated_content !!}
                                 </div>
                             </div>

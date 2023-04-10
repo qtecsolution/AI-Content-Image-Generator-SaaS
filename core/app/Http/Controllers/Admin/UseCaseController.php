@@ -241,11 +241,5 @@ class UseCaseController extends Controller
             return back();
         }
     }
-    public function getInputFields(Request $request)
-    {
-        if (isset($request->id)) {
-            $data = UseCase::where('id', $request->id)->first();
-        }
-        return response()->json($data, 200);
-    }
+    
 }

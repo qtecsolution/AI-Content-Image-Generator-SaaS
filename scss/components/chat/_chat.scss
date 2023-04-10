@@ -1,0 +1,183 @@
+@use '../../global' as *;
+@use '../../partials' as *;
+
+$chat-color: #E6E7EC;
+$bubble-color: #B6B5BA;
+$bubble-animation-duration: 2s;
+$bubble-size: 15px;
+$bubble-border-radius: 100%;
+$bubble-margin-right: 5px;
+$bubble-bob-height: 10px;
+$bubble-bob-background: #9E9DA2;
+
+
+
+.msger {
+    @include flex;
+    flex-direction: column;
+    justify-content: space-between;
+    @include w100;
+    max-width: size(900);
+
+    height: 60vh;
+    @include border-single(right,solid,1,$gray-300);
+    
+
+    &-header {
+        @include flex-between;
+        padding: size(10);
+        @include border-single(bottom,solid,1,$gray-300);
+    }
+
+    &-chat {
+        flex: 1;
+        overflow-y: auto;
+        padding: size(10);
+
+        &::-webkit-scrollbar {
+            width: size(6);
+        }
+        &::-webkit-scrollbar-track {
+            background: #ddd;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #bdbdbd;
+        }
+
+
+    }
+
+    .msg {
+        @include flex;
+        align-items: flex-end;
+        margin-bottom: size(10);
+        &:last-of-type {
+            margin: 0;
+
+        }
+    }
+    .msg-img {
+        @include square(50);
+        @include radius(50);
+        overflow: hidden;
+        margin-right: size(10);
+        
+        img {
+            @include wh100;
+            object-fit: cover;
+        }
+    }
+    .msg-bubble {
+        max-width: size(400);
+        padding: size(14);
+        @include radius(15);
+        background:  #ececec ;
+        @include font($primaryFont,14,normal,normal,20);
+        .msg-info {
+            @include flex-between;
+            @include font($primaryFont,12,normal,normal,20);
+            gap: size(10);
+            margin-bottom: size(10);
+        }
+    }
+    .left-msg {
+        .msg-bubble {
+            border-bottom-left-radius: size(0);
+        }
+    }
+    .right-msg  {
+        flex-direction: row-reverse;
+
+       .msg-img {
+        margin-right: 0;
+        margin-left: size(10);
+        }
+       .msg-bubble {
+        background: $main;
+        color: $white;
+        border-bottom-right-radius: 0;
+       }
+    }
+
+
+    .msger-inputarea {
+        @include flex;
+        padding: size(10);
+        @include border-single(top,solid,1,$gray-300);
+        align-items: center;
+        gap: size(10);
+
+        > * {
+            padding: size(10);
+            border: none;
+            @include radius(3);
+            @include font($primaryFont,14,normal,normal,20);
+
+        }
+
+        .msger-input {
+            flex: 1;
+            background: #ececec ;
+            @include font($primaryFont,14,normal,normal,20);
+          
+
+
+            &:focus {
+                
+            }
+        }
+
+        .msger-send-btn {
+            background: $linear-main;
+            color: $white;
+        }
+    }
+}
+
+
+
+
+
+.fb-chat {
+  background-color: #ececec;
+  width: 100px;
+  line-height: 60px;
+  display: block;
+  border-radius: 30% / 50%;
+
+  &--bubbles {
+    text-align: center;
+
+    span {
+      display: inline-block;
+      background-color: $bubble-color;
+      width: $bubble-size;
+      height: $bubble-size;
+      border-radius: $bubble-border-radius;
+      margin-right: $bubble-margin-right;
+      animation: bob $bubble-animation-duration infinite;
+
+      &:nth-child(1) {
+        animation-delay: -(1s);
+      }
+      &:nth-child(2) {
+        animation-delay: -(0.85s);
+      }
+      &:nth-child(3) {
+        animation-delay: -(0.7s);
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@keyframes bob {
+  10% {
+    transform: translateY(-$bubble-bob-height);
+    background-color: $bubble-bob-background;
+  }
+  50% {
+    transform: translateY(0);
+    background-color: $bubble-color;
+  }
+}

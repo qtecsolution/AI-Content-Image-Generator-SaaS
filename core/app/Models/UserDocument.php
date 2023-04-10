@@ -9,7 +9,7 @@ class UserDocument extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','short_description','description','generated_content','use_case_id','user_id'];
+    protected $fillable = ['title','short_description','description','generated_content','use_case_id','user_id','type'];
 
     public function useCase(){
         return $this->belongsTo(UseCase::class,'use_case_id','id');

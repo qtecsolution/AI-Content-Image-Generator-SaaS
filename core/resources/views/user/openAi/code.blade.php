@@ -61,6 +61,7 @@
                             @csrf
                             <input type="hidden" name="title" id="save-title">
                             <input type="hidden" name="use_case_id" id="save-case">
+                            <input type="hidden" name="type" value="code">
                             <input type="hidden" name="description" id="save-description">
                             <textarea id="summernote" name="generated_content"></textarea>
                         </form>
@@ -135,8 +136,8 @@
                     description,
                 },
                 success: function(data) {
-                    let formatted_text=nl2br(data.content);
-                    $('#summernote').summernote('code', formatted_text);
+                    //let formatted_text=nl2br(data.content);
+                    $('#summernote').summernote('code', data.content);
                     $('#content-generate-preloader').hide();
                     $('#words-count').html(data.words);
                     $('#charecters-count').html(data.characters);
@@ -185,10 +186,6 @@
                 $('.copy-button').tooltip('hide');
             }, 1000);
         }
-        function nl2br (str, is_xhtml) {
-            var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
-            return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
-        } 
 
 
         // Summernote (Texteditor) Script

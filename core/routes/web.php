@@ -57,7 +57,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'user','namespace' => 'User'], 
     Route::get('/image-create','OpenAiController@image')->name('image.create');
     Route::post('/image-generate','OpenAiController@imageGenerate')->name('image.generate');
     Route::get('/image-regenerate/{id}','OpenAiController@imageReGenerate')->name('image.regenerate');
-    Route::get('/use-case-input-fields', 'UseCaseController@getInputFields')->name('use-case.input-fields');
+    Route::get('/use-case-input-fields', 'OpenAiController@getUseCase')->name('use-case.input-fields');
 
     Route::get('/image-variation','OpenAiController@imageVariation')->name('image.variation');
     Route::post('/image-variation','OpenAiController@imageGenerateVariation')->name('image.generate.variation');

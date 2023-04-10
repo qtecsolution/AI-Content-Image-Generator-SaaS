@@ -30,13 +30,13 @@ class UserDocumentController extends Controller
             ->addIndexColumn()
             ->addColumn('checkbox', '
             <div class="customcheck mb-2">
-                                    <input type="checkbox"  value="{{$id}}" id="checkbox-{{$id}}" class="input-checkbox customcheck-box" name="row-check"
-                                        hidden>
-                                    <label for="checkbox-{{$id}}" class="customcheck-label"></label>
-                                </div>
+                <input type="checkbox"  value="{{$id}}" id="checkbox-{{$id}}" class="input-checkbox customcheck-box" name="row-check"
+                    hidden>
+                <label for="checkbox-{{$id}}" class="customcheck-label"></label>
+            </div>
             ')
             ->addColumn('use_case_title', function ($data) {
-                return $data->useCase->title ?? '';
+                return $data->useCase->title ?? 'Code Generate';
             })
             ->addColumn('word_count', function ($data) {
                 return str_word_count($data->generated_content);

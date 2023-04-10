@@ -26,53 +26,38 @@
                                     <div class="create-post">
 
 
-                                        <div class="form-content">
+                                        <div class="form-content mt-2">
 
                                             <div class="row g-4">
-                                                @php 
-                                                    $inputFields = explode(',',$data->useCase->input_fields);
-                                                @endphp
-                                                @if(in_array(1,$inputFields))
+                                                @if((isset($data->useCase->title_label) && $data->useCase->title_label!='') || $data->type=='code')
                                                 <!-- Title    -->
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="title" class="form-label">Title</label>
+                                                        <label for="title" class="form-label">{{$data->useCase->title_label??'Title'}}</label>
                                                         <input type="text" class="form-control custom-input"
                                                             id="title" required autocomplete="off" name="title"
                                                             placeholder="Write here..." value="{{ $data->title }}">
-                                                        <div class="valid-feedback">
-                                                            Awesome! You're one step closer to greatness.
-                                                        </div>
-                                                        <div class="invalid-feedback">
-                                                            Please enter a title
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 @endif
-                                                @if(in_array(2,$inputFields))
+                                                @if(isset($data->useCase->short_description_label) && $data->useCase->short_description_label!='')
                                                 <div class="col-12">
                                                     <div class="form-group">
-                                                        <label for="short_description" class="form-label">Short Description</label>
+                                                        <label for="short_description" class="form-label">{{$data->useCase->short_description_label}}</label>
                                                         <input type="text" class="form-control custom-input"
                                                             id="short_description" autocomplete="off" name="short_description"
                                                             placeholder="" value="{{ $data->short_description }}">
                                                     </div>
                                                 </div>
                                                 @endif
-                                                @if(in_array(3,$inputFields))
+                                                @if((isset($data->useCase->description_label) && $data->useCase->description_label!='') || $data->type=='code')
                                                 <!-- description -->
                                                 <div class="col-12">
                                                     <!-- description  -->
                                                     <div class="form-group">
-                                                        <label for="description" class="form-label">Description</label>
+                                                        <label for="description" class="form-label">{{$data->useCase->description_label??'Instructions'}}</label>
                                                         <textarea class="form-control custom-input" id="description" autocomplete="off" name="description"
                                                             placeholder="Description" rows="6">@purify($data->description)</textarea>
-                                                        <div class="valid-feedback">
-                                                            Awesome! You're one step closer to greatness.
-                                                        </div>
-                                                        <div class="invalid-feedback">
-                                                            Please enter your description
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 @endif
@@ -95,7 +80,7 @@
 
                                 <!-- editor column -->
                                 <div class="col-lg-7 border-start mt-0">
-                                    <textarea id="summernote" name="generated_content">@purify($data->generated_content)</textarea>
+                                    <textarea id="summernote" name="generated_content">{!! htmlspecialchars($data->generated_content) !!}</textarea>
                                 </div>
 
                             </div>

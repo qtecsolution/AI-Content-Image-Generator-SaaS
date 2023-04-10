@@ -12,12 +12,15 @@ $(document).ready(function() {
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'picture', 'list']],
             ['color', ['forecolor']],
-            ['height', ['height']]
+            ['height', ['height','codeview']]
         ],
         colorNames: {
             'red': '#ff0000',
             'green': '#00ff00',
             'blue': '#0000ff'
+        },
+        oninit: function() {
+            $("div.note-editor button[data-event='codeview']").click();
         }
     });
 

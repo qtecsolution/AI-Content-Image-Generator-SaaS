@@ -58,7 +58,7 @@ class OpenAiController extends Controller
             $placeholder = array("[title]", "[short_description]", "[description]");
             $replaceBy = array($request->title ?? '', $request->short_description ?? '', $request->description ?? '');
             $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
-            $prompt +=" The tone of voice must be $request->tone. Give me the response in $request->language language.";
+            $prompt .=" The tone of voice must be $request->tone. Give me the response in $request->language language.";
 
             $temp = floatval($request->temp ?? 0.7);
 
@@ -76,6 +76,11 @@ class OpenAiController extends Controller
             $content =  $result['choices'][0]['text'] ?? '';
             $wordCount = str_word_count($content) ?? 0;
             $charCount = strlen($content) ?? 0;
+            // null space to br
+            $content = preg_replace('/([^>\r\n]?)(\r\n|\n\r|\r|\n)/', '$1<br>$2', $content);
+            //remove all leading <br> tags
+            $pattern = '/^(' . preg_quote('<br>', '/') . ')+/';
+            $content = preg_replace($pattern, '',  $content);
             $results = [
                 'content' => $content,
                 'words' => $wordCount,
@@ -340,22 +345,26 @@ class OpenAiController extends Controller
             //$tokens = $result['usage']['total_tokens'];
             $wordCount = str_word_count($content) ?? 0;
             $charCount = strlen($content) ?? 0;
-            $results = [
-                'content' => $content,
-                'words' => $wordCount,
-                'characters' => $charCount
-            ];
+            $mainContent = preg_replace('/```(.+?)```/s', '<code>$1</code>', htmlspecialchars($content));
+            $mainContent = "<pre class='pre-line'> $mainContent </pre>";
             // Content history create
             ContentHistory::create([
                 'title'=>substr($request->description, 0, 200),
                 'description' => $request->description ?? '',
                 'temperature' => 1,
-                'generated_content' => $content,
+                'type' => 'code',
+                'generated_content' => $mainContent,
                 'prompt' => "You are a helpful assistant that writes code.",
                 'use_case_id' => $request->use_case,
                 'user_id' => Auth::user()->id
             ]);
             balanceDeduction('call_api');
+            
+            $results = [
+                'content' => $mainContent,
+                'words' => $wordCount,
+                'characters' => $charCount
+            ];
             return response()->json($results, 200);
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
@@ -371,5 +380,12 @@ class OpenAiController extends Controller
     public function chat()
     {
         return view('user.openAi.chat');
+    }
+    public function getUseCase(Request $request)
+    {
+        if (isset($request->id)) {
+            $data = UseCase::where('id', $request->id)->first();
+        }
+        return response()->json($data, 200);
     }
 }

@@ -339,8 +339,6 @@
             }, 1000);
         }
 
-
-
         // Summernote (Texteditor) Script
         $(document).ready(function() {
             $('#summernote').summernote({

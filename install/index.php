@@ -399,7 +399,7 @@
 												<input type="text" name="db_name" placeholder="Database Name" required>
 											</div>
 											<div class="information-form-group col-sm-6">
-												<input type="text" name="db_host" value="localhost" placeholder="Database Host" required>
+												<input type="text" name="db_host" value="127.0.0.1" placeholder="Database Host" required>
 											</div>
 											<div class="information-form-group col-sm-6">
 												<input type="text" name="db_user" placeholder="Database User" required>

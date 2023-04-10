@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-           UseCaseSeeder::class, 
+           //UseCaseSeeder::class, 
            LanguageSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
