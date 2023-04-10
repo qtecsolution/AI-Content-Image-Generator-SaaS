@@ -125,8 +125,8 @@ class SettingController extends Controller
             writeConfig($request->type_tw, $request->tw);
         }
 
-        if ($request->has('google')) {
-            writeConfig($request->type_google, $request->google);
+        if ($request->has('instagram')) {
+            writeConfig($request->type_insta, $request->instagram);
         }
 
         if ($request->has('address')) {

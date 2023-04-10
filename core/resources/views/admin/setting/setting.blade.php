@@ -568,10 +568,10 @@
                                     </div>
                                     <div class=" form-group mb-3">
                                         <!--google-->
-                                        <label class="form-label" for="cmsGoogle"> Google Link</label>
-                                        <input type="hidden" value="type_google" name="type_google">
-                                        <input type="text" value="{{ readConfig('type_google') }}" name="google"
-                                            class="form-control custom-input" id="cmsGoogle">
+                                        <label class="form-label" for="cmsInstagram"> Instagram Link</label>
+                                        <input type="hidden" value="type_insta" name="type_insta">
+                                        <input type="text" value="{{ readConfig('type_insta') }}" name="instagram"
+                                            class="form-control custom-input" id="cmsInstagram">
                                     </div>
                                     <div class="form-group mb-3 ">
                                         <!--Number-->
