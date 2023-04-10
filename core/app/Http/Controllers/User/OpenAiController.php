@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\AiChatHistory;
 use App\Models\ContentHistory;
 use App\Models\Images;
 use App\Models\Language;
@@ -32,7 +33,7 @@ class OpenAiController extends Controller
             $defaultCase = UseCase::first();
         }
         $languages = Language::where('status', 1)->pluck('language', 'language');
-        return view('user.openAi.content', compact('cases', 'request', 'inputFields', 'languages','defaultCase'));
+        return view('user.openAi.content', compact('cases', 'request', 'inputFields', 'languages', 'defaultCase'));
     }
     /* Open AI Content Generate */
     public function contentGenerate(Request $request)
@@ -58,7 +59,7 @@ class OpenAiController extends Controller
             $placeholder = array("[title]", "[short_description]", "[description]");
             $replaceBy = array($request->title ?? '', $request->short_description ?? '', $request->description ?? '');
             $prompt = str_replace($placeholder, $replaceBy, $case->prompt);
-            $prompt .=" The tone of voice must be $request->tone. Give me the response in $request->language language.";
+            $prompt .= " The tone of voice must be $request->tone. Give me the response in $request->language language.";
 
             $temp = floatval($request->temp ?? 0.7);
 
@@ -323,8 +324,7 @@ class OpenAiController extends Controller
         try {
 
             $plan = Plan::where('id', auth()->user()->plan_id)->first();
-            $max_tokens = ($plan->word_count < (int)$request->max_words) ? $plan->word_count : (int)$request->max_words;
-            $model = readConfig('open_ai_model');
+            $max_tokens = $plan->word_count;
             // Open AI API call
             $result = OpenAI::chat()->create([
                 'model' => 'gpt-3.5-turbo',
@@ -339,7 +339,7 @@ class OpenAiController extends Controller
                     ],
                 ],
                 'temperature' => 1,
-                'max_tokens' => 4000,
+                'max_tokens' => $max_tokens,
             ]);
             $content = $result['choices'][0]['message']['content'];
             //$tokens = $result['usage']['total_tokens'];
@@ -349,7 +349,7 @@ class OpenAiController extends Controller
             $mainContent = "<pre class='pre-line'> $mainContent </pre>";
             // Content history create
             ContentHistory::create([
-                'title'=>substr($request->description, 0, 200),
+                'title' => substr($request->description, 0, 200),
                 'description' => $request->description ?? '',
                 'temperature' => 1,
                 'type' => 'code',
@@ -359,7 +359,7 @@ class OpenAiController extends Controller
                 'user_id' => Auth::user()->id
             ]);
             balanceDeduction('call_api');
-            
+
             $results = [
                 'content' => $mainContent,
                 'words' => $wordCount,
@@ -377,9 +377,64 @@ class OpenAiController extends Controller
         }
     }
 
+
+
     public function chat()
     {
-        return view('user.openAi.chat');
+        $chatHistory = AiChatHistory::where('user_id',Auth::user()->id)->get();
+        return view('user.openAi.chat',compact('chatHistory'));
+    }
+    public function chatResponse(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'description' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Validation errors',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+        try {
+
+            $plan = Plan::where('id', auth()->user()->plan_id)->first();
+            $max_tokens = $plan->word_count;
+            // Open AI API call
+            $result = OpenAI::chat()->create([
+                'model' => 'gpt-3.5-turbo',
+                'messages' => [
+                    [
+                        "role" => "user",
+                        "content" => $request->description,
+                    ],
+                ],
+                'temperature' => 1,
+                'max_tokens' => $max_tokens,
+            ]);
+            $content = $result['choices'][0]['message']['content'];
+            // Chat history create
+            AiChatHistory::create([
+                'chat_request' => $request->description ?? '',
+                'chat_response' => $content,
+                'user_id' => Auth::user()->id
+            ]);
+            balanceDeduction('call_api');
+
+            $results = [
+                'content' => $content,
+            ];
+            return response()->json($results, 200);
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong',
+                'error' => $errorMessage,
+            ], 400);
+            return response()->json($results, 200);
+        }
     }
     public function getUseCase(Request $request)
     {

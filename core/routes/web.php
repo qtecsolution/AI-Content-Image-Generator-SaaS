@@ -51,6 +51,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'user','namespace' => 'User'], 
     Route::post('/content-generate', 'OpenAiController@contentGenerate')->name('content.generate');
     
     Route::get('/chat', 'OpenAiController@chat')->name('chat.create');
+    Route::post('/chat-response', 'OpenAiController@chatResponse')->name('chat.response');
     Route::get('/code-create', 'OpenAiController@code')->name('code.create');
     Route::post('/code-generate', 'OpenAiController@codeGenerate')->name('code.generate');
 
