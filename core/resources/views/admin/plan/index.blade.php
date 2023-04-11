@@ -47,14 +47,14 @@
                             <div class="pricing-card">
 
                                 <div class="pricing-card-header">
+                                    <span class="name">{{$item->name}}</span>
                                     <span class="price">
                                         <span class="currency">{{readConfig('currency_sambol')}}</span>
                                         <span class="number">{{$item->price}}</span>
                                         <span class="plane-time">/mo</span>
                                     </span>
-                                    <span class="name">{{$item->name}}</span>
-                                    <p class="info {{strpos($item->sub_name, "@") !== false ? 'text-secondary' : ''}}">
-                                        {{$item->sub_name}}</p>
+                                    <small class="text-gray">{{readConfig('currency_sambol')}}{{$item->yearly_price}}/year</small>
+                                    
                                 </div>
 
                                 <div class="pricing-card-body">
@@ -69,19 +69,19 @@
                                             <span class="icon-wrapper">
                                                 <img src="{{asset('assets/images/icons/check.svg')}}" alt="check icon ">
                                             </span>
-                                            <span>{{$item->call_api_count}} Api Request / month</span>
+                                            <span>{{$item->call_api_count}} Api Request per month</span>
                                         </li>
                                         <li>
                                             <span class="icon-wrapper">
                                                 <img src="{{asset('assets/images/icons/check.svg')}}" alt="check icon ">
                                             </span>
-                                            <span>Store {{$item->documet_count}} documents on server</span>
+                                            <span>Store {{$item->documet_count}} documents per month</span>
                                         </li>
                                         <li>
                                             <span class="icon-wrapper">
                                                 <img src="{{asset('assets/images/icons/check.svg')}}" alt="check icon ">
                                             </span>
-                                            <span>Store {{$item->image_count}} Generate Image on server</span>
+                                            <span>Store {{$item->image_count}} Generated Image per month</span>
                                         </li>
                                     </ul>
                                     <div class="d-grid">

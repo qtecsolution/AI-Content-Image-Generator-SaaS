@@ -35,6 +35,7 @@ class PlanController extends Controller
         $plan->documet_count = $request->documet_count;
         $plan->image_count = $request->image_count;
         $plan->price = $request->price;
+        $plan->yearly_price = $request->yearly_price;
         $plan->save();
         myAlert('success', 'Plan Created Succssfully');
         return back();

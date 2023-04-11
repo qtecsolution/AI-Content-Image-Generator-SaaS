@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\PlanExpense;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -60,24 +61,36 @@ class OrderController extends Controller
     function approved($id)
     {
         $order = Order::where('id', $id)->first();
-        $user = Auth::user();
+        $user = User::where('id',$order->user_id)->first();
         $plan = Plan::where('id', $order->plan_id)->first();
         $order->is_paid = true;
         //get old expnase
-        $oldexpense = PlanExpense::where('id', $user->plan_expense_id)->first();
-
+        $oldexpense = PlanExpense::where('id', $user->plan_expense_id)
+             ->where('activated_at', '<=', now())
+             ->where(function ($query) {
+                 $query->whereNull('expire_at')
+                     ->orWhere('expire_at', '>', now());
+             })->where('user_id', $user->id)->first();
+         //remaining days
+         $activeDate = Carbon::parse($oldexpense->activated_at);
+         $expireDate = Carbon::parse($oldexpense->expire_at);
+         $remainingDays = $activeDate->diffInDays($expireDate);
+        $totalDays = $order->type == 2? 365: 30;
+        $months = $order->type == 2? 12: 1;
         if ($oldexpense != null) {
+            $totalDays += $remainingDays; // Add previous remaining days
             //eassign the plan expense
             $expense = new PlanExpense();
             $expense->user_id = $user->id;
             $expense->order_id = $order->id;
             $expense->plan_id = $plan->id;
             $expense->word_count = $plan->word_count;
-            $expense->call_api_count = $plan->call_api_count + ($oldexpense->call_api_count - $oldexpense->current_api_count);
-            $expense->documet_count = $plan->documet_count + ($oldexpense->documet_count - $oldexpense->current_documet_count);
-            $expense->image_count = $plan->image_count + ($oldexpense->image_count - $oldexpense->current_image_count);
+            $expense->call_api_count = ($plan->call_api_count*$months) + ($oldexpense->call_api_count - $oldexpense->current_api_count);
+            $expense->documet_count = ($plan->documet_count*$months) + ($oldexpense->documet_count - $oldexpense->current_documet_count);
+            $expense->image_count = ($plan->image_count*$months) + ($oldexpense->image_count - $oldexpense->current_image_count);
+            $expense->type = $order->type;
             $expense->activated_at = Carbon::now();
-            $expense->expire_at =  Carbon::now()->addDay(30);
+            $expense->expire_at =  Carbon::now()->addDay($totalDays);
             $expense->save();
         } else {
             //eassign the plan expense
@@ -86,11 +99,12 @@ class OrderController extends Controller
             $expense->order_id = $order->id;
             $expense->plan_id = $plan->id;
             $expense->word_count = $plan->word_count;
-            $expense->call_api_count = $plan->call_api_count;
-            $expense->documet_count = $plan->documet_count;
-            $expense->image_count = $plan->image_count;
+            $expense->call_api_count = $plan->call_api_count*$months;
+            $expense->documet_count = $plan->documet_count*$months;
+            $expense->image_count = $plan->image_count*$months;
+            $expense->type = $order->type;
             $expense->activated_at = Carbon::now();
-            $expense->expire_at =  Carbon::now()->addDay(30);
+            $expense->expire_at =  Carbon::now()->addDay($totalDays);
             $expense->save();
         }
         // return $expense;

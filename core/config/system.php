@@ -25,7 +25,7 @@ return array(
     'PAYPAL_CLIENT_ID' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',
     'PAYPAL_APP_SECRET' => 'AYYaAaNKLpw1_KI8bsPWMzHky2qwTo3qOv4yM4LfjMitAUuU22mbVIrgrgqvNqS_9OMMsMRo4gatQNN1',
     'bank_status' => 'on',
-    'about_bank' => 'Write some message',
+    'about_bank' => 'You can just transfer here. Admin will check it out.',
     'bank_name' => 'City Bank',
     'account_number' => '12344355434',
     'account_name' => 'Busniss account',

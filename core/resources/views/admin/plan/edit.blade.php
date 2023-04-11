@@ -69,7 +69,7 @@
 
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail5" class="form-label">Open AI API request limit <span
+                                <label for="inputEmail5" class="form-label">Open AI API request limit per month <span
                                         class="text-danger">*</span> </label>
 
                                 <input type="number" min="0" value="{{ $plan->call_api_count }}" required
@@ -81,7 +81,7 @@
 
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail8" class="form-label">Save Documets limit <span
+                                <label for="inputEmail8" class="form-label">Save Documets limit per month<span
                                         class="text-danger">*</span> </label>
 
                                 <input type="number" min="0" value="{{ $plan->documet_count }}" required
@@ -93,8 +93,7 @@
 
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail9" class="form-label">How many image can generate
-                                    user <span class="text-danger">*</span> </label>
+                                <label for="inputEmail9" class="form-label">Image generate limit per month <span class="text-danger">*</span> </label>
 
                                 <input type="number" min="0" value="{{ $plan->image_count }}" required
                                     name="image_count" class="form-control custom-input" id="inputEmail9"
@@ -105,11 +104,21 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <label for="inputEmail10" class="form-label">Price <span class="text-danger">*</span>
+                                <label for="inputEmail10" class="form-label">Monthly Price <span class="text-danger">*</span>
                                 </label>
                                 <input type="number" value="{{ $plan->price }}" min="0" step="0.01" required
                                     name="price" class="form-control custom-input" id="inputEmail10" placeholder="0">
                                 <small class="text-muted mt-2 fz-12">If you input the 0, it's will be free</small>
+                            </div>
+                            <div class="row mb-3">
+                                <label for="inputEmail6" class="col-sm-12 col-form-label font-500">Yearly Price <span
+                                        class="text-danger">*</span>  </label>
+
+                                <div class="col-sm-12">
+                                    <input type="number" min="0" step="0.01" required name="yearly_price"
+                                        class="form-control custom-input" id="inputEmail6" placeholder="$" value="{{ $plan->yearly_price }}">
+                                </div>
+                                <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be free</small>
                             </div>
 
                             <div class="generate-btn-wrapper">

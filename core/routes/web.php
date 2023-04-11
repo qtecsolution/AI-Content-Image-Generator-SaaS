@@ -80,7 +80,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'user','namespace' => 'User'], 
     Route::get('bank-pay-load', 'PurchaseController@bankPayLoad')->name('checkout.bank');
     Route::get('paypal/pay/success/{id}', 'PurchaseController@paySuccess')->name('paypal.pay.success');
     Route::get('paypal/pay/cancle/{id}', 'PurchaseController@payCancle')->name('paypal.pay.error');
-    Route::get('/plan/user/purchase', 'PurchaseController@userPurchase')->name('user.purchase');
+    Route::get('/plan/purchase', 'PurchaseController@userPurchase')->name('user.purchase');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
     Route::get('/plan/expense', 'PurchaseController@userexpense')->name('plan.userexpense');
     Route::post('/plan/purchase', 'PurchaseController@purchaseDone')->name('plan.purchase.store');

@@ -11,7 +11,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
-
+use Carbon\Carbon;
 
 function strUpperCase($data)
 {
@@ -127,11 +127,16 @@ function showBalance()
             $restApiCall = $expense->call_api_count - $expense->current_api_count;
             $restImage = $expense->image_count - $expense->current_image_count;
             $restDoc = $expense->documet_count - $expense->current_documet_count;
+            //remaining days
+            $activeDate = Carbon::parse($expense->activated_at);
+            $expireDate = Carbon::parse($expense->expire_at);
+            $remainingDays = $activeDate->diffInDays($expireDate);
             return (object) [
                 'api_call'=> $restApiCall,
                 'image'=> $restImage,
                 'document'=> $restDoc,
                 'word'=> $expense->word_count,
+                'remaining_days'=>$remainingDays
             ];
         }else{
             return "";

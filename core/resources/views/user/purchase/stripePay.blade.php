@@ -5,15 +5,15 @@
     {{-- this is single form --}}
     <input type="hidden" name="plan_id" value="{{ $plan->id }}">
     <input type="hidden" id="paymentMethod" name="paymentMethod" value="stripe">
-    <input type="hidden" id="paymentAmount" name="paymentAmount" value="{{ $plan->price }}">
+    <input type="hidden" id="paymentType" name="type" value="{{$type}}">
+    <input type="hidden" id="paymentAmount" name="paymentAmount" value="{{ $type == 2 ? $plan->yearly_price : $plan->price}}">
     <input type="hidden" id="paymentTID" name="paymentTID" value="">
     <input type="hidden" id="value_1" name="value_1" value="">
 
 
 
     <div class="form-group">
-        <label for="name" class="form-label">Name
-        </label>
+        <label for="name" class="form-label">Name</label>
         <input type="text" value="{{ $user->name }}" class="form-control custom-input shadow-none" id="name"
             name="name" autocomplete="off" placeholder="Enter your name">
         <div class="valid-feedback">

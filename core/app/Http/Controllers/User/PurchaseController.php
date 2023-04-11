@@ -10,7 +10,6 @@ use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Mollie\Laravel\Facades\Mollie;
 use Razorpay\Api\Api;
 use Stripe;
 use Omnipay\Omnipay;
@@ -41,11 +40,12 @@ class PurchaseController extends Controller
         }
         return view('user.purchase.purchase', compact('plan', 'user'));
     }
-    public function stripeLoad($id)
+    public function stripeLoad(Request $request,$id)
     {
         $plan = Plan::where('id', $id)->first();
         $user = Auth::user();
-        return view('user.purchase.stripePay', compact('plan', 'user'));
+        $type =$request->type == 2 ? 2 : 1;
+        return view('user.purchase.stripePay', compact('plan', 'user','type'));
     }
 
     public function paypalPayLoad(Request $request)
@@ -60,11 +60,13 @@ class PurchaseController extends Controller
     {
         $plan = Plan::where('id', $request->plan_id)->first();
         $user = Auth::user();
-        return view('user.purchase.bank', compact('plan', 'user'));
+        $type =$request->type == 2 ? 2 : 1;
+        return view('user.purchase.bank', compact('plan', 'user','type'));
     }
 
     public function purchaseDone(Request $request)
     {
+        //return $request->all();
         $request->validate([
             'paymentMethod' => 'required',
             'paymentAmount' => 'required',
@@ -73,9 +75,13 @@ class PurchaseController extends Controller
         $user = Auth::user();
         $plan = Plan::where('id', $request->plan_id)->first();
         $orderInformationUpdate = false;
-        $message = '';
-        if($plan->price <= 0){
-            $oldPurchase = PlanExpense::where(['user_id'=>$user->id,'plan_id'=>$plan->id])->first();
+        $price = $request->type == 2 ? 2 : 1;
+        if($price <= 0){
+            $oldPurchase = PlanExpense::where(['user_id'=>$user->id,'plan_id'=>$plan->id])->where('activated_at', '<=', now())
+            ->where(function ($query) {
+                $query->whereNull('expire_at')
+                    ->orWhere('expire_at', '>', now());
+            })->first();
             if($oldPurchase!=''){
                 myAlert('success', "You've already taken advantage of this free package");
                 return redirect()->route('user.purchase');
@@ -83,7 +89,7 @@ class PurchaseController extends Controller
         }
 
 
-        if ($plan->price <= $request->paymentAmount) {
+        if ($price <= $request->paymentAmount) {
 
             // payment get ways the data
 
@@ -96,8 +102,12 @@ class PurchaseController extends Controller
             $order->email = $request->email;
             $order->phone = $request->phone;
             $order->address = $request->address;
+            $order->type = $request->type;
             if(isset($request->payment_id) && $request->payment_id !== ''){
                 $order->payment_id = $request->payment_id;
+            }
+            if(isset($request->stripeToken) && $request->stripeToken !== ''){
+                $order->payment_id = $request->stripeToken;
             }
             $order->save();
 
@@ -178,6 +188,8 @@ class PurchaseController extends Controller
 
                 //get old expnase
                 $oldexpense = showBalance();
+                $totalDays = $request->type == 2? 365: 30;
+                $months = $order->type == 2? 12: 1;
                 if(isset(demoPlan()->word)){
                     $expense = new PlanExpense();
                     $expense->user_id = $user->id;
@@ -187,22 +199,25 @@ class PurchaseController extends Controller
                     $expense->call_api_count = demoPlan()->api_call;
                     $expense->documet_count = demoPlan()->document;
                     $expense->image_count = demoPlan()->image;
+                    $expense->type = 1;
                     $expense->activated_at = Carbon::now();
                     $expense->expire_at =  Carbon::now()->addDay(30);
                     $expense->save();
                 }else{
                     if ($oldexpense != "") {
+                        $totalDays += $oldexpense->remaining_days; // Add the previous remaining days 
                         //eassign the plan expense
                         $expense = new PlanExpense();
                         $expense->user_id = $user->id;
                         $expense->order_id = $order->id;
                         $expense->plan_id = $plan->id;
                         $expense->word_count = $plan->word_count;
-                        $expense->call_api_count = $plan->call_api_count + $oldexpense->api_call;
-                        $expense->documet_count = $plan->documet_count + $oldexpense->document;
-                        $expense->image_count = $plan->image_count + $oldexpense->image;
+                        $expense->call_api_count = ($plan->call_api_count*$months) + $oldexpense->api_call;
+                        $expense->documet_count = ($plan->documet_count*$months) + $oldexpense->document;
+                        $expense->image_count = ($plan->image_count*$months) + $oldexpense->image;
+                        $expense->type = $request->type;
                         $expense->activated_at = Carbon::now();
-                        $expense->expire_at =  Carbon::now()->addDay(30);
+                        $expense->expire_at =  Carbon::now()->addDay($totalDays);
                         $expense->save();
                     } else {
                         //eassign the plan expense
@@ -211,11 +226,12 @@ class PurchaseController extends Controller
                         $expense->order_id = $order->id;
                         $expense->plan_id = $plan->id;
                         $expense->word_count = $plan->word_count;
-                        $expense->call_api_count = $plan->call_api_count;
-                        $expense->documet_count = $plan->documet_count;
-                        $expense->image_count = $plan->image_count;
+                        $expense->call_api_count = $plan->call_api_count*$months;
+                        $expense->documet_count = $plan->documet_count*$months;
+                        $expense->image_count = $plan->image_count*$months;
+                        $expense->type = $request->type;
                         $expense->activated_at = Carbon::now();
-                        $expense->expire_at =  Carbon::now()->addDay(30);
+                        $expense->expire_at =  Carbon::now()->addDay($totalDays);
                         $expense->save();
                     }
 
@@ -259,21 +275,25 @@ class PurchaseController extends Controller
                 $order->payment_method = 'paypal';
                 $order->save();
 
-                //get old expnase
-                $oldexpense = PlanExpense::where('id', $user->plan_expense_id)->first();
+               //get old expnase
+               $oldexpense = showBalance();
+               $totalDays = $order->type == 2? 365: 30;
+               $months = $order->type == 2? 12: 1;
 
                 if ($oldexpense != null) {
+                    $totalDays += $oldexpense->remaining_days; // Add previous remaining days
                     //eassign the plan expense
                     $expense = new PlanExpense();
                     $expense->user_id = $user->id;
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
                     $expense->word_count = $plan->word_count;
-                    $expense->call_api_count = $plan->call_api_count + ($oldexpense->call_api_count - $oldexpense->current_api_count);
-                    $expense->documet_count = $plan->documet_count + ($oldexpense->documet_count - $oldexpense->current_documet_count);
-                    $expense->image_count = $plan->image_count + ($oldexpense->image_count - $oldexpense->current_image_count);
+                    $expense->call_api_count = ($plan->call_api_count*$months) + $oldexpense->api_call;
+                    $expense->documet_count = ($plan->documet_count*$months) + $oldexpense->document;
+                    $expense->image_count = ($plan->image_count*$months) + $oldexpense->image;
+                    $expense->type = $request->type;
                     $expense->activated_at = Carbon::now();
-                    $expense->expire_at =  Carbon::now()->addDay(30);
+                    $expense->expire_at =  Carbon::now()->addDay($totalDays);
                     $expense->save();
                 } else {
                     //eassign the plan expense
@@ -282,11 +302,11 @@ class PurchaseController extends Controller
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
                     $expense->word_count = $plan->word_count;
-                    $expense->call_api_count = $plan->call_api_count;
-                    $expense->documet_count = $plan->documet_count;
-                    $expense->image_count = $plan->image_count;
+                    $expense->call_api_count = $plan->call_api_count*$months;
+                    $expense->documet_count = $plan->documet_count*$months;
+                    $expense->image_count = $plan->image_count*$months;
                     $expense->activated_at = Carbon::now();
-                    $expense->expire_at =  Carbon::now()->addDay(30);
+                    $expense->expire_at =  Carbon::now()->addDay($totalDays);
                     $expense->save();
                 }
 

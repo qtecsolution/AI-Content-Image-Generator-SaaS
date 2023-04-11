@@ -4,6 +4,9 @@
     <li class="breadcrumb-item active">Checkout</li>
 @endsection
 @section('content')
+@php 
+    $price = request()->input('type') == 2 ? $plan->yearly_price : $plan->price;
+@endphp 
     <div class="main-content p-2 p-md-4 pt-0">
 
         <section class="checkout">
@@ -186,8 +189,8 @@
                                 @csrf
                                 <input type="hidden" id="plan_id" name="plan_id" value="{{ $plan->id }}">
                                 <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
-                                <input type="hidden" id="paymentAmount" name="paymentAmount"
-                                    value="{{ $plan->price }}">
+                                <input type="hidden" id="paymentAmount" name="paymentAmount" value="{{ $price }}">
+                                <input type="hidden" id="paymentType" name="type" value="{{ request()->input('type') == 2 ? 2 : 1 }}">
                                 <input type="hidden" id="paymentID" name="payment_id" value="">
                                 <input type="hidden" id="value_1" name="value_1" value="">
 
@@ -247,16 +250,17 @@
 
                                             <div class="checkout-month d-inline-block">
                                                 <div class="small text-muted">
-                                                    <span class="checkout-subscription d-block">Billed
-                                                        For 30 Days.</span>
-                                                    <span class="d-none checkout-one-time">Billed
-                                                        once.</span>
+                                                    @if(request()->input('type') == 2)
+                                                        <span class="checkout-one-time">Billed for 365 days</span>
+                                                    @else
+                                                        <span class="checkout-subscription d-block">Billed for 30 days.</span>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-auto">
                                             <div class=" checkout-month d-inline-block">
-                                                <span class="text-muted">{{ readConfig('currency_sambol') }}</span>{{ $plan->price }} 
+                                                <span class="text-muted">{{ readConfig('currency_sambol') }}</span>{{ $price }} 
                                             </div>
 
                                         </div>
@@ -274,7 +278,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <span class=" checkout-month d-inline-block">
-                                        <span>{{ readConfig('currency_sambol') }}</span>{{ $plan->price }}
+                                        <span>{{ readConfig('currency_sambol') }}</span>{{ $price }}
                                     </span>
 
                                     
@@ -295,7 +299,7 @@
                         <button type="button" onclick="checkOut()" name="submit"
                             class="btn btn-success btn-block my-3 w-100">
                             <span class=" checkout-month d-inline-block">
-                                Pay {{ readConfig('currency_sambol') }}{{ $plan->price }} 
+                                Pay {{ readConfig('currency_sambol') }}{{ $price }} 
                             </span>
 
                         </button>
@@ -326,7 +330,8 @@
                     paypalPayment();
                     break;
                 case 'stripe':
-                    $('.form-methods').load("{{ route('plan.stripe.load', $plan->id) }}");
+                    var type = $('#paymentType').val();
+                    $('.form-methods').load("{{ route('plan.stripe.load', $plan->id) }}?type="+type);
                     stripPaymnet();
                     break;
                 case 'razorpay':
@@ -343,11 +348,10 @@
 
         }
     </script>
-    @if($plan->price <= 0)
+    @if($price <= 0)
     <script>
         $(document).ready(function() {
             $('#paymentMethod').val('Free');
-            $('#paymentAmount').val({{ $plan->price }});
             $('#paymentID').val('');
             $('#value_1').val('');
             $('#order_payment_done').submit();
@@ -362,7 +366,7 @@
 
             function paypalPayment() {
                 $('#paymentMethod').val('paypal');
-                $('#paymentAmount').val({{ $plan->price }});
+                $('#paymentAmount').val({{ $price }});
                 $('#paymentID').val('');
                 $('#value_1').val('');
                 $('#order_payment_done').submit();
@@ -378,9 +382,10 @@
             function bankPayment() {
 
                 var planId = $('#plan_id').val();
+                var type = $('#paymentType').val();
                 // var formData = $('#order_payment_done').serialize();
-                var url = '{{ route('checkout.bank') }}' + '?plan_id=' + planId;
-                forModal(url, 'Bank Payment Methods');
+                var url = "{{ route('checkout.bank') }}" + `?plan_id=${planId}&type=${type}` ;
+                forModal(url, 'Bank Transfer');
             }
         </script>
     @endif
@@ -394,14 +399,12 @@
             "use strict"
 
             function stripPaymnet() {
-
+                var price = "{{ $price }}";
                 // e.preventDefault();
                 $('#paymentMethod').val('stripe');
-                $('#paymentAmount').val({{ $plan->price }});
+                $('#paymentAmount').val(price);
                 $('#paymentID').val('');
                 $('#value_1').val('');
-
-                // Stripe.setPublishableKey($('#order_payment_done').data('stripe-publishable-key'));
                 Stripe.setPublishableKey("{{ readConfig('STRIPE_KEY') }}");
                 Stripe.createToken({
                     number: $('.card-number').val(),
@@ -439,7 +442,7 @@
             function razorPaymnet(e) {
 
                 $('#paymentMethod').val('razorpay');
-                $('#paymentAmount').val({{ $plan->price }});
+                $('#paymentAmount').val({{ $price }});
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -447,7 +450,7 @@
                 });
                 var options = {
                     "key": "{{ readConfig('RAZORPAY_KEY') }}",
-                    "amount": ({{ $plan->price }} * 100), // 2000 paise = INR 20
+                    "amount": ({{ $price }} * 100), // 2000 paise = INR 20
                     "currency": "USD",
                     "name": "{{ $plan->name }}",
                     "description": "Payment",

@@ -4,6 +4,9 @@
     <li class="breadcrumb-item active">All Plans</li>
 @endsection
 @section('content')
+@php 
+$months = request()->input('type') == 2 ? 12 : 1;
+@endphp
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row g-4">
           
@@ -16,19 +19,29 @@
                     <div class="my-projects-body">
 
                         <div class="pricing-body mt-3">
-
+                            <div class="col-md-12">
+                                <ul class="category-list py-2">
+                                    <li class="category-list-item {{ !request()->input('type') ? 'active' : '' }}"><a href="{{route('user.purchase')}}" class="category-list-link">Monthly</a></li>
+                                    <li class="category-list-item {{ request()->input('type') == 2 ? 'active' : '' }}"><a href="{{route('user.purchase')}}?type=2" class="category-list-link ">Yearly</a></li>
+                                </ul>
+                            </div>
                             <div class="pricing-cards">
                                 <!-- single  card free  -->
                                 @foreach ($plans as $item)
+                                @php 
+                                    $price = request()->input('type') == 2 ? $item->yearly_price : $item->price;
+                                @endphp 
                                 <div class="pricing-card">
+                                    
                                     <div class="pricing-card-header">
+                                        <span class="name">{{$item->name}}</span>
                                         <span class="price">
                                             <span class="currency">{{readConfig('currency_sambol')}}</span>
-                                            <span class="number">{{$item->price}}</span>
-                                            <span class="plane-time">/mo</span>
+                                            <span class="number">{{ $price }}</span>
+                                            <span class="plane-time">/{{ request()->input('type') == 2 ? 'year' : 'mo' }}</span>
                                         </span>
-                                        <span class="name">{{$item->name}}</span>
-                                        <p class="info {{strpos($item->sub_name, "@") !== false ? 'text-secondary' : ''}}">{{$item->sub_name}}</p>
+                                        <small class="text-gray">{{readConfig('currency_sambol')}}{{ request()->input('type') == 2 ? $item->price.'/mo' : $item->yearly_price.'/year' }}</small>
+                                        
                                     </div>
 
                                     <div class="pricing-card-body">
@@ -43,28 +56,28 @@
                                                 <span class="icon-wrapper">
                                                     <img src="{{asset('assets/images/icons/check.svg')}}" alt="check icon ">
                                                 </span>
-                                                <span>{{$item->call_api_count}} Api Request / month</span>
+                                                <span>{{$item->call_api_count * $months  }} Api Request</span>
                                             </li>
                                             <li>
                                                 <span class="icon-wrapper">
                                                     <img src="{{asset('assets/images/icons/check.svg')}}" alt="check icon ">
                                                 </span>
-                                                <span>Store {{$item->documet_count}} documents on server</span>
+                                                <span>Store {{$item->documet_count * $months }} documents on server</span>
                                             </li>
                                             <li>
                                                 <span class="icon-wrapper">
                                                     <img src="{{asset('assets/images/icons/check.svg')}}" alt="check icon ">
                                                 </span>
-                                                <span>Store {{$item->image_count}} Generate Image on server</span>
+                                                <span>Store {{$item->image_count * $months }} Generate Image on server</span>
                                             </li>
                                         </ul>
                                         <div class="d-grid">
-                                            @if($user->plan_id == $item->id && $item->price == 0)
+                                            @if($user->plan_id == $item->id && $price == 0)
                                             <button type="button" class="btn-subscribe subscribed" onclick="redirectUrl('{{route('plan.userexpense')}}')"> 
                                                 See The expenses
                                             </button>
                                             @else
-                                            <button type="button" class="btn-subscribe" onclick="redirectUrl('{{route('plan.purchase',$item->id)}}')"> 
+                                            <button type="button" class="btn-subscribe" onclick="redirectUrl('{{route('plan.purchase',$item->id).'?type='.request()->input('type')}}')"> 
                                                  Purchase now
                                             </button>
                                             @endif

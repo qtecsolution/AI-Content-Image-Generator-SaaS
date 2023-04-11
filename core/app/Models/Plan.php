@@ -13,7 +13,7 @@ class Plan extends Model
 
     protected $fillable = ['user_id', 
     'name', 'word_count', 'call_api_count', 
-    'documet_count', 'lang','image_count','is_published','price'];
+    'documet_count', 'lang','image_count','is_published','price','yearly_price'];
 
     // public function userHasThisPlan()
     // {

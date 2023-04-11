@@ -18,10 +18,10 @@ return new class extends Migration
             $table->integer('word_count')->default(0); // 0 mins Word Count limit per request 
             $table->integer('call_api_count')->default(0); 
             $table->integer('documet_count')->default(0);
-            $table->enum('lang',['all','english'])->default('english');
             $table->integer('image_count')->default(0);
             $table->boolean('is_published')->default(true);
             $table->double('price',10,2)->default(0); //o mins free
+            $table->double('yearly_price',10,2)->nullable(); //o mins free
             $table->timestamps();
         });
     }

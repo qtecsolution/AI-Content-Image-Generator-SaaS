@@ -61,7 +61,7 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="inputEmail3" class="col-sm-12 col-form-label font-500">Open AI API request limit <span
+                                    <label for="inputEmail3" class="col-sm-12 col-form-label font-500">Open AI API request limit per month <span
                                             class="text-danger">*</span> </label>
 
                                     <div class="col-sm-12">
@@ -73,7 +73,7 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="inputEmail4" class="col-sm-12 col-form-label font-500">Save Documets limit <span
+                                    <label for="inputEmail4" class="col-sm-12 col-form-label font-500">Save Documets limit per month<span
                                             class="text-danger">*</span>  </label>
 
                                     <div class="col-sm-12">
@@ -85,9 +85,7 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="inputEmail5" class="col-sm-12 col-form-label font-500">How many image can generate
-                                        user
-                                        <span class="text-danger">*</span> </label>
+                                    <label for="inputEmail5" class="col-sm-12 col-form-label font-500">Image generate limit per month <span class="text-danger">*</span> </label>
 
                                     <div class="col-sm-12">
                                         <input type="number" min="0" required name="image_count"
@@ -100,11 +98,21 @@
 
 
                                 <div class="row mb-3">
-                                    <label for="inputEmail6" class="col-sm-12 col-form-label font-500">Price <span
+                                    <label for="inputEmail6" class="col-sm-12 col-form-label font-500">Monthly Price <span
                                             class="text-danger">*</span>  </label>
 
                                     <div class="col-sm-12">
                                         <input type="number" min="0" step="0.01" required name="price"
+                                            class="form-control custom-input" id="inputEmail6" placeholder="$">
+                                    </div>
+                                    <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be free</small>
+                                </div>
+                                <div class="row mb-3">
+                                    <label for="inputEmail6" class="col-sm-12 col-form-label font-500">Yearly Price <span
+                                            class="text-danger">*</span>  </label>
+
+                                    <div class="col-sm-12">
+                                        <input type="number" min="0" step="0.01" required name="yearly_price"
                                             class="form-control custom-input" id="inputEmail6" placeholder="$">
                                     </div>
                                     <small class="text-muted mt-2 fz-12">if you input the 0 value it's will be free</small>

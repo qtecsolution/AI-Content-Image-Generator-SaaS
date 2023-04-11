@@ -65,21 +65,11 @@
                 <a href="{{ route('user.templates') }}"
                             class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['user.templates']) ? 'active' : '' }}">
                     <span class="icon">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
-                                stroke="#475467" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.54883 10.8418H17.5488" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2.54883 5.8418H17.5488" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2.54883 15.8418H17.5488" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg> 
                     </span>
                     <span class="fz-16">All Templates</span>
                 </a>
@@ -89,7 +79,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button
-                                    class="accordion-button {{ menuActive(['content.*', 'contents.*', 'content-history.*']) ? '' : 'collapsed' }}"
+                                    class="accordion-button {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? '' : 'collapsed' }}"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#aiContent"
                                     aria-expanded="true" aria-controls="collapseOne">
                                     <span class="icon">
@@ -138,21 +128,9 @@
                         <a href="{{ route('chat.create') }}"
                             class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['chat.create']) ? 'active' : '' }}">
                             <span class="icon">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
-                                        stroke="#475467" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.5 12.5C17.5 12.942 17.3244 13.366 17.0118 13.6785C16.6993 13.9911 16.2754 14.1667 15.8333 14.1667H5.83333L2.5 17.5V4.16667C2.5 3.72464 2.67559 3.30072 2.98816 2.98816C3.30072 2.67559 3.72464 2.5 4.16667 2.5H15.8333C16.2754 2.5 16.6993 2.67559 17.0118 2.98816C17.3244 3.30072 17.5 3.72464 17.5 4.16667V12.5Z" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg> 
                             </span>
                             <span class="fz-16">Chat With AI</span>
                         </a>
@@ -691,20 +669,10 @@
                 <a href="{{ route('user.templates') }}"
                             class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['user.templates']) ? 'active' : '' }}">
                     <span class="icon">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                    xmlns="http://www.w3.org/2000/svg">
-                            <path
-                                d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
-                                stroke="#475467" stroke-width="2" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                            <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
-                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                            <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
-                                stroke-linecap="round" stroke-linejoin="round" />
+                        <svg width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.54883 10.8418H17.5488" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2.54883 5.8418H17.5488" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2.54883 15.8418H17.5488" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </span>
                     <span class="fz-16">All Templates</span>
@@ -715,7 +683,7 @@
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="headingOne">
                                 <button
-                                    class="accordion-button {{ menuActive(['content.*', 'contents.*', 'content-history.*']) ? '' : 'collapsed' }}"
+                                    class="accordion-button {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? '' : 'collapsed' }}"
                                     type="button" data-bs-toggle="collapse" data-bs-target="#aiContent"
                                     aria-expanded="true" aria-controls="collapseOne">
                                     <span class="icon">
@@ -760,20 +728,8 @@
                         <a href="{{ route('chat.create') }}"
                             class="dashboard-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['chat.create']) ? 'active' : '' }}">
                             <span class="icon">
-                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M11.6666 1.66675H4.99992C4.55789 1.66675 4.13397 1.84234 3.82141 2.1549C3.50885 2.46746 3.33325 2.89139 3.33325 3.33341V16.6667C3.33325 17.1088 3.50885 17.5327 3.82141 17.8453C4.13397 18.1578 4.55789 18.3334 4.99992 18.3334H14.9999C15.4419 18.3334 15.8659 18.1578 16.1784 17.8453C16.491 17.5327 16.6666 17.1088 16.6666 16.6667V6.66675L11.6666 1.66675Z"
-                                        stroke="#475467" stroke-width="2" stroke-linecap="round"
-                                        stroke-linejoin="round" />
-                                    <path d="M11.6667 1.66675V6.66675H16.6667" stroke="#475467"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.3334 10.8333H6.66675" stroke="#475467" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M13.3334 14.1667H6.66675" stroke="#475467" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                    <path d="M8.33341 7.5H7.50008H6.66675" stroke="#475467" stroke-width="2"
-                                        stroke-linecap="round" stroke-linejoin="round" />
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M17.5 12.5C17.5 12.942 17.3244 13.366 17.0118 13.6785C16.6993 13.9911 16.2754 14.1667 15.8333 14.1667H5.83333L2.5 17.5V4.16667C2.5 3.72464 2.67559 3.30072 2.98816 2.98816C3.30072 2.67559 3.72464 2.5 4.16667 2.5H15.8333C16.2754 2.5 16.6993 2.67559 17.0118 2.98816C17.3244 3.30072 17.5 3.72464 17.5 4.16667V12.5Z" stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
                             </span>
                             <span class="fz-16">Chat With AI</span>
@@ -1228,7 +1184,9 @@
     @include('layouts.modal')
     <!--Start of Tawk.to Script-->
     @if (readConfig('tawk_to') == 'yes')
-        @include('layouts.tawk_to')
+        @if(menuActive(['chat.create','content.*', 'contents.*', 'content-history.*','code.*'])==false)
+            @include('layouts.tawk_to')
+        @endif
     @endif
     <!--End of Tawk.to Script-->
 
