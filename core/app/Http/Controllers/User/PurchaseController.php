@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\PlanExpense;
+use App\Models\User;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -26,7 +27,7 @@ class PurchaseController extends Controller
         $this->gateway->setSecret(env('PAYPAL_APP_SECRET'));
         $this->gateway->setTestMode(true);
     }
-    
+
     public function purchase($id)
     {
         $plan = Plan::where('id', $id)->first();
@@ -70,8 +71,12 @@ class PurchaseController extends Controller
             'paymentMethod' => 'required',
             'paymentAmount' => 'required',
         ]);
-        // return $request;
-        $user = Auth::user();
+        $request->user_id = Auth::user()->id;
+        return $this->purchaseSubmit($request);
+    }
+    public function purchaseSubmit($request)
+    {
+        $user = User::findOrFail($request->user_id);
         $plan = Plan::where('id', $request->plan_id)->first();
         $orderInformationUpdate = false;
         $price = $request->type == 2 ? $plan->yearly_price : $plan->price;
@@ -97,10 +102,10 @@ class PurchaseController extends Controller
             $order->user_id = $user->id;
             $order->plan_id = $plan->id;
             $order->total = $request->paymentAmount;
-            $order->name = $request->name;
-            $order->email = $request->email;
-            $order->phone = $request->phone;
-            $order->address = $request->address;
+            $order->name = $request->name??$user->name;
+            $order->email = $request->email??$user->email;
+            $order->phone = $request->phone??$user->phone;
+            $order->address = $request->address??'';
             $order->type = $request->type;
             if(isset($request->payment_id) && $request->payment_id !== ''){
                 $order->payment_id = $request->payment_id;
@@ -204,7 +209,7 @@ class PurchaseController extends Controller
                     $expense->save();
                 }else{
                     if ($oldexpense != "") {
-                        $totalDays += $oldexpense->remaining_days; // Add the previous remaining days 
+                        $totalDays += $oldexpense->remaining_days; // Add the previous remaining days
                         //eassign the plan expense
                         $expense = new PlanExpense();
                         $expense->user_id = $user->id;
@@ -249,10 +254,82 @@ class PurchaseController extends Controller
             }
         } else {
             myAlert('error', 'Your payable amount is lower the the plan purchase price, please try again');
-            return back();
+            return redirect()->route('user.purchase');
         }
     }
+    public function aamarpayProcess(Request $request){
+        $plan = Plan::where('id',$request->plan)->firstOrFail();
+        $phone = $request->phone??"018";
+        $url = 'https://sandbox.aamarpay.com/request.php'; // live url https://secure.aamarpay.com/request.php
+        $fields = [
+            'store_id' => 'aamarpaytest',
+            'amount' => $request->price, //transaction amount
+            'payment_type' => 'VISA', //no need to change
+            'currency' => 'USD',  //currenct will be USD/BDT
+            'tran_id' => rand(1111111,9999999), //transaction id must be unique from your end
+            'cus_name' => Auth::user()->name,  //customer name
+            'cus_email' => Auth::user()->email, //customer email address
+            'cus_phone' => Auth::user()->phone??$phone, //customer email address
+            'desc' => 'Payment for AI',
+            'success_url' => route('aamarpay.success'), //your success route
+            'fail_url' => route('aamarpay.fail'), //your fail route
+            'cancel_url' => route('aamarpay.fail'), //your cancel url
+            'opt_a' => $plan->id,  //optional paramter
+            'opt_b' => $request->type,
+            'opt_c' => Auth::user()->id,
+            'signature_key' => 'dbb74894e82415a2f7ff0ec3a97e4183'
+        ];
 
+        $fields_string = http_build_query($fields);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_VERBOSE, true);
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $url_forward = str_replace('"', '', stripslashes(curl_exec($ch)));
+        curl_close($ch);
+
+        $this->redirect_to_merchant($url_forward);
+    }
+    function redirect_to_merchant($url) {
+
+        ?>
+        <html xmlns="http://www.w3.org/1999/xhtml">
+        <head><script type="text/javascript">
+                function closethisasap() { document.forms["redirectpost"].submit(); }
+            </script></head>
+        <body onLoad="closethisasap();">
+
+        <form name="redirectpost" method="post" action="<?php echo 'https://sandbox.aamarpay.com/'.$url; ?>"></form>
+        <!-- for live url https://secure.aamarpay.com -->
+        </body>
+        </html>
+        <?php
+        exit;
+    }
+    // Aamar Pay success
+    public function aamarpaySuccess(Request $request){
+        $plan = Plan::where('id',$request->opt_a)->firstOrFail();
+        $price = $request->opt_b==2? $plan->yearly_price:$plan->price;
+        $myResponse = [
+          'plan_id'=>$request->opt_a,
+            'type' => $request->opt_b,
+            'paymentMethod'=>'aamarpay',
+            'paymentAmount'=>$price,
+            'payment_id'=>$request->pg_txnid,
+            'user_id'=>$request->opt_c
+        ];
+        $myResponse = (object) $myResponse;
+        return $this->purchaseSubmit($myResponse);
+     }
+     // Aamar Pay fail
+     public function aamarpayFail(Request $request){
+         myAlert('error', 'Payment unsuccessful. Please try again later.');
+         return redirect()->route('user.purchase');
+     }
     public function paySuccess(Request $request, $id)
     {
         if ($request->input('paymentId') && $request->input('PayerID')) {

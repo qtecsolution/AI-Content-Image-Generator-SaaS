@@ -4,9 +4,9 @@
     <li class="breadcrumb-item active">Checkout</li>
 @endsection
 @section('content')
-@php 
+@php
     $price = request()->input('type') == 2 ? $plan->yearly_price : $plan->price;
-@endphp 
+@endphp
     <div class="main-content p-2 p-md-4 pt-0">
 
         <section class="checkout">
@@ -145,6 +145,26 @@
                                         </div>
                                     </li>
                                 @endif
+                                <li class="list-group-item p-0">
+                                    <div class="customradio p-2">
+                                        <input type="radio" id="aamarPay" class="customradio-box"
+                                               name="payment_processor" value="aamarpay" hidden="">
+                                        <label for="aamarPay" class="customradio-label w-100">
+                                            <div class="d-flex justify-content-between align-items-center">
+
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <img src="{{ asset('assets/images/amarpay.png') }}"
+                                                         class="width-6 rounded-sm">
+                                                    <span class="payment-name">aamarPay </span>
+                                                </div>
+
+                                                <div>
+                                                    <div class="payment-way">aamarPay</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </li>
 
                                 @if (readConfig('bank_status') == 'on')
                                     <li class="list-group-item p-0">
@@ -179,7 +199,7 @@
                         </div>
                     </div>
 
-                    <div class="card border-0 shadow-sm">
+                    <div class="card border-0 shadow-sm d-none">
                         <div class="card-header">
                             <div class="font-weight-medium py-1">Billing information</div>
                         </div>
@@ -260,7 +280,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class=" checkout-month d-inline-block">
-                                                <span class="text-muted">{{ readConfig('currency_sambol') }}</span>{{ $price }} 
+                                                <span class="text-muted">{{ readConfig('currency_sambol') }}</span>{{ $price }}
                                             </div>
 
                                         </div>
@@ -281,7 +301,7 @@
                                         <span>{{ readConfig('currency_sambol') }}</span>{{ $price }}
                                     </span>
 
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -299,7 +319,7 @@
                         <button type="button" onclick="checkOut()" name="submit"
                             class="btn btn-success btn-block my-3 w-100">
                             <span class=" checkout-month d-inline-block">
-                                Pay {{ readConfig('currency_sambol') }}{{ $price }} 
+                                Pay {{ readConfig('currency_sambol') }}{{ $price }}
                             </span>
 
                         </button>
@@ -312,7 +332,6 @@
                 </div>
             </div>
         </section>
-
 
     </div>
 @endsection
@@ -338,6 +357,9 @@
                     // $('.form-methods').load('{{ route('plan.razorpay.load', $plan->id) }}');
                     razorPaymnet();
                     break;
+                case 'aamarpay':
+                    aamarPay()
+                    break;
                 case 'bank':
                     bankPayment()
                     break;
@@ -358,7 +380,7 @@
         });
     </script>
     @endif
-    
+
 
     @if (readConfig('PAYPAL_ACTIVE') == 'on')
         <script>
@@ -374,6 +396,49 @@
         </script>
     @endif
 
+
+    <script>
+        function aamarPay(){
+            var type = $('#paymentType').val();
+            window.location.href = "{{route('aamarpay.process').'?plan='.$plan->id}}&price={{$price}}&type="+type;
+            const formData = {
+                cus_name: '{{Auth::user()->name}}',
+                cus_email : '{{Auth::user()->email}}',
+                cus_phone : '{{Auth::user()->phone}}',
+                amount:'{{ $price }}',
+                tran_id: {{$plan->id."-".time()}},
+                signature_key: "ca14b13465d1afe8305ce219dd9a3599",
+                store_id: "dataghor",
+                currency:'USD',
+                desc:"Payment for AI",
+                cus_add1: "53, Gausul Azam Road, Sector-14, Dhaka, Bangladesh",
+                cus_add2: "Dhaka",
+                cus_city: "Dhaka",
+                cus_country: "Bangladesh",
+                success_url: "{{route('aamarpay.success')}}",
+                fail_url: "{{route('aamarpay.success')}}",
+                cancel_url: "{{route('aamarpay.success')}}",
+                type: "json",
+            };
+            const url ="https://sandbox.aamarpay.com/jsonpost.php";
+            const json = JSON.stringify(formData);
+
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: json,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+
+        }
+    </script>
 
     @if (readConfig('bank_status') == 'on')
         <script>
