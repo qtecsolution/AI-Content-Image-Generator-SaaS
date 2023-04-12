@@ -100,7 +100,7 @@
         <input type="hidden" name="paymentMethod" value="Free">
         <input type="hidden" name="paymentAmount" value="{{ freePlan()->price }}">
         <input type="hidden" name="paymentTID" value="">
-        <input type="hidden" name="value_1" value="">
+        <input type="hidden" name="type" value="1">
 
         <input type="hidden" name="name" value="{{ Auth::user()->name }}">
         <input type="hidden" name="email" value="{{ Auth::user()->email }}">

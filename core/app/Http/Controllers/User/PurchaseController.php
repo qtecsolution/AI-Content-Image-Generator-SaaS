@@ -66,7 +66,6 @@ class PurchaseController extends Controller
 
     public function purchaseDone(Request $request)
     {
-        //return $request->all();
         $request->validate([
             'paymentMethod' => 'required',
             'paymentAmount' => 'required',
@@ -75,7 +74,7 @@ class PurchaseController extends Controller
         $user = Auth::user();
         $plan = Plan::where('id', $request->plan_id)->first();
         $orderInformationUpdate = false;
-        $price = $request->type == 2 ? 2 : 1;
+        $price = $request->type == 2 ? $plan->yearly_price : $plan->price;
         if($price <= 0){
             $oldPurchase = PlanExpense::where(['user_id'=>$user->id,'plan_id'=>$plan->id])->where('activated_at', '<=', now())
             ->where(function ($query) {

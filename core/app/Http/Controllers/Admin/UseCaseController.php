@@ -122,7 +122,7 @@ class UseCaseController extends Controller
             }
             UseCase::create($input);
             myAlert('success', 'Use case saved successfully.');
-            return back();
+            return redirect()->route('use-case.index');
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
             myAlert('error', $errorMessage);
