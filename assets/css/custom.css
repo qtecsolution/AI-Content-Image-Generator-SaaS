@@ -255,9 +255,9 @@
 .purchesinfo-list .blog-image{
     height: auto;
 }
-.dashboard-link.active {
+/* .dashboard-link.active {
     color: #2c4caa !important;
-}
+} */
 @media screen and (min-width: 62rem){
     .sidebar {
         gap: 0.75rem;

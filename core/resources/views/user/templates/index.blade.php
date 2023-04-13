@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 <div class="main-content p-2 p-md-4 pt-0">
-    <div class="row">
+    <div class="row ">
 
         <div class="col-md-12">
             <div class="my-projects all-templates">
@@ -13,16 +13,16 @@
                     <h5 class="header-title text-capitalize"> Use Case Templates </h5>
                 </div>
                 <div class="my-projects-body">
-                    <div class="row">
+                    <div class="row gy-2">
                         <div class="col-md-12">
                             <ul class="category-list">
                                 <li class="category-list-item {{ (Route::currentRouteName() == 'user.templates' && !request()->input('cat')) ? 'active' : '' }}">
-                                    <a href="{{ route('user.templates') }}" class="category-list-link">All</a>
+                                    <a href="{{ route('user.templates') }}" class="category-list-link py-2">All</a>
                                 </li>
                                 @foreach ($categories as $cat)
                                     <li class="category-list-item {{ Request::url() == route('user.templates') && request()->input('cat')==$cat->slug ? 'active' : '' }}">
                                         <a href="{{ route('user.templates')."?cat=$cat->slug" }}"
-                                            class="category-list-link ">{{ $cat->name }}</a>
+                                            class="category-list-link py-2 ">{{ $cat->name }}</a>
                                     </li>
                                 @endforeach
                             </ul>

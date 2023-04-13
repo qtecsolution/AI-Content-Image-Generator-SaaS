@@ -7,10 +7,10 @@
     <div class="main-content p-2 p-md-4 pt-0">
         <section class="my-projects">
             <div class="my-projects-header border-bottom">
-                <h4 class="header-title">AI Content Generate</h4>
+                <h4 class="header-title mt-1">AI Content Generate</h4>
             </div>
             <div class="my-projects-body">
-                <div class="row">
+                <div class="row m-0">
 
                     <!-- create post column -->
                     <div class="col-lg-5 mt-3">
@@ -68,7 +68,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-6 mt-4" id="selectPriority">
+                                        <div class="col-sm-6 mt-4" id="selectPriority">
                                             <div class="form-group">
                                                 <label for="priority" class="form-label">Creativity <i
                                                         class="fa fa-info-circle" data-bs-toggle="tooltip"
@@ -82,7 +82,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-sm-6">
                                             <div class="form-group">
                                                 <label for="priority" class="form-label">Tone of voice <i
                                                         class="fa fa-info-circle" data-bs-toggle="tooltip"
@@ -104,7 +104,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-sm-6">
                                             <div class="form-group mt-3">
                                                 <label for="quantity" class="form-label">Number of results <i
                                                         class="fa fa-info-circle" data-bs-toggle="tooltip"
@@ -119,7 +119,7 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="col-6">
+                                        <div class="col-sm-6">
                                             <div class="form-group mt-3">
                                                 <label for="max_words" class="form-label">Maximum Results Length <i
                                                         class="fa fa-info-circle" data-bs-toggle="tooltip"

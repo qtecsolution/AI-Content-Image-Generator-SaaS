@@ -7,6 +7,7 @@
     // @include breakpoint(tab992) {
     //     padding: size(30) size(50);
     // }
+    overflow-x: hidden;
 }
 
 .welcome {
@@ -99,11 +100,14 @@
     @include hideScrollbar;
     @include flex-column;
     gap: size(0);
+    
 
     
     &-header {
        
         padding-bottom: size(12); 
+        @include flex-between;
+        align-items: flex-end;
         .header-title {
             color: $gray-800; 
             @include font($primaryFont,16,bold,normal,24);
@@ -139,6 +143,7 @@
             @include flex;
              gap: size(20);
             flex-wrap: wrap;
+            justify-content: center;
          }
     }
     

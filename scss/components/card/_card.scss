@@ -10,7 +10,7 @@
     @include transitionsall;
     // min-width: size(180); 
     min-width: size(170);
-    max-width: size(290);
+    // max-width: size(290);
 
     @include breakpoint(tab992) {
         padding: size(20);

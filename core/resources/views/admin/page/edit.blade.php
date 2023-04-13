@@ -28,7 +28,7 @@
 
 
         <div class="float-right">
-            <button class="btn btn-primary px-5 radius-30" type="submit">@translate(Save)</button>
+            <button class="generate-btn px-4" type="submit">@translate(Save)</button>
         </div>
 
     </form>

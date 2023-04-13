@@ -7,7 +7,7 @@
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
-        <div class="row">
+        <div class="">
             <div class="col-md-12">
                 <section class="my-projects">
                     <div class="my-projects-header">

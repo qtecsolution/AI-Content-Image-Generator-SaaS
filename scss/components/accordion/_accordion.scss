@@ -193,6 +193,11 @@
                 @include font($secondaryFont,14,semibold,normal,24);
                 padding:size(10) size(12);
                 @include radius(10);
+                svg {
+                    path {
+                      stroke: $gray-800;
+                    }
+                  }
 
                 &::after {
                                 transform: rotate(180deg);
@@ -234,5 +239,6 @@
         
     }
 }
+
 
 

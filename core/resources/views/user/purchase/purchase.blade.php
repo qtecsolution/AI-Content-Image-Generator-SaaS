@@ -317,7 +317,7 @@
 
                     <div class="px-2">
                         <button type="button" onclick="checkOut()" name="submit"
-                            class="btn btn-success btn-block my-3 w-100">
+                            class="gradient-btn mt-2">
                             <span class=" checkout-month d-inline-block">
                                 Pay {{ readConfig('currency_sambol') }}{{ $price }}
                             </span>

@@ -6,7 +6,7 @@
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
-        <div class="row g-4">
+        <div class="row g-4 mx-0">
 
             <div class="col-md-12">
                 <div class="my-projects">
@@ -15,7 +15,7 @@
                     </div>
 
                     <div class="my-projects-body mt-4">
-                        <div class="row g-4 g-4">
+                        <div class="row g-4">
                             @if (!$order->is_paid)
                             <h4 class="text-warning mt-5"> Admin authorization is necessary for this order, please wait.</h3>
                             @endif

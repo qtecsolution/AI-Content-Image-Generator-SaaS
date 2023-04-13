@@ -112,9 +112,36 @@
     }
   } 
 
+  .dashboard-menu {
+    padding-top: size(30);
+   
+  }
+
 
   .dashboard-link {
-    padding: size(20) size(10);
+    
     display: flex;
     gap: size(10);
+    // background-color: red;
+    // background: #DCE3FF;
+    color: $gray-800;
+    @include font($secondaryFont,14,normal,normal,24);
+    padding:size(12) size(12);
+    @include radius(10);
+    margin-bottom: size(4);
+    padding-left: size(14);
+
+    &.active {
+      background: #DCE3FF;
+      @include font($secondaryFont,14,semibold,normal,24);
+
+      svg {
+        path {
+        
+          stroke: $gray-800;
+        }
+      }
+    }
+
+
   }

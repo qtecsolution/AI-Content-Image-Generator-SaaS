@@ -21,3 +21,23 @@
 
 
 // }
+
+.delete-info {
+    @include flex-column;
+    margin-block: size(20);
+    gap: size(8);
+
+    .delete-title {
+        color: $gray-900;
+        @include font($primaryFont,16,semibold,normal,24);
+        @include breakpoint(mobile576) {
+            @include font($primaryFont,18,semibold,normal,24);
+        }
+    }
+    .delete-text {
+        color: $gray-500;
+        @include font($primaryFont,14,normal,normal,20);
+        margin-bottom: size(10);
+    }
+    
+}

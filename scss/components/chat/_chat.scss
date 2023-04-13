@@ -19,7 +19,7 @@ $bubble-bob-background: #9E9DA2;
     @include w100;
     max-width: size(900);
 
-    height: 60vh;
+    height: 80vh;
     @include border-single(right,solid,1,$gray-300);
     
 
@@ -35,7 +35,7 @@ $bubble-bob-background: #9E9DA2;
         padding: size(10);
 
         &::-webkit-scrollbar {
-            width: size(6);
+            width: size(2);
         }
         &::-webkit-scrollbar-track {
             background: #ddd;
@@ -57,10 +57,16 @@ $bubble-bob-background: #9E9DA2;
         }
     }
     .msg-img {
-        @include square(50);
+        @include square(30);
         @include radius(50);
         overflow: hidden;
         margin-right: size(10);
+        flex-shrink: 0;
+
+        @include breakpoint(mobile576) {
+            @include square(50);
+
+        }
         
         img {
             @include wh100;
@@ -119,7 +125,8 @@ $bubble-bob-background: #9E9DA2;
             flex: 1;
             background: #ececec ;
             @include font($primaryFont,14,normal,normal,20);
-          
+            height: size(50);
+             padding-top: size(15);
 
 
             &:focus {
