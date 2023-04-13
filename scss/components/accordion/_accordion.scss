@@ -224,8 +224,10 @@
     .menu-item {
         color: $gray-600;
         @include font($primaryFont,14,medium,normal,24);
+        @include transitionsall;
         @include hover {
             color: $gray-700;
+            transform: translateX(2px);
         }
 
         &.active {
@@ -241,4 +243,83 @@
 }
 
 
+.new-sidebar {
+    @include list-vertical;
+    gap: size(10);
+    width: 100%;
+    padding-top: size(20);
 
+   .sidebar-link{
+        padding:size(10);
+        display: block;
+        display: none;
+        padding:size(10) size(12);
+        @include radius(10);
+        gap: size(12);
+        @include flex;
+        @include transitionsall;
+        @include hover {
+            color: $gray-700;
+            transform: translateX(2px);
+        }
+
+        &.active {
+            background-color: #dce3ff ;
+            color: $gray-800;
+            @include font($secondaryFont,14,semibold,normal,24);
+            
+        }
+    }
+    .accordion {
+        gap: size(10);
+        width: 100%;
+    }
+    .accordion-item {
+        border: none;
+    }
+      .accordion-button {
+        box-shadow: none;
+        padding: 0;
+        width: 100%;
+        padding:size(10) size(12);
+        display: flex;
+        align-items: center;
+        gap: size(12);
+        transition: transform .3s ease-in-out;
+        color: $gray-600;
+        @include font($secondaryFont,14,normal,normal,24);
+        span {
+            line-height: 1;
+        }
+
+        @include hover {
+            color: $gray-700;
+            transform: translateX(2px);
+        }
+        &::after {
+                   
+            background: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%231D2939' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+            
+}
+      }
+    .accordion-button:not(.collapsed) {
+        background-color: #dce3ff ;
+        box-shadow: none;
+        color: $gray-800;
+        @include font($secondaryFont,14,semibold,normal,24);
+      
+                @include radius(10);
+                svg {
+                    path {
+                      stroke: $gray-800;
+                    }
+                  }
+
+                &::after {
+                   
+                                transform: rotate(180deg);
+                                background: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1.5L6 6.5L11 1.5' stroke='%231D2939' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat center;
+                                
+                }
+    }
+}
