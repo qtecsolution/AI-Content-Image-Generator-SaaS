@@ -70,6 +70,28 @@ $months = request()->input('type') == 2 ? 12 : 1;
                                                 </span>
                                                 <span>Store {{$item->image_count * $months }} Generate Image on server</span>
                                             </li>
+                                            <li>
+                                                <span class="icon-wrapper">
+                                                    <img src="{{ asset('assets/images/icons/check.svg') }}"
+                                                        alt="check icon ">
+                                                </span>
+                                                @php
+                                                    $templates = explode(',', $item->templates);
+                                                    $templatesCategory = [0=>'All Templates',1=>'Basic Templates',2=>'Standard Templates',3=>'Professional Templates'];
+                                                @endphp
+                                                @if (in_array(0, $templates))
+                                                    <span> All Templates </span>
+                                                @else
+                                                    <span>
+                                                        @foreach($templates as $tKey =>  $temp)
+                                                            @if($tKey>0) 
+                                                            , 
+                                                            @endif
+                                                            {{$templatesCategory[$temp]}}
+                                                        @endforeach
+                                                    </span>
+                                                @endif
+                                            </li>
                                         </ul>
                                         <div class="d-grid">
                                             @if($user->plan_id == $item->id && $price == 0)

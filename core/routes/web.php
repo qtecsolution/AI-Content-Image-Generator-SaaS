@@ -118,6 +118,7 @@ Route::group(['middleware' => ['auth', 'admin'],'prefix'=>'admin','namespace' =>
     Route::post('payment/paypal/store', 'PaymentMethodController@paypalSettingStore')->name('payment.paypal.store');
     Route::post('payment/stripe/store', 'PaymentMethodController@stripeSettingStore')->name('payment.stripe.store');
     Route::post('payment/rezor/store', 'PaymentMethodController@rezorSettingStore')->name('payment.rezor.store');
+    Route::post('payment/aamarpay/store', 'PaymentMethodController@aamarPaySettingStore')->name('payment.aamarpay.store');
     Route::post('payment/bank/store', 'PaymentMethodController@bankSettingStore')->name('payment.bank.store');
     Route::post('payment/mollie/store', 'PaymentMethodController@mollieSettingStore')->name('payment.mollie.store');
     // Settings

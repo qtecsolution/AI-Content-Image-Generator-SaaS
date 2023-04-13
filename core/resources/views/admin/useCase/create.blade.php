@@ -87,31 +87,42 @@
                                             <!-- Input Fields  -->
                                             <div class="col-12 mb-3">
                                                 <div class="form-group">
-                                                    <label for="details" class="form-label"> Input Fields & Label:</label>
-                                                    <div class="fz-14 d-flex border-bottom py-2 my-2">
-                                                        <div class="checkWithLable mb-2 col-md-4">
+                                                    <label for="details" class="form-label"> Input Fields Label and Placeholder:</label>
+                                                    <div class="row fz-14 border-bottom py-2 my-2">
+                                                        <div class="checkWithLable mb-2 col-md-12">
                                                             <input type="checkbox" id="useCaseTitle"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="1" checked hidden>
-                                                            <label for="useCaseTitle" class="checkWithLable-label">Title :</label>
+                                                            <label for="useCaseTitle" class="checkWithLable-label">Title (Label &amp; Placeholder) :</label>
                                                         </div>
-                                                        <div class="input-box col-md-8">
+                                                        <div class="input-box col-md-6 col-sm-12">
                                                             <input class="form-control" name="title_label" value="Title">
-                                                            @error('title_label')
-                                                                <div class="text-danger">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
+                                                                @error('title_label')
+                                                                    <div class="text-danger">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                        </div>
+                                                        <div class="input-box col-md-6 col-sm-12">
+                                                            <input class="form-control" name="title_placeholder" value="Write here" placeholder="Placeholder">
+                                                                @error('title_placeholder')
+                                                                    <div class="text-danger">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="fz-14 d-flex border-bottom py-2 my-2">
-                                                        <div class="checkWithLable mb-2 col-md-4">
+                                                    <div class="fz-14 row border-bottom py-2 my-2">
+                                                        <div class="checkWithLable mb-2 col-md-12">
                                                             <input type="checkbox" id="useCaseShort"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="2" hidden>
-                                                            <label for="useCaseShort" class="checkWithLable-label">Short Description :</label>
+                                                            <label for="useCaseShort" class="checkWithLable-label">Short Description <i
+                                                                class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                data-bs-title="Use this input field with dynamic label and placeholder"></i> : </label>
                                                         </div>
-                                                        <div class="input-box col-md-8">
+                                                        <div class="input-box col-md-6">
                                                             <input class="form-control" name="short_description_label" value="Short Description">
                                                             @error('short_description_label')
                                                                 <div class="text-danger">
@@ -119,17 +130,33 @@
                                                                 </div>
                                                             @enderror
                                                         </div>
+                                                        <div class="input-box col-md-6">
+                                                            <input class="form-control" name="short_description_placeholder" value="Write short description here">
+                                                            @error('short_description_placeholder')
+                                                                <div class="text-danger">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-                                                    <div class="fz-14 d-flex border-bottom py-2 my-2">
-                                                        <div class="checkWithLable mb-2 col-md-4">
+                                                    <div class="fz-14 row border-bottom py-2 my-2">
+                                                        <div class="checkWithLable mb-2 col-md-12">
                                                             <input type="checkbox" id="useCaseDescription"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="3" checked hidden>
-                                                            <label for="useCaseDescription" class="checkWithLable-label">Description :</label>
+                                                            <label for="useCaseDescription" class="checkWithLable-label">Description (Label &amp; Placeholder):</label>
                                                         </div>
-                                                        <div class="input-box col-md-8">
+                                                        <div class="input-box col-md-6">
                                                             <input class="form-control" name="description_label" value="Description">
                                                             @error('description_label')
+                                                                <div class="text-danger">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="input-box col-md-6">
+                                                            <input class="form-control" name="description_placeholder" value="Write description here">
+                                                            @error('description_placeholder')
                                                                 <div class="text-danger">
                                                                     {{ $message }}
                                                                 </div>

@@ -22,6 +22,7 @@ return new class extends Migration
             $table->boolean('is_published')->default(true);
             $table->double('price',10,2)->default(0); //o mins free
             $table->double('yearly_price',10,2)->nullable(); //o mins free
+            $table->string('templates',10)->nullable();
             $table->timestamps();
         });
     }

@@ -14,9 +14,9 @@ class PaymentMethodController extends Controller
         if ($request->has('tab')) {
             $tab = $request->tab;
         } else {
-            $tab = 'paypal';
+            $tab = 'stripe';
         }
-        return view('admin.method.index',compact('tab'));
+        return view('admin.paymentMethod.index',compact('tab'));
     }
 
     public function paypalSettingStore(Request $request)
@@ -139,6 +139,23 @@ class PaymentMethodController extends Controller
 
         toast('Razorpay payment method setup', 'success');
         return redirect()->route('payment.method', ['tab' => "rezor"]);
+    }
+    public function aamarPaySettingStore(Request $request)
+    {
+        if ($request->has('AAMARPAY_ACTIVE')) {
+            writeConfig('AAMARPAY_ACTIVE', $request->AAMARPAY_ACTIVE);
+        }
+        if ($request->has('AAMARPAY_STORE')) {
+            writeConfig('AAMARPAY_STORE', $request->AAMARPAY_STORE);
+        }
+
+        if ($request->has('AAMARPAY_KEY')) {
+            writeConfig('AAMARPAY_KEY', $request->AAMARPAY_KEY);
+        }
+
+
+        toast('AamarPay payment method setup', 'success');
+        return redirect()->route('payment.method', ['tab' => "aamarpay"]);
     }
 
 }

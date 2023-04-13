@@ -36,22 +36,23 @@ class PlanController extends Controller
         $plan->image_count = $request->image_count;
         $plan->price = $request->price;
         $plan->yearly_price = $request->yearly_price;
+        $plan->templates =  implode(',',$request->templates);
         $plan->save();
         myAlert('success', 'Plan Created Succssfully');
-        return back();
+        return redirect()->route('plan.index');
     }
 
 
     public function edit($id)
     {
         $plan = Plan::where('id', $id)->first();
-        return view('admin.plan.edit', compact('plan'));
+        $planTemplates = explode(',',$plan->templates);
+        return view('admin.plan.edit', compact('plan','planTemplates'));
     }
 
 
     public function update(Request $request, $id)
     {
-        
         $request->validate([
             'name' => 'required',
             'word_count' => 'required',
@@ -62,6 +63,7 @@ class PlanController extends Controller
             $data = Plan::findOrFail($id);
             $input = $request->except(['_token', '_method']);
             $input['user_id'] = Auth::user()->id;
+            $input['templates'] =  implode(',',$request->templates);
             
             $data->update($input);
             myAlert('success', 'Plan Update updated successfully.');

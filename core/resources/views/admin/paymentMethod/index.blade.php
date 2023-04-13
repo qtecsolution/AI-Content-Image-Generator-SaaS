@@ -6,7 +6,7 @@
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
         <ul class="nav nav-tabs setting-tab" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
+            <li class="nav-item d-none" role="presentation">
                 <button class="nav-link @if (isset($tab) && $tab == 'paypal') active @endif" id="paypal-tab" data-bs-toggle="tab"
                     data-bs-target="#paypal-tab-pane" type="button" role="tab" aria-controls="paypal-tab-pane"
                     aria-selected="true">Paypal Setup</button>
@@ -23,7 +23,11 @@
                     aria-controls="RazorPay-tab-pane" aria-selected="false">RazorPay
                     Setup</button>
             </li>
-
+            <li class="nav-item" role="presentation">
+                <button class="nav-link @if (isset($tab) && $tab == 'aamarpay') active @endif" id="aamarpay-tab" data-bs-toggle="tab"
+                    data-bs-target="#aamarpay-tab-pane" type="button" role="tab" aria-controls="aamarpay-tab-pane"
+                    aria-selected="true">AamarPay Setup</button>
+            </li>
 
             <li class="nav-item d-none" role="presentation">
                 <button class="nav-link @if (isset($tab) && $tab == 'openai') active @endif" id="Mollie-tab"
@@ -187,7 +191,7 @@
                             @csrf
 
                             <div class="form-group mb-2">
-                                <label class="col-form-label" >RAZORPAY_ACTIVE <span class="text-danger">*</span></label>
+                                <label class="col-form-label" >RazorPay Activation <span class="text-danger">*</span></label>
                                 <select class="form-control select2 w-100" name="RAZORPAY_ACTIVE">
                                     <option value="on"
                                         {{ readConfig('RAZORPAY_ACTIVE') == 'on' ? 'selected' : null }}>ON
@@ -198,13 +202,13 @@
                                 </select>
                             </div>
                             <div class="form-group mb-2">
-                                <label class="col-form-label" for="razorpayKey">RAZORPAY_KEY</label>
+                                <label class="col-form-label" for="razorpayKey">RazorPay Key</label>
                                 <input class="form-control" name="RAZORPAY_KEY" value="{{ readConfig('RAZORPAY_KEY') }}"
                                     placeholder="RAZORPAY_KEY" id="razorpayKey">
                             </div>
 
                             <div class="form-group mb-2">
-                                <label class="col-form-label" for="razorpaySecret">RAZORPAY_SECRET</label>
+                                <label class="col-form-label" for="razorpaySecret">RazorPay Secreat</label>
                                 <input class="form-control" name="RAZORPAY_SECRET"
                                     value="{{ readConfig('RAZORPAY_SECRET') }}" placeholder="RAZORPAY_SECRET" id="razorpaySecret">
                             </div>
@@ -220,30 +224,60 @@
                         </form>
                     </div>
                     <div class="col-md-5">
-                        <h6>Here are the general steps to get Stripe client ID and secret:</h6>
+                        <h6>To get the API Key and Secret for Razorpay, you need to follow the instructions below:</h6>
                         <ol class="m-4 fz-14">
-                            <li>Log in to your Stripe account. If you don't have one, sign up for a new account at <a
-                                    href="https://dashboard.stripe.com/register"
-                                    target="_new">https://dashboard.stripe.com/register</a>.</li>
-                            <li>Once you are logged in, go to the "Developers" section of the Stripe Dashboard.</li>
-                            <li>In the left sidebar, click on "API keys."</li>
-                            <li>Under the "Standard keys" section, you will see your "Publishable key" and "Secret key."
-                            </li>
-                            <li>If you have not yet done so, generate a new "Restricted API key" by clicking the "Generate
-                                new key" button under the "Restricted keys" section.</li>
-                            <li>Enter a name for your key, and choose the permissions that you want to grant to the key.
-                            </li>
-                            <li>Click the "Generate" button to create the new key.</li>
-                            <li>You will now see your new Restricted API key listed under the "Restricted keys" section.
-                            </li>
-                            <li>Copy the publishable key, secret key, and restricted API key and save them in a secure
-                                location. These will be used to authenticate your Stripe API requests.</li>
+                            <li>Sign up for a Razorpay account: Go to the Razorpay website (<a href="https://razorpay.com/" target="_blank">Razorpay.com</a>) and sign up for an account. Once you have signed up, log in to your account.</li>
+                            
+                            <li>Generate API Keys: Once you are logged in, go to the Dashboard and click on the "API Keys" tab on the left-hand side. Here, you will see the option to generate your API Key and Secret. Click on the "Generate Key" button to generate your API Key and Secret. </li>
+                            <li>Copy the API Key and Secret: Once the API Key and Secret are generated, copy them and store them in a safe place. You will need these credentials to integrate Razorpay with your website or application. </li>
                         </ol>
-                        <p class="fz-14">Note that the steps above are for obtaining Stripe REST API credentials, which are used for
-                            integrating Stripe payment functionality into your web or mobile application. If you need to
-                            obtain other types of Stripe credentials, such as the Connect platform credentials, the process
-                            may be different. Be sure to consult the Stripe documentation or support resources for more
-                            detailed instructions.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade @if (isset($tab) && $tab == 'aamarpay') show active @endif" id="aamarpay-tab-pane"
+                role="tabpanel" aria-labelledby="aamarpay-tab" tabindex="0">
+
+                <div class="row">
+                    <div class="col-md-7">
+                        <form action="{{ route('payment.aamarpay.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
+
+                            <div class="form-group mb-2">
+                                <label class="col-form-label" >AamarPay Activation <span class="text-danger">*</span></label>
+                                <select class="form-control select2 w-100" name="AAMARPAY_ACTIVE">
+                                    <option value="on"
+                                        {{ readConfig('AAMARPAY_ACTIVE') == 'on' ? 'selected' : null }}>ON
+                                    </option>
+                                    <option value="off"
+                                        {{ readConfig('AAMARPAY_ACTIVE') == 'off' ? 'selected' : null }}>OFF
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label" for="aamarpayStore">AamarPay Store ID</label>
+                                <input class="form-control" name="AAMARPAY_STORE"
+                                    value="{{ readConfig('AAMARPAY_STORE') }}" placeholder="Store ID" id="aamarpayStore">
+                            </div>
+                            <div class="form-group mb-2">
+                                <label class="col-form-label" for="aamarpayKey">AamarPay Signature Key</label>
+                                <input class="form-control" name="AAMARPAY_KEY" value="{{ readConfig('AAMARPAY_KEY') }}"
+                                    placeholder="Signature Key" id="aamarpayKey">
+                            </div>
+                            <div class="text-center">
+                            <div class="generate-btn-wrapper">
+                                    <button type="submit" class="generate-btn px-4">Save</button>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+                    <div class="col-md-5">
+                        <h6>Here are the general steps to get AamarPay Store ID & Signature Key:</h6>
+                        <ol class="m-4 fz-14">
+                            <li> Go to <a href="https://registration.aamarpay.com/"> registration.aamarpay.com </a> and complete registration.</li>
+                            <li>Please follow their instructions carefully. Once you have completed all the necessary steps, you will receive your store ID and signature key.</li>
+                        </ol>
                     </div>
                 </div>
             </div>

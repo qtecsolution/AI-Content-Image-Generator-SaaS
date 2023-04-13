@@ -38,7 +38,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-lg-6 border-start">
+                            <div class="col-lg-6 border-none border-lg-start">
                                 <form method="POST" action="{{ route('profile.update') }}"
                                     enctype="multipart/form-data" class="authentication-form needs-validation">
                                     @csrf
