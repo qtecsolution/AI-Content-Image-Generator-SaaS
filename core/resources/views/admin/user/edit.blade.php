@@ -12,9 +12,9 @@
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
-        <div class="row">
+        <div class="">
 
-            <div class="col-md-12">
+            <div class="col-12">
                 <div class="my-projects">
                     <div class="my-projects-header border-bottom ">
                         <h5 class="header-title text-capitalize">{{ $user->type }} Information Edit</h5>
@@ -54,7 +54,7 @@
                     </div>
                     <div class="my-projects-body">
                         <div class="row ">
-                            <div class="col-4 py-3">
+                            <div class="col-lg-4 py-3">
                                 <div class="card">
                                     <div class="p-2">
                                         @if ($user->avatar != '' && file_exists($user->avatar))
@@ -78,7 +78,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-6 border-start">
+                            <div class="col-lg-6 border-start">
                                 <form method="POST" action="{{ route('users.update', $user->id) }}"
                                     enctype="multipart/form-data" class="authentication-form needs-validation py-3" novalidate>
                                     @csrf

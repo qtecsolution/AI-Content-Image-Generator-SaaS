@@ -21,8 +21,8 @@ $months = request()->input('type') == 2 ? 12 : 1;
                         <div class="pricing-body mt-3">
                             <div class="col-md-12">
                                 <ul class="category-list py-2">
-                                    <li class="category-list-item {{ !request()->input('type') ? 'active' : '' }}"><a href="{{route('user.purchase')}}" class="category-list-link">Monthly</a></li>
-                                    <li class="category-list-item {{ request()->input('type') == 2 ? 'active' : '' }}"><a href="{{route('user.purchase')}}?type=2" class="category-list-link ">Yearly</a></li>
+                                    <li class="category-list-item {{ !request()->input('type') ? 'active' : '' }}"><a href="{{route('user.purchase')}}" class="category-list-link py-2">Monthly</a></li>
+                                    <li class="category-list-item {{ request()->input('type') == 2 ? 'active' : '' }}"><a href="{{route('user.purchase')}}?type=2" class="category-list-link py-2">Yearly</a></li>
                                 </ul>
                             </div>
                             <div class="pricing-cards">

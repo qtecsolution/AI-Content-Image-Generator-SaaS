@@ -143,20 +143,35 @@
 <!-- Modal -->
 <div class="modal fade" id="resourceDelete" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
+      <div class="modal-content p-4">
+        <!-- <div class="modal-header">
           <h1 class="modal-title fs-5" id="exampleModalLabel"> <i class="bi bi-trash3 text-danger"></i> Delete confirmation</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
+        </div> -->
+       
+
         <div class="modal-body">
-          <h6> Are you sure you want to delete? </h6>
+          <span>
+            <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="4" width="48" height="48" rx="24" fill="#FEE4E2"/>
+                <path d="M28 24V28M28 32H28.01M38 28C38 33.5228 33.5228 38 28 38C22.4772 38 18 33.5228 18 28C18 22.4772 22.4772 18 28 18C33.5228 18 38 22.4772 38 28Z" stroke="#D92D20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="4" y="4" width="48" height="48" rx="24" stroke="#FEF3F2" stroke-width="8"/>
+                </svg>
+          </span>
+          
+          <div class="delete-info">
+            <h3 class="delete-title"> Delete blog post</h3>
+            <p class="delete-text">Are you sure you want to delete this post? This action cannot be undone.</p>
+          </div>
+
+          <div class="d-flex gap-2 w-100">
+            <button type="button" class="modal-cancel-btn flex-fill" data-bs-dismiss="modal">Close</button>
+            {!! Form::open(['method' => 'delete','class'=>'flex-fill']) !!}
+            <button type="submit" class="modal-confirm-btn w-100"> <i class="bi bi-trash3"></i> Confirm</button>
+            {!! Form::close() !!}
+          </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-custom" data-bs-dismiss="modal">Close</button>
-          {!! Form::open(['method' => 'delete']) !!}
-          <button type="submit" class="btn btn-custom btn-danger"> <i class="bi bi-trash3"></i> Confirm</button>
-          {!! Form::close() !!}
-        </div>
+        
       </div>
     </div>
   </div>

@@ -14,18 +14,18 @@
 
 .payment-name {
     color: $gray-800 ;
-    @include font($primaryFont,14,medium,normal,22);
+    @include font($primaryFont,12,medium,normal,22);
 
     @include breakpoint(mobile576) {
-    @include font($primaryFont,16,medium,normal,22);
+    @include font($primaryFont,14,medium,normal,22);
 
     }
 }
 .payment-way{
     color: $gray-500;
-    @include font($primaryFont,14,normal,normal,22);
+    @include font($primaryFont,12,normal,normal,22);
     @include breakpoint(mobile576) {
-        @include font($primaryFont,16,medium,normal,22);
+        @include font($primaryFont,14,medium,normal,22);
     
         }
 }

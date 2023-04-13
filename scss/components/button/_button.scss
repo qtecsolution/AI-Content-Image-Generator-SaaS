@@ -92,13 +92,18 @@
   @include radius(14);
   @include flex-center;
   @include border(solid, 5, hsl(234, 100%, 95%));
-  @include font($primaryFont, 16, medium, normal, 24);
+  @include font($primaryFont, 14, medium, normal, 24);
   @include transitionsall;
   padding: size(8);
 
   @include hover {
     border-color: lighten($main, 45%);
     color: $white;
+  }
+
+  @include breakpoint(mobile576) {
+    @include font($primaryFont, 16, medium, normal, 24);
+
   }
 }
 
@@ -310,3 +315,26 @@
 
 }
 
+.modal-cancel-btn {
+  border: none;
+  padding: size(10);
+  @include border(solid,1,$gray-300);
+  @include radius(8);
+  @include font($primaryFont, 14, medium, normal,20 );
+  font-weight: 600;
+}
+
+.modal-confirm-btn {
+  border: none;
+  padding: size(10);
+  @include border(solid,1,transparent);
+  @include radius(8);
+  @include font($primaryFont, 14, medium, normal,20 );
+  font-weight: 600;
+  background-color: #D92D20;
+  @include transitionsall;
+  color: $white;
+  @include hover {
+    @include setBgColor(darken(#D92D20, 10%), $white);
+  }
+}

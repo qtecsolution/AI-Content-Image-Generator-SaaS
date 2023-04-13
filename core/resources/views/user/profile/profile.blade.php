@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div class="main-content p-2 p-md-4 pt-0">
-        <div class="row">
+        <div class="">
 
             <div class="col-md-12">
                 <div class="my-projects">
@@ -13,13 +13,13 @@
                         <h5 class="header-title text-capitalize"> Profile </h5>
                     </div>
                     <div class="my-projects-body">
-                        <div class="row mt-3">
-                            <div class="col-4">
+                        <div class="row mt-3 g-2 ">
+                            <div class="col-lg-4">
                                 <div class="card">
                                     <div class="p-2">
                                         @if ($user->avatar != '' && file_exists($user->avatar))
                                             <img src="{{ asset($user->avatar) }}" alt="{{ $user->name }}"
-                                                style="max-width:150px">
+                                                style="max-width:150px" class="rounded">
                                         @else
                                             <img src="{{ asset('assets/images/placeholder.png') }}"
                                                 alt="{{ $user->name }}" style="max-width:150px">
@@ -28,7 +28,7 @@
                                     <div class="card-body">
                                         <h5 class="card-title"> {{ $user->name }} </h5>
                                     </div>
-                                    <ul class="list-group list-group-flush">
+                                    <ul class="list-group list-group-flush info-list">
                                         <li class="list-group-item"> <b> Email: </b> {{ $user->email }} </li>
                                         <li class="list-group-item"> <b> Phone: </b> {{ $user->phone }} </li>
                                         <li class="list-group-item"> <b> Address: </b> {{ $user->address ?? '' }} </li>
@@ -38,7 +38,7 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-6 border-start">
+                            <div class="col-lg-6 border-start">
                                 <form method="POST" action="{{ route('profile.update') }}"
                                     enctype="multipart/form-data" class="authentication-form needs-validation">
                                     @csrf
