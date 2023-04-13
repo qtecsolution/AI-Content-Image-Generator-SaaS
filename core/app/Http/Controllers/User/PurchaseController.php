@@ -32,21 +32,21 @@ class PurchaseController extends Controller
     {
         $plan = Plan::where('id', $id)->first();
         $user = Auth::user();
-        if($plan->price <= 0){
-            $oldPurchase = PlanExpense::where(['user_id'=>$user->id,'plan_id'=>$plan->id])->first();
-            if($oldPurchase!=''){
+        if ($plan->price <= 0) {
+            $oldPurchase = PlanExpense::where(['user_id' => $user->id, 'plan_id' => $plan->id])->first();
+            if ($oldPurchase != '') {
                 myAlert('success', "You've already taken advantage of this free package");
                 return redirect()->route('user.purchase');
             }
         }
         return view('user.purchase.purchase', compact('plan', 'user'));
     }
-    public function stripeLoad(Request $request,$id)
+    public function stripeLoad(Request $request, $id)
     {
         $plan = Plan::where('id', $id)->first();
         $user = Auth::user();
-        $type =$request->type == 2 ? 2 : 1;
-        return view('user.purchase.stripePay', compact('plan', 'user','type'));
+        $type = $request->type == 2 ? 2 : 1;
+        return view('user.purchase.stripePay', compact('plan', 'user', 'type'));
     }
 
     public function paypalPayLoad(Request $request)
@@ -61,8 +61,8 @@ class PurchaseController extends Controller
     {
         $plan = Plan::where('id', $request->plan_id)->first();
         $user = Auth::user();
-        $type =$request->type == 2 ? 2 : 1;
-        return view('user.purchase.bank', compact('plan', 'user','type'));
+        $type = $request->type == 2 ? 2 : 1;
+        return view('user.purchase.bank', compact('plan', 'user', 'type'));
     }
 
     public function purchaseDone(Request $request)
@@ -80,37 +80,37 @@ class PurchaseController extends Controller
         $plan = Plan::where('id', $request->plan_id)->first();
         $orderInformationUpdate = false;
         $price = $request->type == 2 ? $plan->yearly_price : $plan->price;
-        if($price <= 0){
-            $oldPurchase = PlanExpense::where(['user_id'=>$user->id,'plan_id'=>$plan->id])->where('activated_at', '<=', now())
-            ->where(function ($query) {
-                $query->whereNull('expire_at')
-                    ->orWhere('expire_at', '>', now());
-            })->first();
-            if($oldPurchase!=''){
+        if ($price <= 0) {
+            $oldPurchase = PlanExpense::where(['user_id' => $user->id, 'plan_id' => $plan->id])->where('activated_at', '<=', now())
+                ->where(function ($query) {
+                    $query->whereNull('expire_at')
+                        ->orWhere('expire_at', '>', now());
+                })->first();
+            if ($oldPurchase != '') {
                 myAlert('success', "You've already taken advantage of this free package");
                 return redirect()->route('user.purchase');
             }
         }
-
+        $invoice = $request->invoice_id ?? invoiceGenerator();
 
         if ($price <= $request->paymentAmount) {
 
             // payment get ways the data
 
             $order = new Order();
-            $order->invoice = invoiceGenerator();
+            $order->invoice = $invoice;
             $order->user_id = $user->id;
             $order->plan_id = $plan->id;
             $order->total = $request->paymentAmount;
-            $order->name = $request->name??$user->name;
-            $order->email = $request->email??$user->email;
-            $order->phone = $request->phone??$user->phone;
-            $order->address = $request->address??'';
+            $order->name = $request->name ?? $user->name;
+            $order->email = $request->email ?? $user->email;
+            $order->phone = $request->phone ?? $user->phone;
+            $order->address = $request->address ?? '';
             $order->type = $request->type;
-            if(isset($request->payment_id) && $request->payment_id !== ''){
+            if (isset($request->payment_id) && $request->payment_id !== '') {
                 $order->payment_id = $request->payment_id;
             }
-            if(isset($request->stripeToken) && $request->stripeToken !== ''){
+            if (isset($request->stripeToken) && $request->stripeToken !== '') {
                 $order->payment_id = $request->stripeToken;
             }
             $order->save();
@@ -146,7 +146,7 @@ class PurchaseController extends Controller
                         $message = $e->getMessage();
                     }
                 }
-            }  else if ($request->paymentMethod == 'paypal') {
+            } else if ($request->paymentMethod == 'paypal') {
 
                 try {
 
@@ -192,9 +192,9 @@ class PurchaseController extends Controller
 
                 //get old expnase
                 $oldexpense = showBalance();
-                $totalDays = $request->type == 2? 365: 30;
-                $months = $order->type == 2? 12: 1;
-                if(isset(demoPlan()->word)){
+                $totalDays = $request->type == 2 ? 365 : 30;
+                $months = $order->type == 2 ? 12 : 1;
+                if (isset(demoPlan()->word)) {
                     $expense = new PlanExpense();
                     $expense->user_id = $user->id;
                     $expense->order_id = $order->id;
@@ -207,7 +207,7 @@ class PurchaseController extends Controller
                     $expense->activated_at = Carbon::now();
                     $expense->expire_at =  Carbon::now()->addDay(30);
                     $expense->save();
-                }else{
+                } else {
                     if ($oldexpense != "") {
                         $totalDays += $oldexpense->remaining_days; // Add the previous remaining days
                         //eassign the plan expense
@@ -216,9 +216,9 @@ class PurchaseController extends Controller
                         $expense->order_id = $order->id;
                         $expense->plan_id = $plan->id;
                         $expense->word_count = $plan->word_count;
-                        $expense->call_api_count = ($plan->call_api_count*$months) + $oldexpense->api_call;
-                        $expense->documet_count = ($plan->documet_count*$months) + $oldexpense->document;
-                        $expense->image_count = ($plan->image_count*$months) + $oldexpense->image;
+                        $expense->call_api_count = ($plan->call_api_count * $months) + $oldexpense->api_call;
+                        $expense->documet_count = ($plan->documet_count * $months) + $oldexpense->document;
+                        $expense->image_count = ($plan->image_count * $months) + $oldexpense->image;
                         $expense->type = $request->type;
                         $expense->activated_at = Carbon::now();
                         $expense->expire_at =  Carbon::now()->addDay($totalDays);
@@ -230,15 +230,14 @@ class PurchaseController extends Controller
                         $expense->order_id = $order->id;
                         $expense->plan_id = $plan->id;
                         $expense->word_count = $plan->word_count;
-                        $expense->call_api_count = $plan->call_api_count*$months;
-                        $expense->documet_count = $plan->documet_count*$months;
-                        $expense->image_count = $plan->image_count*$months;
+                        $expense->call_api_count = $plan->call_api_count * $months;
+                        $expense->documet_count = $plan->documet_count * $months;
+                        $expense->image_count = $plan->image_count * $months;
                         $expense->type = $request->type;
                         $expense->activated_at = Carbon::now();
                         $expense->expire_at =  Carbon::now()->addDay($totalDays);
                         $expense->save();
                     }
-
                 }
 
                 //update user active plane
@@ -249,7 +248,7 @@ class PurchaseController extends Controller
                 myAlert('success', 'Plan is successfully subscribed  enjoy the service');
                 return redirect()->route('plan.userexpense');
             } else {
-                myAlert('error','There are some problem, please try again');
+                myAlert('error', 'There are some problem, please try again');
                 return back();
             }
         } else {
@@ -257,19 +256,20 @@ class PurchaseController extends Controller
             return redirect()->route('user.purchase');
         }
     }
-    public function aamarpayProcess(Request $request){
-        $plan = Plan::where('id',$request->plan)->firstOrFail();
-        $phone = $request->phone??"018";
-        $url = 'https://sandbox.aamarpay.com/request.php'; // live url https://secure.aamarpay.com/request.php
+    public function aamarpayProcess(Request $request)
+    {
+        $plan = Plan::where('id', $request->plan)->firstOrFail();
+        $phone = $request->phone ?? "018";
+        $url = 'https://sandbox.aamarpay.com/request.php';
         $fields = [
             'store_id' => 'aamarpaytest',
             'amount' => $request->price, //transaction amount
             'payment_type' => 'VISA', //no need to change
             'currency' => 'USD',  //currenct will be USD/BDT
-            'tran_id' => rand(1111111,9999999), //transaction id must be unique from your end
+            'tran_id' => invoiceGenerator(), //transaction id must be unique from your end
             'cus_name' => Auth::user()->name,  //customer name
             'cus_email' => Auth::user()->email, //customer email address
-            'cus_phone' => Auth::user()->phone??$phone, //customer email address
+            'cus_phone' => Auth::user()->phone ?? $phone, //customer email address
             'desc' => 'Payment for AI',
             'success_url' => route('aamarpay.success'), //your success route
             'fail_url' => route('aamarpay.fail'), //your fail route
@@ -294,42 +294,57 @@ class PurchaseController extends Controller
 
         $this->redirect_to_merchant($url_forward);
     }
-    function redirect_to_merchant($url) {
+    function redirect_to_merchant($url)
+    {
 
-        ?>
+?>
         <html xmlns="http://www.w3.org/1999/xhtml">
-        <head><script type="text/javascript">
-                function closethisasap() { document.forms["redirectpost"].submit(); }
-            </script></head>
+
+        <head>
+            <script type="text/javascript">
+                function closethisasap() {
+                    document.forms["redirectpost"].submit();
+                }
+            </script>
+        </head>
+
         <body onLoad="closethisasap();">
 
-        <form name="redirectpost" method="post" action="<?php echo 'https://sandbox.aamarpay.com/'.$url; ?>"></form>
-        <!-- for live url https://secure.aamarpay.com -->
+            <form name="redirectpost" method="post" action="<?php echo 'https://sandbox.aamarpay.com/' . $url; ?>"></form>
+            <!-- for live url https://secure.aamarpay.com -->
         </body>
+
         </html>
-        <?php
+<?php
         exit;
     }
     // Aamar Pay success
-    public function aamarpaySuccess(Request $request){
-        $plan = Plan::where('id',$request->opt_a)->firstOrFail();
-        $price = $request->opt_b==2? $plan->yearly_price:$plan->price;
+    public function aamarpaySuccess(Request $request)
+    {
+        $plan = Plan::where('id', $request->opt_a)->firstOrFail();
+        $price = $request->opt_b == 2 ? $plan->yearly_price : $plan->price;
         $myResponse = [
-          'plan_id'=>$request->opt_a,
+            'invoice_id' => $request->mer_txnid,
+            'plan_id' => $request->opt_a,
             'type' => $request->opt_b,
-            'paymentMethod'=>'aamarpay',
-            'paymentAmount'=>$price,
-            'payment_id'=>$request->pg_txnid,
-            'user_id'=>$request->opt_c
+            'paymentMethod' => 'aamarpay',
+            'paymentAmount' => $price,
+            'payment_id' => $request->pg_txnid,
+            'user_id' => $request->opt_c
         ];
         $myResponse = (object) $myResponse;
+        $user = User::findOrFail($request->opt_c);
+        Auth::loginUsingId($user->id);
         return $this->purchaseSubmit($myResponse);
-     }
-     // Aamar Pay fail
-     public function aamarpayFail(Request $request){
-         myAlert('error', 'Payment unsuccessful. Please try again later.');
-         return redirect()->route('user.purchase');
-     }
+    }
+    // Aamar Pay fail
+    public function aamarpayFail(Request $request)
+    {
+        $user = User::findOrFail($request->opt_c);
+        Auth::loginUsingId($user->id);
+        myAlert('error', 'Payment unsuccessful. Please try again later.');
+        return redirect()->route('user.purchase');
+    }
     public function paySuccess(Request $request, $id)
     {
         if ($request->input('paymentId') && $request->input('PayerID')) {
@@ -351,10 +366,10 @@ class PurchaseController extends Controller
                 $order->payment_method = 'paypal';
                 $order->save();
 
-               //get old expnase
-               $oldexpense = showBalance();
-               $totalDays = $order->type == 2? 365: 30;
-               $months = $order->type == 2? 12: 1;
+                //get old expnase
+                $oldexpense = showBalance();
+                $totalDays = $order->type == 2 ? 365 : 30;
+                $months = $order->type == 2 ? 12 : 1;
 
                 if ($oldexpense != null) {
                     $totalDays += $oldexpense->remaining_days; // Add previous remaining days
@@ -364,9 +379,9 @@ class PurchaseController extends Controller
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
                     $expense->word_count = $plan->word_count;
-                    $expense->call_api_count = ($plan->call_api_count*$months) + $oldexpense->api_call;
-                    $expense->documet_count = ($plan->documet_count*$months) + $oldexpense->document;
-                    $expense->image_count = ($plan->image_count*$months) + $oldexpense->image;
+                    $expense->call_api_count = ($plan->call_api_count * $months) + $oldexpense->api_call;
+                    $expense->documet_count = ($plan->documet_count * $months) + $oldexpense->document;
+                    $expense->image_count = ($plan->image_count * $months) + $oldexpense->image;
                     $expense->type = $request->type;
                     $expense->activated_at = Carbon::now();
                     $expense->expire_at =  Carbon::now()->addDay($totalDays);
@@ -378,9 +393,9 @@ class PurchaseController extends Controller
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
                     $expense->word_count = $plan->word_count;
-                    $expense->call_api_count = $plan->call_api_count*$months;
-                    $expense->documet_count = $plan->documet_count*$months;
-                    $expense->image_count = $plan->image_count*$months;
+                    $expense->call_api_count = $plan->call_api_count * $months;
+                    $expense->documet_count = $plan->documet_count * $months;
+                    $expense->image_count = $plan->image_count * $months;
                     $expense->activated_at = Carbon::now();
                     $expense->expire_at =  Carbon::now()->addDay($totalDays);
                     $expense->save();
@@ -425,21 +440,22 @@ class PurchaseController extends Controller
     public function userPurchase()
     {
         $user = Auth::user();
-        $plans = Plan::where('is_published', true)->orderBy('id','ASC')->get();
+        $plans = Plan::where('is_published', true)->orderBy('id', 'ASC')->get();
         return view('user.purchase.userPurchase', compact('plans', 'user'));
     }
 
     // User Transaction History
-    public function userTransactions(){
+    public function userTransactions()
+    {
         $user = Auth::user();
-        $allData = Order::with(['user', 'plan'])->where('user_id',$user->id)->orderBy('orders.id', 'DESC')->paginate(12);
-        return view('user.purchase.transactions',compact('allData'));
+        $allData = Order::with(['user', 'plan'])->where('user_id', $user->id)->orderBy('orders.id', 'DESC')->paginate(12);
+        return view('user.purchase.transactions', compact('allData'));
     }
-    public function userTransactionDetails($orderId){
-        $order = Order::where(['id'=> $orderId,'user_id'=>Auth::user()->id])->firstOrFail();
+    public function userTransactionDetails($orderId)
+    {
+        $order = Order::where(['id' => $orderId, 'user_id' => Auth::user()->id])->firstOrFail();
         $plan = Plan::where('id', $order->plan_id)->first();
         $expense = PlanExpense::where('order_id', $order->id)->first();
         return view('user.purchase.transactionDetails', compact('plan', 'expense', 'order'));
     }
-
 }
