@@ -123,7 +123,7 @@ function showBalance()
                  $query->whereNull('expire_at')
                      ->orWhere('expire_at', '>', now());
              })->where('user_id', $user->id)->first();
-        if($expense !== ''){
+        if($expense != ''){
             $restApiCall = $expense->call_api_count - $expense->current_api_count;
             $restImage = $expense->image_count - $expense->current_image_count;
             $restDoc = $expense->documet_count - $expense->current_documet_count;

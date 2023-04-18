@@ -31,15 +31,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         $cases = UseCase::where('is_published', 1)->where('is_popular', 1);
-        if(!in_array("0",showBalance()->templates)){
-            $cases = $cases->whereIn('type',showBalance()->templates);
-        }
-        $cases = $cases->get();
         $noPlan = 0;
         if(showBalance()==''){
             $noPlan = 1;
+        }elseif(!in_array("0",showBalance()->templates)){
+            $cases = $cases->whereIn('type',showBalance()->templates);
         }
+        $cases = $cases->get();
+        
         return view('user.home', compact('cases','noPlan'));
     }
     
