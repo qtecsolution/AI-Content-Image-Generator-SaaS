@@ -87,7 +87,7 @@ $months = request()->input('type') == 2 ? 12 : 1;
                                                             @if($tKey>0) 
                                                             , 
                                                             @endif
-                                                            {{$templatesCategory[$temp]}}
+                                                            {{$templatesCategory[$temp]??''}}
                                                         @endforeach
                                                     </span>
                                                 @endif

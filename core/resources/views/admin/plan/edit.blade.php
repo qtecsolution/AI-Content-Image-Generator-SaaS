@@ -115,7 +115,10 @@
                             </div>
                         </div>
                         <div class="form-group mb-5">
-                            <label for="inputEmail6" class="col-sm-12 col-form-label font-500">Templates Access <span
+                            <label for="inputEmail6" class="col-sm-12 col-form-label font-500">Templates Access <i
+                                class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                data-bs-title="You can select multiple template types."></i> <span
                                     class="text-danger">*</span> : </label>
 
                             <div class="col-sm-12">

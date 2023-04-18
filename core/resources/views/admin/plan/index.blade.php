@@ -105,7 +105,7 @@
                                                                 @if($tKey>0) 
                                                                 , 
                                                                 @endif
-                                                                {{$templatesCategory[$temp]}}
+                                                                {{$templatesCategory[$temp]??''}}
                                                             @endforeach
                                                         </span>
                                                     @endif

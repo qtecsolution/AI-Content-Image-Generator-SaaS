@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class PlanExpense extends Model
 {
     use HasFactory;
+
+    public function plan(){
+        return $this->belongsTo(Plan::class,'plan_id','id');
+    }
 }

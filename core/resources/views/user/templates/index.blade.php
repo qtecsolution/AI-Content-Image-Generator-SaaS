@@ -29,12 +29,18 @@
                         </div>
                         @foreach ($allData as $case)
                         <div class="col-lg-3 col-md-4 col-sm-6 mb-2">
-                            <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card">
-                                <figure class="card-img">
+                            <a href="{{ route('content.create') }}?case={{ $case->id }}" class="template-card"
+                                @if(!in_array(0,$templates)) @if(!in_array($case->type,$templates))
+                                 data-bs-toggle="tooltip"
+                                data-bs-placement="top"
+                                data-bs-title="Upgrade your subscription for access this template"
+                                  style="border-color: #ffa464;" @endif @endif >
+                                 <figure class="card-img">
                                     <img src="{{ filePath($case->icon) }}" alt="{{ $case->title }}">
                                 </figure>
                                 <h3 class="card-title"> {{ $case->title }} </h3>
                                 <p class="card-des">{{ $case->details }}</p>
+                                <p class="text-start font-12 text-black-50"> <small> <i class="fa fa-circle" aria-hidden="true"></i> {{$types[$case->type]??''}} </small> </p>
                             </a>
                         </div>
                     @endforeach

@@ -131,12 +131,15 @@ function showBalance()
             $activeDate = Carbon::parse($expense->activated_at);
             $expireDate = Carbon::parse($expense->expire_at);
             $remainingDays = $activeDate->diffInDays($expireDate);
+            // templates type
+            $templates = explode(',',$expense->plan->templates);
             return (object) [
                 'api_call'=> $restApiCall,
                 'image'=> $restImage,
                 'document'=> $restDoc,
                 'word'=> $expense->word_count,
-                'remaining_days'=>$remainingDays
+                'remaining_days'=>$remainingDays,
+                'templates' =>  $templates
             ];
         }else{
             return "";

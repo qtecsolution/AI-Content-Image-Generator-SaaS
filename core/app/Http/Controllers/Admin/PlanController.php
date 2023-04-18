@@ -64,6 +64,7 @@ class PlanController extends Controller
             $input = $request->except(['_token', '_method']);
             $input['user_id'] = Auth::user()->id;
             $input['templates'] =  implode(',',$request->templates);
+           // return $input;
             
             $data->update($input);
             myAlert('success', 'Plan Update updated successfully.');

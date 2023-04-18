@@ -43,7 +43,6 @@
                                         <th scope="col">Name</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Phone</th>
-                                        <th scope="col">Status</th>
                                         <th scope="col" width="10%"></th>
                                     </tr>
                                 </thead>
@@ -53,13 +52,7 @@
                                             <td> {{ $data->name }} </td>
                                             <td> {{ $data->email }} </td>
                                             <td> {{ $data->phone }} </td>
-                                            <td>
-                                                @if ($data->is_active == 1)
-                                                    <span class="active-pill"> Active </span>
-                                                @else
-                                                    <span class="deactive-pill"> <span class="circle"></span> Inactive </span>
-                                                @endif
-                                            </td>
+                                            
                                             <td>
                                                 <div class="action-wrapper d-flex gap-4">
                                                     <a  data-bs-toggle="tooltip"

@@ -42,7 +42,7 @@
                                             <div class="form-group">
                                                 <label for="title" class="form-label title_label"> {{$defaultCase->title_label}}: </label>
                                                 <input type="text" class="form-control custom-input" id="title"
-                                                    autocomplete="off" name="title" placeholder="">
+                                                    autocomplete="off" name="title" placeholder="{{$defaultCase->title_placeholder}}">
                                             </div>
                                         </div>
 
@@ -52,7 +52,7 @@
                                             <div class="form-group">
                                                 <label for="short_description" class="form-label">{{$defaultCase->short_description_label}}: </label>
                                                 <textarea class="form-control custom-input resize-vertical" id="short_description" autocomplete="off" name="short_description"
-                                                    placeholder="" rows="2"></textarea>
+                                                    placeholder="{{$defaultCase->short_description_placeholder}}" rows="2"></textarea>
                                             </div>
                                         </div>
 
@@ -62,7 +62,7 @@
                                             <div class="form-group">
                                                 <label for="description" class="form-label"> {{$defaultCase->description_label}}: </label>
                                                 <textarea class="form-control custom-input resize-vertical" id="description" autocomplete="off" name="description"
-                                                    placeholder="" rows="6"></textarea>
+                                                    placeholder="{{$defaultCase->description_placeholder}}" rows="6"></textarea>
                                                 <small class="text-mute"> Should describe your need for better result.
                                                 </small>
                                             </div>
@@ -121,7 +121,7 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group mt-3">
-                                                <label for="max_words" class="form-label">Maximum Results Length <i
+                                                <label for="max_words" class="form-label">Max Results Length <i
                                                         class="fa fa-info-circle" data-bs-toggle="tooltip"
                                                         data-bs-placement="top"
                                                         data-bs-title="Maximum words can generate."></i> </label>
@@ -227,15 +227,17 @@
                 if (result.title_label != '' && result.title_label != null) {
                     $('#title-field').show();
                     $('#title-field label').html(result.title_label+' :');
+                    $('#title-field input').attr('placeholder',result.title_placeholder);
                 }
                 if (result.short_description_label != '' && result.short_description_label != null) {
                     $('#short-description').show();
                     $('#short-description label').html(result.short_description_label+' :');
+                    $('#short-description input').attr('placeholder',result.short_description_placeholder);
 
                 }
                 if (result.description_label != '' && result.description_label != null) {
                     $('#description-field').show();
-                    $('#description-field label').html(result.description_label+' :');
+                    $('#description-field input').attr(result.description_placeholder);
 
                 }
             })

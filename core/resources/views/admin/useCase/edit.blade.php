@@ -88,31 +88,45 @@
                                             <!-- Input Fields  -->
                                             <div class="col-12 mb-3">
                                                 <div class="form-group">
-                                                    <label for="details" class="form-label"> Input Fields & Label:</label>
-                                                    <div class="fz-14 d-flex border-bottom py-2 my-2">
-                                                        <div class="checkWithLable mb-2 col-md-4">
+                                                    <label for="details" class="form-label"> Input Fields Label and Placeholder:</label>
+                                                    <div class="row fz-14 border-bottom py-2 my-2">
+                                                        <div class="checkWithLable mb-2 col-md-12">
                                                             <input type="checkbox" id="useCaseTitle"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="1" @if($data->title_label!='') checked @endif hidden>
-                                                            <label for="useCaseTitle" class="checkWithLable-label">Title :</label>
+                                                            <label for="useCaseTitle" class="checkWithLable-label">Title <i
+                                                                class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                data-bs-title="Use this input field with dynamic label and placeholder"></i> :</label>
                                                         </div>
-                                                        <div class="input-box col-md-8">
+                                                        <div class="input-box col-md-6 col-sm-12">
                                                             <input class="form-control" name="title_label" value="{{$data->title_label}}">
-                                                            @error('title_label')
-                                                                <div class="text-danger">
-                                                                    {{ $message }}
-                                                                </div>
-                                                            @enderror
+                                                                @error('title_label')
+                                                                    <div class="text-danger">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
+                                                        </div>
+                                                        <div class="input-box col-md-6 col-sm-12">
+                                                            <input class="form-control" name="title_placeholder" value="{{$data->title_placeholder}}" placeholder="Placeholder">
+                                                                @error('title_placeholder')
+                                                                    <div class="text-danger">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                         </div>
                                                     </div>
-                                                    <div class="fz-14 d-flex border-bottom py-2 my-2">
-                                                        <div class="checkWithLable mb-2 col-md-4">
+                                                    <div class="fz-14 row border-bottom py-2 my-2">
+                                                        <div class="checkWithLable mb-2 col-md-12">
                                                             <input type="checkbox" id="useCaseShort"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="2" @if($data->short_description_label!='') checked @endif hidden>
-                                                            <label for="useCaseShort" class="checkWithLable-label">Short Description :</label>
+                                                            <label for="useCaseShort" class="checkWithLable-label">Short Description <i
+                                                                class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                data-bs-title="Use this input field with dynamic label and placeholder"></i> : </label>
                                                         </div>
-                                                        <div class="input-box col-md-8">
+                                                        <div class="input-box col-md-6">
                                                             <input class="form-control" name="short_description_label" value="{{$data->short_description_label}}">
                                                             @error('short_description_label')
                                                                 <div class="text-danger">
@@ -120,17 +134,36 @@
                                                                 </div>
                                                             @enderror
                                                         </div>
+                                                        <div class="input-box col-md-6">
+                                                            <input class="form-control" name="short_description_placeholder" value="{{$data->short_description_placeholder}}">
+                                                            @error('short_description_placeholder')
+                                                                <div class="text-danger">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
                                                     </div>
-                                                    <div class="fz-14 d-flex border-bottom py-2 my-2">
-                                                        <div class="checkWithLable mb-2 col-md-4">
+                                                    <div class="fz-14 row border-bottom py-2 my-2">
+                                                        <div class="checkWithLable mb-2 col-md-12">
                                                             <input type="checkbox" id="useCaseDescription"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="3" @if($data->description_label!='') checked @endif hidden>
-                                                            <label for="useCaseDescription" class="checkWithLable-label">Description :</label>
+                                                            <label for="useCaseDescription" class="checkWithLable-label">Description <i
+                                                                class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                data-bs-title="Use this input field with dynamic label and placeholder"></i> :</label>
                                                         </div>
-                                                        <div class="input-box col-md-8">
+                                                        <div class="input-box col-md-6">
                                                             <input class="form-control" name="description_label" value="{{$data->description_label}}">
                                                             @error('description_label')
+                                                                <div class="text-danger">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        </div>
+                                                        <div class="input-box col-md-6">
+                                                            <input class="form-control" name="description_placeholder" value="{{$data->description_placeholder}}">
+                                                            @error('description_placeholder')
                                                                 <div class="text-danger">
                                                                     {{ $message }}
                                                                 </div>
@@ -148,10 +181,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="generate-btn-wrapper">
-                                            <button type="submit" class="generate-btn px-4">Submit</button>
                                         </div>
                                     </div>
                                     <div class="col-md-7 border-start">
@@ -199,6 +228,27 @@
                                                         Please enter a title
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="is_published" class="form-label"> Popularity : </label>
+                                                    {!! Form::select('is_popular', [1 => 'Popular', 0 => 'Normal'], $data->is_popular, ['class' => 'nice-select w-100']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="is_published" class="form-label"> Status : </label>
+                                                    {!! Form::select('is_published', [1 => 'Active', 0 => 'Inactive'], $data->is_published, ['class' => 'nice-select w-100']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="type" class="form-label"> Type : </label>
+                                                    {!! Form::select('type', [1=>'Basic Templates',2=>'Standard Templates',3=>'Professional Templates'], $data->type, ['class' => 'nice-select w-100']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="generate-btn-wrapper">
+                                                <button type="submit" class="generate-btn px-4">Submit</button>
                                             </div>
                                         </div>
                                     </div>

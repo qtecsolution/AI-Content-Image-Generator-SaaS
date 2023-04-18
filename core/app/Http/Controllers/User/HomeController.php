@@ -31,7 +31,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $cases = UseCase::where('is_published', 1)->where('is_popular', 1)->get();
+        $cases = UseCase::where('is_published', 1)->where('is_popular', 1);
+        if(!in_array("0",showBalance()->templates)){
+            $cases = $cases->whereIn('type',showBalance()->templates);
+        }
+        $cases = $cases->get();
         $noPlan = 0;
         if(showBalance()==''){
             $noPlan = 1;
@@ -116,6 +120,8 @@ class HomeController extends Controller
         }
         $allData = $allData->get();
         $categories = UseCaseCategory::where('is_published', 1)->get();
-        return view('user.templates.index', compact('allData','categories'));
+        $types = [1=>'Basic',2=>'Standard',3=>'Professional'];
+        $templates = showBalance()->templates;
+        return view('user.templates.index', compact('allData','categories','templates','types'));
     }
 }

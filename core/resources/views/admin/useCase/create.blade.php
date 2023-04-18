@@ -93,7 +93,10 @@
                                                             <input type="checkbox" id="useCaseTitle"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="1" checked hidden>
-                                                            <label for="useCaseTitle" class="checkWithLable-label">Title (Label &amp; Placeholder) :</label>
+                                                            <label for="useCaseTitle" class="checkWithLable-label">Title <i
+                                                                class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                data-bs-title="Use this input field with dynamic label and placeholder"></i> :</label>
                                                         </div>
                                                         <div class="input-box col-md-6 col-sm-12">
                                                             <input class="form-control" name="title_label" value="Title">
@@ -144,7 +147,10 @@
                                                             <input type="checkbox" id="useCaseDescription"
                                                                 class="checkWithLable-box input-check-box"
                                                                 name="input_fields[]" value="3" checked hidden>
-                                                            <label for="useCaseDescription" class="checkWithLable-label">Description (Label &amp; Placeholder):</label>
+                                                            <label for="useCaseDescription" class="checkWithLable-label">Description <i
+                                                                class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top"
+                                                                data-bs-title="Use this input field with dynamic label and placeholder"></i> :</label>
                                                         </div>
                                                         <div class="input-box col-md-6">
                                                             <input class="form-control" name="description_label" value="Description">
@@ -228,6 +234,12 @@
                                                 <div class="form-group">
                                                     <label for="is_published" class="form-label"> Status : </label>
                                                     {!! Form::select('is_published', [1 => 'Active', 0 => 'Inactive'], '1', ['class' => 'nice-select w-100']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-6 mb-3">
+                                                <div class="form-group">
+                                                    <label for="type" class="form-label"> Type : </label>
+                                                    {!! Form::select('type', [1=>'Basic Templates',2=>'Standard Templates',3=>'Professional Templates'], '1', ['class' => 'nice-select w-100']) !!}
                                                 </div>
                                             </div>
                                             <div class="generate-btn-wrapper">

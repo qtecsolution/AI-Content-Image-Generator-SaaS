@@ -25,15 +25,25 @@ class OpenAiController extends Controller
             myAlert('error', 'Your Api call limit: 0');
             return redirect()->route('user.purchase');
         }
-        $cases = UseCase::where('is_published', 1)->pluck('title', 'id');
-        $inputFields = [];
         if (isset($request->case)) {
-            $defaultCase = UseCase::where('id', $request->case)->first();
+            $defaultCase = UseCase::where('id', $request->case)->latest();
         } else {
-            $defaultCase = UseCase::first();
+            $defaultCase = UseCase::latest();
         }
+        $cases = UseCase::where('is_published', 1);
+        if(!in_array("0",showBalance()->templates)){
+            $defaultCase = $defaultCase->whereIn('type',showBalance()->templates);
+            $cases = $cases->whereIn('type',showBalance()->templates);
+        }
+        $defaultCase = $defaultCase->first();
+        if($defaultCase == ''){
+            myAlert('error','You should upgrade you subscription plan.');
+            return redirect()->route('user.purchase');
+        }
+        $cases = $cases->pluck('title', 'id');
+        
         $languages = Language::where('status', 1)->pluck('language', 'language');
-        return view('user.openAi.content', compact('cases', 'request', 'inputFields', 'languages', 'defaultCase'));
+        return view('user.openAi.content', compact('cases', 'request', 'languages', 'defaultCase'));
     }
     /* Open AI Content Generate */
     public function contentGenerate(Request $request)
@@ -381,7 +391,7 @@ class OpenAiController extends Controller
 
     public function chat()
     {
-        $chatHistory = AiChatHistory::where('user_id',Auth::user()->id)->get();
+        $chatHistory = AiChatHistory::where('user_id',Auth::user()->id)->latest()->limit(100)->get();
         return view('user.openAi.chat',compact('chatHistory'));
     }
     public function chatResponse(Request $request)
