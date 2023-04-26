@@ -41,11 +41,11 @@ class SettingController extends Controller
 
     public function tawkToStore(Request $request)
     {
+        writeConfig('tawk_direct_link', $request->tawk_direct_link);
         writeConfig('tawk_to', $request->tawk_to);
-        $fileName = 'tawk_to.blade.php';
+        $fileName = base_path('resources/views/layouts/tawk_to.blade.php');
         $fileContents = $request->code;
         File::put($fileName, $fileContents);
-        copy(asset('tawk_to.blade.php'), base_path('resources/views/layouts/tawk_to.blade.php'));
         toast('Tawk to is setup', 'success');
         return redirect()->route('setting', ['tab' => "tawkto"]);
     }
@@ -100,12 +100,18 @@ class SettingController extends Controller
 
         // return $request;
         if ($request->hasFile('logo')) {
-            $oldFile = readConfig('type_logo');
+            $oldFile = readConfig('logo');
             fileDelete($oldFile);
             $logo = fileUpload($request->file('logo'), 'site', 'logo');
+            writeConfig('logo', $logo);
+        }
+        if ($request->hasFile('icon')) {
+            $oldFile = readConfig('icon');
+            fileDelete($oldFile);
+            $icon = fileUpload($request->file('icon'), 'site', 'icon');
             // Icon generate for PWA
-            iconGenerate($logo);
-            writeConfig('type_logo', $logo);
+            writeConfig('icon', $icon);
+            iconGenerate($icon);
         }
 
         if ($request->has('name')) {
@@ -113,6 +119,9 @@ class SettingController extends Controller
             writeConfig('name', $request->name);
         }
 
+        if ($request->has('heading_title')) {
+            writeConfig('heading_title', $request->heading_title);
+        }
         if ($request->has('footer')) {
             writeConfig($request->type_footer, $request->footer);
         }

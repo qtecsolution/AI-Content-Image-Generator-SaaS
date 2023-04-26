@@ -2,7 +2,8 @@
 
 return array(
     'name' => 'Creaify',
-    'type_logo' => 'assets/uploads/site/2023/04/10/logo5147.png',
+    'logo' => 'assets/uploads/site/2023/04/26/logo9987.png',
+    'icon' => 'assets/uploads/site/2023/04/26/icon7077.png',
     'type_name' => 'Creaify',
     'type_footer' => 'All rights reserved by Creaify',
     'type_mail' => 'example@mail.com',
@@ -49,4 +50,6 @@ return array(
     'pwa_active' => 'yes',
     'open_ai_model' => 'text-davinci-003',
     'demo' => false,
+    'tawk_direct_link' => 'https://tawk.to/chat/640710734247f20fefe472e8/1gqtpggta',
+    'heading_title' => 'Write your Business Idea with',
 );

@@ -7,8 +7,7 @@
 
                 <div class="col-12">
                     <div class="hero-content pt-5">
-                        <h1 class="hero-title">Write your Business Idea <br>
-                            with <span class="logo-name"> {{ readConfig('name') }} </span> </h1>
+                        <h1 class="hero-title">{{ readConfig('heading_title') }} <span class="logo-name"> {{ readConfig('name') }} </span> </h1>
                         <p class="hero-des">{{ readConfig('name') }} is designed to help you streamline your writing process,
                             <br>
                             increase your productivity, and create high-quality content.
@@ -33,8 +32,8 @@
                 </div>
 
                 <div class="col-12" data-aos="zoom-in" data-aos-delay="500" data-aos-duration="1000">
-                    <figure class="preview-image">
-                        <img src="assets/images/landing/preview-editor.svg" alt="preview editor">
+                    <figure class="preview-image img-custom-radius">
+                        <img src="assets/images/landing/preview-editor.png" alt="preview editor">
                     </figure>
                 </div>
 
@@ -211,13 +210,13 @@
                 </div>
 
                 <div class="col-lg-5" data-aos="zoom-in" data-aos-duration="1000">
-                    <figure class="works-immage">
-                        <img src="assets/images/landing/create-post.svg" alt="preview editor">
+                    <figure class="works-immage img-custom-radius">
+                        <img src="assets/images/landing/create-post.png" alt="preview editor">
                     </figure>
                 </div>
                 <div class="col-lg-7" data-aos="zoom-in" data-aos-duration="1000">
-                    <figure class="works-immage">
-                        <img src="assets/images/landing/editor.svg" alt="preview editor">
+                    <figure class="works-immage img-custom-radius">
+                        <img src="assets/images/landing/editor.png" alt="preview editor">
                     </figure>
                 </div>
 
@@ -355,6 +354,28 @@
                                             <img src="assets/images/icons/check.svg" alt="check icon ">
                                         </span>
                                         <span>Generate {{$item->image_count}} Image / month </span>
+                                    </li>
+                                    <li>
+                                                <span class="icon-wrapper">
+                                                    <img src="{{ asset('assets/images/icons/check.svg') }}"
+                                                         alt="check icon ">
+                                                </span>
+                                        @php
+                                            $templates = explode(',', $item->templates);
+                                            $templatesCategory = [0=>'All Templates',1=>'Basic Templates',2=>'Standard Templates',3=>'Professional Templates'];
+                                        @endphp
+                                        @if (in_array(0, $templates))
+                                            <span> All Templates </span>
+                                        @else
+                                            <span>
+                                                        @foreach($templates as $tKey =>  $temp)
+                                                    @if($tKey>0)
+                                                        ,
+                                                    @endif
+                                                    {{$templatesCategory[$temp]??''}}
+                                                @endforeach
+                                                    </span>
+                                        @endif
                                     </li>
                                 </ul>
                                 <div class="d-grid">

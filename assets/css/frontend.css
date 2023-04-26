@@ -16,3 +16,17 @@
     height: 20px;
     display: inherit;
 }
+.img-custom-radius{
+    border: 16.0005px solid rgba(44, 76, 172, 0.05);
+    border-radius: 27px;
+    overflow: hidden;
+}
+.step .left .count-number{
+    color: #2C4CAC;
+    font-size: 21px;
+    font-weight: 400;
+}
+.header-logo{
+    max-height: 50px;
+    width: auto;
+}

@@ -192,7 +192,7 @@
 	}
 	//------------->> Extension & Permission
 	$requiredServerExtensions = [
-			'JSON', 'Mbstring', 'OpenSSL', 'PDO', 'pdo_mysql', 'cURL',  'GD'
+			'Fileinfo','JSON', 'Mbstring', 'OpenSSL', 'PDO', 'pdo_mysql', 'cURL',  'GD'
 	];
 
 	$folderPermissions = [

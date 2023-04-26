@@ -277,3 +277,8 @@ pre.pre-line{
     white-space: pre-line;
 }
 .font-12{font-size: 12px !important;}
+.header-logo{
+    max-height: 55px;
+    width: auto;
+    margin: 0 auto;
+}

@@ -12,7 +12,7 @@
 
     <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ readConfig('RAZORPAY_KEY') }}"
         data-amount="{{ 100 * $plan->price }}" data-name="{{ readConfig('type_name') }}" data-description=""
-        data-image="{{ filePath(readConfig('type_logo')) }}" data-prefill.name="{{ $user->name }}"
+        data-image="{{ filePath(readConfig('logo')) }}" data-prefill.name="{{ $user->name }}"
         data-prefill.email="{{ $user->email }}"></script>
 
 

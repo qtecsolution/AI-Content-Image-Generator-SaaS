@@ -45,7 +45,7 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="title" class="form-label">Title</label>
-                                                        <input type="text" class="form-control custom-input"
+                                                        <input type="text" class="form-control custom-input @error('title') is-invalid @enderror"
                                                             id="title" required autocomplete="off" name="title"
                                                             placeholder="Write here..." value="{{ $data->title }}">
                                                         @error('title')
@@ -62,7 +62,7 @@
                                                             @purify($data->description)
                                                         </textarea>
                                                         @error('description')
-                                                            <div class="invalid-feedback">
+                                                            <div class="text-danger">
                                                                 {{ $message }}
                                                             </div>
                                                         @enderror
@@ -106,7 +106,7 @@
                                                 <label for="category_id" class="form-label">Category</label>
                                                 {!! Form::select('category_id', $category, $data->category_id??'', ['class' => 'w-100 nice-select','placeholder'=>'-select category-','required']) !!}
                                                 @error('category_id')
-                                                    <div class="invalid-feedback">
+                                                    <div class="text-danger">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
@@ -117,7 +117,7 @@
                                     <div class="col-12 mb-3">
                                         <div class="form-group">
                                             <label for="tags" class="form-label">Tags</label>
-                                            <textarea class="form-control custom-input" id="tags" autocomplete="off" name="tags"
+                                            <textarea class="form-control custom-input @error('tags') is-invalid @enderror" id="tags" autocomplete="off" name="tags"
                                                 placeholder="Tags sapareted by comma" rows="2">@purify($data->tags)</textarea>
                                             @error('tags')
                                                 <div class="invalid-feedback">
@@ -132,7 +132,7 @@
                                         <!-- description  -->
                                         <div class="form-group">
                                             <label for="meta_description" class="form-label">Meta Description</label>
-                                            <textarea class="form-control custom-input" id="meta_description" autocomplete="off" name="meta_description"
+                                            <textarea class="form-control custom-input @error('meta_description') is-invalid @enderror" id="meta_description" autocomplete="off" name="meta_description"
                                                 placeholder="Meta Description" rows="4">@purify($data->meta_description)</textarea>
                                             @error('meta_description')
                                                 <div class="invalid-feedback">

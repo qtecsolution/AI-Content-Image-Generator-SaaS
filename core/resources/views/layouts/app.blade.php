@@ -21,9 +21,9 @@
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 
     <!-- MAIN CSS  -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/utilities.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v=1">
+    <link rel="stylesheet" href="{{ asset('assets/css/utilities.css') }}?v=1">
 
 
 
@@ -41,11 +41,11 @@
         <div class="leader-section section-right"></div>
     </div>
     <!-- SIDEBAR MENU START -->
-    <aside class="sidebar">
+    <aside class="sidebar pt-2">
         <div class="sidebar-header">
 
             <a href="{{ route('home') }}">
-                <h3 class="logo-name ps-3"> {{ readConfig('name') }} </h3>
+                <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}">
             </a>
 
 
@@ -55,7 +55,7 @@
             <div class="sidebar-menu  w-100 ">
                 <!-- sidebar menu   -->
 
-                <ul class="new-sidebar">
+                <ul class="new-sidebar pt-2">
 
                     <li>
                         <div class="accordion" id="accordionExample">
@@ -326,7 +326,7 @@
                                     </div>
                                 </div>
 
-                          
+
                                 <!-- manage users   -->
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
@@ -483,7 +483,7 @@
                                         </div>
                                     </div>
                                 </div>
-                             
+
                                 <!-- settings -->
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
@@ -927,7 +927,7 @@
                                     </div>
                                 </div>
 
-                          
+
                                 <!-- manage users   -->
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
@@ -1084,7 +1084,7 @@
                                         </div>
                                     </div>
                                 </div>
-                             
+
                                 <!-- settings -->
                                 <div class="accordion-item">
                                     <h2 class="accordion-header">
@@ -1198,9 +1198,9 @@
     @include('layouts.modal')
     <!--Start of Tawk.to Script-->
     @if (readConfig('tawk_to') == 'yes')
-    @if(menuActive(['chat.create','content.*', 'contents.*', 'content-history.*','code.*'])==false)
-    @include('layouts.tawk_to')
-    @endif
+        @if(menuActive(['chat.create','content.*', 'contents.*', 'content-history.*','code.*'])==false)
+            @include('layouts.tawk_to')
+        @endif
     @endif
     <!--End of Tawk.to Script-->
 

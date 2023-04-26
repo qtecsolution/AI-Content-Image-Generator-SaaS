@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <meta name="description" content="{{readConfig('meta_desc')}}">
 	<meta name="author" content="{{ readConfig('name') }} ">
 	<meta name="keywords" content="{{readConfig('meta_key')}}">
@@ -24,7 +24,7 @@
 
     <!-- MAIN CSS  -->
     <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/frontend.css') }}?v=1">
     <!-- aos scroll animation  -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     @if(readConfig('pwa_active') == 'yes')
@@ -42,7 +42,7 @@
             <div class="header-desk d-none d-lg-flex ">
                 <div class="header-left">
                     <a href="{{route('/')}}">
-                        <h3 class="logo-name text-center header-logo">{{ readConfig('name') }} </h3>
+                        <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}">
                     </a>
                     <ul class="desk-menu">
                         <li>
@@ -64,7 +64,6 @@
 
                 <div class="header-right">
                     <ul class="desk-menu">
-
                         <li><a href="{{route('login')}}" class="primarybtn-landing ">Get started ___ it’s free</a></li>
                     </ul>
                 </div>
@@ -74,7 +73,7 @@
 
             <div class="moble-header d-flex justify-content-between d-lg-none align-items-center ">
                 <a href="{{route('/')}}">
-                    <h3 class="logo-name text-center header-logo">{{ readConfig('name') }} </h3>
+                    <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}">
                 </a>
 
                 <span data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
@@ -118,7 +117,7 @@
                         <div class="long-check-wrapper">
                             <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
                         </div>
-                        <span>No credit card required</span>
+                        <span>Get started for free</span>
                     </div>
                 </div>
 
@@ -127,7 +126,7 @@
                         <div class="long-check-wrapper">
                             <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
                         </div>
-                        <span>7-day trial of Standard plan</span>
+                        <span>30-day trial of Free plan</span>
                     </div>
                 </div>
 
@@ -184,8 +183,7 @@
                 <div class="row g-4">
                     <div class="col-lg-2">
                         <a href="{{route('/')}}">
-                            <h3 class="logo-name">{{ readConfig('name') }} </h3>
-                            <p></p>
+                            <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}">
                         </a>
                     </div>
 
@@ -196,7 +194,7 @@
                                 @foreach(pages() as $item)
                                 <a href="{{route('page',$item->slug)}}" class="link">{{$item->title}}</a>
                                 @endforeach
-                            
+
                             </div>
                         </div>
                     </div>
@@ -210,7 +208,7 @@
                                     {{ $fUseCase->title }}
                                 </a>
                                 @endforeach
-                          
+
                             </div>
                         </div>
                     </div>
@@ -219,9 +217,11 @@
                         <div class="footerlinks">
                             <h5 class="footerlinks-title">Others</h5>
                             <div class="footerlink">
-                                <a href="{{route('blogs.index')}}" class="link">Blogs</a>
-                                <a href="{{route('register')}}" class="link"> Register</a>
                                 <a href="{{route('login')}}" class="link"> Login</a>
+                                <a href="{{route('register')}}" class="link"> Register</a>
+                                @if (readConfig('tawk_to') == 'yes' && readConfig('tawk_direct_link') != '')
+                                    <a target="_blank" href="{{readConfig('tawk_direct_link')}}" class="link"> Feedback </a>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -233,7 +233,7 @@
                                 @foreach(footerBlog() as $blog)
                                 <a href="{{route('blogs.show',$blog->slug)}}" class="link">{{$blog->title}}</a>
                                 @endforeach
-                                
+
                             </div>
                         </div>
                     </div>
@@ -271,7 +271,7 @@
                 </div>
 
                 <div class="copyright">
-                    <p class="copyright-text">  Copyright  © {{date('Y')}}. {{ readConfig('type_footer') }}  </p>
+                    <p class="copyright-text"> {{ readConfig('type_footer') }}  </p>
                 </div>
             </div>
         </div>
@@ -282,15 +282,15 @@
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu" aria-labelledby="mobileMenu">
         <div class="offcanvas-header">
             <a href="{{route('/')}}">
-                <h3 class="logo-name text-center header-logo">{{ readConfig('name') }}</h3>
+                <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}">
             </a>
 
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
-                        d="M13.2849 15.5425L7.62804 9.88562L1.97118 15.5425L0.0855651 13.6569L5.74242 8L0.0855651 
-                    2.34315L1.97118 0.457528L7.62804 6.11438L13.2849 0.457527L15.1705 2.34315L9.51366 8L15.1705 13.6569L13.2849 
+                        d="M13.2849 15.5425L7.62804 9.88562L1.97118 15.5425L0.0855651 13.6569L5.74242 8L0.0855651
+                    2.34315L1.97118 0.457528L7.62804 6.11438L13.2849 0.457527L15.1705 2.34315L9.51366 8L15.1705 13.6569L13.2849
                     15.5425Z"
                         fill="#718096" />
                 </svg>
@@ -330,7 +330,7 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
     </script>
     <script>
-        // animation on scroll 
+        // animation on scroll
         AOS.init({
             offset: 120, // offset (in px) from the original trigger point
             delay: 0, // values from 0 to 3000, with step 50ms
@@ -357,7 +357,7 @@
 
 
 
-        // header background add when scroll start 
+        // header background add when scroll start
         var scrollTrigger = 80;
 
         window.onscroll = function() {

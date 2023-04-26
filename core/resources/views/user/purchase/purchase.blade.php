@@ -519,7 +519,7 @@
                     "currency": "USD",
                     "name": "{{ $plan->name }}",
                     "description": "Payment",
-                    "image": "{{ filePath(readConfig('type_logo')) }}",
+                    "image": "{{ filePath(readConfig('logo')) }}",
                     "handler": function(response) {
                         $('#paymentID').val(response.razorpay_payment_id);
                         $('#order_payment_done').submit();

@@ -14,7 +14,7 @@
                 <div class="my-projects-header border-bottom">
                     <h4 class="header-title">Add New Blog</h4>
                     <div class="project-button pull-right">
-                           
+
                         <a href="{{ route('manage-blogs.index') }}"class="seeall-btn d-flex">
                           <span class="icon">
                             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -25,8 +25,8 @@
                                 <path d="M2 8H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                                 <path d="M2 12H2.00667" stroke="#1D2939" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
                             </svg>
-                          </span>   
-                         <span class="mt-1">View All</span> 
+                          </span>
+                         <span class="mt-1">View All</span>
                         </a>
                     </div>
                 </div>
@@ -46,7 +46,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="title" class="form-label">Title</label>
-                                                    <input type="text" class="form-control custom-input" id="title"
+                                                    <input type="text" class="form-control custom-input @error('title') is-invalid @enderror" id="title"
                                                         required autocomplete="off" name="title"
                                                         placeholder="Write here..." value="{{ old('title') }}">
                                                     @error('title')
@@ -60,9 +60,9 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="description" class="form-label">Blog Description</label>
-                                                    <textarea id="summernote" name="description"></textarea>
+                                                    <textarea id="summernote" name="description">{{old('description')}}</textarea>
                                                     @error('description')
-                                                    <div class="invalid-feedback">
+                                                    <div class="text-danger">
                                                         {{ $message }}
                                                     </div>
                                                     @enderror
@@ -79,7 +79,7 @@
                                         <div class="form-group">
                                             <label for="title" class="form-label">Image</label>
                                             <div>
-                                                <input  type="file" name="image" class="form-control custom-input" >
+                                                <input  type="file" name="image" class="form-control custom-input @error('image') is-invalid @enderror" >
                                                  @error('image')
                                                      <div class="invalid-feedback">
                                                          {{ $message }}
@@ -96,7 +96,7 @@
                                             <label for="category_id" class="form-label">Category</label>
                                             {!! Form::select('category_id', $category, '', ['class' => 'w-100 nice-select','placeholder'=>'-select category-','required']) !!}
                                             @error('category_id')
-                                                <div class="invalid-feedback">
+                                                <div class="text-danger">
                                                     {{ $message }}
                                                 </div>
                                             @enderror
@@ -107,8 +107,8 @@
                                 <div class="col-12 mb-3">
                                     <div class="form-group">
                                         <label for="tags" class="form-label">Tags</label>
-                                        <textarea class="form-control custom-input" id="tags" autocomplete="off" name="tags"
-                                            placeholder="Tags sapareted by comma" rows="2"></textarea>
+                                        <textarea class="form-control custom-input @error('tags') is-invalid @enderror" id="tags" autocomplete="off" name="tags"
+                                            placeholder="Tags sapareted by comma" rows="2">{{old('tags')}}</textarea>
                                         @error('tags')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -122,8 +122,8 @@
                                     <!-- description  -->
                                     <div class="form-group">
                                         <label for="meta_description" class="form-label">Meta Description</label>
-                                        <textarea class="form-control custom-input" id="meta_description" autocomplete="off" name="meta_description"
-                                            placeholder="Meta Description" rows="4"></textarea>
+                                        <textarea class="form-control custom-input @error('meta_description') is-invalid @enderror" id="meta_description" autocomplete="off" name="meta_description"
+                                            placeholder="Meta Description" rows="4">{{old('meta_description')}}</textarea>
                                         @error('meta_description')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -141,7 +141,7 @@
                                     <button type="submit" class="generate-btn px-4">Submit</button>
                                 </div>
                             </div>
-                          
+
 
                         </div>
                     </form>
