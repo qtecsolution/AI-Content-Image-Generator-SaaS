@@ -9,7 +9,7 @@
                         <img src="{{filePath($blog->image)}}" alt="blogdetail" height="864">
                     </figure>
                 </div>
-                <div class="col-lg-9">
+                <div class="col-lg-12">
                     <div class="blogdetail-row">
 
 

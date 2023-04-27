@@ -142,7 +142,7 @@
             @include font($primaryFont,12,normal,normal,18);
             
             @include breakpoint(mobile576) {
-            @include font($primaryFont,14,normal,normal,18);
+            @include font($primaryFont,16,normal,normal,28);
 
             }
         

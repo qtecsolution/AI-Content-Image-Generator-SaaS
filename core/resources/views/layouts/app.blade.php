@@ -55,8 +55,8 @@
 
             <ul class="new-sidebar pt-2">
 
-                <li>
-                    <div class="accordion" id="accordionExample">
+                    <li>
+                        <div class="accordion" id="mobileMenu">
 
                         <!-- Home  single-->
                         <div class="single-item">
@@ -97,12 +97,12 @@
 
                         <!-- ai content   -->
 
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button
-                                    class="accordion-button {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? '' : 'collapsed' }}"
-                                    type="button" data-bs-toggle="collapse" data-bs-target="#aiContent"
-                                    aria-expanded="true" aria-controls="aiContent">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button
+                                        class="accordion-button {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? '' : 'collapsed' }}"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#aiContent-mobile"
+                                        aria-expanded="true" aria-controls="aiContent-mobile">
                                         <span class="icon">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -122,12 +122,12 @@
 
 
                                         </span>
-                                    <span class="title fz-16"> AI Content</span>
-                                </button>
-                            </h2>
-                            <div id="aiContent"
-                                 class="accordion-collapse collapse {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? 'show' : '' }}"
-                                 data-bs-parent="#accordionExample">
+                                        <span class="title fz-16"> AI Content</span>
+                                    </button>
+                                </h2>
+                                <div id="aiContent-mobile"
+                                    class="accordion-collapse collapse {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? 'show' : '' }}"
+                                    data-bs-parent="#mobileMenu">
 
                                 <div class="accordion-body">
                                     <div class="menu-items">
@@ -165,12 +165,12 @@
                             </a>
                         </div>
 
-                        <!--  ai images  -->
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button {{ menuActive(['image.*']) ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#aiImages"
-                                        aria-expanded="true" aria-controls="aiImages">
+                            <!--  ai images  -->
+                            <div class="accordion-item">
+                                <h2 class="accordion-header">
+                                    <button class="accordion-button {{ menuActive(['image.*']) ? '' : 'collapsed' }}"
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#aiImages-mobile"
+                                        aria-expanded="true" aria-controls="aiImages-mobile">
                                         <span class="icon">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -188,12 +188,12 @@
 
                                         </span>
 
-                                    <span class="title fz-16">AI Image</span>
-                                </button>
-                            </h2>
-                            <div id="aiImages"
-                                 class="accordion-collapse collapse {{ menuActive(['image.*']) ? 'show' : '' }}"
-                                 data-bs-parent="#accordionExample">
+                                        <span class="title fz-16">AI Image</span>
+                                    </button>
+                                </h2>
+                                <div id="aiImages-mobile"
+                                    class="accordion-collapse collapse {{ menuActive(['image.*']) ? 'show' : '' }}"
+                                    data-bs-parent="#mobileMenu">
 
                                 <div class="accordion-body">
                                     <div class="menu-items">
@@ -264,13 +264,13 @@
                                 </a>
                             </div>
 
-                            <!-- manage ai    -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button
-                                        class="accordion-button {{(menuActive(['use-case.*','use-case-category.*']) || menuActive('setting') && request()->input('tab') === 'openai')?'':'collapsed'}} "
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#manageAi"
-                                        aria-expanded="true" aria-controls="collapseOne">
+                                <!-- manage ai    -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button
+                                            class="accordion-button {{menuActive(['use-case.*','use-case-category.*'])?'':'collapsed'}} "
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#manageAi-mobile"
+                                            aria-expanded="true" aria-controls="manageAi-mobile">
                                             <span class="icon">
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -312,36 +312,37 @@
                                                 </svg>
 
                                             </span>
-                                        <span class="title fz-16"> Manage AI</span>
-                                    </button>
-                                </h2>
-                                <div id="manageAi"
-                                     class="accordion-collapse collapse {{(menuActive(['use-case.*','use-case-category.*']) || menuActive('setting') && request()->input('tab') === 'openai') ?'show':''}}"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="menu-items">
-                                            <a href="{{ route('use-case.index') }}"
-                                               class="menu-item {{ menuActive('use-case.*') ? 'active' : '' }}">Use
-                                                Case Templates</a>
-                                            <a href="{{ route('use-case-category.index') }}"
-                                               class="menu-item {{ menuActive('use-case-category.*') ? 'active' : '' }}">Template
-                                                Category</a>
-                                            <a href="{{ route('setting') }}?tab=openai"
-                                               class="menu-item {{ menuActive('setting') && request()->input('tab') === 'openai' ? 'active' : '' }}">AI
-                                                Settings</a>
+                                            <span class="title fz-16"> Manage AI</span>
+                                        </button>
+                                    </h2>
+                                    <div id="manageAi-mobile"
+                                        class="accordion-collapse collapse {{menuActive(['use-case.*','use-case-category.*'])?'show':''}}"
+                                        data-bs-parent="#mobileMenu">
+                                        <div class="accordion-body">
+                                            <div class="menu-items">
+                                                <a href="{{ route('use-case.index') }}"
+                                                    class="menu-item {{ menuActive('use-case.*') ? 'active' : '' }}">Use
+                                                    Case Templates</a>
+                                                <a href="{{ route('use-case-category.index') }}"
+                                                    class="menu-item {{ menuActive('use-case-category.*') ? 'active' : '' }}">Template
+                                                    Category</a>
+                                                <a href="{{ route('setting') }}?tab=openai"
+                                                    class="menu-item {{ menuActive('setting') && request()->input('tab') === 'openai' ? 'active' : '' }}">AI
+                                                    Settings</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <!-- manage users   -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button
-                                        class="accordion-button {{menuActive(['users.*','admin.*'])?'':'collapsed'}}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo"
-                                        aria-expanded="false" aria-controls="collapseTwo">
+                                <!-- manage users   -->
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button
+                                            class="accordion-button {{menuActive(['users.*','admin.*'])?'':'collapsed'}}"
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo-mobile"
+                                            aria-expanded="false" aria-controls="collapseTwo-mobile">
                                             <span class="icon">
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -372,20 +373,21 @@
 
                                             </span>
 
-                                        <span class="title fz-16">Manage Users</span>
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo"
-                                     class="accordion-collapse collapse {{menuActive(['users.*','admin.*'])?'show':''}}"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
-                                        <div class="menu-items">
-                                            <a href="{{ route('users.index') }}"
-                                               class="menu-item {{ menuActive('users.*') ? 'active' : '' }}">Customer
-                                                List</a>
-                                            <a href="{{ route('admin.all') }}"
-                                               class=" menu-item  {{ menuActive('admin.*') ? 'active' : '' }}">Admin
-                                                List</a>
+                                            <span class="title fz-16">Manage Users</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapseTwo-mobile"
+                                        class="accordion-collapse collapse {{menuActive(['users.*','admin.*'])?'show':''}}"
+                                        data-bs-parent="#mobileMenu">
+                                        <div class="accordion-body">
+                                            <div class="menu-items">
+                                                <a href="{{ route('users.index') }}"
+                                                    class="menu-item {{ menuActive('users.*') ? 'active' : '' }}">Customer
+                                                    List</a>
+                                                <a href="{{ route('admin.all') }}"
+                                                    class=" menu-item  {{ menuActive('admin.*') ? 'active' : '' }}">Admin
+                                                    List</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -396,8 +398,8 @@
                                 <h2 class="accordion-header">
                                     <button
                                         class="accordion-button {{ menuActive(['payment.*', 'order.*', 'plan.*']) ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#Finincial"
-                                        aria-expanded="false" aria-controls="Finincial">
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#Finincial-mobile"
+                                            aria-expanded="false" aria-controls="Finincial-mobile">
                                                 <span class="icon">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -420,12 +422,12 @@
 
                                         </span>
                                         <span class="title fz-16">Financial</span>
-                                    </button>
-                                </h2>
-                                <div id="Finincial"
-                                     class="accordion-collapse collapse {{ menuActive(['payment.*', 'order.*', 'plan.*']) ? 'show' : '' }}"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                                        </button>
+                                    </h2>
+                                    <div id="Finincial-mobile"
+                                        class="accordion-collapse collapse {{ menuActive(['payment.*', 'order.*', 'plan.*']) ? 'show' : '' }}"
+                                        data-bs-parent="#mobileMenu">
+                                        <div class="accordion-body">
                                         <div class="menu-items">
 
 
@@ -451,8 +453,8 @@
                                 <h2 class="accordion-header">
                                     <button
                                         class="accordion-button {{ menuActive(['manage-blogs.*', 'blog-category.*', 'manage-faq.*', 'pages.*']) ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#Frontend"
-                                        aria-expanded="false" aria-controls="Frontend">
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#Frontend-mobile"
+                                            aria-expanded="false" aria-controls="Frontend-mobile">
                                                 <span class="icon">
                                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                  xmlns="http://www.w3.org/2000/svg">
@@ -468,12 +470,12 @@
                                         </span>
 
                                         <span class="title fz-16">Frontend</span>
-                                    </button>
-                                </h2>
-                                <div id="Frontend"
-                                     class="accordion-collapse collapse {{ menuActive(['manage-blogs.*', 'blog-category.*', 'manage-faq.*', 'pages.*']) ? 'show' : '' }}"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                                        </button>
+                                    </h2>
+                                    <div id="Frontend-mobile"
+                                    class="accordion-collapse collapse {{ menuActive(['manage-blogs.*', 'blog-category.*', 'manage-faq.*', 'pages.*']) ? 'show' : '' }}"
+                                        data-bs-parent="#mobileMenu">
+                                        <div class="accordion-body">
                                         <div class="menu-items">
                                             <a href="{{ route('manage-blogs.index') }}"
                                                class="menu-item {{ menuActive('manage-blogs.*') ? 'active' : '' }}">Blog
@@ -498,8 +500,8 @@
                                 <h2 class="accordion-header">
                                     <button
                                         class="accordion-button {{ menuActive('setting') && request()->input('tab') != 'openai' ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#settings"
-                                        aria-expanded="false" aria-controls="settings">
+                                            type="button" data-bs-toggle="collapse" data-bs-target="#settings-mobile"
+                                            aria-expanded="false" aria-controls="settings-mobile">
                                             <span class="icon">
                                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                              xmlns="http://www.w3.org/2000/svg">
@@ -523,13 +525,13 @@
 
                                     </span>
 
-                                        <span class="title fz-16">Settings</span>
-                                    </button>
-                                </h2>
-                                <div id="settings"
-                                     class="accordion-collapse collapse {{ menuActive('setting') && request()->input('tab') != 'openai' ? 'show' : '' }}"
-                                     data-bs-parent="#accordionExample">
-                                    <div class="accordion-body">
+                                    <span class="title fz-16">Settings</span>
+                                        </button>
+                                    </h2>
+                                    <div id="settings-mobile"
+                                    class="accordion-collapse collapse {{ menuActive('setting') && request()->input('tab') != 'openai' ? 'show' : '' }}"
+                                        data-bs-parent="#mobileMenu">
+                                        <div class="accordion-body">
                                         <div class="menu-items">
                                             <a href="{{ route('setting') }}?tab=cms"
                                                class="menu-item {{ menuActive('setting') && request()->input('tab') == 'cms' ? 'active' : '' }}">General

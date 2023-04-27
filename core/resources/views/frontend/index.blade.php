@@ -10,7 +10,7 @@
                         <h1 class="hero-title">{{ readConfig('heading_title') }} <span class="logo-name"> {{ readConfig('name') }} </span> </h1>
                         <p class="hero-des">{{ readConfig('name') }} is designed to help you streamline your writing process,
                             <br>
-                            increase your productivity, and create high-quality content.
+                            increase your productivity , and create high-quality content.
                         </p>
 
                         <a href="{{ route('register') }}" class="primarybtn-landing">
@@ -177,12 +177,12 @@
                             beautiful image with one click.</p>
                     </div>
                 </div>
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
                     <figure class="generate-image1">
                         <img src="assets/images/landing/generate.svg" alt="generate image ">
                     </figure>
                 </div>
-                <div class="col-lg-8 mx-auto">
+                <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
                     <figure class="generate-image2">
                         <img src="assets/images/landing/generate2.svg" alt="generate image ">
                     </figure>
@@ -196,7 +196,7 @@
     <!--================= AI IMAGE GENERATE END================== -->
 
     <!-- ==============work start======================= -->
-    <section class="how-works" id="works">
+    <section class="how-works py-5" id="works">
         <div class="container pt-4">
 
             <div class="row g-4 align-items-center">
@@ -288,7 +288,7 @@
     <!-- ==============work end======================= -->
 
     <!-- ==============Choose package start======================= -->
-    <section class="choose-package" id="pricing">
+    <section class="choose-package  py-5" id="pricing">
         <div class="container">
 
             <div class="row g-4 align-items-center">

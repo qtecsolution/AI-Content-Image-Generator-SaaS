@@ -297,7 +297,7 @@
     align-items: center;
     gap: size(24);
     padding: size(10) size(0);
-
+     flex-direction: column;
     .long-check-wrapper {
         @include square(58);
         background: $gray-100;
