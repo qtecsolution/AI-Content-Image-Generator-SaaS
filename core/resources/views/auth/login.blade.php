@@ -6,9 +6,9 @@
     <form method="POST" class="authentication-form needs-validation" action="{{ route('login') }}" novalidate>
         @csrf
         <div class="authentication-form-header">
-            <h3 class="logo-name"> <a href="{{route('/')}}"> {{readConfig('type_name')}} </a> </h3>
+            <h3 class="logo-name"> <a href="{{route('/')}}"> <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}"> </a> </h3>
             <h3 class="section-title">Log in to your account</h3>
-            <p class="form-des">{{readConfig('type_login_title')}}</p>
+            <p class="form-des">Welcome back! Please enter your details</p>
         </div>
 
         <div class="authentication-form-body">
@@ -52,7 +52,7 @@
                     <label for="useCaseTitle" class="checkWithLable-label gray-600 font-500"> Remember Me </label>
                 </div>
                 @if (Route::has('password.request'))
-                <a href="{{ route('password.request') }}" class="forgot-pass">Forgot password</a>
+                <a href="{{ route('password.request') }}" class="forgot-pass">Forgot password?</a>
                 @endif
             </div>
 

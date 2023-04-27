@@ -1,4 +1,5 @@
 @extends('frontend.app')
+@section('title', $blog->title)
 @section('content')
     <section class="blog-detail">
         <div class="container">
@@ -15,13 +16,13 @@
                         <div class="content">
                             <p class="date">
                                 <span class="icon">
-                                    <img src="{{asset('assets/icons/calendar.svg')}}">
+                                    <img src="{{asset('assets/images/icons/calendar.svg')}}">
                                 </span>
                                 {{ date('jS F, Y', strtotime($blog->created_at)) }}
                                 @if($blog->category != null)
                                 <a href="{{route('blog.category',$blog->category->slug)}}" class="mx-3">
                                 <span class="icon">
-                                    <img src="{{asset('assets/icons/folder.svg')}}">
+                                    <img src="{{asset('assets/images/icons/folder.svg')}}">
                                 </span>
                                 {{$blog->category->name ?? ''}}
                                 </a>

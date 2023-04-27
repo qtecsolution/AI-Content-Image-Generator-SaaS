@@ -5,7 +5,7 @@
         @csrf
 
         <div class="authentication-form-header">
-            <h3 class="logo-name">{{ readConfig('type_name') }}</h3>
+            <h3 class="logo-name">{{ readConfig('name') }}</h3>
             <h3 class="section-title">Enter your new password</h3>
             <p class="form-des"> Please enter your valid email and password. </p>
         </div>

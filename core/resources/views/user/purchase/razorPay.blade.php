@@ -11,7 +11,7 @@
     <input type="hidden" id="value_1" name="value_1" value="">
 
     <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="{{ readConfig('RAZORPAY_KEY') }}"
-        data-amount="{{ 100 * $plan->price }}" data-name="{{ readConfig('type_name') }}" data-description=""
+        data-amount="{{ 100 * $plan->price }}" data-name="{{ readConfig('name') }}" data-description=""
         data-image="{{ filePath(readConfig('logo')) }}" data-prefill.name="{{ $user->name }}"
         data-prefill.email="{{ $user->email }}"></script>
 

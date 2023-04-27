@@ -7,8 +7,8 @@
     <form method="POST" action="{{ route('register') }}" class="authentication-form needs-validation" novalidate>
         @csrf
 
-        <div class="authentication-form-header align-items-start">
-            <h3 class="logo-name"> <a href="{{ route('/') }}"> {{ readConfig('type_name') }} </a> </h3>
+        <div class="authentication-form-header">
+            <h3 class="logo-name"> <a href="{{ route('/') }}"> <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}"> </a> </h3>
             <h3 class="section-title">Sign up</h3>
             <p class="form-des">{{ readConfig('type_register_title') }}</p>
         </div>

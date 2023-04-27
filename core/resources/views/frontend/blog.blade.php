@@ -1,7 +1,8 @@
 @extends('frontend.app')
+@section('title', 'Blog')
 @section('content')
     <!-- ===================hero  start======================= -->
-    <section class="hero bg-blog pb-4">
+    <section class="hero bg-blog pb-4 bg-transparent">
         <div class="container">
             <div class="row g-4">
                 <div class="col-12">

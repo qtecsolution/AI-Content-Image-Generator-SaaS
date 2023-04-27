@@ -2,7 +2,7 @@
 
 return array(
     'name' => 'Creaify',
-    'logo' => 'assets/uploads/site/2023/04/26/logo9987.png',
+    'logo' => 'assets/uploads/site/2023/04/27/logo7137.png',
     'icon' => 'assets/uploads/site/2023/04/26/icon7077.png',
     'type_name' => 'Creaify',
     'type_footer' => 'All rights reserved by Creaify',

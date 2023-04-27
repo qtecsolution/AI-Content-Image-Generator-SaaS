@@ -401,7 +401,7 @@
 
                 <div class="col-12" data-aos="fade-up" data-aos-duration="1000">
                     <div class="section-header">
-                        <button class="section-btn"><span class="text">Faq</span></button>
+                        <button class="section-btn"><span class="text">FAQ</span></button>
                         <h3 class="benifits-title"> Frequently Asked <br>
                             Questions </h3>
                     </div>
