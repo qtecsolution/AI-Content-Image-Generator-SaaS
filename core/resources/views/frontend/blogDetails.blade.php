@@ -1,5 +1,5 @@
 @extends('frontend.app')
-@section('title', $blog->title)
+@section('title', $blog->title.' - '.readConfig('name'))
 @section('content')
     <section class="blog-detail">
         <div class="container">

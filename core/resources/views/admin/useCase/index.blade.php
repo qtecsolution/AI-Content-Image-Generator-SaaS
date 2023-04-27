@@ -62,8 +62,8 @@
                                         <td>Name</td>
                                         <td>Category</td>
                                         <td> Details </td>
-                                        <td>Last Modified</td>
-                                        <td> Action </td>
+                                        <td data-orderable="false">Type</td>
+                                        <td data-orderable="false"> Action </td>
                                     </tr>
                                 </thead>
                             </table>
@@ -114,7 +114,8 @@
                         data: 'details',
                     },
                     {
-                        data: 'updated_at',
+                        data: 'type_value',
+                        name:'type'
                     },
                     {
                         data: 'action',

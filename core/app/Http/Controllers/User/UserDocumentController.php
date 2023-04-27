@@ -42,7 +42,7 @@ class UserDocumentController extends Controller
                 return str_word_count($data->generated_content);
             })
             ->addColumn('last_modify', function ($data) {
-                return $data->updated_at;
+                return date('Y-m-d',strtotime($data->updated_at));
             })
             ->addColumn('action', '
             <div class="action-wrapper">

@@ -282,3 +282,4 @@ pre.pre-line{
     width: auto;
     margin: 0 auto;
 }
+.note-editable ul, .note-editable ol {padding: inherit !important;}

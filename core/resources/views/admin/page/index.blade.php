@@ -48,7 +48,7 @@
                                     <td>@translate(S / L)</td>
                                     <td>@translate(Title)</td>
                                     <td>@translate(Total Section)</td>
-                                    <td></td>
+                                    <td>Action</td>
                                 </tr>
                             </thead>
                             <tbody>

@@ -32,7 +32,10 @@ class UseCaseController extends Controller
                 ->addColumn('case_icon', function ($data) {
                     return "<img src=".filePath($data->icon)." alt='Icon' style='max-height:30px'>";
                 })
-               
+                ->addColumn('type_value', function ($data) {
+                    $types = [1=>'Basic Templates',2=>'Standard Templates',3=>'Professional Templates'];
+                    return $types[$data->type];
+                })
                 ->addColumn('action','
                 <div class="action-wrapper">
                     <a class="text-danger" title="Delete Data"

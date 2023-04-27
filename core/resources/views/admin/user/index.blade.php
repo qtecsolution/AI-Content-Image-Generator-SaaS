@@ -64,7 +64,7 @@
                                         <td scope="col" data-orderable="false">Email</td>
                                         <td scope="col" data-orderable="false">Phone</td>
                                         <td scope="col" data-orderable="false">Plan</td>
-                                        <td scope="col" width="10%" data-orderable="false"></td>
+                                        <td scope="col" width="10%" data-orderable="false">Action</td>
                                     </tr>
                                 </thead>
                                 <tbody>

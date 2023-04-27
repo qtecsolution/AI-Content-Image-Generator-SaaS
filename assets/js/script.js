@@ -12,7 +12,8 @@ $(document).ready(function() {
             ['para', ['ul', 'ol', 'paragraph']],
             ['insert', ['link', 'picture', 'list']],
             ['color', ['forecolor']],
-            ['height', ['height','codeview']]
+            ['height', ['height','codeview']],
+            ['mybutton', ['cleartags']]
         ],
         colorNames: {
             'red': '#ff0000',
@@ -33,8 +34,28 @@ $(document).ready(function() {
             "<style id=\"fixed\">.note-editor .dropdown-toggle::after { all: unset; } .note-editor .note-dropdown-menu { box-sizing: content-box; } .note-editor .note-modal-footer { box-sizing: content-box; }</style>"
         )
         .prependTo("body");
+});
+$.extend($.summernote.plugins, {
+    'cleartags': function(context) {
+        var self = this;
+        var ui = $.summernote.ui;
+        var $note = context.layoutInfo.note;
 
-})
+        // add Clear Tags button
+        context.memo('button.cleartags', function() {
+            var button = ui.button({
+                contents: '<i class="fa fa-eraser"/>',
+                tooltip: 'Clear Tags',
+                click: function() {
+                    var html = $note.summernote('code');
+                    html = html.replace(/(<([^>]+)>)/ig, '');
+                    $note.summernote('code', html);
+                }
+            });
+            return button.render();
+        });
+    }
+});
 
 // avatar preview
 

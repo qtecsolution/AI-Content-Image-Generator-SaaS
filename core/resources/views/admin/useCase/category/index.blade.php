@@ -53,7 +53,7 @@
                                                 <td> Name</td>
                                                 <td>Slug</td>
                                                 <td>Status</td>
-                                                <td>  </td>
+                                                <td> Action </td>
                                             </tr>
                                         </thead>
                                         <tbody>

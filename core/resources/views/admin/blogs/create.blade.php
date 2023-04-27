@@ -151,29 +151,3 @@
     </div>
 </div>
 @endsection
-@section('script')
-<script>
-// Summernote (Texteditor) Script
-$(document).ready(function() {
-    $('#summernote').summernote({
-        toolbar: [
-            ['style', ['style']],
-            ['font', ['bold', 'italic', 'underline', 'clear']],
-            ['fontsize', ['fontsize']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['insert', ['link', 'picture', 'list']],
-            ['color', ['forecolor']],
-            ['height', ['height']]
-        ],
-        disableResizeEditor: false,
-        height: 600, // set editor height
-        minHeight: 600, // set minimum height of editor
-        maxHeight: 600,
-
-    });
-
-    $('.note-statusbar').hide();
-
-})
-</script>
-@endsection

@@ -52,7 +52,7 @@
                                         <td> Category </td>
                                         <td> Author </td>
                                         <td> Status </td>
-                                        <td data-orderable="false"></td>
+                                        <td data-orderable="false">Action</td>
                                     </tr>
                                 </thead>
                                 <tbody> </tbody>

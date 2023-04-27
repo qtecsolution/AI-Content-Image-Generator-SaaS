@@ -1,5 +1,5 @@
 @extends('frontend.app')
-@section('title', 'Blog')
+@section('title', 'Blog - '.readConfig('name'))
 @section('content')
     <!-- ===================hero  start======================= -->
     <section class="hero bg-blog pb-4 bg-transparent">

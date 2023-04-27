@@ -82,7 +82,7 @@
                             <td> Use Case </td>
                             <td>Words </td>
                             <td>Last Modified</td>
-                            <td data-orderable="false">...</td>
+                            <td data-orderable="false">Action</td>
                         </tr>
                     </thead>
                     <tbody> </tbody>

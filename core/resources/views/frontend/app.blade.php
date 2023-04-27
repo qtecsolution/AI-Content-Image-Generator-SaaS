@@ -15,7 +15,7 @@
     <meta property="og:description" content="{{ readConfig('meta_desc') }}">
     <meta property="og:image" content="/{{ readConfig('meta_image') }}">
     <meta property="og:type" content="website">
-    <title>@yield('title', 'Home') - {{ readConfig('name') }}</title>
+    <title>@yield('title', readConfig('name'))</title>
 
     <!-- Link Swiper's CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />

@@ -268,7 +268,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button
-                                        class="accordion-button {{menuActive(['use-case.*','use-case-category.*'])?'':'collapsed'}} "
+                                        class="accordion-button {{(menuActive(['use-case.*','use-case-category.*']) || menuActive('setting') && request()->input('tab') === 'openai')?'':'collapsed'}} "
                                         type="button" data-bs-toggle="collapse" data-bs-target="#manageAi"
                                         aria-expanded="true" aria-controls="collapseOne">
                                             <span class="icon">
@@ -316,7 +316,7 @@
                                     </button>
                                 </h2>
                                 <div id="manageAi"
-                                     class="accordion-collapse collapse {{menuActive(['use-case.*','use-case-category.*'])?'show':''}}"
+                                     class="accordion-collapse collapse {{(menuActive(['use-case.*','use-case-category.*']) || menuActive('setting') && request()->input('tab') === 'openai') ?'show':''}}"
                                      data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="menu-items">
@@ -629,13 +629,14 @@
             </ul>
         </nav>
     </header>
-
+    @if(menuActive('home') == false)
     <nav aria-label="breadcrumb " class="ai-breadcrumb">
         <ol class="breadcrumb m-0 fz-12  font-500">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
             @yield('breadcrumb')
         </ol>
     </nav>
+    @endif
     @yield('content')
 </main>
 <!-- MAIN SECTION END -->
@@ -876,7 +877,7 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button
-                                        class="accordion-button {{menuActive(['use-case.*','use-case-category.*'])?'':'collapsed'}} "
+                                        class="accordion-button {{(menuActive(['use-case.*','use-case-category.*']) || menuActive('setting') && request()->input('tab') === 'openai')?'':'collapsed'}} "
                                         type="button" data-bs-toggle="collapse" data-bs-target="#manageAi-mobile"
                                         aria-expanded="true" aria-controls="collapseOne">
                                             <span class="icon">
@@ -924,7 +925,7 @@
                                     </button>
                                 </h2>
                                 <div id="manageAi-mobile"
-                                     class="accordion-collapse collapse {{menuActive(['use-case.*','use-case-category.*'])?'show':''}}"
+                                     class="accordion-collapse collapse {{(menuActive(['use-case.*','use-case-category.*']) || menuActive('setting') && request()->input('tab') === 'openai')?'show':''}}"
                                      data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="menu-items">

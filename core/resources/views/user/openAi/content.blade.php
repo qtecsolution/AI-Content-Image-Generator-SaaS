@@ -341,32 +341,5 @@
             }, 1000);
         }
 
-        // Summernote (Texteditor) Script
-        $(document).ready(function() {
-            $('#summernote').summernote({
-                toolbar: [
-                    ['style', ['style']],
-                    ['font', ['bold', 'italic', 'underline', 'clear']],
-                    ['fontsize', ['fontsize']],
-                    ['para', ['ul', 'ol', 'paragraph']],
-                    ['insert', ['link', 'picture', 'list']],
-                    ['color', ['forecolor']],
-                    ['height', ['height']]
-                ],
-                colorNames: {
-                    'red': '#ff0000',
-                    'green': '#00ff00',
-                    'blue': '#0000ff'
-                }
-            });
-
-            // these code for fixing some style in editor 
-            var styleEle = $("style#fixed");
-            if (styleEle.length == 0)
-                $(
-                    "<style id=\"fixed\">.note-editor .dropdown-toggle::after { all: unset; } .note-editor .note-dropdown-menu { box-sizing: content-box; } .note-editor .note-modal-footer { box-sizing: content-box; }</style>"
-                )
-                .prependTo("body");
-        })
     </script>
 @endsection
