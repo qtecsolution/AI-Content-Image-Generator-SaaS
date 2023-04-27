@@ -27,6 +27,17 @@
     font-weight: 400;
 }
 .header-logo{
-    max-height: 50px;
+    max-height: 40px;
     width: auto;
 }
+
+@media only screen and (max-width: 600px) {
+
+    .header-logo{
+        max-height: 34px;
+        width: auto;
+    }
+    
+}
+
+

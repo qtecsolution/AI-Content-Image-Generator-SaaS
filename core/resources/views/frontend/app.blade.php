@@ -63,7 +63,7 @@
                 </div>
 
                 <div class="header-right">
-                    <ul class="desk-menu">
+                    <ul class="desk-menu d-none d-xl-flex">
                         <li><a href="{{route('login')}}" class="primarybtn-landing ">Get started ___ it’s free</a></li>
                     </ul>
                 </div>
@@ -95,7 +95,7 @@
     @yield('content')
     <!-- ==============get started start======================= -->
     <section class="get-started">
-        <div class="container py-5">
+        <div class="container py-5 mt-5">
 
             <div class="row g-4 align-items-center" data-aos="fade-up" data-aos-duration="1000">
 
@@ -112,7 +112,7 @@
 
             <div class="row g-4 text-center px-5 justify-content-center" data-aos="fade-up" data-aos-duration="1000">
 
-                <div class="col-lg-4">
+                <div class=" col-6 col-lg-2">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
                             <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class=" col-6 col-lg-3">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
                             <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4">
+                <div class=" col-6 col-lg-3">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
                             <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
@@ -138,7 +138,7 @@
                         <span>{{totalUseCase()}}+ content types to explore</span>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class=" col-6 col-lg-2">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
                             <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
@@ -146,7 +146,7 @@
                         <span>AI Image generate</span>
                     </div>
                 </div>
-                <div class="col-lg-4">
+                <div class=" col-6 col-lg-2">
                     <div class="getstarted-box">
                         <div class="long-check-wrapper">
                             <img src="{{asset('assets/images/icons/cards-icons/check-logn.svg')}}" alt="long check icon ">
@@ -154,6 +154,7 @@
                         <span>Progressive Web Apps</span>
                     </div>
                 </div>
+               
 
             </div>
 
@@ -312,8 +313,6 @@
                 <li class="mobilelist-item" data-bs-dismiss="offcanvas">
                     <a href="{{route('login')}}" class="mobilelist-link">Login</a>
                 </li>
-
-
             </ul>
 
 
