@@ -52,7 +52,7 @@
                                     <label class="col-form-label" for="val-suggestions">
                                         @translate(Content Description)</label>
                                     <textarea required id="summernote" class="form-control note-editable @error('body') is-invalid @enderror" name="body" rows="5"
-                                        aria-required="true">@purify($content->body)</textarea>
+                                        aria-required="true"> {!! $content->body !!}</textarea>
                                     @error('body')
                                         <span class="invalid-feedback" role="alert"> <strong>{{ $message }}</strong>
                                         </span>

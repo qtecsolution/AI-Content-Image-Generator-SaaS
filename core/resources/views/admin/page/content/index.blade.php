@@ -60,7 +60,7 @@
                                 <td>{{ $item->title }}</td>
                                 <td>
                                     <div class="text-truncate">
-                                    {!! $item->body!!}
+                                     @purify($item->body)
                                     </div>
                                 </td>
 
