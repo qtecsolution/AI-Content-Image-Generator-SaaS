@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 26, 2023 at 06:24 AM
+-- Generation Time: Apr 27, 2023 at 06:52 AM
 -- Server version: 5.7.35
 -- PHP Version: 7.4.33
 
@@ -120,7 +120,6 @@ CREATE TABLE `blog_categories` (
 --
 
 INSERT INTO `blog_categories` (`id`, `name`, `slug`, `tags`, `is_published`, `meta_description`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'Blog Category', 'blog-category', 'Blog Category', 1, 'Blog Category', 1, '2023-04-08 09:37:56', '2023-04-08 09:37:56'),
 (2, 'Use Case Templates', 'use-case-templates', 'Use Case', 1, 'Use Case', 1, '2023-04-26 16:19:24', '2023-04-26 20:43:52'),
 (3, 'Image Generate', 'image-generate', 'Image Generate', 1, 'Image Generate', 1, '2023-04-26 16:22:08', '2023-04-26 16:22:08'),
 (4, 'Coding', 'coding', 'Coding', 1, 'Coding', 1, '2023-04-26 16:22:59', '2023-04-26 16:22:59'),
@@ -374,7 +373,10 @@ INSERT INTO `orders` (`id`, `invoice`, `user_id`, `plan_id`, `is_paid`, `total`,
 (3, '1681120618-10084', 3, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Ria Berg', 'luri@mailinator.com', NULL, NULL, '2023-04-10 09:56:58', '2023-04-10 09:56:58'),
 (4, '1681183597-17080', 1, 2, 0, 5.00, 'bank', NULL, 1, NULL, NULL, NULL, NULL, NULL, '2023-04-11 14:26:37', '2023-04-11 14:26:37'),
 (5, '1681185011-25832', 1, 2, 1, 5.00, 'bank', NULL, 1, NULL, NULL, NULL, NULL, NULL, '2023-04-11 14:50:11', '2023-04-11 14:50:17'),
-(6, '1681197401-58264', 4, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, '2023-04-11 18:16:41', '2023-04-11 18:16:41');
+(6, '1681197401-58264', 4, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, '2023-04-11 18:16:41', '2023-04-11 18:16:41'),
+(7, '1682575728-31946', 5, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'kawsar ahmed', 'kawsar.qtec@gmail.com', NULL, '', '2023-04-27 17:08:48', '2023-04-27 17:08:48'),
+(8, '1682589428-16748', 6, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Md Likhon Uz Zaman', 'likhon.qtec@gmail.com', NULL, '', '2023-04-27 20:57:08', '2023-04-27 20:57:08'),
+(9, '1682594328-42800', 7, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'NM Babor', 'nmbabor50@gmail.com', NULL, '', '2023-04-27 22:18:48', '2023-04-27 22:18:48');
 
 -- --------------------------------------------------------
 
@@ -457,6 +459,13 @@ CREATE TABLE `password_reset_tokens` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
+('nmbabor50@gmail.com', '$2y$10$5qLKTLYKa/94b.E7dVEAHu.5Pu7zHgUzWimdFtfJboL3x5j9y3sXq', '2023-04-27 22:24:51');
+
 -- --------------------------------------------------------
 
 --
@@ -505,7 +514,8 @@ CREATE TABLE `plans` (
 
 INSERT INTO `plans` (`id`, `user_id`, `name`, `word_count`, `call_api_count`, `documet_count`, `lang`, `image_count`, `is_published`, `price`, `yearly_price`, `templates`, `created_at`, `updated_at`) VALUES
 (1, 1, 'Free', 200, 100, 10, 'english', 5, 1, 0.00, 0.00, '1', '2023-04-08 09:24:30', '2023-04-11 20:38:04'),
-(2, 1, 'Basic', 400, 200, 150, 'english', 20, 1, 5.00, 50.00, '0', '2023-04-08 09:24:53', '2023-04-17 20:29:23');
+(2, 1, 'Basic', 400, 200, 150, 'english', 20, 1, 5.00, 50.00, '0', '2023-04-08 09:24:53', '2023-04-17 20:29:23'),
+(3, 1, 'Gold', 800, 400, 300, 'english', 40, 1, 10.00, 100.00, '0', '2023-04-27 18:13:29', '2023-04-27 18:13:29');
 
 -- --------------------------------------------------------
 
@@ -542,7 +552,10 @@ INSERT INTO `plan_expenses` (`id`, `user_id`, `order_id`, `plan_id`, `word_count
 (2, 2, 2, 1, 200, 100, 1, 10, 1, 'english', 5, 0, 1, '2023-04-10 15:45:22', '2023-05-10 15:45:22', '2023-04-10 09:45:22', '2023-04-10 09:47:24'),
 (3, 3, 3, 1, 200, 100, 7, 10, 0, 'english', 5, 0, 1, '2023-04-10 15:56:58', '2023-05-10 15:56:58', '2023-04-10 09:56:58', '2023-04-10 22:37:07'),
 (4, 1, 5, 2, 400, 253, 2, 150, 0, 'english', 20, 2, 1, '2023-04-11 09:50:17', '2023-05-11 09:50:17', '2023-04-11 14:50:17', '2023-04-26 16:36:38'),
-(5, 4, 6, 1, 200, 100, 1, 10, 0, 'english', 5, 0, 1, '2023-04-11 13:16:41', '2023-05-11 13:16:41', '2023-04-11 18:16:41', '2023-04-11 18:16:57');
+(5, 4, 6, 1, 200, 100, 1, 10, 0, 'english', 5, 0, 1, '2023-04-11 13:16:41', '2023-05-11 13:16:41', '2023-04-11 18:16:41', '2023-04-11 18:16:57'),
+(6, 5, 7, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-27 12:08:48', '2023-05-27 12:08:48', '2023-04-27 17:08:48', '2023-04-27 17:08:48'),
+(7, 6, 8, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-27 15:57:08', '2023-05-27 15:57:08', '2023-04-27 20:57:08', '2023-04-27 20:57:08'),
+(8, 7, 9, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-27 17:18:48', '2023-05-27 17:18:48', '2023-04-27 22:18:48', '2023-04-27 22:18:48');
 
 -- --------------------------------------------------------
 
@@ -575,10 +588,13 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `avatar`, `type`, `plan_id`, `order_id`, `google_id`, `plan_expense_id`, `password`, `pass_changed`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '01811951215', NULL, 'assets/uploads/user/2023/04/11/admin9853.png', 'admin', 2, NULL, NULL, 4, '$2y$10$1SDiVdRA5peWo5CEQr8yG.vFGatkoZZ8BB8R9n7bWy0NfNsedB4ty', 0, NULL, 'bHhBdy9aSVS2yHVrvGMwkXUWCWXw5s2xo5g3UAcLNGsidxJtrFnhNSIxbzTA', '2023-04-08 09:23:34', '2023-04-11 22:32:25'),
+(1, 'Admin', 'admin@gmail.com', '01811951215', NULL, 'assets/uploads/user/2023/04/11/admin9853.png', 'admin', 2, NULL, NULL, 4, '$2y$10$1SDiVdRA5peWo5CEQr8yG.vFGatkoZZ8BB8R9n7bWy0NfNsedB4ty', 0, NULL, 'DTdqj4J2vGji6VlQVdaLi2Z1gyUgamFukgcKzPrV7P2AR7gP5g7W3ywwOYRV', '2023-04-08 09:23:34', '2023-04-11 22:32:25'),
 (2, 'Rhona French', 'zubilub@mailinator.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 2, '$2y$10$ELM1fN0y6ahxJNXtSK0EGuaXaGTEjT2YWu95026C6Fn1LEDcBWzS.', 0, NULL, NULL, '2023-04-10 09:45:22', '2023-04-10 09:45:22'),
 (3, 'Ria Berg', 'luri@mailinator.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 3, '$2y$10$59XXoeOLgStspvf3eA7qzug2UiaoVod.kAOI1QfagaPZMaBB.Necq', 0, NULL, NULL, '2023-04-10 09:56:58', '2023-04-10 09:56:58'),
-(4, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 5, '$2y$10$Ub9KI.e8bR/ZxhtrDJmVOu1GviP6oiqwCPC51nXDPYUAuZMTRT/IO', 0, NULL, NULL, '2023-04-11 18:16:40', '2023-04-11 18:16:41');
+(4, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 5, '$2y$10$Ub9KI.e8bR/ZxhtrDJmVOu1GviP6oiqwCPC51nXDPYUAuZMTRT/IO', 0, NULL, NULL, '2023-04-11 18:16:40', '2023-04-11 18:16:41'),
+(5, 'kawsar ahmed', 'kawsar.qtec@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '118151146567838160319', 6, '$2y$10$PC25r2z.Unb03tAXutGGf.PD6m.IyE/nsKkIU4FGRIBjrgvmxUCy2', 0, NULL, NULL, '2023-04-27 17:02:39', '2023-04-27 17:08:48'),
+(6, 'Md Likhon Uz Zaman', 'likhon.qtec@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '101538057543828608657', 7, '$2y$10$LgqlpZu9syYYHViAwLVaFeEFzn1O8PfysLIR7l23ehsTDKCSOlVki', 0, NULL, NULL, '2023-04-27 20:56:57', '2023-04-27 20:57:08'),
+(7, 'NM Babor', 'nmbabor50@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 8, '$2y$10$iayBl0o8EBFphxfu2cXka.CEMmiXkRL5B6aYnhvuPncD4wxNSHD3q', 0, NULL, NULL, '2023-04-27 22:18:47', '2023-04-27 22:18:48');
 
 -- --------------------------------------------------------
 
@@ -898,7 +914,7 @@ ALTER TABLE `ai_chat_histories`
 -- AUTO_INCREMENT for table `blogs`
 --
 ALTER TABLE `blogs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `blog_categories`
@@ -946,7 +962,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -970,19 +986,19 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT for table `plans`
 --
 ALTER TABLE `plans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `plan_expenses`
 --
 ALTER TABLE `plan_expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_documents`
