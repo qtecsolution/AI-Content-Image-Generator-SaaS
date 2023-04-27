@@ -665,7 +665,7 @@
             <ul class="new-sidebar">
 
                 <li>
-                    <div class="accordion" id="accordionExample">
+                    <div class="accordion" id="accordionMobile">
 
                         <!-- Home  single-->
                         <div class="single-item">
@@ -736,7 +736,7 @@
                             </h2>
                             <div id="aiContent"
                                  class="accordion-collapse collapse {{ menuActive(['content.*', 'contents.*', 'content-history.*','code.*']) ? 'show' : '' }}"
-                                 data-bs-parent="#accordionExample">
+                                 data-bs-parent="#accordionMobile">
 
                                 <div class="accordion-body">
                                     <div class="menu-items">
@@ -802,7 +802,7 @@
                             </h2>
                             <div id="aiImages"
                                  class="accordion-collapse collapse {{ menuActive(['image.*']) ? 'show' : '' }}"
-                                 data-bs-parent="#accordionExample">
+                                 data-bs-parent="#accordionMobile">
 
                                 <div class="accordion-body">
                                     <div class="menu-items">
@@ -926,7 +926,7 @@
                                 </h2>
                                 <div id="manageAi-mobile"
                                      class="accordion-collapse collapse {{(menuActive(['use-case.*','use-case-category.*']) || menuActive('setting') && request()->input('tab') === 'openai')?'show':''}}"
-                                     data-bs-parent="#accordionExample">
+                                     data-bs-parent="#accordionMobile">
                                     <div class="accordion-body">
                                         <div class="menu-items">
                                             <a href="{{ route('use-case.index') }}"
@@ -986,7 +986,7 @@
                                 </h2>
                                 <div id="manage-user-mobile"
                                      class="accordion-collapse collapse {{menuActive(['users.*','admin.*'])?'show':''}}"
-                                     data-bs-parent="#accordionExample">
+                                     data-bs-parent="#accordionMobile">
                                     <div class="accordion-body">
                                         <div class="menu-items">
                                             <a href="{{ route('users.index') }}"
@@ -1005,8 +1005,8 @@
                                 <h2 class="accordion-header">
                                     <button
                                         class="accordion-button {{ menuActive(['payment.*', 'order.*', 'plan.*']) ? '' : 'collapsed' }}"
-                                        type="button" data-bs-toggle="collapse" data-bs-target="#financieal"
-                                        aria-expanded="false" aria-controls="financieal">
+                                        type="button" data-bs-toggle="collapse" data-bs-target="#financial-mobile"
+                                        aria-expanded="false" aria-controls="financial-mobile">
                                                 <span class="icon">
                                                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
                                                          xmlns="http://www.w3.org/2000/svg">
@@ -1033,7 +1033,7 @@
                                 </h2>
                                 <div id="financial-mobile"
                                      class="accordion-collapse collapse {{ menuActive(['payment.*', 'order.*', 'plan.*']) ? 'show' : '' }}"
-                                     data-bs-parent="#accordionExample">
+                                     data-bs-parent="#accordionMobile">
                                     <div class="accordion-body">
                                         <div class="menu-items">
 
@@ -1081,7 +1081,7 @@
                                 </h2>
                                 <div id="frontend-mobile"
                                      class="accordion-collapse collapse {{ menuActive(['manage-blogs.*', 'blog-category.*', 'manage-faq.*', 'pages.*']) ? 'show' : '' }}"
-                                     data-bs-parent="#accordionExample">
+                                     data-bs-parent="#accordionMobile">
                                     <div class="accordion-body">
                                         <div class="menu-items">
                                             <a href="{{ route('manage-blogs.index') }}"
@@ -1137,7 +1137,7 @@
                                 </h2>
                                 <div id="settings-mobile"
                                      class="accordion-collapse collapse {{ menuActive('setting') && request()->input('tab') != 'openai' ? 'show' : '' }}"
-                                     data-bs-parent="#accordionExample">
+                                     data-bs-parent="#accordionMobile">
                                     <div class="accordion-body">
                                         <div class="menu-items">
                                             <a href="{{ route('setting') }}?tab=cms"

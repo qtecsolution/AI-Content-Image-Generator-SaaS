@@ -3,7 +3,7 @@
         @csrf
 
         <div class="form-group mb-3">
-            <label  class="form-label">@translate(Page Title) <span class="text-danger">*</span></label>
+            <label  class="form-label"> @translate(Page Title) <span class="text-danger">*</span></label>
             <input class="form-control custom-input" placeholder="@translate(Page Title)" type="text"  name="title" required>
         </div>
 
