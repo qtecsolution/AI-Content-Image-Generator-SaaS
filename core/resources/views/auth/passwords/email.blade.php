@@ -4,7 +4,7 @@
 <form method="POST" class="authentication-form needs-validation" action="{{ route('password.email') }}">
     @csrf
     <div class="authentication-form-header">
-        <h3 class="logo-name">{{readConfig('name')}}</h3>
+        <h3 class="logo-name"><a href="{{route('/')}}"> <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}"> </a></h3>
         <h3 class="section-title">Enter your valid email</h3>
         <p class="form-des">Forget Your Password! Please enter your email here. </p>
     </div>
