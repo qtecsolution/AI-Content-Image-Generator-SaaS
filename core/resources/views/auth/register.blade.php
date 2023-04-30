@@ -1,6 +1,6 @@
 @extends('auth.app')
 
-@section('title', 'Signup')
+@section('title', 'Register')
 
 @section('content')
 
@@ -81,7 +81,7 @@
                     <span class="icon">
                         <img src="{{ asset('/assets/images/icons/google.svg') }}" width="25">
                     </span>
-                    <span class="text">Sign up with Google</span>
+                    <span class="text">Register with Google</span>
                 </button>
             @endif
 

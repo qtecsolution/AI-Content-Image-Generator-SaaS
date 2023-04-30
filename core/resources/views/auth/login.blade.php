@@ -51,13 +51,13 @@
                         hidden>
                     <label for="useCaseTitle" class="checkWithLable-label gray-600 font-500"> Remember Me </label>
                 </div>
-                @if (Route::has('password.request'))
+                @if (Route::has('password.request') && env('MAIL_PASSWORD') !='')
                 <a href="{{ route('password.request') }}" class="forgot-pass">Forgot password?</a>
                 @endif
             </div>
 
             <!-- get started  -->
-            <button class="gradient-btn">Sign in </button>
+            <button class="gradient-btn">Log in </button>
 
 
             @if(env('GOOGLE_CLIENT_ID') != '' && env('GOOGLE_CLIENT_SECRET') != '')
@@ -66,12 +66,12 @@
                 <span class="icon">
                     <img src="{{asset('/assets/images/icons/google.svg')}}" width="25">
                 </span>
-                <span class="text">Sign in with Google</span>
+                <span class="text">Log in with Google</span>
             </button>
             @endif
 
 
-            <p class="authentication-bottom">Don’t have an account? <a href="{{ route('register') }}">Sign up</a> </p>
+            <p class="authentication-bottom">Don’t have an account? <a href="{{ route('register') }}">Register</a> </p>
 
         </div>
     </form>

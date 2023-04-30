@@ -36,7 +36,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
     <!-- BOOTSTRAP VALIDATION  -->
     <script src="{{ asset('assets/js/bootstrap-validation.js') }}"></script>
+    @include('sweetalert::alert')
     <script>
+        function redirectUrl(url){
+            window.location.href = url;
+        }
         document.addEventListener("DOMContentLoaded", function() {
             setTimeout(() => {
                 document.body.classList.add("loaded");

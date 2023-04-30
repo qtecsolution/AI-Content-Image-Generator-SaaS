@@ -445,7 +445,7 @@
 
                                             <label class="form-label" for="mailPass">MAIL PASSWORD <span
                                                     class="text-danger">*</span></label>
-                                            <input type="text" class="form-control custom-input" name="MAIL_PASSWORD"
+                                            <input type="password" class="form-control custom-input" name="MAIL_PASSWORD"
                                                 id="mailPass" value="{{ env('MAIL_PASSWORD') }}">
 
                                         </div>
