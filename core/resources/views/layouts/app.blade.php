@@ -547,6 +547,25 @@
                                 </div>
                             </div>
                             @endif
+                            <div class="single-item">
+                                <a href="{{ route('/') }}"
+                                    class="sidebar-link gray-800 d-flex align-items-center fz-14">
+                                    <span class="icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M16.667 2.5H3.33366C2.41318 2.5 1.66699 3.24619 1.66699 4.16667V12.5C1.66699 13.4205 2.41318 14.1667 3.33366 14.1667H16.667C17.5875 14.1667 18.3337 13.4205 18.3337 12.5V4.16667C18.3337 3.24619 17.5875 2.5 16.667 2.5Z"
+                                                stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M6.66699 17.5H13.3337" stroke="#475467" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M10 14.1667V17.5" stroke="#475467" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span class="fz-16">Go to website</span>
+                                </a>
+                            </div>
 
 
                     </div>
@@ -1142,12 +1161,30 @@
                                         class="menu-item {{ menuActive('setting') && request()->input('tab') == 'pwa' ? 'active' : '' }}">PWA
                                         Settings</a>
 
-
                                 </div>
                                     </div>
                                 </div>
                             </div>
                             @endif
+                            <div class="single-item">
+                                <a href="{{ route('/') }}"
+                                    class="sidebar-link gray-800 d-flex align-items-center fz-14">
+                                    <span class="icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M16.667 2.5H3.33366C2.41318 2.5 1.66699 3.24619 1.66699 4.16667V12.5C1.66699 13.4205 2.41318 14.1667 3.33366 14.1667H16.667C17.5875 14.1667 18.3337 13.4205 18.3337 12.5V4.16667C18.3337 3.24619 17.5875 2.5 16.667 2.5Z"
+                                                stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M6.66699 17.5H13.3337" stroke="#475467" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M10 14.1667V17.5" stroke="#475467" stroke-width="2"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span class="fz-16">Go to website</span>
+                                </a>
+                            </div>
 
 
                     </div>

@@ -45,11 +45,11 @@ return array(
     'MOLLIE_KEY' => 'test_7WRmUeVGdRTG5G4Kk34rcaDgjxuUHj',
     'MOLLIE_Partner_ID' => '16905249',
     'MOLLIE_Profile_ID' => 'pfl_n3GFjcQ4EN',
-    'tawk_to' => 'yes',
+    'tawk_to' => 'no',
     'currency_sambol' => '$',
     'pwa_active' => 'yes',
     'open_ai_model' => 'text-davinci-003',
     'demo' => false,
-    'tawk_direct_link' => 'https://tawk.to/chat/640710734247f20fefe472e8/1gqtpggta',
+    'tawk_direct_link' => null,
     'heading_title' => 'Write your Business Idea with',
 );

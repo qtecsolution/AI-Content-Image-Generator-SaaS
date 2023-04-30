@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.11
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Apr 27, 2023 at 06:52 AM
--- Server version: 5.7.35
--- PHP Version: 7.4.33
+-- Host: localhost
+-- Generation Time: Apr 30, 2023 at 01:21 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `qtecsol1_creaify`
+-- Database: `creaify_db`
 --
 
 -- --------------------------------------------------------
@@ -30,41 +29,12 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `ai_chat_histories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `chat_request` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `chat_response` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `chat_request` longtext NOT NULL,
+  `chat_response` longtext NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `ai_chat_histories`
---
-
-INSERT INTO `ai_chat_histories` (`id`, `chat_request`, `chat_response`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 'hello', 'Hello! How can I assist you today?', 1, '2023-04-10 09:12:11', '2023-04-10 09:12:11'),
-(2, 'how are you?', 'As an AI, I don\'t have feelings like humans. But I\'m functioning well, thank you. How can I assist you?', 1, '2023-04-10 09:12:28', '2023-04-10 09:12:28'),
-(3, 'give me a html sample code', '<!DOCTYPE html>\n<html>\n<head>\n	<title>Sample HTML Code</title>\n</head>\n<body>\n	<header>\n		<h1>Welcome to my Website</h1>\n		<nav>\n			<ul>\n				<li><a href=\"#\">Home</a></li>\n				<li><a href=\"#\">About Us</a></li>\n				<li><a href=\"#\">Contact Us</a></li>\n			</ul>\n		</nav>\n	</header>\n	<main>\n		<h2>About Us</h2>\n		<p>We are a group of passionate individuals who are dedicated to providing the best services to our clients. Our team consists of highly skilled professionals who are constantly learning and adapting to new technologies and trends.</p>\n		<h2>Contact Us</h2>\n		<form>\n			<label for=\"name\">Name:</label><br>\n			<input type=\"text\" id=\"name\" name=\"name\"><br>\n', 1, '2023-04-10 09:13:51', '2023-04-10 09:13:51'),
-(4, 'give me a js script sample', 'Here is an example of a JavaScript function that calculates the factorial of a number:\n\n```\nfunction factorial(num) {\n  if (num === 0 || num === 1) {\n    return 1;\n  } else {\n    return num * factorial(num - 1);\n  }\n}\n\nconsole.log(factorial(5)); // Output: 120\n```\n\nThis function takes a number `num` as input and recursively calculates its factorial. The base case is when `num` is 0 or 1, in which case the function returns 1. Otherwise, it multiplies `num` by the factorial of `num-1`. We then call the function with `factorial(5)` and print the result to the console.', 1, '2023-04-10 09:14:15', '2023-04-10 09:14:15'),
-(5, 'hello', 'Hello! How can I assist you today?', 1, '2023-04-10 09:31:17', '2023-04-10 09:31:17'),
-(6, 'hi', 'Hello! How may I assist you today?', 1, '2023-04-10 09:31:57', '2023-04-10 09:31:57'),
-(7, 'My Name is NM Babor\ni work at qtec solution ltd. \ndo you know my boss name?', 'As an AI language model, I do not have access to information about specific companies or their employees. Therefore, I am unable to provide you with the name of your boss at Qtec Solution Ltd.', 1, '2023-04-10 09:32:55', '2023-04-10 09:32:55'),
-(8, 'my boss name mosarrof rubel\nfrom noakhali', 'That\'s great to know! Is there anything else you would like to share about your boss or Noakhali? As an AI language model, I am always here to listen and assist you with your queries.', 1, '2023-04-10 09:36:10', '2023-04-10 09:36:10'),
-(9, 'who is my boss?', 'As an AI language model, I am not authorized to have knowledge of your workplace or employment status. Please refer to your contract or HR department to find out who your boss is.', 1, '2023-04-10 09:36:35', '2023-04-10 09:36:35'),
-(10, 'hi', 'Hello, how can I assist you today?', 1, '2023-04-10 09:55:44', '2023-04-10 09:55:44'),
-(11, 'hi', 'Hello! How can I assist you today?', 3, '2023-04-10 09:58:50', '2023-04-10 09:58:50'),
-(12, 'hello', 'Hello! How can I assist you today?', 3, '2023-04-10 09:59:03', '2023-04-10 09:59:03'),
-(13, 'hello', 'Hello there! How may I assist you today?', 3, '2023-04-10 10:00:43', '2023-04-10 10:00:43'),
-(14, 'what is your name', 'As an AI language model, I don\'t have a name, but you can refer to me as OpenAI.', 3, '2023-04-10 10:00:58', '2023-04-10 10:00:58'),
-(15, 'Meaning of GPT', 'GPT stands for \"Generative Pre-trained Transformer\". It is a type of deep learning language model used for natural language processing tasks like language translation, text completion, and text summarization. GPT is based on a transformer architecture and is trained on massive amounts of data to improve its performance. The most popular versions of GPT include GPT-2 and GPT-3.', 3, '2023-04-10 10:01:39', '2023-04-10 10:01:39'),
-(16, 'if i use a function in form submit, how can i use evenet.preventDefault', 'To use `event.preventDefault()` in a form submit function, you can pass the event object as a parameter in the function and call `preventDefault()` on it.\n\nHere\'s an example:\n\n```\n<form id=\"my-form\">\n  <input type=\"text\" name=\"text-input\">\n  <button type=\"submit\" id=\"submit-btn\">Submit</button>\n</form>\n\n<script>\n  const form = document.getElementById(\"my-form\");\n  const submitBtn = document.getElementById(\"submit-btn\");\n  \n  form.addEventListener(\"submit\", handleSubmit);\n  \n  function handleSubmit(event) {\n    event.preventDefault();\n    // Do something here\n  }\n</script>\n```\n\nIn the above example, the `handleSubmit` function is called when the form is submitted. It prevents the default form submit behavior using `event.preventDefault()`. You can add your own custom code here to handle the form submission.', 3, '2023-04-10 10:02:48', '2023-04-10 10:02:48'),
-(17, 'hello', 'Hello! How may I assist you today?', 1, '2023-04-10 11:29:59', '2023-04-10 11:29:59'),
-(18, 'hello', 'Hello! How may I assist you today?', 3, '2023-04-10 22:37:07', '2023-04-10 22:37:07'),
-(19, 'hello', 'Hi there, how may I assist you today?', 1, '2023-04-11 14:24:04', '2023-04-11 14:24:04'),
-(20, 'how are you', 'I\'m an AI language model, so I don\'t have feelings or emotions, but I\'m functioning normally. How can I assist you today?', 1, '2023-04-11 14:24:21', '2023-04-11 14:24:21'),
-(21, 'gime me weather update in banglades', 'As an AI language model, I do not have access to real-time information, but according to recent reports, Bangladesh is currently experiencing hot and humid weather with occasional rain showers in some parts. The average temperature in the capital city of Dhaka is around 32°C (90°F) during the day and 24°C (75°F) at night. It is recommended to stay hydrated and avoid prolonged exposure to the sun. Residents should also keep an eye out for any potential natural disasters, such as cyclones or floods, during this monsoon season.', 1, '2023-04-11 14:24:59', '2023-04-11 14:24:59'),
-(22, 'how to center a dive in html ?', 'To center a div in HTML, you can use the CSS property called \"margin\" and set it to \"auto\". Here\'s an example:\n\n```html\n<div style=\"width: 50%; margin: 0 auto;\">\n  <p>This is a centered div!</p>\n</div>\n```\n\nIn this example, the \"width\" property is set to 50% of the parent container and the \"margin\" property is set to 0 (top and bottom margins) and \"auto\" (left and right margins). This will center the div horizontally within the parent container.', 1, '2023-04-11 15:23:38', '2023-04-11 15:23:38'),
-(23, 'Hello', 'Hello! How may I assist you today?', 4, '2023-04-11 18:16:57', '2023-04-11 18:16:57');
 
 -- --------------------------------------------------------
 
@@ -74,13 +44,13 @@ INSERT INTO `ai_chat_histories` (`id`, `chat_request`, `chat_response`, `user_id
 
 CREATE TABLE `blogs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tags` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_description` tinytext COLLATE utf8mb4_unicode_ci,
-  `description` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_published` tinyint(4) NOT NULL DEFAULT '1',
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  `meta_description` tinytext DEFAULT NULL,
+  `description` longtext NOT NULL,
+  `is_published` tinyint(4) NOT NULL DEFAULT 1,
   `category_id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -105,11 +75,11 @@ INSERT INTO `blogs` (`id`, `title`, `slug`, `tags`, `image`, `meta_description`,
 
 CREATE TABLE `blog_categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tags` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `is_published` tinyint(4) NOT NULL DEFAULT '1',
-  `meta_description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `tags` varchar(255) DEFAULT NULL,
+  `is_published` tinyint(4) NOT NULL DEFAULT 1,
+  `meta_description` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -134,14 +104,14 @@ INSERT INTO `blog_categories` (`id`, `name`, `slug`, `tags`, `is_published`, `me
 CREATE TABLE `content_histories` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `use_case_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `temperature` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_description` text COLLATE utf8mb4_unicode_ci,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `prompt` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `generated_content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `temperature` varchar(255) NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `short_description` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `prompt` text NOT NULL,
+  `generated_content` longtext NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `type` enum('content','code') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'content',
+  `type` enum('content','code') NOT NULL DEFAULT 'content',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -171,7 +141,6 @@ INSERT INTO `content_histories` (`id`, `use_case_id`, `temperature`, `title`, `s
 (18, NULL, '1', 'write a js code for file upload', NULL, 'write a js code for file upload', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> Here&#039;s a code snippet for uploading files using JavaScript:\n\nHTML:\n<code>html\n&lt;form&gt;\n  &lt;input type=&quot;file&quot; id=&quot;fileInput&quot;&gt;\n  &lt;button type=&quot;button&quot; onclick=&quot;uploadFile()&quot;&gt;Upload&lt;/button&gt;\n&lt;/form&gt;\n</code>\n\nJS:\n<code>javascript\nfunction uploadFile() {\n  const input = document.getElementById(&#039;fileInput&#039;);\n  const file = input.files[0];\n  const url = &#039;your_upload_url_here&#039;;\n\n  const xhr = new XMLHttpRequest();\n  const formData = new FormData();\n\n  formData.append(&#039;file&#039;, file);\n\n  xhr.onreadystatechange = function () {\n    if (xhr.readyState === XMLHttpRequest.DONE) {\n      if (xhr.status === 200) {\n        console.log(xhr.responseText);\n      } else {\n        console.error(&#039;There was a problem uploading the file.&#039;);\n      }\n    }\n  };\n\n  xhr.open(&#039;POST&#039;, url, true);\n  xhr.send(formData);\n}\n</code>\nNote: Replace `&#039;your_upload_url_here&#039;` with the URL where you want to upload the file. </pre>', 1, 'code', '2023-04-10 06:11:21', '2023-04-10 06:11:21'),
 (19, NULL, '1', 'write a code for file upload in js', NULL, 'write a code for file upload in js', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> Sure, here&#039;s a sample code for file upload in JavaScript:\n\n<code>html\n&lt;form method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;\n  &lt;input type=&quot;file&quot; name=&quot;file&quot;&gt;\n  &lt;button type=&quot;submit&quot;&gt;Upload&lt;/button&gt;\n&lt;/form&gt;\n\n&lt;script&gt;\n  const form = document.querySelector(&#039;form&#039;);\n  form.addEventListener(&#039;submit&#039;, (e) =&gt; {\n    e.preventDefault();\n    const formData = new FormData(form);\n    fetch(&#039;/your-upload-endpoint&#039;, {\n      method: &#039;POST&#039;,\n      body: formData\n    })\n    .then(response =&gt; response.json())\n    .then(data =&gt; console.log(data))\n    .catch(error =&gt; console.error(error))\n  });\n&lt;/script&gt;\n</code>\n\nIn the above code, we have a basic HTML form that includes a file input and a submit button. When this form gets submitted, we prevent the default behavior using `e.preventDefault()`, and then we create a new instance of `FormData` from the form element. Finally, we use `fetch` to make a POST request to a server endpoint that handles the file upload. Once the upload is complete, we log the response data to the console. </pre>', 1, 'code', '2023-04-10 06:12:27', '2023-04-10 06:12:27'),
 (20, NULL, '1', 'write a code for file upload in php', NULL, 'write a code for file upload in php', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> Here&#039;s an example code for file upload in PHP:\n\n<code>\n&lt;form action=&quot;upload.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;\n  &lt;input type=&quot;file&quot; name=&quot;fileToUpload&quot; id=&quot;fileToUpload&quot;&gt;\n  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot; name=&quot;submit&quot;&gt;\n&lt;/form&gt;\n\n&lt;?php\nif(isset($_POST[&quot;submit&quot;])){\n  $target_dir = &quot;uploads/&quot;;\n  $target_file = $target_dir . basename($_FILES[&quot;fileToUpload&quot;][&quot;name&quot;]);\n  $uploadOk = 1;\n  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));\n  \n  // Check if file already exists\n  if (file_exists($target_file)) {\n    echo &quot;Sorry, file already exists.&quot;;\n    $uploadOk = 0;\n  }\n  \n  // Check file size\n  if ($_FILES[&quot;fileToUpload&quot;][&quot;size&quot;] &gt; 500000) {\n    echo &quot;Sorry, your file is too large.&quot;;\n    $uploadOk = 0;\n  }\n  \n  // Allow only certain file formats\n  if($imageFileType != &quot;jpg&quot; &amp;&amp; $imageFileType != &quot;png&quot; &amp;&amp; $imageFileType != &quot;jpeg&quot; &amp;&amp; $imageFileType != &quot;gif&quot;) {\n    echo &quot;Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed.&quot;;\n    $uploadOk = 0;\n  }\n  \n  // Check if $uploadOk is set to 0 by an error\n  if ($uploadOk == 0) {\n    echo &quot;Sorry, your file was not uploaded.&quot;;\n  } else {\n    if (move_uploaded_file($_FILES[&quot;fileToUpload&quot;][&quot;tmp_name&quot;], $target_file)) {\n      echo &quot;The file &quot;. htmlspecialchars( basename( $_FILES[&quot;fileToUpload&quot;][&quot;name&quot;])). &quot; has been uploaded.&quot;;\n    } else {\n      echo &quot;Sorry, there was an error uploading your file.&quot;;\n    }\n  }\n}\n?&gt;\n</code>\n\nPlease note that you should create a &quot;uploads&quot; folder in your root directory, and make sure it has write permission (e.g. 755 or 777, depending on your server configuration). </pre>', 1, 'code', '2023-04-10 06:13:22', '2023-04-10 06:13:22'),
-(21, NULL, '1', 'Write a php upload file code', NULL, 'Write a php upload file code', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> Sure, here is an example PHP code to upload a file:\n\n```php\n&lt;?php\n// Check if a file was uploaded\nif(isset($_FILES[&#039;file&#039;])) {\n   $errors = array();\n   $file_name = $_FILES[&#039;file&#039;][&#039;name&#039;];\n   $file_size = $_FILES[&#039;file&#039;][&#039;size&#039;];\n   $file_tmp = $_FILES[&#039;file&#039;][&#039;tmp_name&#039;];\n   $file_type = $_FILES[&#039;file&#039;][&#039;type&#039;];\n   \n   // Allow only certain file types\n   $allowed_file_types = array(&#039;jpg&#039;, &#039;jpeg&#039;, &#039;png&#039;, &#039;pdf&#039;);\n   $file_ext = strtolower(end(explode(&#039;.&#039;,$_FILES[&#039;file&#039;][&#039;name&#039;])));\n   \n   if(!in_array($file_ext,$allowed_file_types)) {\n      $errors[] = &quot;File type not allowed. Only JPG, JPEG, PNG and PDF files are allowed.&quot;;\n   }\n   \n   if($file_size &gt; 2097152) {\n      $errors[] = &#039;File size cannot exceed  </pre>', 2, 'code', '2023-04-10 09:47:09', '2023-04-10 09:47:09'),
 (22, NULL, '1', 'write html sample code', NULL, 'write html sample code', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> Sure, here is an example of basic HTML code:\n\n<code>html\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;title&gt;My Website&lt;/title&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Welcome to my website!&lt;/h1&gt;\n    &lt;p&gt;This is some sample text.&lt;/p&gt;\n    &lt;ul&gt;\n      &lt;li&gt;List item 1&lt;/li&gt;\n      &lt;li&gt;List item 2&lt;/li&gt;\n      &lt;li&gt;List item 3&lt;/li&gt;\n    &lt;/ul&gt;\n  &lt;/body&gt;\n&lt;/html&gt;\n</code>\n\nIn this example, we have a basic HTML document with a title, header, and a simple list. The `&lt;!DOCTYPE html&gt;` declaration at the beginning of the document lets the web browser know that this is an HTML5 document. The `&lt;html&gt;` tag represents the root element of the page, and all other elements should be within it. The `&lt;head&gt;` section contains metadata about the document, such as the title of the page. The </pre>', 1, 'code', '2023-04-10 11:30:19', '2023-04-10 11:30:19'),
 (24, NULL, '1', 'fgh', NULL, 'fgh', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> I&#039;m sorry, could you please provide more information or context for what you need help with? </pre>', 1, 'code', '2023-04-11 14:21:55', '2023-04-11 14:21:55'),
 (25, 14, '0.7', 'Air Condition', '', 'I have a ac. i want to sell it. The brand of ac is Gree.', 'Write me a product description for Air Condition. The category of the product is . The description of the product is I have a ac. i want to sell it. The brand of ac is Gree. The tone of voice must be casual. Give me the response in English (USA) language.', '\n<br>\nStay cool and comfortable in your home with the Gree air conditioner! This powerful unit has a cooling capacity of 24,000 BTU and can cover an area of up to 1,500 square feet. It features a high-efficiency air filter to keep your air clean and fresh, as well as an adjustable thermostat for personalized cooling. With its easy installation and energy-saving design, the Gree air conditioner is the perfect solution for your home cooling needs.', 1, 'content', '2023-04-12 20:59:53', '2023-04-12 20:59:53');
@@ -184,12 +153,12 @@ INSERT INTO `content_histories` (`id`, `use_case_id`, `temperature`, `title`, `s
 
 CREATE TABLE `failed_jobs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `uuid` varchar(255) NOT NULL,
+  `connection` text NOT NULL,
+  `queue` text NOT NULL,
+  `payload` longtext NOT NULL,
+  `exception` longtext NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -200,10 +169,10 @@ CREATE TABLE `failed_jobs` (
 
 CREATE TABLE `faqs` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `question` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `answer` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `question` varchar(255) NOT NULL,
+  `answer` text NOT NULL,
   `priority` int(11) NOT NULL,
-  `is_published` tinyint(4) NOT NULL DEFAULT '1',
+  `is_published` tinyint(4) NOT NULL DEFAULT 1,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -227,27 +196,14 @@ INSERT INTO `faqs` (`id`, `question`, `answer`, `priority`, `is_published`, `use
 
 CREATE TABLE `images` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `prompt` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `size` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `image_path` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `old_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prompt` varchar(255) DEFAULT NULL,
+  `size` varchar(255) NOT NULL,
+  `image_path` varchar(255) NOT NULL,
+  `old_image` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `images`
---
-
-INSERT INTO `images` (`id`, `prompt`, `size`, `image_path`, `old_image`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, '1', '256x256', 'assets/uploads/ai_images//2023/04/11/202304112449.png', NULL, 1, '2023-04-11 14:25:26', '2023-04-11 14:25:26'),
-(2, 'nature', '256x256', 'assets/uploads/ai_images//2023/04/11/202304115326.png', NULL, 1, '2023-04-11 14:25:56', '2023-04-11 14:25:56'),
-(3, 'nature', '256x256', 'assets/uploads/ai_images//2023/04/11/202304111304.png', NULL, 1, '2023-04-11 14:26:07', '2023-04-11 14:26:07'),
-(4, 'nature', '256x256', 'assets/uploads/ai_images//2023/04/11/202304116504.png', NULL, 1, '2023-04-11 14:26:08', '2023-04-11 14:26:08'),
-(5, 'nature', '256x256', 'assets/uploads/ai_images//2023/04/11/202304112181.png', NULL, 1, '2023-04-11 14:26:21', '2023-04-11 14:26:21'),
-(6, 'Nature', '256x256', 'assets/uploads/ai_images//2023/04/11/202304115371.png', NULL, 1, '2023-04-11 14:50:35', '2023-04-11 14:50:35'),
-(7, 'Use case Templates image', '256x256', 'assets/uploads/ai_images//2023/04/26/202304267818.png', NULL, 1, '2023-04-26 16:36:38', '2023-04-26 16:36:38');
 
 -- --------------------------------------------------------
 
@@ -257,10 +213,10 @@ INSERT INTO `images` (`id`, `prompt`, `size`, `image_path`, `old_image`, `user_i
 
 CREATE TABLE `languages` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `language` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `language_flag` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `language` varchar(255) NOT NULL,
+  `language_code` varchar(255) NOT NULL,
+  `language_flag` varchar(255) DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -308,7 +264,7 @@ INSERT INTO `languages` (`id`, `language`, `language_code`, `language_flag`, `st
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -346,19 +302,19 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 
 CREATE TABLE `orders` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `invoice` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `invoice` varchar(255) DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `plan_id` bigint(20) UNSIGNED NOT NULL,
-  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
+  `is_paid` tinyint(1) NOT NULL DEFAULT 0,
   `total` double(10,2) DEFAULT NULL,
-  `payment_method` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `payment_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` tinyint(4) NOT NULL DEFAULT '1',
-  `other` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `payment_method` varchar(255) DEFAULT NULL,
+  `payment_id` varchar(255) DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT 1,
+  `other` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -368,15 +324,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `invoice`, `user_id`, `plan_id`, `is_paid`, `total`, `payment_method`, `payment_id`, `type`, `other`, `name`, `email`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, '1680945910-11514', 1, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, '2023-04-08 09:25:10', '2023-04-08 09:25:10'),
-(2, '1681119922-44057', 2, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Rhona French', 'zubilub@mailinator.com', NULL, NULL, '2023-04-10 09:45:22', '2023-04-10 09:45:22'),
-(3, '1681120618-10084', 3, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Ria Berg', 'luri@mailinator.com', NULL, NULL, '2023-04-10 09:56:58', '2023-04-10 09:56:58'),
-(4, '1681183597-17080', 1, 2, 0, 5.00, 'bank', NULL, 1, NULL, NULL, NULL, NULL, NULL, '2023-04-11 14:26:37', '2023-04-11 14:26:37'),
-(5, '1681185011-25832', 1, 2, 1, 5.00, 'bank', NULL, 1, NULL, NULL, NULL, NULL, NULL, '2023-04-11 14:50:11', '2023-04-11 14:50:17'),
-(6, '1681197401-58264', 4, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, '2023-04-11 18:16:41', '2023-04-11 18:16:41'),
-(7, '1682575728-31946', 5, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'kawsar ahmed', 'kawsar.qtec@gmail.com', NULL, '', '2023-04-27 17:08:48', '2023-04-27 17:08:48'),
-(8, '1682589428-16748', 6, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Md Likhon Uz Zaman', 'likhon.qtec@gmail.com', NULL, '', '2023-04-27 20:57:08', '2023-04-27 20:57:08'),
-(9, '1682594328-42800', 7, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'NM Babor', 'nmbabor50@gmail.com', NULL, '', '2023-04-27 22:18:48', '2023-04-27 22:18:48');
+(1, '1682853667-74583', 1, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Admin', 'admin@gmail.com', '0966000', '', '2023-04-30 11:21:07', '2023-04-30 11:21:07');
 
 -- --------------------------------------------------------
 
@@ -386,14 +334,14 @@ INSERT INTO `orders` (`id`, `invoice`, `user_id`, `plan_id`, `is_paid`, `total`,
 
 CREATE TABLE `pages` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_authorize` tinyint(1) NOT NULL DEFAULT '0',
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `meta_keys` mediumtext COLLATE utf8mb4_unicode_ci,
-  `meta_title` mediumtext COLLATE utf8mb4_unicode_ci,
-  `meta_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_desc` longtext COLLATE utf8mb4_unicode_ci,
+  `title` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `is_authorize` tinyint(1) NOT NULL DEFAULT 0,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `meta_keys` mediumtext DEFAULT NULL,
+  `meta_title` mediumtext DEFAULT NULL,
+  `meta_image` varchar(255) DEFAULT NULL,
+  `meta_desc` longtext DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -414,14 +362,14 @@ INSERT INTO `pages` (`id`, `title`, `slug`, `is_authorize`, `active`, `meta_keys
 
 CREATE TABLE `page_contents` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `page_id` bigint(20) UNSIGNED NOT NULL,
-  `body` longtext COLLATE utf8mb4_unicode_ci,
-  `active` tinyint(1) NOT NULL DEFAULT '1',
-  `meta_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `meta_keys` longtext COLLATE utf8mb4_unicode_ci,
-  `meta_desc` longtext COLLATE utf8mb4_unicode_ci,
-  `sorting` int(11) NOT NULL DEFAULT '0',
+  `body` longtext DEFAULT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT 1,
+  `meta_image` varchar(255) DEFAULT NULL,
+  `meta_keys` longtext DEFAULT NULL,
+  `meta_desc` longtext DEFAULT NULL,
+  `sorting` int(11) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -442,8 +390,8 @@ INSERT INTO `page_contents` (`id`, `title`, `page_id`, `body`, `active`, `meta_i
 --
 
 CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -454,8 +402,8 @@ CREATE TABLE `password_resets` (
 --
 
 CREATE TABLE `password_reset_tokens` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -474,11 +422,11 @@ INSERT INTO `password_reset_tokens` (`email`, `token`, `created_at`) VALUES
 
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
   `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `expires_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -494,16 +442,16 @@ CREATE TABLE `personal_access_tokens` (
 CREATE TABLE `plans` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `word_count` int(11) NOT NULL DEFAULT '0',
-  `call_api_count` int(11) NOT NULL DEFAULT '0',
-  `documet_count` int(11) NOT NULL DEFAULT '0',
-  `lang` enum('all','english') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'english',
-  `image_count` int(11) NOT NULL DEFAULT '0',
-  `is_published` tinyint(1) NOT NULL DEFAULT '1',
-  `price` double(10,2) NOT NULL DEFAULT '0.00',
+  `name` varchar(255) NOT NULL,
+  `word_count` int(11) NOT NULL DEFAULT 0,
+  `call_api_count` int(11) NOT NULL DEFAULT 0,
+  `documet_count` int(11) NOT NULL DEFAULT 0,
+  `lang` enum('all','english') NOT NULL DEFAULT 'english',
+  `image_count` int(11) NOT NULL DEFAULT 0,
+  `is_published` tinyint(1) NOT NULL DEFAULT 1,
+  `price` double(10,2) NOT NULL DEFAULT 0.00,
   `yearly_price` double(10,2) DEFAULT NULL,
-  `templates` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '1',
+  `templates` varchar(20) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -528,15 +476,15 @@ CREATE TABLE `plan_expenses` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `plan_id` bigint(20) UNSIGNED NOT NULL,
-  `word_count` int(11) NOT NULL DEFAULT '0',
-  `call_api_count` int(11) NOT NULL DEFAULT '0',
-  `current_api_count` int(11) NOT NULL DEFAULT '0',
-  `documet_count` int(11) NOT NULL DEFAULT '0',
-  `current_documet_count` int(11) NOT NULL DEFAULT '0',
-  `lang` enum('all','english') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'english',
-  `image_count` int(11) NOT NULL DEFAULT '0',
-  `current_image_count` int(11) NOT NULL DEFAULT '0',
-  `type` tinyint(4) NOT NULL DEFAULT '1',
+  `word_count` int(11) NOT NULL DEFAULT 0,
+  `call_api_count` int(11) NOT NULL DEFAULT 0,
+  `current_api_count` int(11) NOT NULL DEFAULT 0,
+  `documet_count` int(11) NOT NULL DEFAULT 0,
+  `current_documet_count` int(11) NOT NULL DEFAULT 0,
+  `lang` enum('all','english') NOT NULL DEFAULT 'english',
+  `image_count` int(11) NOT NULL DEFAULT 0,
+  `current_image_count` int(11) NOT NULL DEFAULT 0,
+  `type` tinyint(4) NOT NULL DEFAULT 1,
   `activated_at` datetime DEFAULT NULL,
   `expire_at` datetime DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -548,14 +496,7 @@ CREATE TABLE `plan_expenses` (
 --
 
 INSERT INTO `plan_expenses` (`id`, `user_id`, `order_id`, `plan_id`, `word_count`, `call_api_count`, `current_api_count`, `documet_count`, `current_documet_count`, `lang`, `image_count`, `current_image_count`, `type`, `activated_at`, `expire_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 200, 100, 47, 10, 10, 'english', 5, 5, 1, '2023-04-08 15:25:10', '2023-05-08 15:25:10', '2023-04-08 09:25:10', '2023-04-11 14:26:21'),
-(2, 2, 2, 1, 200, 100, 1, 10, 1, 'english', 5, 0, 1, '2023-04-10 15:45:22', '2023-05-10 15:45:22', '2023-04-10 09:45:22', '2023-04-10 09:47:24'),
-(3, 3, 3, 1, 200, 100, 7, 10, 0, 'english', 5, 0, 1, '2023-04-10 15:56:58', '2023-05-10 15:56:58', '2023-04-10 09:56:58', '2023-04-10 22:37:07'),
-(4, 1, 5, 2, 400, 253, 2, 150, 0, 'english', 20, 2, 1, '2023-04-11 09:50:17', '2023-05-11 09:50:17', '2023-04-11 14:50:17', '2023-04-26 16:36:38'),
-(5, 4, 6, 1, 200, 100, 1, 10, 0, 'english', 5, 0, 1, '2023-04-11 13:16:41', '2023-05-11 13:16:41', '2023-04-11 18:16:41', '2023-04-11 18:16:57'),
-(6, 5, 7, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-27 12:08:48', '2023-05-27 12:08:48', '2023-04-27 17:08:48', '2023-04-27 17:08:48'),
-(7, 6, 8, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-27 15:57:08', '2023-05-27 15:57:08', '2023-04-27 20:57:08', '2023-04-27 20:57:08'),
-(8, 7, 9, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-27 17:18:48', '2023-05-27 17:18:48', '2023-04-27 22:18:48', '2023-04-27 22:18:48');
+(1, 1, 1, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-30 17:21:07', '2023-05-30 17:21:07', '2023-04-30 11:21:07', '2023-04-30 11:21:07');
 
 -- --------------------------------------------------------
 
@@ -565,20 +506,20 @@ INSERT INTO `plan_expenses` (`id`, `user_id`, `order_id`, `plan_id`, `word_count
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `avatar` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `type` enum('admin','user') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'user',
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `avatar` varchar(255) DEFAULT NULL,
+  `type` enum('admin','user') NOT NULL DEFAULT 'user',
   `plan_id` bigint(20) UNSIGNED DEFAULT NULL,
   `order_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `google_id` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `google_id` varchar(255) DEFAULT NULL,
   `plan_expense_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pass_changed` tinyint(4) NOT NULL DEFAULT '0',
+  `password` varchar(255) NOT NULL,
+  `pass_changed` tinyint(4) NOT NULL DEFAULT 0,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -588,13 +529,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `avatar`, `type`, `plan_id`, `order_id`, `google_id`, `plan_expense_id`, `password`, `pass_changed`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '01811951215', NULL, 'assets/uploads/user/2023/04/11/admin9853.png', 'admin', 2, NULL, NULL, 4, '$2y$10$1SDiVdRA5peWo5CEQr8yG.vFGatkoZZ8BB8R9n7bWy0NfNsedB4ty', 0, NULL, 'DTdqj4J2vGji6VlQVdaLi2Z1gyUgamFukgcKzPrV7P2AR7gP5g7W3ywwOYRV', '2023-04-08 09:23:34', '2023-04-11 22:32:25'),
-(2, 'Rhona French', 'zubilub@mailinator.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 2, '$2y$10$ELM1fN0y6ahxJNXtSK0EGuaXaGTEjT2YWu95026C6Fn1LEDcBWzS.', 0, NULL, NULL, '2023-04-10 09:45:22', '2023-04-10 09:45:22'),
-(3, 'Ria Berg', 'luri@mailinator.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 3, '$2y$10$59XXoeOLgStspvf3eA7qzug2UiaoVod.kAOI1QfagaPZMaBB.Necq', 0, NULL, NULL, '2023-04-10 09:56:58', '2023-04-10 09:56:58'),
-(4, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 5, '$2y$10$Ub9KI.e8bR/ZxhtrDJmVOu1GviP6oiqwCPC51nXDPYUAuZMTRT/IO', 0, NULL, NULL, '2023-04-11 18:16:40', '2023-04-11 18:16:41'),
-(5, 'kawsar ahmed', 'kawsar.qtec@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '118151146567838160319', 6, '$2y$10$PC25r2z.Unb03tAXutGGf.PD6m.IyE/nsKkIU4FGRIBjrgvmxUCy2', 0, NULL, NULL, '2023-04-27 17:02:39', '2023-04-27 17:08:48'),
-(6, 'Md Likhon Uz Zaman', 'likhon.qtec@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '101538057543828608657', 7, '$2y$10$LgqlpZu9syYYHViAwLVaFeEFzn1O8PfysLIR7l23ehsTDKCSOlVki', 0, NULL, NULL, '2023-04-27 20:56:57', '2023-04-27 20:57:08'),
-(7, 'NM Babor', 'nmbabor50@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 8, '$2y$10$iayBl0o8EBFphxfu2cXka.CEMmiXkRL5B6aYnhvuPncD4wxNSHD3q', 0, NULL, NULL, '2023-04-27 22:18:47', '2023-04-27 22:18:48');
+(1, 'Admin', 'admin@gmail.com', '0966000', NULL, 'assets/uploads/user/2023/04/30/admin6458.png', 'admin', 1, NULL, NULL, 1, '$2y$10$1SDiVdRA5peWo5CEQr8yG.vFGatkoZZ8BB8R9n7bWy0NfNsedB4ty', 0, NULL, 'F5tX1D7LYxYVDqBHan3ffJVJtAsdT97Rda6KbDIf0O83XwGWOqpJbaSsXDUB', '2023-04-08 09:23:34', '2023-04-30 11:21:07');
 
 -- --------------------------------------------------------
 
@@ -604,37 +539,16 @@ INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `avatar`, `type`
 
 CREATE TABLE `user_documents` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_description` text COLLATE utf8mb4_unicode_ci,
-  `description` text COLLATE utf8mb4_unicode_ci,
-  `generated_content` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `short_description` text DEFAULT NULL,
+  `description` text DEFAULT NULL,
+  `generated_content` longtext NOT NULL,
   `use_case_id` bigint(20) UNSIGNED DEFAULT NULL,
   `user_id` bigint(20) UNSIGNED NOT NULL,
-  `type` enum('content','code') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'content',
+  `type` enum('content','code') NOT NULL DEFAULT 'content',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `user_documents`
---
-
-INSERT INTO `user_documents` (`id`, `title`, `short_description`, `description`, `generated_content`, `use_case_id`, `user_id`, `type`, `created_at`, `updated_at`) VALUES
-(1, 'Javascript Alerts', NULL, 'Javascript Alert', 'The `alert()` method is a function in JavaScript that displays a message box with a specified message and an OK button. Its syntax is as follows:\n\n```\nalert(\"Your message here\");\n```\n\nFor example, if you want to display a message \"Hello, World!\" using an alert box, the code would be:\n\n```\nalert(\"Hello, World!\");\n```\nHere\'s a basic HTML login form code:\n\n```\n<form>\n  <label for=\"username\">Username:</label>\n  <input type=\"text\" id=\"username\" name=\"username\">\n\n  <label for=\"password\">Password:</label>\n  <input type=\"password\" id=\"password\" name=\"password\">\n\n  <input type=\"submit\" value=\"Login\">\n</form>\n\n```\n\nThis form includes two input fields, \"Username\" and \"Password\", and a submit button with the text \"Login\". When the form is submitted, it will send the values of the two fields to the server for further processing. Note that this is just a basic example, and a real login form would require much more security measures.\nHere\'s an example of how to upload a file using PHP:\n\nHTML form:\n```\n<form method=\"post\" enctype=\"multipart/form-data\">\n    <input type=\"file\" name=\"file\">\n    <input type=\"submit\" name=\"submit\" value=\"Upload\">\n</form>\n```\n\nPHP code to handle the file upload:\n```\nif (isset($_POST[\'submit\'])) {\n    $file = $_FILES[\'file\'];\n\n    $fileName = $_FILES[\'file\'][\'name\'];\n    $fileTmpName = $_FILES[\'file\'][\'tmp_name\'];\n    $fileSize = $_FILES[\'file\'][\'size\'];\n    $fileError = $_FILES[\'file\'][\'error\'];\n    $fileType = $_FILES[\'file\'][\'type\'];\n\n    $fileExt = explode(\'.\', $fileName);\n    $fileActualExt = strtolower(end($fileExt));\n\n    $allowed = array(\'jpg\', \'jpeg\', \'png\', \'pdf\'); // allowed file extensions\n\n    if (in_array($fileActualExt, $allowed)) {\n        if ($fileError === 0) {\n            if ($fileSize < 1000000) { // max file size\n                $fileNameNew = uniqid(\'\', true).\".\".$fileActualExt;\n                $fileDestination = \'uploads/\'.$fileNameNew;\n                move_uploaded_file($fileTmpName, $fileDestination);\n                echo \"File uploaded successfully.\";\n            } else {\n                echo \"File is too big.\";\n            }\n        } else {\n            echo \"Error uploading the file.\";\n        }\n    } else {\n        echo \"Invalid file type.\";\n    }\n}\n```\n\nThis code checks if a file has been uploaded, validates its extension, size and, if everything is correct, moves it to a folder named \"uploads\". You can modify the code to suit your specific needs.', NULL, 1, 'code', '2023-04-09 06:55:43', '2023-04-10 04:18:42'),
-(2, 'Android Phone', NULL, 'Android Phone with 40 mega pixel camera.', 'Are you looking for a smartphone that has it all? Look no further than an Android phone with a 40 mega pixel camera! This smartphone has all the latest features, along with an incredibly powerful camera. With 40 mega pixels, you can capture every moment in stunning detail. The phone also has plenty of other features, from a long-lasting battery and a water-resistant body to an intuitive interface and an array of apps. Plus, you can customize this phone to fit your lifestyle and preferences. Get an Android phone with a 40 mega pixel camera today and start capturing the world around you in incredible detail.', 5, 1, 'content', '2023-04-10 04:39:57', '2023-04-10 04:39:57'),
-(3, 'Write a javascript code for image preview for input', NULL, 'Write a javascript code for image preview for input', '<pre class=\"pre-line\"> Here\'s an example code for creating an image preview for input using JavaScript:<br>\n<br>\nHTML:<br>\n<code>html<br>\n&lt;input type=\"file\" id=\"inputImage\"/&gt;<br>\n&lt;img id=\"preview\"/&gt;<br>\n</code><br>\n<br>\nJavaScript:<br>\n<code>javascript<br>\nconst inputImage = document.querySelector(\'#inputImage\');<br>\nconst preview = document.querySelector(\'#preview\');<br>\n<br>\ninputImage.addEventListener(\'change\', () =&gt; {<br>\n  const file = inputImage.files[0];<br>\n  const reader = new FileReader();<br>\n<br>\n  reader.addEventListener(\'load\', () =&gt; {<br>\n    preview.src = reader.result;<br>\n  });<br>\n<br>\n  if (file) {<br>\n    reader.readAsDataURL(file);<br>\n  }<br>\n});<br>\n</code><br>\n<br>\nThis code listens for a file input change event and uses FileReader to read the selected file. Once the file has been read, it sets the image preview\'s source to the read result. </pre>', NULL, 1, 'code', '2023-04-10 05:38:15', '2023-04-10 05:38:15'),
-(4, 'Cover Latter', 'Cover Latter', 'Cover Latter', '<br>\r\n<br>\r\nWriting a cover letter can be a daunting task, especially if you\'ve never done it before. But don\'t worry! A cover letter is simply a short introduction to the employer about who you are and why you\'re the right person for the job.<br>\r\n<br>\r\nWhen crafting your cover letter, it\'s important to keep a few things in mind. Start by making sure you have the employer\'s name, job title, and contact information. Then, use a conversational but professional tone as you explain why you\'re the perfect candidate for the job. Highlight your relevant skills and qualifications, and make sure to include any relevant experiences or achievements.<br>\r\n<br>\r\nFinally, be sure to thank the employer for taking the time to read your application. Closing your letter on a positive note is sure to leave a good impression.<br>\r\n<br>\r\nGood luck!', 6, 1, 'content', '2023-04-10 05:42:00', '2023-04-10 05:42:00'),
-(5, 'Laptop', NULL, 'A second hand laptop, brand HP, ram 8 gb, processor core i5, storage 256 gb ssd', '<br><br>\r\n<br><br>\r\nAre you looking for a laptop that can handle all of your computing needs? Look no further than this second-hand HP laptop. With 8GB of RAM, a Core i5 processor and 256GB SSD storage, you\'ll have plenty of power and storage to take care of your workload. Whether you\'re surfing the web, editing photos or playing games, this laptop is up to the task. Get yours today and enjoy the power of a second-hand HP laptop.', 5, 1, 'content', '2023-04-10 05:56:29', '2023-04-10 05:56:29'),
-(6, 'A Second Hand Laptop', NULL, 'I have laptop with charger. Now i want sell it. ram 8 gb, storage 256 gb ssd. Brand HP, Processor core i5', '<br>\r\n<br>\r\nLooking for a reliable laptop? Look no further! I\'m selling this pre-loved HP laptop with 8GB RAM and 256GB SSD storage. It has a Core i5 processor, so you can count on it to handle all your computing needs. Plus, it comes with a charger. Get it now before it\'s gone!', 5, 1, 'content', '2023-04-10 06:00:09', '2023-04-10 06:00:09'),
-(7, 'Cover Latter', 'Cover Latter', 'Cover Latter', '<br>\r\n<br>\r\nA cover letter is a great way to introduce yourself to someone who may not have met you before. It is your chance to show off your personality and make a great first impression.<br>\r\n<br>\r\nA cover letter should be written in a casual, conversational tone. This is your chance to stand out from the crowd and make a connection with the person you are sending it to. Make sure not to be overly formal or too stiff.<br>\r\n<br>\r\nMake sure to include information about why you are writing in the cover letter. You can mention something specific about the company or position that made you interested in applying. Show the employer that you have done your research and understand the job.<br>\r\n<br>\r\nAt the end of your cover letter, make sure to thank the employer for their time and consideration. This small gesture can really make a difference.<br>\r\n<br>\r\nWriting a cover letter can be intimidating, but with a little creativity and effort, it can be a great way to make a great impression and stand out from', 6, 1, 'content', '2023-04-10 06:02:57', '2023-04-10 06:02:57'),
-(8, 'Cover Letter', 'Cover Letter', 'Cover Letter', '<br>\r\n<br>\r\nDear [Hiring Manager],<br>\r\n<br>\r\nI am writing to apply for the [Position] at [Company], and I am confident that I am a great fit for the role. With my [number] years of experience in [field], I believe I can bring a valuable perspective to the team.<br>\r\n<br>\r\nI am passionate about the work I do and I am eager to learn and grow in my career. I am highly organized, reliable, and have a strong attention to detail. I am able to work both independently, and as part of a team in order to ensure that projects are completed on-time and to the highest standard.<br>\r\n<br>\r\nI am confident that I have the skills and experience you are looking for in a candidate. I am excited to have the opportunity to discuss this role in further detail with you and I look forward to hearing from you soon.<br>\r\n<br>\r\nSincerely, <br>\r\n[Your Name]', 6, 1, 'content', '2023-04-10 06:03:41', '2023-04-10 06:03:41'),
-(9, 'Cover Letter', 'Cover Letter', 'Cover Letter', '<br>\r\nWhen you\'re applying for a job, a cover letter can help you make a great first impression. It\'s an opportunity to show your personality and how you\'ll fit into the company\'s culture. A cover letter should highlight your qualifications and provide a sense of what kind of employee you\'ll be.<br>\r\n<br>\r\nWriting a good cover letter can be challenging, so it\'s important to take your time and write it carefully. Here are some tips to help you craft the perfect cover letter:<br>\r\n<br>\r\n• Start by introducing yourself. Include your name, the job you\'re applying for, and why you\'re the right person for the job.<br>\r\n<br>\r\n• Explain why you\'re interested in the company and what makes you a good fit. Show that you\'ve done your research and have a genuine interest in the company.<br>\r\n<br>\r\n• Focus on your qualifications. Highlight the experiences, skills, and accomplishments that make you the right person for the job.<br>\r\n<br>\r\n• Conclude your letter by expressing your', 6, 1, 'content', '2023-04-10 06:05:48', '2023-04-10 06:05:48'),
-(10, 'Cover Letter', 'Cover Letter', 'Cover Letter', '<br>\r\nA cover letter is an important part of any job application, as it will introduce you to the employer and provide them with an insight into your experience and qualifications.<br>\r\n<br>\r\nAs such, it’s important to create a well-crafted cover letter that will help you stand out from the competition.<br>\r\n<br>\r\nMy name is [Name], and I am applying for the [Position Title] position at [Company Name].<br>\r\n<br>\r\nI believe that my background in [Field] and my passion for [Industry] make me an ideal candidate for this role. I have [Years] of experience in [Field], and I am confident that I can quickly and effectively hit the ground running.<br>\r\n<br>\r\nI am highly organized, detail-oriented, and committed to exceeding expectations. I have a strong work ethic and an eagerness to learn and grow in the role.<br>\r\n<br>\r\nI am excited to share my enthusiasm and knowledge with your team and contribute to the success of [Company Name].<br>', 6, 1, 'content', '2023-04-10 06:10:45', '2023-04-10 06:10:45'),
-(11, 'write a js code for file upload', NULL, 'write a js code for file upload', '<pre class=\"pre-line\"> Here\'s a code snippet for uploading files using JavaScript:<br>\r\n<br>\r\nHTML:<br>\r\n<code>html<br>\r\n&lt;form&gt;<br>\r\n  &lt;input type=\"file\" id=\"fileInput\"&gt;<br>\r\n  &lt;button type=\"button\" onclick=\"uploadFile()\"&gt;Upload&lt;/button&gt;<br>\r\n&lt;/form&gt;<br>\r\n</code><br>\r\n<br>\r\nJS:<br>\r\n<code>javascript<br>\r\nfunction uploadFile() {<br>\r\n  const input = document.getElementById(\'fileInput\');<br>\r\n  const file = input.files[0];<br>\r\n  const url = \'your_upload_url_here\';<br>\r\n<br>\r\n  const xhr = new XMLHttpRequest();<br>\r\n  const formData = new FormData();<br>\r\n<br>\r\n  formData.append(\'file\', file);<br>\r\n<br>\r\n  xhr.onreadystatechange = function () {<br>\r\n    if (xhr.readyState === XMLHttpRequest.DONE) {<br>\r\n      if (xhr.status === 200) {<br>\r\n        console.log(xhr.responseText);<br>\r\n      } else {<br>\r\n        console.error(\'There was a problem uploading the file.\');<br>\r\n      }<br>\r\n    }<br>\r\n  };<br>\r\n<br>\r\n  xhr.open(\'POST\', url, true);<br>\r\n  xhr.send(formData);<br>\r\n}<br>\r\n</code><br>\r\nNote: Replace `\'your_upload_url_here\'` with the URL where you want to upload the file. </pre>', NULL, 1, 'code', '2023-04-10 06:11:30', '2023-04-10 06:11:30'),
-(12, 'write a code for file upload in js', NULL, 'write a code for file upload in js', '<pre class=\"pre-line\"> Sure, here\'s a sample code for file upload in JavaScript:\r\n\r\n<code>html\r\n&lt;form method=\"post\" enctype=\"multipart/form-data\"&gt;\r\n  &lt;input type=\"file\" name=\"file\"&gt;\r\n  &lt;button type=\"submit\"&gt;Upload&lt;/button&gt;\r\n&lt;/form&gt;\r\n\r\n&lt;script&gt;\r\n  const form = document.querySelector(\'form\');\r\n  form.addEventListener(\'submit\', (e) =&gt; {\r\n    e.preventDefault();\r\n    const formData = new FormData(form);\r\n    fetch(\'/your-upload-endpoint\', {\r\n      method: \'POST\',\r\n      body: formData\r\n    })\r\n    .then(response =&gt; response.json())\r\n    .then(data =&gt; console.log(data))\r\n    .catch(error =&gt; console.error(error))\r\n  });\r\n&lt;/script&gt;\r\n</code>\r\n\r\nIn the above code, we have a basic HTML form that includes a file input and a submit button. When this form gets submitted, we prevent the default behavior using `e.preventDefault()`, and then we create a new instance of `FormData` from the form element. Finally, we use `fetch` to make a POST request to a server endpoint that handles the file upload. Once the upload is complete, we log the response data to the console. </pre>', NULL, 1, 'code', '2023-04-10 06:12:50', '2023-04-10 06:12:50'),
-(13, 'write a code for file upload in php', NULL, 'write a code for file upload in php', '<pre class=\"pre-line\"> Here\'s an example code for file upload in PHP:\r\n\r\n<code>\r\n&lt;form action=\"upload.php\" method=\"post\" enctype=\"multipart/form-data\"&gt;\r\n  &lt;input type=\"file\" name=\"fileToUpload\" id=\"fileToUpload\"&gt;\r\n  &lt;input type=\"submit\" value=\"Upload\" name=\"submit\"&gt;\r\n&lt;/form&gt;\r\n\r\n&lt;?php\r\nif(isset($_POST[\"submit\"])){\r\n  $target_dir = \"uploads/\";\r\n  $target_file = $target_dir . basename($_FILES[\"fileToUpload\"][\"name\"]);\r\n  $uploadOk = 1;\r\n  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));\r\n  \r\n  // Check if file already exists\r\n  if (file_exists($target_file)) {\r\n    echo \"Sorry, file already exists.\";\r\n    $uploadOk = 0;\r\n  }\r\n  \r\n  // Check file size\r\n  if ($_FILES[\"fileToUpload\"][\"size\"] &gt; 500000) {\r\n    echo \"Sorry, your file is too large.\";\r\n    $uploadOk = 0;\r\n  }\r\n  \r\n  // Allow only certain file formats\r\n  if($imageFileType != \"jpg\" &amp;&amp; $imageFileType != \"png\" &amp;&amp; $imageFileType != \"jpeg\" &amp;&amp; $imageFileType != \"gif\") {\r\n    echo \"Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed.\";\r\n    $uploadOk = 0;\r\n  }\r\n  \r\n  // Check if $uploadOk is set to 0 by an error\r\n  if ($uploadOk == 0) {\r\n    echo \"Sorry, your file was not uploaded.\";\r\n  } else {\r\n    if (move_uploaded_file($_FILES[\"fileToUpload\"][\"tmp_name\"], $target_file)) {\r\n      echo \"The file \". htmlspecialchars( basename( $_FILES[\"fileToUpload\"][\"name\"])). \" has been uploaded.\";\r\n    } else {\r\n      echo \"Sorry, there was an error uploading your file.\";\r\n    }\r\n  }\r\n}\r\n?&gt;\r\n</code>\r\n\r\nPlease note that you should create a \"uploads\" folder in your root directory, and make sure it has write permission (e.g. 755 or 777, depending on your server configuration). </pre>', NULL, 1, 'code', '2023-04-10 06:13:34', '2023-04-10 06:13:34'),
-(14, 'Write a php upload file code', NULL, 'Write a php upload file code', '<pre class=\"pre-line\"> Sure, here is an example PHP code to upload a file:\r\n\r\n```php\r\n&lt;?php\r\n// Check if a file was uploaded\r\nif(isset($_FILES[\'file\'])) {\r\n   $errors = array();\r\n   $file_name = $_FILES[\'file\'][\'name\'];\r\n   $file_size = $_FILES[\'file\'][\'size\'];\r\n   $file_tmp = $_FILES[\'file\'][\'tmp_name\'];\r\n   $file_type = $_FILES[\'file\'][\'type\'];\r\n   \r\n   // Allow only certain file types\r\n   $allowed_file_types = array(\'jpg\', \'jpeg\', \'png\', \'pdf\');\r\n   $file_ext = strtolower(end(explode(\'.\',$_FILES[\'file\'][\'name\'])));\r\n   \r\n   if(!in_array($file_ext,$allowed_file_types)) {\r\n      $errors[] = \"File type not allowed. Only JPG, JPEG, PNG and PDF files are allowed.\";\r\n   }\r\n   \r\n   if($file_size &gt; 2097152) {\r\n      $errors[] = \'File size cannot exceed  </pre>', NULL, 2, 'code', '2023-04-10 09:47:24', '2023-04-10 09:47:24'),
-(15, 'write html sample code', NULL, 'write html sample code', '<pre class=\"pre-line\"> Sure, here is an example of basic HTML code:\r\n\r\n<code>html\r\n&lt;!DOCTYPE html&gt;\r\n&lt;html&gt;\r\n  &lt;head&gt;\r\n    &lt;title&gt;My Website&lt;/title&gt;\r\n  &lt;/head&gt;\r\n  &lt;body&gt;\r\n    &lt;h1&gt;Welcome to my website!&lt;/h1&gt;\r\n    &lt;p&gt;This is some sample text.&lt;/p&gt;\r\n    &lt;ul&gt;\r\n      &lt;li&gt;List item 1&lt;/li&gt;\r\n      &lt;li&gt;List item 2&lt;/li&gt;\r\n      &lt;li&gt;List item 3&lt;/li&gt;\r\n    &lt;/ul&gt;\r\n  &lt;/body&gt;\r\n&lt;/html&gt;\r\n</code>\r\n\r\nIn this example, we have a basic HTML document with a title, header, and a simple list. The `&lt;!DOCTYPE html&gt;` declaration at the beginning of the document lets the web browser know that this is an HTML5 document. The `&lt;html&gt;` tag represents the root element of the page, and all other elements should be within it. The `&lt;head&gt;` section contains metadata about the document, such as the title of the page. The </pre>', NULL, 1, 'code', '2023-04-10 11:30:22', '2023-04-10 11:30:22');
 
 -- --------------------------------------------------------
 
@@ -644,20 +558,20 @@ INSERT INTO `user_documents` (`id`, `title`, `short_description`, `description`,
 
 CREATE TABLE `use_cases` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `icon` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `details` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `prompt` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `icon` varchar(255) NOT NULL,
+  `details` varchar(255) DEFAULT NULL,
+  `prompt` text NOT NULL,
   `use_case_category_id` bigint(20) UNSIGNED DEFAULT NULL,
-  `is_popular` tinyint(4) NOT NULL DEFAULT '1',
-  `title_label` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `short_description_label` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description_label` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `title_placeholder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'Write here',
-  `short_description_placeholder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'Write short description here',
-  `description_placeholder` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT 'Write description here',
-  `type` int(11) NOT NULL DEFAULT '1',
-  `is_published` tinyint(1) NOT NULL DEFAULT '1',
+  `is_popular` tinyint(4) NOT NULL DEFAULT 1,
+  `title_label` varchar(150) DEFAULT NULL,
+  `short_description_label` varchar(150) DEFAULT NULL,
+  `description_label` varchar(150) DEFAULT NULL,
+  `title_placeholder` varchar(255) DEFAULT 'Write here',
+  `short_description_placeholder` varchar(255) DEFAULT 'Write short description here',
+  `description_placeholder` varchar(255) DEFAULT 'Write description here',
+  `type` int(11) NOT NULL DEFAULT 1,
+  `is_published` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -729,9 +643,9 @@ INSERT INTO `use_cases` (`id`, `title`, `icon`, `details`, `prompt`, `use_case_c
 
 CREATE TABLE `use_case_categories` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `is_published` tinyint(1) NOT NULL DEFAULT '1',
+  `name` varchar(255) NOT NULL,
+  `slug` varchar(255) NOT NULL,
+  `is_published` tinyint(1) NOT NULL DEFAULT 1,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -908,7 +822,7 @@ ALTER TABLE `use_case_categories`
 -- AUTO_INCREMENT for table `ai_chat_histories`
 --
 ALTER TABLE `ai_chat_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -944,7 +858,7 @@ ALTER TABLE `faqs`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `languages`
@@ -962,7 +876,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -992,19 +906,19 @@ ALTER TABLE `plans`
 -- AUTO_INCREMENT for table `plan_expenses`
 --
 ALTER TABLE `plan_expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_documents`
 --
 ALTER TABLE `user_documents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `use_cases`

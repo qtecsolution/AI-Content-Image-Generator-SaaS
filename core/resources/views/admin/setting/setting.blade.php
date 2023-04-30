@@ -447,7 +447,6 @@
                                                     class="text-danger">*</span></label>
                                             <input type="password" class="form-control custom-input" name="MAIL_PASSWORD"
                                                 id="mailPass" value="{{ env('MAIL_PASSWORD') }}">
-
                                         </div>
 
                                         <div class="form-group mb-3">
