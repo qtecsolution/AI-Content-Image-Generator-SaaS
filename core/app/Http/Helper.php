@@ -93,6 +93,14 @@ function filePath($file)
         return asset('assets/images/placeholder.png');
     }
 }
+function favicon($file)
+{
+    if ($file != null && file_exists($file)) {
+        return asset($file);
+    } else {
+        return asset('assets/images/favicon.ico');
+    }
+}
 
 
 function filePathRoot($file)
@@ -279,7 +287,7 @@ function iconGenerate($photo){
     if (!File::exists($path)) {
         File::makeDirectory($path, 0755, true, true);
     }
-    
+
     $img= Image::make($photo);
     $img->resize(512,512);
     $img->save($path.'/icon-512x512.png');

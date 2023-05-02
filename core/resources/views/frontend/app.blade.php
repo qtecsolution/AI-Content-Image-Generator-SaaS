@@ -30,7 +30,7 @@
     @if (readConfig('pwa_active') == 'yes')
         @laravelPWA
     @endif
-    <link rel="icon" type="image/png" href="{{ filePath(readConfig('favicon_icon')) }}">
+    <link rel="icon" type="image/png" href="{{ favicon(readConfig('favicon_icon')) }}">
 </head>
 
 <body class="body-landing">
@@ -166,7 +166,7 @@
                         <span>Progressive Web Apps</span>
                     </div>
                 </div>
-               
+
 
             </div>
 
