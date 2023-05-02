@@ -383,7 +383,6 @@ class OpenAiController extends Controller
                 'message' => 'Something went wrong',
                 'error' => $errorMessage,
             ], 400);
-            return response()->json($results, 200);
         }
     }
 
@@ -391,7 +390,7 @@ class OpenAiController extends Controller
 
     public function chat()
     {
-        $chatHistory = AiChatHistory::where('user_id',Auth::user()->id)->latest()->limit(100)->get();
+        $chatHistory = AiChatHistory::where('user_id',Auth::user()->id)->orderBy('id','ASC')->limit(100)->get();
         return view('user.openAi.chat',compact('chatHistory'));
     }
     public function chatResponse(Request $request)

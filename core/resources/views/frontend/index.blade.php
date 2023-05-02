@@ -172,9 +172,9 @@
                     data-aos-duration="1000">
                     <div class="section-header">
                         <button class="section-btn"><span class="text">Content</span></button>
-                        <h3 class="benifits-title"> <span>{{ readConfig('name') }}</span> helps to <br> <span>generate image..</span></h3>
+                        <h3 class="benifits-title"> <span>{{ readConfig('name') }}</span> helps to <br> <span>generate images</span></h3>
                         <p class="des">Get your content and content thumbnail in one place. <br> Generate unique and
-                            beautiful image with one click.</p>
+                            beautiful images with one click.</p>
                     </div>
                 </div>
                 <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
@@ -436,4 +436,17 @@
         </div>
     </section>
     <!--===================== faq  end=====================-->
+@endsection
+@section('script')
+    <script>
+        const allTemplateBtn = document.querySelector('.all-template-btn');
+        allTemplateBtn.addEventListener("click",function (){
+            let childSpan = allTemplateBtn.querySelector("span");
+            if (allTemplateBtn.classList.contains("collapsed")) {
+                childSpan.innerHTML = "See All Templates";
+            }else{
+                childSpan.innerHTML = "Hide All Templates";
+            }
+        });
+    </script>
 @endsection

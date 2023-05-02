@@ -82,7 +82,7 @@
                                                 value="{{ env('OPENAI_API_KEY') }}" class="form-control custom-input">
                                         </div>
                                         <div class="form-group mb-5">
-                                            <label for="open_ai_model" class="form-label">OpenAi Model</label>
+                                            <label for="open_ai_model" class="form-label">OpenAi Model for Content Generate</label>
                                             {!! Form::select('open_ai_model', $aiModels, readConfig('open_ai_model'), [
                                                 'class' => 'form-control custom-input w-100 nice-select',
                                             ]) !!}
