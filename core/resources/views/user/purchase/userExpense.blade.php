@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="my-projects">
                     <div class="my-projects-header border-bottom">
-                        <h5 class="header-title">Plan Purchase and expenses Informations</h5>
+                        <h5 class="header-title">Plan purchase and expenses informations</h5>
                     </div>
 
                     <div class="my-projects-body mt-4">
@@ -24,12 +24,11 @@
                                     <h4 class="title">Plan Information</h4>
                                     <ul class="purchesinfo-list">
                                         <li>Name: {{ $plan->name }}</li>
-                                        <li>Word Count: {{ $plan->word_count }}</li>
-                                        <li>API Call: {{ $plan->call_api_count }} /mo </li>
-                                        <li>Document Save Count: {{ $plan->documet_count }} /mo</li>
-                                        <li>Image Save Count: {{ $plan->image_count }} /mo</li>
-                                        <li>Monthly Price: {{readConfig('currency_sambol')}}{{ $plan->price }}</li>
-                                        <li>Yearly Price: {{readConfig('currency_sambol')}}{{ $plan->yearly_price }}</li>
+                                        <li>Total words: {{ $plan->word_count }} /mo</li>
+                                        <li>Maximum word per request: {{ $plan->max_words }}</li>
+                                        <li>Total image generate: {{ $plan->image_count }} /mo</li>
+                                        <li>Monthly price: {{readConfig('currency_sambol')}}{{ $plan->price }}</li>
+                                        <li>Yearly price: {{readConfig('currency_sambol')}}{{ $plan->yearly_price }}</li>
                                     </ul>
                                 </div>    
                             </div>   
@@ -53,22 +52,12 @@
                                 <div class="purches-info-box pe-lg-4">
                                     <h4 class="title">Your expenses summary @if(readConfig('demo')) <br> <small class="text-danger"> We have set limitations in demo mode. </small> @endif </h4>
                                     <ul class="purchesinfo-list">
-                                        <li>Total API Call: {{ $expense->current_api_count }}</li>
-                                            <li>Rest of API Call:
-                                                {{ $expense->call_api_count - $expense->current_api_count }}</li>
-                                            <li>Total Document Save Count:
-                                                {{ $expense->current_documet_count }}
-                                            </li>
-                                            <li>Rest of Documet Save Count:
-                                                {{ $expense->documet_count - $expense->current_documet_count }}</li>
-                                            <li>Total Image: {{ $expense->current_image_count }}
-                                            </li>
-                                            <li>Rest of Image:
-                                                {{ $expense->image_count - $expense->current_image_count }}</li>
-                                            <li>Activated Date:
-                                                {{ dateTimeFormat($expense->activated_at) }}</li>
-                                            <li>Expire Date:
-                                                {{ dateTimeFormat($expense->expire_at) }}</li>
+                                        <li>Total word used: {{ $expense->current_word_count }}</li>
+                                        <li>Rest of word: {{ $expense->word_count - $expense->current_word_count }}</li>
+                                        <li>Total image: {{ $expense->current_image_count }}</li>
+                                        <li>Rest of image: {{ $expense->image_count - $expense->current_image_count }}</li>
+                                        <li>Activated date: {{ dateTimeFormat($expense->activated_at) }}</li>
+                                        <li>Expire date: {{ dateTimeFormat($expense->expire_at) }}</li>
                                     </ul>
                                 </div>
                                 @endif    

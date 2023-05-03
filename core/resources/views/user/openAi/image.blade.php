@@ -97,7 +97,9 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <div class="col-md-12 mt-3">
+                                    <p class="text-secondary"> <i class="fa fa-bolt"></i> Your balance is <b>{{showBalance()->image}}</b> {{showBalance()->image>1?'images':'image'}} </p>
+                                </div>
                                 <div class="generate-btn-wrapper mt-3">
                                     <button type="submit" class="generate-btn px-4">Generate Image</button>
                                 </div>

@@ -65,50 +65,63 @@
                                                         <img src="{{ asset('assets/images/icons/check.svg') }}"
                                                             alt="check icon ">
                                                     </span>
-                                                    <span>Generate Maximum {{ $item->word_count }} AI Words</span>
+                                                    <span>{{ $item->word_count }} words per month</span>
                                                 </li>
                                                 <li>
                                                     <span class="icon-wrapper">
                                                         <img src="{{ asset('assets/images/icons/check.svg') }}"
                                                             alt="check icon ">
                                                     </span>
-                                                    <span>{{ $item->call_api_count }} Api Request per month</span>
-                                                </li>
-                                                <li>
-                                                    <span class="icon-wrapper">
-                                                        <img src="{{ asset('assets/images/icons/check.svg') }}"
-                                                            alt="check icon ">
-                                                    </span>
-                                                    <span>Store {{ $item->documet_count }} documents per month</span>
-                                                </li>
-                                                <li>
-                                                    <span class="icon-wrapper">
-                                                        <img src="{{ asset('assets/images/icons/check.svg') }}"
-                                                            alt="check icon ">
-                                                    </span>
-                                                    <span>Store {{ $item->image_count }} Generated Image per month</span>
-                                                </li>
-                                                <li>
-                                                    <span class="icon-wrapper">
-                                                        <img src="{{ asset('assets/images/icons/check.svg') }}"
-                                                            alt="check icon ">
-                                                    </span>
+                                                    <span>Access to </span>
                                                     @php
                                                         $templates = explode(',', $item->templates);
                                                         $templatesCategory = [0=>'All Templates',1=>'Basic Templates',2=>'Standard Templates',3=>'Professional Templates'];
                                                     @endphp
                                                     @if (in_array(0, $templates))
-                                                        <span> All Templates </span>
+                                                        <span> all templates </span>
                                                     @else
                                                         <span>
                                                             @foreach($templates as $tKey =>  $temp)
-                                                                @if($tKey>0) 
-                                                                , 
+                                                                @if($tKey>0)
+                                                                ,
                                                                 @endif
-                                                                {{$templatesCategory[$temp]??''}}
+                                                                {{ Str::lower($templatesCategory[$temp]??'')}}
                                                             @endforeach
                                                         </span>
                                                     @endif
+                                                </li>
+                                                <li>
+                                                    <span class="icon-wrapper">
+                                                        <img src="{{ asset('assets/images/icons/check.svg') }}"
+                                                            alt="check icon ">
+                                                    </span>
+                                                    <span>{{ $item->max_words }} maximum words per request</span>
+                                                </li>
+                                                <li>
+                                                    <span class="icon-wrapper">
+                                                        <img src="{{ asset('assets/images/icons/check.svg') }}"
+                                                            alt="check icon ">
+                                                    </span>
+                                                    <span>Generate {{ $item->image_count }} AI image per month</span>
+                                                </li>
+                                                
+                                                <li>
+                                                <span class="icon-wrapper {{$item->code_generate_enabled!=1?'bg-danger':''}}">
+                                                    <img src="{{asset('')}}assets/images/icons/{{$item->code_generate_enabled==1?'check.svg':'cross.svg'}}" alt="check icon ">
+                                                </span>
+                                                    <span>Code generate with AI</span>
+                                                </li>
+                                                <li>
+                                                    <span class="icon-wrapper {{$item->chat_enabled!=1?'bg-danger':''}}">
+                                                        <img src="{{asset('')}}assets/images/icons/{{$item->chat_enabled==1?'check.svg':'cross.svg'}}" alt="check icon ">
+                                                    </span>
+                                                    <span>Chat with AI</span>
+                                                </li>
+                                                <li>
+                                                    <span class="icon-wrapper {{$item->chat_enabled!=1?'bg-danger':''}}">
+                                                        <img src="{{asset('')}}assets/images/icons/{{$item->chat_enabled==1?'check.svg':'cross.svg'}}" alt="check icon ">
+                                                    </span>
+                                                    <span>Email and chat support</span>
                                                 </li>
                                             </ul>
                                             <div class="d-grid">

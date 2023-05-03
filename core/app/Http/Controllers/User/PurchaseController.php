@@ -194,14 +194,12 @@ class PurchaseController extends Controller
                 $oldexpense = showBalance();
                 $totalDays = $request->type == 2 ? 365 : 30;
                 $months = $order->type == 2 ? 12 : 1;
-                if (isset(demoPlan()->word)) {
+                if (isset(demoPlan()->word_count)) {
                     $expense = new PlanExpense();
                     $expense->user_id = $user->id;
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
-                    $expense->word_count = demoPlan()->word;
-                    $expense->call_api_count = demoPlan()->api_call;
-                    $expense->documet_count = demoPlan()->document;
+                    $expense->word_count = demoPlan()->word_count;
                     $expense->image_count = demoPlan()->image;
                     $expense->type = 1;
                     $expense->activated_at = Carbon::now();
@@ -215,9 +213,7 @@ class PurchaseController extends Controller
                         $expense->user_id = $user->id;
                         $expense->order_id = $order->id;
                         $expense->plan_id = $plan->id;
-                        $expense->word_count = $plan->word_count;
-                        $expense->call_api_count = ($plan->call_api_count * $months) + $oldexpense->api_call;
-                        $expense->documet_count = ($plan->documet_count * $months) + $oldexpense->document;
+                        $expense->word_count = ($plan->word_count * $months) + $oldexpense->word_count;
                         $expense->image_count = ($plan->image_count * $months) + $oldexpense->image;
                         $expense->type = $request->type;
                         $expense->activated_at = Carbon::now();
@@ -229,9 +225,7 @@ class PurchaseController extends Controller
                         $expense->user_id = $user->id;
                         $expense->order_id = $order->id;
                         $expense->plan_id = $plan->id;
-                        $expense->word_count = $plan->word_count;
-                        $expense->call_api_count = $plan->call_api_count * $months;
-                        $expense->documet_count = $plan->documet_count * $months;
+                        $expense->word_count = $plan->word_count * $months;
                         $expense->image_count = $plan->image_count * $months;
                         $expense->type = $request->type;
                         $expense->activated_at = Carbon::now();
@@ -378,9 +372,7 @@ class PurchaseController extends Controller
                     $expense->user_id = $user->id;
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
-                    $expense->word_count = $plan->word_count;
-                    $expense->call_api_count = ($plan->call_api_count * $months) + $oldexpense->api_call;
-                    $expense->documet_count = ($plan->documet_count * $months) + $oldexpense->document;
+                    $expense->word_count = ($plan->word_count * $months) + $oldexpense->word_count;
                     $expense->image_count = ($plan->image_count * $months) + $oldexpense->image;
                     $expense->type = $request->type;
                     $expense->activated_at = Carbon::now();
@@ -392,9 +384,8 @@ class PurchaseController extends Controller
                     $expense->user_id = $user->id;
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
-                    $expense->word_count = $plan->word_count;
-                    $expense->call_api_count = $plan->call_api_count * $months;
-                    $expense->documet_count = $plan->documet_count * $months;
+                    $expense->word_count = $plan->word_count * $months;
+                    $expense->document_count = $plan->document_count * $months;
                     $expense->image_count = $plan->image_count * $months;
                     $expense->activated_at = Carbon::now();
                     $expense->expire_at =  Carbon::now()->addDay($totalDays);

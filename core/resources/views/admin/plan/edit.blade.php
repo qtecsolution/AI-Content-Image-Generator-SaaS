@@ -46,54 +46,60 @@
                                     class="text-danger">*</span> : </label>
                             <br>
                             <div class="col-sm-12">
-                                <input type="text" name="name" required class="form-control custom-input" 
+                                <input type="text" name="name" required class="form-control custom-input @error('name') is-invalid @enderror"
                                     id="planName" placeholder="plan name" value="{{$plan->name}}">
+                                    @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                             </div>
                         </div>
-
-
                         <div class="form-group mb-3">
-                            <label for="wordCount" class="col-sm-12 col-form-label font-500">Word Count limit per request
+                            <label for="wordCount" class="col-sm-12 col-form-label font-500">Total words per month
                                 <span class="text-danger">*</span> : </label>
 
                             <div class="col-sm-12">
                                 <input type="number" min="0" required name="word_count"
-                                    class="form-control custom-input" id="wordCount" placeholder="0" value="{{$plan->word_count}}">
+                                       class="form-control custom-input @error('word_count') is-invalid @enderror" id="wordCount" placeholder="0" value="{{$plan->word_count}}">
+                                    @error('word_count')
+                                       <div class="invalid-feedback">
+                                           {{ $message }}
+                                       </div>
+                                   @enderror
                             </div>
                         </div>
 
-
                         <div class="form-group mb-3">
-                            <label for="inputEmail3" class="col-sm-12 col-form-label font-500">Open AI API request limit per month <span
-                                    class="text-danger">*</span> : </label>
+                            <label for="maxWordCount" class="col-sm-12 col-form-label font-500">Maximum word limit per request
+                                <span class="text-danger">*</span> : </label>
 
                             <div class="col-sm-12">
-                                <input type="number" min="0" required name="call_api_count"
-                                    class="form-control custom-input" id="inputEmail3" placeholder="0" value="{{$plan->call_api_count}}">
+                                <input type="number" min="0" required name="max_words"
+                                    class="form-control custom-input @error('max_words') is-invalid @enderror" id="maxWordCount" placeholder="0" value="{{$plan->max_words}}">
+                                @error('max_words')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
 
 
                         <div class="form-group mb-3">
-                            <label for="inputEmail4" class="col-sm-12 col-form-label font-500">Save Documets limit per month<span
-                                    class="text-danger">*</span> : </label>
-
-                            <div class="col-sm-12">
-                                <input type="number" min="0" required name="documet_count"
-                                    class="form-control custom-input" id="inputEmail4" placeholder="0" value="{{$plan->documet_count}}">
-                            </div>
-                        </div>
-
-
-                        <div class="form-group mb-3">
-                            <label for="inputEmail5" class="col-sm-12 col-form-label font-500">Image generate limit per month <span class="text-danger">*</span> : </label>
+                            <label for="inputEmail5" class="col-sm-12 col-form-label font-500">Total Image generate per month <span class="text-danger">*</span> : </label>
 
                             <div class="col-sm-12">
                                 <input type="number" min="0" required name="image_count"
-                                    class="form-control custom-input" id="inputEmail5" placeholder="0" value="{{$plan->image_count}}">
+                                    class="form-control custom-input @error('image_count') is-invalid @enderror" id="inputEmail5" placeholder="0" value="{{$plan->image_count}}">
+                                @error('image_count')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
-                        
+
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12 border-start">
                         <div class="form-group mb-3">
@@ -102,7 +108,12 @@
 
                             <div class="col-sm-12">
                                 <input type="number" min="0" step="0.01" required name="price"
-                                    class="form-control custom-input" id="inputEmail6" placeholder="$" value="{{$plan->price}}">
+                                    class="form-control custom-input @error('price') is-invalid @enderror" id="inputEmail6" placeholder="$" value="{{$plan->price}}">
+                                @error('price')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group mb-3">
@@ -111,7 +122,12 @@
 
                             <div class="col-sm-12">
                                 <input type="number" min="0" step="0.01" required name="yearly_price"
-                                    class="form-control custom-input" id="inputEmail6" placeholder="$" value="{{$plan->yearly_price}}">
+                                    class="form-control custom-input @error('yearly_price') is-invalid @enderror" id="inputEmail6" placeholder="$" value="{{$plan->yearly_price}}">
+                                @error('yearly_price')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
                             </div>
                         </div>
                         <div class="form-group mb-5">
@@ -126,12 +142,23 @@
                             </div>
                         </div>
                         <div class="form-group mb-3">
+                            <div class="col-sm-6 mb-3">
+                                <label role="button"> <input type="checkbox" value="1" name="code_generate_enabled" {{$plan->code_generate_enabled==1 ?'checked':''}}> Code Generate with AI </label>
+                            </div>
+                            <div class="col-sm-6 mb-3">
+                                <label role="button"> <input type="checkbox" value="1" name="chat_enabled" {{$plan->chat_enabled==1 ?'checked':''}}> Chat with AI </label>
+                            </div>
+                            <div class="col-sm-6">
+                                <label> <input type="checkbox" value="1" name="support_enabled" {{$plan->support_enabled==1 ?'checked':''}}> Email and chat support </label>
+                            </div>
+                        </div>
+                        <div class="form-group mb-3">
                             <div class="generate-btn-wrapper">
-                                <button type="submit" class="generate-btn px-4">Create</button>
+                                <button type="submit" class="generate-btn px-4">Update</button>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </form>
         </div>

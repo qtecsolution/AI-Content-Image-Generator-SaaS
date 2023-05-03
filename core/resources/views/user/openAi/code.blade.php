@@ -16,9 +16,10 @@
                     <div class="col-lg-5 mt-3">
 
                         <div class="create-post">
+                            @if(showBalance()->code_generate_enabled==1)
                             <form action="{{route('code.generate')}}" id="input-form"
                                 class="createpost-form  needs-validati  h-100 flex-column  justify-content-between" method="post">
-                                @csrf                                
+                                @csrf
                                 <div class="form-content">
                                     <div class="row g-4 mb-3">
                                         <!-- description -->
@@ -34,10 +35,13 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
+                                    <p class="text-secondary"> <i class="fa fa-bolt"></i> Your balance is <b>{{showBalance()->word_count}}</b> words </p>
+                                </div>
+                                <div class="col-md-12">
                                     <p class="text-danger" id="openai-error" style="display: none">
                                         <small> Don't worry, you can contact with admin. </small>
                                         <br>
-                                         <small> <b>Open AI Error:</b>  <span></span> </small>
+                                         <small> <b>Error:</b>  <span></span> </small>
                                     </p>
                                 </div>
                                 <div class="generate-btn-wrapper">
@@ -45,10 +49,46 @@
                                             class="fa fa-circle-o-notch fa-spin fs-4" aria-hidden="true"></i> </span>
                                     <button type="submit" class="generate-btn">Generate</button>
                                 </div>
-                                
-
-
                             </form>
+                            @else
+                                <div>
+                                    <div class="form-content">
+                                        <div class="row g-4 mb-3">
+                                            <!-- description -->
+                                            <div class="col-12 mb-2" id="description-field">
+                                                <div class="form-group">
+                                                    <label for="description" class="form-label">Instructions</label>
+                                                    <textarea disabled class="form-control custom-input" id="description" autocomplete="off" name="description"
+                                                              placeholder="Ex: Create a php code for get session." rows="6"></textarea>
+                                                    <small class="text-mute"> Should describe your need for better result.
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p class="text-secondary"> <i class="fa fa-bolt"></i> Your balance is <b>{{showBalance()->word_count}}</b> words </p>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <p class="text-danger" id="openai-error" style="display: none">
+                                            <small> Don't worry, you can contact with admin. </small>
+                                            <br>
+                                            <small> <b>Error:</b>  <span></span> </small>
+                                        </p>
+                                    </div>
+                                    <div class="generate-btn-wrapper pb-2">
+                                    <span id="content-generate-preloader" style="display: none" class="lh-50 me-2"> <i
+                                            class="fa fa-circle-o-notch fa-spin fs-4" aria-hidden="true"></i> </span>
+                                        <button type="submit" class="generate-btn">Generate</button>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <p class="text-danger">
+                                            <small> You should upgrade your subscription plan for access <b>AI Code Generator</b>. <br> <a href="{{route('user.purchase')}}"> Click here </a> </small>
+                                        </p>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
 
 
@@ -96,13 +136,13 @@
                         </button>
                     </div>
                 </div>
-                
+
 
                     </div>
 
                 </div>
 
-               
+
             </div>
         </section>
     </div>
@@ -187,5 +227,33 @@
             }, 1000);
         }
 
+
+        // Summernote (Texteditor) Script
+        $(document).ready(function() {
+            $('#summernote').summernote({
+                toolbar: [
+                    ['style', ['style']],
+                    ['font', ['bold', 'italic', 'underline', 'clear']],
+                    ['fontsize', ['fontsize']],
+                    ['para', ['ul', 'ol', 'paragraph']],
+                    ['insert', ['link', 'picture', 'list']],
+                    ['color', ['forecolor']],
+                    ['height', ['height']]
+                ],
+                colorNames: {
+                    'red': '#ff0000',
+                    'green': '#00ff00',
+                    'blue': '#0000ff'
+                }
+            });
+
+            // these code for fixing some style in editor
+            var styleEle = $("style#fixed");
+            if (styleEle.length == 0)
+                $(
+                    "<style id=\"fixed\">.note-editor .dropdown-toggle::after { all: unset; } .note-editor .note-dropdown-menu { box-sizing: content-box; } .note-editor .note-modal-footer { box-sizing: content-box; }</style>"
+                )
+                .prependTo("body");
+        })
     </script>
 @endsection

@@ -67,13 +67,12 @@ class UserDocumentController extends Controller
         $request->validate([
             'generated_content' => 'required',
         ]);
-        
+
 
         try {
             $input = $request->except('_token');
             $input['user_id'] = Auth::user()->id;
             UserDocument::create($input);
-            balanceDeduction('document');
             myAlert('success', 'Content Saved successfully.');
             return back();
         } catch (\Exception $e) {
@@ -132,7 +131,6 @@ class UserDocumentController extends Controller
         try {
             $data = UserDocument::findOrFail($id);
             $data->delete();
-            balanceDeduction('document-delete');
             myAlert('success', 'Content is deleted');
             return back();
         } catch (\Exception $e) {

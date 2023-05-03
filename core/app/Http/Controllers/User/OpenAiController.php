@@ -21,8 +21,8 @@ class OpenAiController extends Controller
         if (showBalance() == '') {
             myAlert('error', 'Subscribe any plan first!');
             return redirect()->route('user.purchase');
-        } elseif (showBalance()->api_call == 0) {
-            myAlert('error', 'Your Api call limit: 0');
+        } elseif (showBalance()->word_count == 0) {
+            myAlert('error', 'Your word limit: 0');
             return redirect()->route('user.purchase');
         }
         if (isset($request->case)) {
@@ -41,7 +41,7 @@ class OpenAiController extends Controller
             return redirect()->route('user.purchase');
         }
         $cases = $cases->pluck('title', 'id');
-        
+
         $languages = Language::where('status', 1)->pluck('language', 'language');
         return view('user.openAi.content', compact('cases', 'request', 'languages', 'defaultCase'));
     }
@@ -74,7 +74,7 @@ class OpenAiController extends Controller
             $temp = floatval($request->temp ?? 0.7);
 
             $plan = Plan::where('id', auth()->user()->plan_id)->first();
-            $max_tokens = ($plan->word_count < (int)$request->max_words) ? $plan->word_count : (int)$request->max_words;
+            $max_tokens = ($plan->max_words < (int)$request->max_words) ? $plan->max_words : (int)$request->max_words;
             $model = readConfig('open_ai_model');
             // Open AI API call
             $result = OpenAI::completions()->create([
@@ -108,7 +108,7 @@ class OpenAiController extends Controller
                 'use_case_id' => $request->use_case,
                 'user_id' => Auth::user()->id
             ]);
-            balanceDeduction('call_api');
+            balanceDeduction('word',$wordCount);
             return response()->json($results, 200);
         } catch (\Exception $e) {
             $errorMessage = $e->getMessage();
@@ -311,8 +311,8 @@ class OpenAiController extends Controller
         if (showBalance() == '') {
             myAlert('error', 'Subscribe any plan first!');
             return redirect()->route('user.purchase');
-        } elseif (showBalance()->api_call == 0) {
-            myAlert('error', 'Your Api call limit: 0');
+        } elseif (showBalance()->word_count == 0) {
+            myAlert('error', 'Your word limit: 0');
             return redirect()->route('user.purchase');
         }
         return view('user.openAi.code');
@@ -320,6 +320,13 @@ class OpenAiController extends Controller
     /* Open AI Content Generate */
     public function codeGenerate(Request $request)
     {
+        if(showBalance()->code_generate_enabled!=1){
+            return response()->json([
+                'success' => false,
+                'message' => 'Permission errors',
+                'error' => 'You should upgrade your subscription plan for access AI Code generator',
+            ], 422);
+        }
         $validator = Validator::make($request->all(), [
             'description' => 'required',
         ]);
@@ -334,7 +341,7 @@ class OpenAiController extends Controller
         try {
 
             $plan = Plan::where('id', auth()->user()->plan_id)->first();
-            $max_tokens = $plan->word_count;
+            $max_tokens = $plan->max_words;
             // Open AI API call
             $result = OpenAI::chat()->create([
                 'model' => 'gpt-3.5-turbo',
@@ -368,7 +375,7 @@ class OpenAiController extends Controller
                 'use_case_id' => $request->use_case,
                 'user_id' => Auth::user()->id
             ]);
-            balanceDeduction('call_api');
+            balanceDeduction('word',$wordCount);
 
             $results = [
                 'content' => $mainContent,
@@ -390,11 +397,25 @@ class OpenAiController extends Controller
 
     public function chat()
     {
+        if (showBalance() == '') {
+            myAlert('error', 'Subscribe any plan first!');
+            return redirect()->route('user.purchase');
+        } elseif (showBalance()->word_count == 0) {
+            myAlert('error', 'Your word limit: 0');
+            return redirect()->route('user.purchase');
+        }
         $chatHistory = AiChatHistory::where('user_id',Auth::user()->id)->orderBy('id','ASC')->limit(100)->get();
         return view('user.openAi.chat',compact('chatHistory'));
     }
     public function chatResponse(Request $request)
     {
+        if(showBalance()->chat_enabled!=1){
+            return response()->json([
+                'success' => false,
+                'message' => 'Permission errors',
+                'error' => 'You should upgrade your subscription plan for access chat feature',
+            ], 422);
+        }
         $validator = Validator::make($request->all(), [
             'description' => 'required',
         ]);
@@ -409,7 +430,7 @@ class OpenAiController extends Controller
         try {
 
             $plan = Plan::where('id', auth()->user()->plan_id)->first();
-            $max_tokens = $plan->word_count;
+            $max_tokens = $plan->max_words;
             // Open AI API call
             $result = OpenAI::chat()->create([
                 'model' => 'gpt-3.5-turbo',
@@ -429,7 +450,8 @@ class OpenAiController extends Controller
                 'chat_response' => $content,
                 'user_id' => Auth::user()->id
             ]);
-            balanceDeduction('call_api');
+            $wordCount = str_word_count($content) ?? 0;
+            balanceDeduction('word',$wordCount);
 
             $results = [
                 'content' => $content,
@@ -442,7 +464,6 @@ class OpenAiController extends Controller
                 'message' => 'Something went wrong',
                 'error' => $errorMessage,
             ], 400);
-            return response()->json($results, 200);
         }
     }
     public function getUseCase(Request $request)

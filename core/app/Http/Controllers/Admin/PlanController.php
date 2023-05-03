@@ -27,19 +27,38 @@ class PlanController extends Controller
 
     public function store(Request $request)
     {
-        $plan = new Plan();
-        $plan->user_id = Auth::id();
-        $plan->name = $request->name;
-        $plan->word_count = $request->word_count;
-        $plan->call_api_count = $request->call_api_count;
-        $plan->documet_count = $request->documet_count;
-        $plan->image_count = $request->image_count;
-        $plan->price = $request->price;
-        $plan->yearly_price = $request->yearly_price;
-        $plan->templates =  implode(',',$request->templates);
-        $plan->save();
-        myAlert('success', 'Plan Created Succssfully');
-        return redirect()->route('plan.index');
+        $request->validate([
+            'name' => 'required',
+            'word_count' => 'required',
+            'max_words' => 'required',
+            'image_count' => 'required',
+            'price' => 'required',
+            'yearly_price' => 'required',
+            'image_count' => 'required',
+        ]);
+
+        try {
+            $input = $request->except('_token');
+            $input['user_id'] = Auth::user()->id;
+            $input['templates'] = in_array('0', $request->templates) ? 0 : implode(',',$request->templates);
+            if(isset($request->code_generate_enabled)){
+                $input['code_generate_enabled'] = 1;
+            }
+            if(isset($request->chat_enabled)){
+                $input['chat_enabled'] = 1;
+            }
+            if(isset($request->support_enabled)){
+                $input['support_enabled'] = 1;
+            }
+
+            Plan::create($input);
+            myAlert('success', 'Plan Created Succssfully');
+            return redirect()->route('plan.index');
+        } catch (\Exception $e) {
+            $errorMessage = $e->getMessage();
+            myAlert('error', $errorMessage);
+            return back();
+        }
     }
 
 
@@ -56,16 +75,29 @@ class PlanController extends Controller
         $request->validate([
             'name' => 'required',
             'word_count' => 'required',
-            'documet_count' => 'required',
+            'max_words' => 'required',
+            'image_count' => 'required',
+            'price' => 'required',
+            'yearly_price' => 'required',
+            'image_count' => 'required',
         ]);
 
         try {
             $data = Plan::findOrFail($id);
             $input = $request->except(['_token', '_method']);
             $input['user_id'] = Auth::user()->id;
-            $input['templates'] =  implode(',',$request->templates);
+            $input['templates'] = in_array('0', $request->templates) ? 0 : implode(',',$request->templates);
+            if(!isset($request->code_generate_enabled)){
+                 $input['code_generate_enabled'] = 0;
+            }
+            if(!isset($request->chat_enabled)){
+                 $input['chat_enabled'] = 0;
+            }
+            if(!isset($request->support_enabled)){
+                 $input['support_enabled'] = 0;
+            }
            // return $input;
-            
+
             $data->update($input);
             myAlert('success', 'Plan Update updated successfully.');
             return back();

@@ -283,3 +283,9 @@ pre.pre-line{
     margin: 0 auto;
     margin-top: 20px;
 }
+.min-height-70{
+    min-height: 70px;
+}
+.visibility-hidden{
+    visibility: hidden;
+}

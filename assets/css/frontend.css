@@ -37,7 +37,11 @@
         max-height: 34px;
         width: auto;
     }
-    
+
 }
-
-
+.benefit-icon img{
+    width: 100px;
+}
+.visibility-hidden{
+    visibility: hidden;
+}

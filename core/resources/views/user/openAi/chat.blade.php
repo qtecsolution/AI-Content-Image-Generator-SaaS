@@ -35,10 +35,11 @@
                                         </div>
                                     </div>
                                 </div>
-        
-                                    
+
+
                                 @endforeach
                             </div>
+                            @if(showBalance()->chat_enabled==1)
                             <form class="msger-inputarea" onsubmit="requestForResponse(event)">
                                 <textarea id="myTextarea" class="msger-input" rows="1" placeholder="Enter your message..."></textarea>
                                 <button type="submit" class="msger-send-btn">
@@ -49,11 +50,28 @@
                                     </svg>
                                 </button>
                             </form>
+                            @else
+                                <div class="col-md-12">
+                                    <p class="text-danger">
+                                        <small> You should upgrade your subscription plan for access chat feature. <a href="{{route('user.purchase')}}"> Click here </a> </small>
+                                    </p>
+                                </div>
+                                <div class="msger-inputarea">
+                                    <textarea class="msger-input" rows="1" disabled placeholder="Enter your message..."></textarea>
+                                    <button type="submit" class="msger-send-btn">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                             fill="currentColor" class="bi bi-send" viewBox="0 0 16 16">
+                                            <path
+                                                d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            @endif
                             <div class="col-md-12">
                                 <p class="text-danger" id="openai-error" style="display: none">
                                     <small> Don't worry, you can contact with admin. </small>
                                     <br>
-                                    <small> <b>Open AI Error:</b> <span></span> </small>
+                                    <small> <b>Error:</b> <span></span> </small>
                                 </p>
                             </div>
 
@@ -79,7 +97,7 @@
         if(lastElement != null){
             div.scrollTop = lastElement.offsetTop;
         }
-        // if press enter + shift 
+        // if press enter + shift
         textarea.addEventListener("keydown", (event) => {
         if (event.keyCode === 13 && event.shiftKey) {
             // Increment textarea rows
@@ -134,7 +152,7 @@
             msgerInput.value = "";
             textarea.rows = 1;
         }
-        
+
         msgerForm.addEventListener("submit", event => {
             requestForResponse(event)
         });

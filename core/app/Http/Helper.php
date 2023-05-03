@@ -132,9 +132,8 @@ function showBalance()
                      ->orWhere('expire_at', '>', now());
              })->where('user_id', $user->id)->first();
         if($expense != ''){
-            $restApiCall = $expense->call_api_count - $expense->current_api_count;
             $restImage = $expense->image_count - $expense->current_image_count;
-            $restDoc = $expense->documet_count - $expense->current_documet_count;
+            $restWord = $expense->word_count - $expense->current_word_count;
             //remaining days
             $activeDate = Carbon::parse($expense->activated_at);
             $expireDate = Carbon::parse($expense->expire_at);
@@ -142,12 +141,14 @@ function showBalance()
             // templates type
             $templates = explode(',',$expense->plan->templates);
             return (object) [
-                'api_call'=> $restApiCall,
                 'image'=> $restImage,
-                'document'=> $restDoc,
-                'word'=> $expense->word_count,
+                'max_words'=> $expense->plan->max_words,
+                'word_count'=> $restWord,
                 'remaining_days'=>$remainingDays,
-                'templates' =>  $templates
+                'templates' =>  $templates,
+                'code_generate_enabled'=>$expense->plan->code_generate_enabled,
+                'chat_enabled'=>$expense->plan->chat_enabled,
+                'support_enabled'=>$expense->plan->support_enabled,
             ];
         }else{
             return "";
@@ -173,35 +174,15 @@ function balanceDeduction($type, $n=1)
         return false;
     } else {
         switch ($type) {
-            case 'call_api':
-                if ($planExpenses->call_api_count > $planExpenses->current_api_count) {
-                    $planExpenses->current_api_count++;
+            case 'word':
+                if ($planExpenses->word_count > $planExpenses->current_word_count) {
+                    $planExpenses->current_word_count += $n;
                     $planExpenses->save();
                     $status =  true;
                 } else {
                     $status = false;
                 }
                 break;
-
-            case 'document':
-                if ($planExpenses->documet_count > $planExpenses->current_documet_count) {
-                    $planExpenses->current_documet_count++;
-                    $planExpenses->save();
-                    $status =  true;
-                } else {
-                    $status = false;
-                }
-                break;
-            case 'document-delete':
-                if ($$planExpenses->current_documet_count>0) {
-                    $planExpenses->current_documet_count--;
-                    $planExpenses->save();
-                    $status =  true;
-                } else {
-                    $status = false;
-                }
-                break;
-
             case 'image':
                 if ($planExpenses->image_count > $planExpenses->current_image_count) {
                     $planExpenses->current_image_count += $n;
@@ -273,10 +254,9 @@ function freePlan(){
 function demoPlan(){
     if(readConfig('demo')){
         return (object) [
-            'api_call'=> 10,
+            'max_words'=> 200,
             'image'=> 5,
-            'document'=> 5,
-            'word'=> 500,
+            'word_count'=> 500,
         ];
     }else{
         return "";

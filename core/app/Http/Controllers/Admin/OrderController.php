@@ -84,9 +84,7 @@ class OrderController extends Controller
             $expense->user_id = $user->id;
             $expense->order_id = $order->id;
             $expense->plan_id = $plan->id;
-            $expense->word_count = $plan->word_count;
-            $expense->call_api_count = ($plan->call_api_count*$months) + ($oldexpense->call_api_count - $oldexpense->current_api_count);
-            $expense->documet_count = ($plan->documet_count*$months) + ($oldexpense->documet_count - $oldexpense->current_documet_count);
+            $expense->word_count = ($plan->word_count*$months) + ($oldexpense->word_count - $oldexpense->current_word_count);
             $expense->image_count = ($plan->image_count*$months) + ($oldexpense->image_count - $oldexpense->current_image_count);
             $expense->type = $order->type;
             $expense->activated_at = Carbon::now();
@@ -98,9 +96,7 @@ class OrderController extends Controller
             $expense->user_id = $user->id;
             $expense->order_id = $order->id;
             $expense->plan_id = $plan->id;
-            $expense->word_count = $plan->word_count;
-            $expense->call_api_count = $plan->call_api_count*$months;
-            $expense->documet_count = $plan->documet_count*$months;
+            $expense->word_count = $plan->word_count*$months;
             $expense->image_count = $plan->image_count*$months;
             $expense->type = $order->type;
             $expense->activated_at = Carbon::now();

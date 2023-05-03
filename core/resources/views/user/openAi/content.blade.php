@@ -126,10 +126,13 @@
                                                         data-bs-placement="top"
                                                         data-bs-title="Maximum words can generate."></i> </label>
                                                         <input type="number" class="form-control custom-input" id="max_words"
-                                                        autocomplete="off" name="max_words" placeholder="Max Length" min="5" max="{{showBalance()->word}}" value="{{showBalance()->word}}">
+                                                        autocomplete="off" name="max_words" placeholder="Max Length" min="5" max="{{showBalance()->max_words}}" value="{{showBalance()->max_words}}">
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <p class="text-secondary"> <i class="fa fa-bolt"></i> Your balance is <b>{{showBalance()->word_count}}</b> words </p>
                                 </div>
                                 <div class="col-md-12">
                                     <p class="text-danger" id="openai-error" style="display: none">
@@ -143,7 +146,7 @@
                                             class="fa fa-circle-o-notch fa-spin fs-4" aria-hidden="true"></i> </span>
                                     <button type="submit" class="generate-btn">Generate post</button>
                                 </div>
-                                
+
 
 
                             </form>
@@ -174,7 +177,7 @@
                     <div class="right">
                         <button type="button" onclick="regenerate()" data-bs-toggle="tooltip"
                             data-bs-placement="top" title="Regenerate content">
-                            
+
                             <span>
                             <svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M8.20833 1.04175L10.375 3.20841M10.375 3.20841L8.20833 5.37508M10.375 3.20841H2.79167C2.21703 3.20841 1.66593 3.43669 1.2596 3.84302C0.853273 4.24935 0.625 4.80045 0.625 5.37508V6.45841M2.79167 12.9584L0.625 10.7917M0.625 10.7917L2.79167 8.62508M0.625 10.7917H8.20833C8.78297 10.7917 9.33407 10.5635 9.7404 10.1571C10.1467 9.75082 10.375 9.19972 10.375 8.62508V7.54175" stroke="#1D2939" stroke-linecap="round" stroke-linejoin="round"/>
@@ -205,13 +208,13 @@
                         </button>
                     </div>
                 </div>
-                
+
 
                     </div>
 
                 </div>
 
-               
+
             </div>
         </section>
     </div>

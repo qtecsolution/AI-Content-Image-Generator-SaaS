@@ -110,6 +110,9 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-md-12 mt-3">
+                                    <p class="text-secondary"> <i class="fa fa-bolt"></i> Your balance is <b>{{showBalance()->image}}</b> {{showBalance()->image>1?'images':'image'}} </p>
+                                </div>
 
                                 <div class="generate-btn-wrapper" style="justify-content: flex-start;">
                                     <button type="submit" class="generate-btn">Generate Variation</button>

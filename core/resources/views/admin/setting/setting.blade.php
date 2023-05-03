@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Setting')
+@section('title','Setting')
 @section('breadcrumb')
     <li class="breadcrumb-item active"> Setting</li>
 @endsection
@@ -13,54 +13,55 @@
                     <ul class="nav nav-tabs setting-tab" id="myTab" role="tablist">
                         <li class="nav-item" role="presentation">
                             <button class="nav-link @if (isset($tab) && $tab == 'openai') active @endif" id="paypal-tab"
-                                data-bs-toggle="tab" data-bs-target="#paypal-tab-pane" type="button" role="tab"
-                                aria-controls="paypal-tab-pane" aria-selected="true">Open Ai Setup
+                                    data-bs-toggle="tab" data-bs-target="#paypal-tab-pane" type="button" role="tab"
+                                    aria-controls="paypal-tab-pane" aria-selected="true">Open Ai Setup
                             </button>
                         </li>
                         <li class="nav-item" role="presentation">
                             <button class="nav-link @if (isset($tab) && $tab == 'tawkto') active @endif" id="Stripe-tab"
-                                data-bs-toggle="tab" data-bs-target="#Stripe-tab-pane" type="button" role="tab"
-                                aria-controls="Stripe-tab-pane" aria-selected="false">Tawk to
+                                    data-bs-toggle="tab" data-bs-target="#Stripe-tab-pane" type="button" role="tab"
+                                    aria-controls="Stripe-tab-pane" aria-selected="false">Tawk to
                                 Setup
                             </button>
                         </li>
 
                         <li class="nav-item" role="presentation">
                             <button class="nav-link @if (isset($tab) && $tab == 'login') active @endif" id="social-tab"
-                                data-bs-toggle="tab" data-bs-target="#social-tab-pane" type="button" role="tab"
-                                aria-controls="social-tab-pane" aria-selected="false">Social Login
+                                    data-bs-toggle="tab" data-bs-target="#social-tab-pane" type="button" role="tab"
+                                    aria-controls="social-tab-pane" aria-selected="false">Social Login
                                 Setup
                             </button>
                         </li>
 
                         <li class="nav-item" role="presentation">
                             <button class="nav-link @if (isset($tab) && $tab == 'seo') active @endif" id="seo-tab"
-                                data-bs-toggle="tab" data-bs-target="#seo-tab-pane" type="button" role="tab"
-                                aria-controls="seo-tab-pane" aria-selected="false">SEO
+                                    data-bs-toggle="tab" data-bs-target="#seo-tab-pane" type="button" role="tab"
+                                    aria-controls="seo-tab-pane" aria-selected="false">SEO
                                 Tools
                             </button>
                         </li>
 
                         <li class="nav-item" role="presentation">
                             <button class="nav-link @if (isset($tab) && $tab == 'smtp') active @endif" id="RazorPay-tab"
-                                data-bs-toggle="tab" data-bs-target="#RazorPay-tab-pane" type="button" role="tab"
-                                aria-controls="RazorPay-tab-pane" aria-selected="false">SMTP
+                                    data-bs-toggle="tab" data-bs-target="#RazorPay-tab-pane" type="button" role="tab"
+                                    aria-controls="RazorPay-tab-pane" aria-selected="false">SMTP
                                 Setup
                             </button>
                         </li>
 
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link @if (isset($tab) && $tab == 'cms') active @endif" id="FlutterWave-tab"
-                                data-bs-toggle="tab" data-bs-target="#FlutterWave-tab-pane" type="button" role="tab"
-                                aria-controls="FlutterWave-tab-pane" aria-selected="false">CMS
+                            <button class="nav-link @if (isset($tab) && $tab == 'cms') active @endif"
+                                    id="FlutterWave-tab"
+                                    data-bs-toggle="tab" data-bs-target="#FlutterWave-tab-pane" type="button" role="tab"
+                                    aria-controls="FlutterWave-tab-pane" aria-selected="false">CMS
                                 Settings
                             </button>
                         </li>
 
                         <li class="nav-item" role="presentation">
                             <button class="nav-link @if (isset($tab) && $tab == 'pwa') active @endif" id="pwa-tab"
-                                data-bs-toggle="tab" data-bs-target="#pwa-tab-pane" type="button" role="tab"
-                                aria-controls="pwa-tab-pane" aria-selected="false">Progressive Web Apps
+                                    data-bs-toggle="tab" data-bs-target="#pwa-tab-pane" type="button" role="tab"
+                                    aria-controls="pwa-tab-pane" aria-selected="false">Progressive Web Apps
                                 Configure
                             </button>
                         </li>
@@ -69,23 +70,30 @@
                     </ul>
 
                     <div class="tab-content mt-5 setting-tab-content" id="myTabContent">
-                        <div class="tab-pane fade @if (isset($tab) && $tab == 'openai') show active @endif" id="paypal-tab-pane"
-                            role="tabpanel" aria-labelledby="paypal-tab" tabindex="0">
+                        <div class="tab-pane fade @if (isset($tab) && $tab == 'openai') show active @endif"
+                             id="paypal-tab-pane" role="tabpanel" aria-labelledby="paypal-tab" tabindex="0">
 
                             <div class="row">
                                 <div class="col-lg-7">
                                     <form method="post" action="{{ route('open.ai.store') }}">
                                         @csrf
                                         <div class="form-group mb-3">
-                                            <label for="api-key" class="form-label">OpenAi Api Key</label>
+                                            <label for="api-key" class="form-label">OpenAi Api Key:</label>
                                             <input type="text" id="api-key" name="OPENAI_API_KEY"
-                                                value="{{ env('OPENAI_API_KEY') }}" class="form-control custom-input">
+                                                   value="{{ env('OPENAI_API_KEY') }}"
+                                                   class="form-control custom-input">
                                         </div>
-                                        <div class="form-group mb-5">
-                                            <label for="open_ai_model" class="form-label">OpenAi Model for Content Generate</label>
-                                            {!! Form::select('open_ai_model', $aiModels, readConfig('open_ai_model'), [
-                                                'class' => 'form-control custom-input w-100 nice-select',
-                                            ]) !!}
+                                        <div class="form-group mb-3 min-height-70">
+                                            <label for="open_ai_model" class="form-label">OpenAi Model for Content Generate:</label>
+                                            {!! Form::select('open_ai_model', $aiModels, readConfig('open_ai_model'), ['class'=>'form-control custom-input w-100 nice-select']) !!}
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <div>
+                                                <label class="form-label"> <i class="fa fa-angle-double-right"></i> OpenAi Model for Code Generate: <b> gpt-3.5-turbo </b> </label>
+                                            </div>
+                                            <div>
+                                                <label class="form-label"> <i class="fa fa-angle-double-right"></i> OpenAi Model for Chat: <b> gpt-3.5-turbo </b> </label>
+                                            </div>
                                         </div>
                                         <div class="generate-btn-wrapper">
                                             <button type="submit" class="generate-btn px-4">Save</button>
@@ -99,7 +107,8 @@
 
                                     <ol class="m-4 fz-14 gray-800">
                                         <li>Go to the OpenAI website: <a
-                                                href="https://platform.openai.com/account/billing/overview" target="_new"
+                                                href="https://platform.openai.com/account/billing/overview"
+                                                target="_new"
                                                 class="gray-800 text-decoration-underline fw-bold">
                                                 https://platform.openai.com/account/billing/overview </a>
                                         </li>
@@ -138,7 +147,7 @@
 
                         </div>
                         <div class="tab-pane fade @if (isset($tab) && $tab == 'tawkto') show active @endif"
-                            id="Stripe-tab-pane" role="tabpanel" aria-labelledby="Stripe-tab" tabindex="0">
+                             id="Stripe-tab-pane" role="tabpanel" aria-labelledby="Stripe-tab" tabindex="0">
 
                             <div class="row">
                                 <div class="col-md-7">
@@ -147,8 +156,8 @@
                                         <div class="form-group mb-3">
                                             <label for="exampleInputEmail1" class="form-label">Active Tawk to</label>
                                             <select class="form-control custom-input" name="tawk_to" required>
-                                                <option value="no"
-                                                    {{ readConfig('tawk_to') == 'no' ? 'selected' : null }}>
+                                                <option
+                                                    value="no" {{ readConfig('tawk_to') == 'no' ? 'selected' : null }}>
                                                     NO
                                                 </option>
                                                 <option value="yes"
@@ -160,13 +169,15 @@
                                         <div class="form-group mb-3">
                                             <label for="place-where" class="form-label">Tawk.to
                                                 script</label>
-                                            <textarea class="form-control custom-input" name="code" id="place-where" rows="14">@include('layouts.tawk_to')</textarea>
+                                            <textarea class="form-control custom-input" name="code" id="place-where"
+                                                      rows="14">@include('layouts.tawk_to')</textarea>
 
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="place-where" class="form-label"> Direct Chat Link for feedback
-                                            </label>
-                                            <textarea class="form-control custom-input" name="tawk_direct_link" id="place-where" rows="2">{{ readConfig('tawk_direct_link') }}</textarea>
+                                            <label for="place-where" class="form-label"> Direct Chat Link </label>
+                                            <textarea class="form-control custom-input" name="tawk_direct_link"
+                                                      id="place-where"
+                                                      rows="2">{{readConfig('tawk_direct_link')}}</textarea>
 
                                         </div>
                                         <div class="generate-btn-wrapper">
@@ -182,7 +193,7 @@
                                     <ol class="m-4 fz-14 gray-800">
                                         <li>
                                             <p>Sign up for a tawk.to account at <a href="https://www.tawk.to/"
-                                                    target="_blank">https://www.tawk.to/</a>
+                                                                                   target="_blank">https://www.tawk.to/</a>
                                             </p>
                                         </li>
                                         <li>
@@ -227,36 +238,37 @@
                         </div>
 
                         <div class="tab-pane fade @if (isset($tab) && $tab == 'login') show active @endif"
-                            id="social-tab-pane" role="tabpanel" aria-labelledby="social-tab" tabindex="0">
+                             id="social-tab-pane" role="tabpanel" aria-labelledby="social-tab" tabindex="0">
 
                             <div class="row">
                                 <div class="col-lg-7">
                                     <form class="project-table-wrapper p-3" method="post"
-                                        action="{{ route('social.store') }}">
+                                          action="{{ route('social.store') }}">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label for="googleClientId" class="form-label">Google Client Id</label>
                                             <input type="text" class="form-control custom-input"
-                                                value="{{ env('GOOGLE_CLIENT_ID') }}" id="googleClientId"
-                                                name="GOOGLE_CLIENT_ID" aria-describedby="emailHelp">
+                                                   value="{{ env('GOOGLE_CLIENT_ID') }}" id="googleClientId"
+                                                   name="GOOGLE_CLIENT_ID" aria-describedby="emailHelp">
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label for="googleClientSecret" class="form-label">Google Client
                                                 Secret </label>
                                             <input type="text" class="form-control custom-input"
-                                                value="{{ env('GOOGLE_CLIENT_SECRET') }}" id="googleClientSecret"
-                                                name="GOOGLE_CLIENT_SECRET" aria-describedby="emailHelp">
+                                                   value="{{ env('GOOGLE_CLIENT_SECRET') }}" id="googleClientSecret"
+                                                   name="GOOGLE_CLIENT_SECRET" aria-describedby="emailHelp">
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label for="googleCallback" class="form-label">Google Call back url <i
-                                                    data-bs-toggle="tooltip" data-bs-placement="top"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-placement="top"
                                                     data-bs-title="Copy this link for use google call back url"
                                                     class="fa fa-info-circle"></i> </label>
                                             <input type="text" class="form-control custom-input"
-                                                value="{{ route('auth.google.callback') }}" id="googleCallback"
-                                                name="GOOGLE_REDIRECT_URL" aria-describedby="emailHelp">
+                                                   value="{{route('auth.google.callback')}}" id="googleCallback"
+                                                   name="GOOGLE_REDIRECT_URL" aria-describedby="emailHelp">
                                         </div>
 
 
@@ -316,36 +328,42 @@
                         </div>
 
                         <div class="tab-pane fade @if (isset($tab) && $tab == 'seo') show active @endif"
-                            id="seo-tab-pane" role="tabpanel" aria-labelledby="seo-tab" tabindex="0">
+                             id="seo-tab-pane"
+                             role="tabpanel" aria-labelledby="seo-tab" tabindex="0">
 
                             <div class="row">
                                 <div class="col-lg-7">
                                     <form class="project-table-wrapper p-3" method="post"
-                                        action="{{ route('seo.store') }}" enctype="multipart/form-data">
+                                          action="{{ route('seo.store') }}"
+                                          enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group mb-3">
                                             <label for="metaTitle" class="form-label">Meta Title</label>
                                             <input type="text" class="form-control custom-input"
-                                                value="{{ readConfig('meta_title') }}" id="metaTitle" name="meta_title"
-                                                aria-describedby="emailHelp">
+                                                   value="{{ readConfig('meta_title') }}" id="metaTitle"
+                                                   name="meta_title"
+                                                   aria-describedby="emailHelp">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="metaKey" class="form-label">Meta Keywords</label>
-                                            <textarea class="form-control custom-input" id="metaKey" name="meta_key" aria-describedby="emailHelp">{{ readConfig('meta_key') }}</textarea>
+                                            <textarea class="form-control custom-input" id="metaKey" name="meta_key"
+                                                      aria-describedby="emailHelp">{{ readConfig('meta_key') }}</textarea>
                                         </div>
 
 
                                         <div class="form-group mb-3">
                                             <label for="metaDescription" class="form-label">Meta Description</label>
-                                            <textarea class="form-control custom-input" id="metaDescription" name="meta_desc" aria-describedby="emailHelp"> {{ readConfig('meta_desc') }} </textarea>
+                                            <textarea class="form-control custom-input" id="metaDescription"
+                                                      name="meta_desc"
+                                                      aria-describedby="emailHelp"> {{ readConfig('meta_desc') }} </textarea>
                                         </div>
 
                                         <div class="form-group mb-3">
                                             <label class="form-label">Meta Image</label>
                                             <input type="file" class="form-control custom-input" name="meta_image"
-                                                aria-describedby="emailHelp">
+                                                   aria-describedby="emailHelp">
                                             <img src="{{ filePath(readConfig('meta_image')) }}" class="mt-3"
-                                                width="100">
+                                                 width="100">
                                         </div>
 
                                         <div class="generate-btn-wrapper">
@@ -403,7 +421,7 @@
                         </div>
 
                         <div class="tab-pane fade @if (isset($tab) && $tab == 'smtp') show active @endif"
-                            id="RazorPay-tab-pane" role="tabpanel" aria-labelledby="RazorPay-tab" tabindex="0">
+                             id="RazorPay-tab-pane" role="tabpanel" aria-labelledby="RazorPay-tab" tabindex="0">
 
                             <div class="row">
 
@@ -558,7 +576,7 @@
                         </div>
 
                         <div class="tab-pane fade @if (isset($tab) && $tab == 'cms') show active @endif"
-                            id="FlutterWave-tab-pane" role="tabpanel" aria-labelledby="FlutterWave-tab" tabindex="0">
+                             id="FlutterWave-tab-pane" role="tabpanel" aria-labelledby="FlutterWave-tab" tabindex="0">
 
                             <form method="post" action="{{ route('site.update') }}" enctype="multipart/form-data">
                                 @csrf
@@ -572,12 +590,12 @@
                                                 <div class="avatar-upload">
                                                     <div class="avatar-edit">
                                                         <input type='file' name="logo" id="imageUpload_f_icon"
-                                                            accept=".png, .jpg, .jpeg" />
+                                                               accept=".png, .jpg, .jpeg"/>
                                                         <label for="imageUpload_f_icon"></label>
                                                     </div>
                                                     <div class="avatar-preview" style="height: 70px;">
                                                         <div id="imagePreview_f_icon"
-                                                            style="background-image: url({{ filePath(readConfig('logo')) }})">
+                                                             style="background-image: url({{ filePath(readConfig('logo')) }})">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -587,18 +605,18 @@
 
                                         <div class="sitelogos-wrapper">
                                             <div class="logo-box">
-                                                <span class="box-title">Icon <i class="fa fa-info-circle"
-                                                        data-bs-toggle="tooltip" data-bs-placement="top"
-                                                        data-bs-title="Upload a 512 x 512px icon for your Favicon & PWA, which will be resized accordingly."></i></span>
+                                    <span class="box-title">Icon <i class="fa fa-info-circle" data-bs-toggle="tooltip"
+                                                                    data-bs-placement="top"
+                                                                    data-bs-title="Upload a 512 x 512px icon for your Favicon & PWA, which will be resized accordingly."></i></span>
                                                 <div class="avatar-upload">
                                                     <div class="avatar-edit">
                                                         <input type='file' name="icon" id="imageUpload"
-                                                            accept=".png, .jpg, .jpeg" />
+                                                               accept=".png, .jpg, .jpeg"/>
                                                         <label for="imageUpload"></label>
                                                     </div>
                                                     <div class="avatar-preview">
                                                         <div id="imagePreview"
-                                                            style="background-image: url({{ filePath(readConfig('icon')) }});">
+                                                             style="background-image: url({{ filePath(readConfig('icon')) }});">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -612,9 +630,8 @@
                                                 <div class="form-group mb-3">
                                                     <label class="form-label" for="applicantName">Application Name</label>
                                                     <input type="hidden" value="type_name" name="type_name">
-                                                    <input type="text" value="{{ readConfig('type_name') }}"
-                                                        name="name" class="form-control custom-input"
-                                                        id="applicantName">
+                                                    <input type="text" value="{{ readConfig('type_name') }}" name="name"
+                                                           class="form-control custom-input" id="applicantName">
                                                 </div>
 
                                                 <div class="form-group mb-3">
@@ -622,44 +639,44 @@
                                                     <label class="form-label" for="applicantFooter">Application
                                                         Footer</label>
                                                     <input type="hidden" value="type_footer" name="type_footer">
-                                                    <input type="text" value="{{ readConfig('type_footer') }}"
-                                                        name="footer" class="form-control custom-input"
-                                                        id="applicantFooter">
+                                                    <input type="text" value="{{ readConfig('type_footer') }}" name="footer"
+                                                           class="form-control custom-input" id="applicantFooter">
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <!--address-->
                                                     <label class="form-label" for="address">Address</label>
                                                     <input type="hidden" value="type_address" name="type_address">
                                                     <input type="text" value="{{ readConfig('type_address') }}"
-                                                        name="address" class="form-control custom-input" id="address">
+                                                           name="address"
+                                                           class="form-control custom-input" id="address">
                                                 </div>
                                                 <div class="form-group mb-3">
                                                     <!--mail-->
                                                     <label class="form-label" for="cmsMail"> Mail</label>
                                                     <input type="hidden" value="type_mail" name="type_mail">
-                                                    <input type="text" value="{{ readConfig('type_mail') }}"
-                                                        name="mail" class="form-control custom-input" id="cmsMail">
+                                                    <input type="text" value="{{ readConfig('type_mail') }}" name="mail"
+                                                           class="form-control custom-input" id="cmsMail">
                                                 </div>
                                                 <div class="form-group mb-3 ">
                                                     <!--Number-->
                                                     <label class="form-label" for="cmsNumber">Contact Number </label>
                                                     <input type="hidden" value="type_number" name="type_number">
-                                                    <input type="text" value="{{ readConfig('type_number') }}"
-                                                        name="number" class="form-control custom-input" id="cmsNumber">
+                                                    <input type="text" value="{{ readConfig('type_number') }}" name="number"
+                                                           class="form-control custom-input" id="cmsNumber">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="mb-3 form-group">
                                                     <label class="form-label" for="headingTitle">Heading Title</label>
                                                     <input type="text" value="{{ readConfig('heading_title') }}"
-                                                        name="heading_title" class="form-control custom-input"
-                                                        id="headingTitle">
+                                                           name="heading_title"
+                                                           class="form-control custom-input" id="headingTitle">
                                                 </div>
                                                 <div class="mb-3 form-group">
                                                     <label class="form-label" for="cmsFb">Facebook Link</label>
                                                     <input type="hidden" value="type_fb" name="type_fb">
-                                                    <input type="text" value="{{ readConfig('type_fb') }}"
-                                                        name="fb" class="form-control custom-input" id="cmsFb">
+                                                    <input type="text" value="{{ readConfig('type_fb') }}" name="fb"
+                                                           class="form-control custom-input" id="cmsFb">
                                                 </div>
 
 
@@ -667,16 +684,15 @@
                                                     <!--tw-->
                                                     <label class="form-label" for="twitter"> Twitter Link</label>
                                                     <input type="hidden" value="type_tw" name="type_tw">
-                                                    <input type="text" value="{{ readConfig('type_tw') }}"
-                                                        name="tw" class="form-control custom-input" id="twitter">
+                                                    <input type="text" value="{{ readConfig('type_tw') }}" name="tw"
+                                                           class="form-control custom-input" id="twitter">
                                                 </div>
                                                 <div class=" form-group mb-3">
                                                     <!--google-->
                                                     <label class="form-label" for="cmsInstagram"> Instagram Link</label>
                                                     <input type="hidden" value="type_insta" name="type_insta">
-                                                    <input type="text" value="{{ readConfig('type_insta') }}"
-                                                        name="instagram" class="form-control custom-input"
-                                                        id="cmsInstagram">
+                                                    <input type="text" value="{{ readConfig('type_insta') }}" name="instagram"
+                                                           class="form-control custom-input" id="cmsInstagram">
                                                 </div>
                                                 <div class="m-2 text-center">
                                                     <div class="generate-btn-wrapper">
@@ -694,7 +710,8 @@
                         </div>
 
                         <div class="tab-pane fade @if (isset($tab) && $tab == 'pwa') show active @endif"
-                            id="pwa-tab-pane" role="tabpanel" aria-labelledby="pwa-tab" tabindex="0">
+                             id="pwa-tab-pane"
+                             role="tabpanel" aria-labelledby="pwa-tab" tabindex="0">
 
                             <form method="post" action="{{ route('pwa.setup.store') }}" enctype="multipart/form-data">
                                 @csrf
@@ -730,7 +747,8 @@
                                                 Short
                                                 Name)</label>
                                             <input class="form-control custom-input" name="short_name" type="text"
-                                                id="shortname" value="{{ config('laravelpwa.manifest.short_name') }}">
+                                                   id="shortname"
+                                                   value="{{ config('laravelpwa.manifest.short_name') }}">
                                         </div>
 
 
@@ -740,9 +758,10 @@
                                                     <label class="col-form-label">@translate(Progressive Web Apps
                                                         background
                                                         color)</label>
-                                                    <input class="form-control custom-input py-2" name="background_color"
-                                                        type="color"
-                                                        value="{{ config('laravelpwa.manifest.background_color') }}">
+                                                    <input class="form-control custom-input py-2"
+                                                           name="background_color"
+                                                           type="color"
+                                                           value="{{ config('laravelpwa.manifest.background_color') }}">
                                                 </div>
 
                                             </div>
@@ -751,8 +770,8 @@
                                                     <label class="col-form-label">@translate(Progressive Web Apps theme
                                                         color)</label>
                                                     <input class="form-control custom-input" name="theme_color"
-                                                        type="color"
-                                                        value="{{ config('laravelpwa.manifest.theme_color') }}">
+                                                           type="color"
+                                                           value="{{ config('laravelpwa.manifest.theme_color') }}">
                                                 </div>
                                             </div>
                                         </div>

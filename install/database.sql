@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 30, 2023 at 01:21 PM
+-- Generation Time: May 03, 2023 at 03:21 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -35,6 +35,14 @@ CREATE TABLE `ai_chat_histories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `ai_chat_histories`
+--
+
+INSERT INTO `ai_chat_histories` (`id`, `chat_request`, `chat_response`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'hello', 'Hi there! How may I assist you today?', 1, '2023-05-02 09:32:20', '2023-05-02 09:32:20'),
+(2, 'asdfasf', 'I\'m sorry, I do not understand your input. Can you please provide more information or ask a specific question?', 1, '2023-05-02 09:46:23', '2023-05-02 09:46:23');
 
 -- --------------------------------------------------------
 
@@ -143,7 +151,9 @@ INSERT INTO `content_histories` (`id`, `use_case_id`, `temperature`, `title`, `s
 (20, NULL, '1', 'write a code for file upload in php', NULL, 'write a code for file upload in php', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> Here&#039;s an example code for file upload in PHP:\n\n<code>\n&lt;form action=&quot;upload.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;\n  &lt;input type=&quot;file&quot; name=&quot;fileToUpload&quot; id=&quot;fileToUpload&quot;&gt;\n  &lt;input type=&quot;submit&quot; value=&quot;Upload&quot; name=&quot;submit&quot;&gt;\n&lt;/form&gt;\n\n&lt;?php\nif(isset($_POST[&quot;submit&quot;])){\n  $target_dir = &quot;uploads/&quot;;\n  $target_file = $target_dir . basename($_FILES[&quot;fileToUpload&quot;][&quot;name&quot;]);\n  $uploadOk = 1;\n  $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));\n  \n  // Check if file already exists\n  if (file_exists($target_file)) {\n    echo &quot;Sorry, file already exists.&quot;;\n    $uploadOk = 0;\n  }\n  \n  // Check file size\n  if ($_FILES[&quot;fileToUpload&quot;][&quot;size&quot;] &gt; 500000) {\n    echo &quot;Sorry, your file is too large.&quot;;\n    $uploadOk = 0;\n  }\n  \n  // Allow only certain file formats\n  if($imageFileType != &quot;jpg&quot; &amp;&amp; $imageFileType != &quot;png&quot; &amp;&amp; $imageFileType != &quot;jpeg&quot; &amp;&amp; $imageFileType != &quot;gif&quot;) {\n    echo &quot;Sorry, only JPG, JPEG, PNG &amp; GIF files are allowed.&quot;;\n    $uploadOk = 0;\n  }\n  \n  // Check if $uploadOk is set to 0 by an error\n  if ($uploadOk == 0) {\n    echo &quot;Sorry, your file was not uploaded.&quot;;\n  } else {\n    if (move_uploaded_file($_FILES[&quot;fileToUpload&quot;][&quot;tmp_name&quot;], $target_file)) {\n      echo &quot;The file &quot;. htmlspecialchars( basename( $_FILES[&quot;fileToUpload&quot;][&quot;name&quot;])). &quot; has been uploaded.&quot;;\n    } else {\n      echo &quot;Sorry, there was an error uploading your file.&quot;;\n    }\n  }\n}\n?&gt;\n</code>\n\nPlease note that you should create a &quot;uploads&quot; folder in your root directory, and make sure it has write permission (e.g. 755 or 777, depending on your server configuration). </pre>', 1, 'code', '2023-04-10 06:13:22', '2023-04-10 06:13:22'),
 (22, NULL, '1', 'write html sample code', NULL, 'write html sample code', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> Sure, here is an example of basic HTML code:\n\n<code>html\n&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n  &lt;head&gt;\n    &lt;title&gt;My Website&lt;/title&gt;\n  &lt;/head&gt;\n  &lt;body&gt;\n    &lt;h1&gt;Welcome to my website!&lt;/h1&gt;\n    &lt;p&gt;This is some sample text.&lt;/p&gt;\n    &lt;ul&gt;\n      &lt;li&gt;List item 1&lt;/li&gt;\n      &lt;li&gt;List item 2&lt;/li&gt;\n      &lt;li&gt;List item 3&lt;/li&gt;\n    &lt;/ul&gt;\n  &lt;/body&gt;\n&lt;/html&gt;\n</code>\n\nIn this example, we have a basic HTML document with a title, header, and a simple list. The `&lt;!DOCTYPE html&gt;` declaration at the beginning of the document lets the web browser know that this is an HTML5 document. The `&lt;html&gt;` tag represents the root element of the page, and all other elements should be within it. The `&lt;head&gt;` section contains metadata about the document, such as the title of the page. The </pre>', 1, 'code', '2023-04-10 11:30:19', '2023-04-10 11:30:19'),
 (24, NULL, '1', 'fgh', NULL, 'fgh', 'You are a helpful assistant that writes code.', '<pre class=\'pre-line\'> I&#039;m sorry, could you please provide more information or context for what you need help with? </pre>', 1, 'code', '2023-04-11 14:21:55', '2023-04-11 14:21:55'),
-(25, 14, '0.7', 'Air Condition', '', 'I have a ac. i want to sell it. The brand of ac is Gree.', 'Write me a product description for Air Condition. The category of the product is . The description of the product is I have a ac. i want to sell it. The brand of ac is Gree. The tone of voice must be casual. Give me the response in English (USA) language.', '\n<br>\nStay cool and comfortable in your home with the Gree air conditioner! This powerful unit has a cooling capacity of 24,000 BTU and can cover an area of up to 1,500 square feet. It features a high-efficiency air filter to keep your air clean and fresh, as well as an adjustable thermostat for personalized cooling. With its easy installation and energy-saving design, the Gree air conditioner is the perfect solution for your home cooling needs.', 1, 'content', '2023-04-12 20:59:53', '2023-04-12 20:59:53');
+(25, 14, '0.7', 'Air Condition', '', 'I have a ac. i want to sell it. The brand of ac is Gree.', 'Write me a product description for Air Condition. The category of the product is . The description of the product is I have a ac. i want to sell it. The brand of ac is Gree. The tone of voice must be casual. Give me the response in English (USA) language.', '\n<br>\nStay cool and comfortable in your home with the Gree air conditioner! This powerful unit has a cooling capacity of 24,000 BTU and can cover an area of up to 1,500 square feet. It features a high-efficiency air filter to keep your air clean and fresh, as well as an adjustable thermostat for personalized cooling. With its easy installation and energy-saving design, the Gree air conditioner is the perfect solution for your home cooling needs.', 1, 'content', '2023-04-12 20:59:53', '2023-04-12 20:59:53'),
+(26, 3, '0.7', 'about psoriasis', '', '', 'I\'m writing a blog on about psoriasis. In short The blog is about. Suggest me the intro for this blog? The tone of voice must be casual. Give me the response in English (USA) language.', '\n<br>\nPsoriasis is a chronic skin condition that affects millions of people around the world. It is characterized by red, scaly patches of skin that can cause discomfort and embarrassment. In this blog, we\'ll talk about what psoriasis is, how it is treated, and how to manage it on a daily basis. We\'ll also discuss the latest research and treatments available for this condition, so that you can make informed decisions about your healthcare.', 1, 'content', '2023-05-03 10:29:55', '2023-05-03 10:29:55'),
+(27, 3, '0.7', 'natural remedy of psoriasis', '', '', 'I\'m writing a blog on natural remedy of psoriasis. In short The blog is about. Suggest me the intro for this blog? The tone of voice must be casual. Give me the response in English (USA) language.', '\n<br>\nAre you looking for natural remedies for psoriasis? If so, you\'ve come to the right place! In this blog, we\'ll explore various natural remedies for psoriasis that are safe, effective, and easy to implement. From dietary changes to lifestyle habits, there are many different ways to help manage psoriasis symptoms. Read on to learn more about natural remedies for psoriasis!', 1, 'content', '2023-05-03 10:39:29', '2023-05-03 10:39:29');
 
 -- --------------------------------------------------------
 
@@ -185,8 +195,8 @@ CREATE TABLE `faqs` (
 INSERT INTO `faqs` (`id`, `question`, `answer`, `priority`, `is_published`, `user_id`, `created_at`, `updated_at`) VALUES
 (1, 'Should we be afraid of AI?', 'Don\'t know, I suggest you to reach out to Elon Must. That \"alien\" for sure knows something.', 1, 1, 1, '2023-04-11 21:16:36', '2023-04-11 21:16:36'),
 (2, 'Do I have to pay for OpenAI services?', 'Yes you do. Upon exceeding their free 18$, you will be charged based on your usage at the end of each month.', 2, 1, 1, '2023-04-11 21:17:02', '2023-04-11 21:17:02'),
-(3, 'What Davinci uses behind?', 'Davinci is fully powered by OpenAI GPT3 and DALLE services.', 3, 1, 1, '2023-04-11 21:17:21', '2023-04-11 21:17:21'),
-(4, 'What kind of payment gateways does Davinci supports?', 'Davinci supports 8 different payment gateways, 6 can be used for both Prepaid and Subscription plans. Refer to the description to get the exact list.', 4, 1, 1, '2023-04-11 21:19:06', '2023-04-11 21:19:06');
+(3, 'What Creaify uses behind?', 'Creaify is fully powered by OpenAI GPT3 and DALLE services.', 3, 1, 1, '2023-04-11 21:17:21', '2023-05-03 13:03:06'),
+(4, 'What kind of payment gateways does Creaify supports?', 'Creaify supports 4 different payment gateways.', 4, 1, 1, '2023-04-11 21:19:06', '2023-05-03 13:03:22');
 
 -- --------------------------------------------------------
 
@@ -204,6 +214,14 @@ CREATE TABLE `images` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `images`
+--
+
+INSERT INTO `images` (`id`, `prompt`, `size`, `image_path`, `old_image`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'Cloud sky with rain fall', '256x256', 'assets/uploads/ai_images//2023/05/03/20230503450.png', NULL, 1, '2023-05-03 11:32:18', '2023-05-03 11:32:18'),
+(2, 'Cloud sky with rain fall', '256x256', 'assets/uploads/ai_images//2023/05/03/202305034306.png', NULL, 1, '2023-05-03 11:32:20', '2023-05-03 11:32:20');
 
 -- --------------------------------------------------------
 
@@ -292,7 +310,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2023_03_01_172546_create_blogs_table', 1),
 (18, '2023_03_02_122318_create_faqs_table', 1),
 (19, '2023_03_06_190539_create_languages_table', 1),
-(20, '2023_04_10_150053_create_ai_chat_histories_table', 2);
+(20, '2023_04_10_150053_create_ai_chat_histories_table', 2),
+(21, '2023_05_02_124222_add_column_in_plan_table', 3);
 
 -- --------------------------------------------------------
 
@@ -324,7 +343,9 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `invoice`, `user_id`, `plan_id`, `is_paid`, `total`, `payment_method`, `payment_id`, `type`, `other`, `name`, `email`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, '1682853667-74583', 1, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Admin', 'admin@gmail.com', '0966000', '', '2023-04-30 11:21:07', '2023-04-30 11:21:07');
+(1, '1683109066-76588', 1, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Admin', 'admin@gmail.com', '0966000', '', '2023-05-03 10:17:46', '2023-05-03 10:17:46'),
+(2, '1683111241-94318', 1, 3, 1, 10.00, 'aamarpay', 'AAM1683111242588425', 1, NULL, 'Admin', 'admin@gmail.com', '0966000', '', '2023-05-03 10:54:07', '2023-05-03 10:54:07'),
+(3, '1683113802-85888', 1, 4, 1, 20.00, 'aamarpay', 'AAM1683113803588431', 1, NULL, 'Admin', 'admin@gmail.com', '0966000', '', '2023-05-03 11:36:47', '2023-05-03 11:36:47');
 
 -- --------------------------------------------------------
 
@@ -444,9 +465,11 @@ CREATE TABLE `plans` (
   `user_id` bigint(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
   `word_count` int(11) NOT NULL DEFAULT 0,
-  `call_api_count` int(11) NOT NULL DEFAULT 0,
-  `documet_count` int(11) NOT NULL DEFAULT 0,
-  `lang` enum('all','english') NOT NULL DEFAULT 'english',
+  `max_words` int(11) NOT NULL DEFAULT 200,
+  `document_count` int(11) NOT NULL DEFAULT 0,
+  `support_enabled` tinyint(4) NOT NULL DEFAULT 0,
+  `code_generate_enabled` tinyint(4) NOT NULL DEFAULT 0,
+  `chat_enabled` tinyint(4) NOT NULL DEFAULT 0,
   `image_count` int(11) NOT NULL DEFAULT 0,
   `is_published` tinyint(1) NOT NULL DEFAULT 1,
   `price` double(10,2) NOT NULL DEFAULT 0.00,
@@ -460,10 +483,10 @@ CREATE TABLE `plans` (
 -- Dumping data for table `plans`
 --
 
-INSERT INTO `plans` (`id`, `user_id`, `name`, `word_count`, `call_api_count`, `documet_count`, `lang`, `image_count`, `is_published`, `price`, `yearly_price`, `templates`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Free', 200, 100, 10, 'english', 5, 1, 0.00, 0.00, '1', '2023-04-08 09:24:30', '2023-04-11 20:38:04'),
-(2, 1, 'Basic', 400, 200, 150, 'english', 20, 1, 5.00, 50.00, '0', '2023-04-08 09:24:53', '2023-04-17 20:29:23'),
-(3, 1, 'Gold', 800, 400, 300, 'english', 40, 1, 10.00, 100.00, '0', '2023-04-27 18:13:29', '2023-04-27 18:13:29');
+INSERT INTO `plans` (`id`, `user_id`, `name`, `word_count`, `max_words`, `document_count`, `support_enabled`, `code_generate_enabled`, `chat_enabled`, `image_count`, `is_published`, `price`, `yearly_price`, `templates`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Free', 1000, 200, 10, 1, 0, 0, 5, 1, 0.00, 0.00, '1', '2023-04-08 09:24:30', '2023-05-03 13:19:34'),
+(2, 1, 'Basic', 10000, 400, 150, 1, 1, 0, 20, 1, 5.00, 50.00, '0', '2023-04-08 09:24:53', '2023-05-03 13:20:01'),
+(3, 1, 'Gold', 20000, 600, 300, 1, 1, 1, 40, 1, 10.00, 100.00, '0', '2023-04-27 18:13:29', '2023-05-03 13:20:23');
 
 -- --------------------------------------------------------
 
@@ -477,11 +500,9 @@ CREATE TABLE `plan_expenses` (
   `order_id` bigint(20) UNSIGNED NOT NULL,
   `plan_id` bigint(20) UNSIGNED NOT NULL,
   `word_count` int(11) NOT NULL DEFAULT 0,
-  `call_api_count` int(11) NOT NULL DEFAULT 0,
-  `current_api_count` int(11) NOT NULL DEFAULT 0,
-  `documet_count` int(11) NOT NULL DEFAULT 0,
-  `current_documet_count` int(11) NOT NULL DEFAULT 0,
-  `lang` enum('all','english') NOT NULL DEFAULT 'english',
+  `current_word_count` int(11) NOT NULL DEFAULT 0,
+  `document_count` int(11) NOT NULL DEFAULT 0,
+  `current_document_count` int(11) NOT NULL DEFAULT 0,
   `image_count` int(11) NOT NULL DEFAULT 0,
   `current_image_count` int(11) NOT NULL DEFAULT 0,
   `type` tinyint(4) NOT NULL DEFAULT 1,
@@ -495,8 +516,10 @@ CREATE TABLE `plan_expenses` (
 -- Dumping data for table `plan_expenses`
 --
 
-INSERT INTO `plan_expenses` (`id`, `user_id`, `order_id`, `plan_id`, `word_count`, `call_api_count`, `current_api_count`, `documet_count`, `current_documet_count`, `lang`, `image_count`, `current_image_count`, `type`, `activated_at`, `expire_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 200, 100, 0, 10, 0, 'english', 5, 0, 1, '2023-04-30 17:21:07', '2023-05-30 17:21:07', '2023-04-30 11:21:07', '2023-04-30 11:21:07');
+INSERT INTO `plan_expenses` (`id`, `user_id`, `order_id`, `plan_id`, `word_count`, `current_word_count`, `document_count`, `current_document_count`, `image_count`, `current_image_count`, `type`, `activated_at`, `expire_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, 1, 1000, 110, 0, 0, 5, 0, 1, '2023-05-03 16:17:46', '2023-06-02 16:17:46', '2023-05-03 10:17:46', '2023-05-03 10:39:29'),
+(2, 1, 2, 3, 1690, 0, 0, 0, 45, 2, 1, '2023-05-03 16:54:07', '2023-07-02 16:54:07', '2023-05-03 10:54:07', '2023-05-03 11:32:20'),
+(3, 1, 3, 4, 101690, 0, 0, 0, 293, 0, 1, '2023-05-03 17:36:47', '2023-08-01 17:36:47', '2023-05-03 11:36:47', '2023-05-03 11:36:47');
 
 -- --------------------------------------------------------
 
@@ -529,7 +552,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `avatar`, `type`, `plan_id`, `order_id`, `google_id`, `plan_expense_id`, `password`, `pass_changed`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '0966000', NULL, 'assets/uploads/user/2023/04/30/admin6458.png', 'admin', 1, NULL, NULL, 1, '$2y$10$1SDiVdRA5peWo5CEQr8yG.vFGatkoZZ8BB8R9n7bWy0NfNsedB4ty', 0, NULL, 'F5tX1D7LYxYVDqBHan3ffJVJtAsdT97Rda6KbDIf0O83XwGWOqpJbaSsXDUB', '2023-04-08 09:23:34', '2023-04-30 11:21:07');
+(1, 'Admin', 'admin@gmail.com', '0966000', NULL, 'assets/uploads/user/2023/04/30/admin6458.png', 'admin', 4, NULL, NULL, 3, '$2y$10$1SDiVdRA5peWo5CEQr8yG.vFGatkoZZ8BB8R9n7bWy0NfNsedB4ty', 0, NULL, 'kPB9sTmPhQleeCa5dBReHO2ANXNTqACZm7UMdvhYISlfV2YwpsYgvx7X7JE6', '2023-04-08 09:23:34', '2023-05-03 11:36:47');
 
 -- --------------------------------------------------------
 
@@ -549,6 +572,14 @@ CREATE TABLE `user_documents` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `user_documents`
+--
+
+INSERT INTO `user_documents` (`id`, `title`, `short_description`, `description`, `generated_content`, `use_case_id`, `user_id`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'about psoriasis', NULL, NULL, '<br>\r\nPsoriasis is a chronic skin condition that affects millions of people around the world. It is characterized by red, scaly patches of skin that can cause discomfort and embarrassment. In this blog, we\'ll talk about what psoriasis is, how it is treated, and how to manage it on a daily basis. We\'ll also discuss the latest research and treatments available for this condition, so that you can make informed decisions about your healthcare.', 3, 1, 'content', '2023-05-03 10:30:20', '2023-05-03 10:30:20'),
+(2, 'natural remedy of psoriasis', NULL, NULL, '<br>\r\nAre you looking for natural remedies for psoriasis? If so, you\'ve come to the right place! In this blog, we\'ll explore various natural remedies for psoriasis that are safe, effective, and easy to implement. From dietary changes to lifestyle habits, there are many different ways to help manage psoriasis symptoms. Read on to learn more about natural remedies for psoriasis!', 3, 1, 'content', '2023-05-03 10:40:01', '2023-05-03 10:40:01');
 
 -- --------------------------------------------------------
 
@@ -822,7 +853,7 @@ ALTER TABLE `use_case_categories`
 -- AUTO_INCREMENT for table `ai_chat_histories`
 --
 ALTER TABLE `ai_chat_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `blogs`
@@ -840,7 +871,7 @@ ALTER TABLE `blog_categories`
 -- AUTO_INCREMENT for table `content_histories`
 --
 ALTER TABLE `content_histories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -858,7 +889,7 @@ ALTER TABLE `faqs`
 -- AUTO_INCREMENT for table `images`
 --
 ALTER TABLE `images`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `languages`
@@ -870,13 +901,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -906,7 +937,7 @@ ALTER TABLE `plans`
 -- AUTO_INCREMENT for table `plan_expenses`
 --
 ALTER TABLE `plan_expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -918,7 +949,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_documents`
 --
 ALTER TABLE `user_documents`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `use_cases`

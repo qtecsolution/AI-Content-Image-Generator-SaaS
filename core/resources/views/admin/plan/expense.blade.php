@@ -29,10 +29,9 @@
                                     <h4 class="title">Plan Information</h4>
                                     <ul class="purchesinfo-list">
                                         <li>Name: {{ $plan->name }}</li>
-                                        <li>Word Count: {{ $plan->word_count }}</li>
-                                        <li>API Call: {{ $plan->call_api_count }} /mo </li>
-                                        <li>Document Save Count: {{ $plan->documet_count }} /mo</li>
-                                        <li>Image Save Count: {{ $plan->image_count }} /mo</li>
+                                        <li>Total words: {{ $plan->word_count }} /mo</li>
+                                        <li>Maximum word per request: {{ $plan->max_words }}</li>
+                                        <li>Total image generate: {{ $plan->image_count }} /mo</li>
                                         <li>Monthly Price: {{readConfig('currency_sambol')}}{{ $plan->price }}</li>
                                         <li>Yearly Price: {{readConfig('currency_sambol')}}{{ $plan->yearly_price }}</li>
                                     </ul>
@@ -58,22 +57,11 @@
                                 <div class="purches-info-box pe-lg-4">
                                     <h4 class="title">Expenses summary</h4>
                                     <ul class="purchesinfo-list">
-                                        <li>Total API Call: {{ $expense->current_api_count }}</li>
-                                            <li>Rest of API Call:
-                                                {{ $expense->call_api_count - $expense->current_api_count }}</li>
-                                            <li>Total Document Save Count:
-                                                {{ $expense->current_documet_count }}
-                                            </li>
-                                            <li>Rest of Documet Save Count:
-                                                {{ $expense->documet_count - $expense->current_documet_count }}</li>
-                                            <li>Total Image: {{ $expense->current_image_count }}
-                                            </li>
-                                            <li>Rest of Image:
-                                                {{ $expense->image_count - $expense->current_image_count }}</li>
-                                            <li>Activated Date:
-                                                {{ dateTimeFormat($expense->activated_at) }}</li>
-                                            <li>Expire Date:
-                                                {{ dateTimeFormat($expense->expire_at) }}</li>
+                                        <li>Total word used: {{ $expense->current_word_count }}</li>
+                                        <li>Rest of word: {{ $expense->word_count - $expense->current_word_count }}</li>
+                                        <li>Rest of Image: {{ $expense->image_count - $expense->current_image_count }}</li>
+                                        <li>Activated Date: {{ dateTimeFormat($expense->activated_at) }}</li>
+                                        <li>Expire Date: {{ dateTimeFormat($expense->expire_at) }}</li>
                                     </ul>
                                 </div>
                                 
