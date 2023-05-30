@@ -92,7 +92,7 @@
 
                     <div class="small-box revenue">
                         <div class="small-box-left">
-                            <h1 class="total-number">{{ $salesData->sum('total') }}</h1>
+                            <h1 class="total-number"> {{readConfig('currency_symbol')}}{{ $salesData->sum('total') }}</h1>
                             <p class="total-text">Current Monthly Revenue</p>
                         </div>
                         <div class="small-box-right">
@@ -166,8 +166,8 @@
                                         @foreach ($orders as $item)
                                         <tr>
                                             <td>{{ $item->invoice }}</td>
-                                            <td>{{ $item->user->name }}</td>
-                                            <td>{{ $item->plan->name }}</td>
+                                            <td>{{ $item->user->name??'' }}</td>
+                                            <td>{{ $item->plan->name??'' }}</td>
                                             <td>{{ dateTimeFormat($item->created_at) }}</td>
                                         </tr>
                                         @endforeach

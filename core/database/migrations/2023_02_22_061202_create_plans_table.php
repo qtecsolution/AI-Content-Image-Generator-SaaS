@@ -15,14 +15,17 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id'); //who created
             $table->string('name');
-            $table->integer('word_count')->default(0); // 0 mins Word Count limit per request 
-            $table->integer('call_api_count')->default(0); 
-            $table->integer('documet_count')->default(0);
+            $table->integer('word_count')->default(0); // 0 mins Word Count limit per request
+            $table->integer('max_words')->default(0);
+            $table->integer('document_count')->default(0);
             $table->integer('image_count')->default(0);
             $table->boolean('is_published')->default(true);
             $table->double('price',10,2)->default(0); //o mins free
             $table->double('yearly_price',10,2)->nullable(); //o mins free
             $table->string('templates',10)->nullable();
+            $table->tinyInteger('support_enabled')->default(0);
+            $table->tinyInteger('code_generate_enabled')->default(0);
+            $table->tinyInteger('chat_enabled')->default(0);
             $table->timestamps();
         });
     }

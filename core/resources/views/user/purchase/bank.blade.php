@@ -14,7 +14,7 @@
             <li class="list-group-item">Account Number: {{ readConfig('account_number') }}</li>
             <li class="list-group-item">Swift Code: {{ readConfig('swift_code') }}</li>
             <li class="list-group-item">Routing Number: {{ readConfig('routing_number') }}</li>
-            <li class="list-group-item">Payable Amount: {{readConfig('currency_sambol')}}{{ $type == 2 ? $plan->yearly_price : $plan->price}} </li>
+            <li class="list-group-item">Payable Amount: {{readConfig('currency_symbol')}}{{ $type == 2 ? $plan->yearly_price : $plan->price}} </li>
         </ul>
 
         <div class="form-group mt-2 mb-2">

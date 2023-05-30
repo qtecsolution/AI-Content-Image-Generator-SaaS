@@ -4,7 +4,7 @@
     <li class="breadcrumb-item active">Contents History Details</li>
 @endsection
 @section('content')
-    
+
     <div class="main-content p-2 p-md-4 pt-0">
         <div class="row">
             <div class="col-md-12">
@@ -13,7 +13,7 @@
                     <div class="my-projects-header border-bottom">
                         <h4 class="header-title">Content History  details</h4>
                         <div class="project-button pull-right">
-                          
+
                                     <a href="{{ route('content-history.index') }}"  class="seeall-btn d-flex">
                               <span class="icon">
                                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -26,18 +26,18 @@
                                 </svg>
 
                             </span>
-                            <span class="mt-1">Hisotry</span>
-                        </a>        
+                            <span class="mt-1">History</span>
+                        </a>
                         </div>
                     </div>
                     <div class="my-projects-body ">
                         <div class="row g-4">
                             <div class="col-lg-5">
-                                <table class="table fz-14">
+                                <table class="table fz-14 white-space-normal">
                                     @if((isset($data->useCase->title_label) && $data->useCase->title_label!='') || $data->type=='code')
                                     <tr>
                                         <td class="font-600"> {{$data->useCase->title_label??'Title'}} </td>
-                                        <td> : </th>
+                                        <td> : </td>
                                         <td> {{$data->title}} </td>
                                     </tr>
                                     @endif

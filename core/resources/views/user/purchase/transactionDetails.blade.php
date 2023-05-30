@@ -28,8 +28,8 @@
                                         <li>Total words: {{ $plan->word_count }} /mo</li>
                                         <li>Maximum word per request: {{ $plan->max_words }}</li>
                                         <li>Image Save Count: {{ $plan->image_count }} /mo</li>
-                                        <li>Monthly Price: {{readConfig('currency_sambol')}}{{ $plan->price }}</li>
-                                        <li>Yearly Price: {{readConfig('currency_sambol')}}{{ $plan->yearly_price }}</li>
+                                        <li>Monthly Price: {{readConfig('currency_symbol')}}{{ $plan->price }}</li>
+                                        <li>Yearly Price: {{readConfig('currency_symbol')}}{{ $plan->yearly_price }}</li>
                                     </ul>
                                 </div>    
                             </div>   
@@ -40,7 +40,7 @@
                                         <li>Date: {{ dateTimeFormat($order->created_at) }}</li>
                                         <li>Invoice: {{ $order->invoice }}</li>
                                         <li>Payment Type: {{ $order->type==2?'Yearly':'Monthly' }} </li>
-                                        <li>Paid Amount: {{readConfig('currency_sambol')}} {{ $order->total }} </li>
+                                        <li>Paid Amount: {{readConfig('currency_symbol')}} {{ $order->total }} </li>
                                         <li>Payment Method: {{ $order->payment_method }}</li>
                                         @if($order->other != '')
                                         <li> <b> Attachment: </b>  <a href="{{filePath($order->other)}}" target="_blank"> <i class="fa fa-file"></i> Attach File </a> </li>

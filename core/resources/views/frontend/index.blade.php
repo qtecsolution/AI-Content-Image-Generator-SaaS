@@ -177,7 +177,7 @@
                             beautiful images with one click.</p>
                     </div>
                 </div>
-                <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-duration="1000">
+                <div class="col-lg-8 mx-auto d-none" data-aos="fade-up" data-aos-duration="1000">
                     <figure class="generate-image1">
                         <img src="assets/images/landing/generate.svg" alt="generate image ">
                     </figure>
@@ -298,7 +298,10 @@
                         <button class="section-btn"><span class="text">Pricing</span></button>
                         <h3 class="benifits-title">Choose Your <br>
                             Preferred Package</h3>
-
+                    </div>
+                    <div class="col-md-12 text-center">
+                        <label> <input class="pricing_status" type="radio" value="1" name="pricing_status" checked> Monthly </label>
+                        <label> <input class="pricing_status" type="radio" value="2" name="pricing_status"> Yearly </label>
                     </div>
                 </div>
             </div>
@@ -316,11 +319,11 @@
                             <div class="pricing-card-header">
                                 <span class="name">{{$item->name}}</span>
                                 <span class="price">
-                                    <span class="currency">{{readConfig('currency_sambol')}}</span>
+                                    <span class="currency">{{readConfig('currency_symbol')}}</span>
                                     <span class="number">{{$item->price}}</span>
                                     <span class="plane-time">/mo</span>
                                 </span>
-                                <small class="text-gray {{$item->price == 0 ? 'visibility-hidden':''}}">{{readConfig('currency_sambol')}}{{$item->yearly_price }}/year</small>
+                                <small class="text-gray {{$item->price == 0 ? 'visibility-hidden':''}}">{{readConfig('currency_symbol')}}{{$item->yearly_price }}/year</small>
                             </div>
 
                             <div class="pricing-card-body">
@@ -337,23 +340,22 @@
                                                     <img src="{{ asset('assets/images/icons/check.svg') }}"
                                                          alt="check icon ">
                                                 </span>
-                                        <span>Access to </span>
+                                        <span>Access to
                                         @php
                                             $templates = explode(',', $item->templates);
                                             $templatesCategory = [0=>'All Templates',1=>'Basic Templates',2=>'Standard Templates',3=>'Professional Templates'];
                                         @endphp
                                         @if (in_array(0, $templates))
-                                            <span> all templates </span>
+                                             all templates
                                         @else
-                                            <span>
-                                                        @foreach($templates as $tKey =>  $temp)
-                                                    @if($tKey>0)
-                                                        ,
-                                                    @endif
-                                                    {{ Str::lower($templatesCategory[$temp]??'')}}
-                                                @endforeach
-                                                    </span>
+                                            @foreach($templates as $tKey =>  $temp)
+                                                @if($tKey>0)
+                                                    ,
+                                                @endif
+                                                {{ Str::lower($templatesCategory[$temp]??'')}}
+                                            @endforeach
                                         @endif
+                                    </span>
                                     </li>
                                     <li>
                                                 <span class="icon-wrapper">
@@ -390,7 +392,7 @@
                                     </li>
                                 </ul>
                                 <div class="d-grid">
-                                    <a href="{{route('plan.purchase',$item->id)}}" class="btn-subscribe text-center text-white"> Subscribe </a>
+                                    <button onclick='planSubscribe("{{route('plan.purchase',$item->id)}}")' class="btn-subscribe text-center text-white"> Subscribe </button>
                                 </div>
                             </div>
 
@@ -398,6 +400,7 @@
                     </div>
                     @endforeach
                 </div>
+                <div class="swiper-pagination mt-5"></div>
             </div>
 
         </div>
@@ -459,5 +462,14 @@
                 childSpan.innerHTML = "Hide All Templates";
             }
         });
+
+        function planSubscribe(url) {
+
+            const type = document.querySelector('input[name="pricing_status"]:checked').value;
+            if(type==2){
+                url += '?type='+type;
+            }
+            window.location.href = url;
+        }
     </script>
 @endsection

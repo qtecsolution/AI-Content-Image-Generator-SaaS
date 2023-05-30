@@ -6,10 +6,10 @@
         <div class="row">
             <div class="col-12 text-center">
                 <h3 class="welcome-title">👋 Hi, {{ Auth::user()->name }} </h3>
-                <p class="welcome-text">"Welcome to {{readConfig('name')}}! We're glad to have you here. Our platform is designed
+                <p class="welcome-text"> Welcome to {{readConfig('name')}}! We're glad to have you here. Our platform is designed
                     to help you streamline <br> your writing process, increase your productivity, and create
                     high-quality content. <br> We're confident you'll find the tools and features here to be
-                    user-friendly and effective.</p>
+                    user-friendly and effective. </p>
             </div>
         </div>
     </section>
@@ -107,7 +107,7 @@
         <input type="hidden" name="address" value="{{ Auth::user()->address }}">
         <input type="hidden" name="phone" value="{{ Auth::user()->phone }}">
     </form>
-    
+
 </div>
 @endsection
 @section('script')
@@ -143,7 +143,7 @@ var swiper = new Swiper(".templateSwiper", {
         },
     },
 });
-//Checked all Checkbox 
+//Checked all Checkbox
 $('#allSelect').change(function() {
     $('#projectTable .input-checkbox').prop('checked', $(this).prop('checked'));
     applicantSelected();
@@ -162,7 +162,7 @@ function applicantSelected() {
         $('#delete-selected').hide();
     }
 }
-// multiple delete 
+// multiple delete
 function multipleDelete() {
     let deleteId = [];
     $('#projectTable .input-checkbox:checked').each(function() {
@@ -196,7 +196,7 @@ $(function() {
         },
         processing: true,
         serverSide: true,
-        ordering: true,
+        ordering: false,
         ajax: {
             url: "{{ route('contents.create') }}"
         },

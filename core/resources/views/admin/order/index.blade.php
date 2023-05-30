@@ -12,7 +12,7 @@
                         <h5 class="header-title">All @if(isset($request->status) && $request->status==0) Pending @endif Transactions</h5>
                         <div class="project-button pull-right">
                             @if(isset($request->status) && $request->status==0)
-                            
+
                             <a href="{{ route('order.index') }}" class="seeall-btn d-flex">
                                 <span class="icon">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,8 +27,8 @@
                                 </span>
                                 <span class="mt-1"> All Transactions</span>
                             </a>
-                            @else 
-                            
+                            @else
+
                             <a href="{{ route('order.index') }}?status=0" class="seeall-btn d-flex">
                                 <span class="icon">
                                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,14 +62,15 @@
 
                             <table class="project-table table" id="datatables">
                                 <thead>
-                                    
+
                                     <tr class="bg-white">
                                     <td>Date</td>
                                     <td>Invoice</td>
                                     <td>User</td>
                                     <td>Plan</td>
+                                    <td>Amount</td>
                                     <td>Method</td>
-                                    <td width="10%"></th>
+                                    <td width="10%"></td>
                                     </tr>
                                 </thead>
                             </table>
@@ -89,7 +90,7 @@
                 sDom: 'Rfrtlip',
                 processing: true,
                 serverSide: true,
-                ordering: true,
+                ordering: false,
                 language: {
                     paginate: {
                         next: ` <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -109,6 +110,7 @@
                 columns: [
                     {
                         data: 'added_date',
+                        name:'created_at'
                     },
                     {
                         data: 'invoice',
@@ -121,6 +123,10 @@
                     {
                         data: 'plan_name',
                         name: 'plan.name'
+                    },
+                    {
+                        data: 'total_amount',
+                        name: 'total'
                     },
                     {
                         data: 'payment_method',

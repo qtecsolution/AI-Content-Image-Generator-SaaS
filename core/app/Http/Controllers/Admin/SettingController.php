@@ -25,8 +25,8 @@ class SettingController extends Controller
             'text-curie-001'=>'Curie (GPT 3)',
             'text-davinci-003'=>'Davinci (GPT 3)',
             'gpt-3.5-turbo'=>'ChatGPT (3.5 Turbo)',
-            'gpt-4'=>'GPT 4 (8K)',
-            'gpt-4-32k'=>'GPT 4 (32K)',
+            // 'gpt-4'=>'GPT 4 (8K)',
+            // 'gpt-4-32k'=>'GPT 4 (32K)',
             ];
         return view('admin.setting.setting', compact('tab','aiModels'));
     }

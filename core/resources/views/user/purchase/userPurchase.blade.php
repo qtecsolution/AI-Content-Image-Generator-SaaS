@@ -36,11 +36,11 @@ $months = request()->input('type') == 2 ? 12 : 1;
                                     <div class="pricing-card-header">
                                         <span class="name">{{$item->name}}</span>
                                         <span class="price">
-                                            <span class="currency">{{readConfig('currency_sambol')}}</span>
+                                            <span class="currency">{{readConfig('currency_symbol')}}</span>
                                             <span class="number">{{ $price }}</span>
                                             <span class="plane-time">/{{ request()->input('type') == 2 ? 'year' : 'mo' }}</span>
                                         </span>
-                                        <small class="text-gray {{$item->price == 0 ? 'visibility-hidden':''}}">{{readConfig('currency_sambol')}}{{ request()->input('type') == 2 ? $item->price.'/mo' : $item->yearly_price.'/year' }}</small>
+                                        <small class="text-gray {{$item->price == 0 ? 'visibility-hidden':''}}">{{readConfig('currency_symbol')}}{{ request()->input('type') == 2 ? $item->price.'/mo' : $item->yearly_price.'/year' }}</small>
 
                                     </div>
 

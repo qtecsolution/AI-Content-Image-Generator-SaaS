@@ -77,7 +77,7 @@
                                                     </div>
 
                                                     <div>
-                                                        <div class="payment-way">Credit card</div>
+                                                        <div class="payment-way">Stripe</div>
                                                     </div>
 
                                                 </div>
@@ -145,6 +145,7 @@
                                         </div>
                                     </li>
                                 @endif
+                                @if (readConfig('AAMARPAY_ACTIVE') == 'on')
                                 <li class="list-group-item p-0">
                                     <div class="customradio p-2">
                                         <input type="radio" id="aamarPay" class="customradio-box"
@@ -165,6 +166,7 @@
                                         </label>
                                     </div>
                                 </li>
+                                @endif
 
                                 @if (readConfig('bank_status') == 'on')
                                     <li class="list-group-item p-0">
@@ -181,7 +183,7 @@
                                                     </div>
 
                                                     <div>
-                                                        <div class="payment-way">Bank Transfar</div>
+                                                        <div class="payment-way">Bank Transfer</div>
                                                     </div>
                                                 </div>
                                             </label>
@@ -280,7 +282,7 @@
                                         </div>
                                         <div class="col-auto">
                                             <div class=" checkout-month d-inline-block">
-                                                <span class="text-muted">{{ readConfig('currency_sambol') }}</span>{{ $price }}
+                                                <span class="text-muted">{{ readConfig('currency_symbol') }}</span>{{ $price }}
                                             </div>
 
                                         </div>
@@ -298,7 +300,7 @@
                                 </div>
                                 <div class="col-auto">
                                     <span class=" checkout-month d-inline-block">
-                                        <span>{{ readConfig('currency_sambol') }}</span>{{ $price }}
+                                        <span>{{ readConfig('currency_symbol') }}</span>{{ $price }}
                                     </span>
 
 
@@ -315,18 +317,18 @@
                         </span>
                     </div>
 
-                    <div class="px-2">
+                    <div class="px-2 mb-2">
                         <button type="button" onclick="checkOut()" name="submit"
                             class="gradient-btn mt-2">
                             <span class=" checkout-month d-inline-block">
-                                Pay {{ readConfig('currency_sambol') }}{{ $price }}
+                                Pay {{ readConfig('currency_symbol') }}{{ $price }}
                             </span>
 
                         </button>
                     </div>
 
-                    <span class="invalid-feedback methodError alert alert-danger" role="alert">
-                        <strong>Please select the payment methods</strong>
+                    <span class="invalid-feedback text-danger methodError" role="alert">
+                       Please select the payment methods
                     </span>
 
                 </div>
@@ -401,42 +403,6 @@
         function aamarPay(){
             var type = $('#paymentType').val();
             window.location.href = "{{route('aamarpay.process').'?plan='.$plan->id}}&price={{$price}}&type="+type;
-            const formData = {
-                cus_name: '{{Auth::user()->name}}',
-                cus_email : '{{Auth::user()->email}}',
-                cus_phone : '{{Auth::user()->phone}}',
-                amount:'{{ $price }}',
-                tran_id: {{$plan->id."-".time()}},
-                signature_key: "ca14b13465d1afe8305ce219dd9a3599",
-                store_id: "dataghor",
-                currency:'USD',
-                desc:"Payment for AI",
-                cus_add1: "53, Gausul Azam Road, Sector-14, Dhaka, Bangladesh",
-                cus_add2: "Dhaka",
-                cus_city: "Dhaka",
-                cus_country: "Bangladesh",
-                success_url: "{{route('aamarpay.success')}}",
-                fail_url: "{{route('aamarpay.success')}}",
-                cancel_url: "{{route('aamarpay.success')}}",
-                type: "json",
-            };
-            const url ="https://sandbox.aamarpay.com/jsonpost.php";
-            const json = JSON.stringify(formData);
-
-            $.ajax({
-                url: url,
-                type: "POST",
-                data: json,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function(response) {
-                    console.log(response);
-                },
-                error: function(xhr, status, error) {
-                    console.log(error);
-                }
-            });
-
         }
     </script>
 
@@ -513,9 +479,10 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+                var amount = parseInt("{{ $price }}") * 100;
                 var options = {
                     "key": "{{ readConfig('RAZORPAY_KEY') }}",
-                    "amount": ({{ $price }} * 100), // 2000 paise = INR 20
+                    "amount": amount, // 2000 paise = INR 20
                     "currency": "USD",
                     "name": "{{ $plan->name }}",
                     "description": "Payment",

@@ -235,12 +235,13 @@
                 if (result.short_description_label != '' && result.short_description_label != null) {
                     $('#short-description').show();
                     $('#short-description label').html(result.short_description_label+' :');
-                    $('#short-description input').attr('placeholder',result.short_description_placeholder);
+                    $('#short-description .form-control').attr('placeholder',result.short_description_placeholder);
 
                 }
                 if (result.description_label != '' && result.description_label != null) {
                     $('#description-field').show();
-                    $('#description-field input').attr(result.description_placeholder);
+                    $('#description-field label').html(result.description_label+' :');
+                    $('#description-field .form-control').attr('placeholder',result.description_placeholder);
 
                 }
             })

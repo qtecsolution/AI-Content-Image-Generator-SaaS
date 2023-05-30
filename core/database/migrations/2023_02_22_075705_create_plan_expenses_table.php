@@ -16,11 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id'); //who created
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('plan_id');
-            $table->integer('word_count')->default(0); // 0 mins Word Count limit per request 
-            $table->integer('call_api_count')->default(0); 
-            $table->integer('current_api_count')->default(0); 
-            $table->integer('documet_count')->default(0);
-            $table->integer('current_documet_count')->default(0);
+            $table->integer('word_count')->default(0);
+            $table->integer('current_word_count')->default(0); 
+            $table->integer('document_count')->default(0);
+            $table->integer('current_document_count')->default(0);
             $table->integer('image_count')->default(0);
             $table->integer('current_image_count')->default(0);
             $table->tinyInteger('type')->default(1);

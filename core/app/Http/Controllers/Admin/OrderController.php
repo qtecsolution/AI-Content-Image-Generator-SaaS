@@ -33,8 +33,11 @@ class OrderController extends Controller
                 ->addColumn('plan_name', function ($data) {
                     return $data->plan->name ?? '';
                 })
+                ->addColumn('total_amount', function ($data) {
+                    return readConfig('currency_symbol').$data->total;
+                })
                 ->addColumn('added_date', function ($data) {
-                    return dateTimeFormat($data->created_at);
+                    return date('Y-m-d',strtotime($data->created_at));
                 })
                 ->addColumn('payment_status','
                     @if ($is_paid)
@@ -44,7 +47,7 @@ class OrderController extends Controller
                     <a href="{{ route(\'plan.expense\', $id) }}"
                             class="status-panding">Pending</a>
                     @endif')
-                ->rawColumns(['payment_status','added_date'])
+                ->rawColumns(['payment_status'])
                 ->toJson();
         }
 

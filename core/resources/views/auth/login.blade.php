@@ -3,7 +3,7 @@
 @section('title', 'Login')
 
 @section('content')
-    <form method="POST" class="authentication-form needs-validation" action="{{ route('login') }}" novalidate>
+    <form method="POST" class="authentication-form needs-validation mb-5" action="{{ route('login') }}" novalidate>
         @csrf
         <div class="authentication-form-header">
             <h3 class="logo-name"> <a href="{{route('/')}}"> <img class="header-logo" src="{{filePath(readConfig('logo'))}}" alt="{{readConfig('name')}}"> </a> </h3>
@@ -72,6 +72,16 @@
 
 
             <p class="authentication-bottom">Don’t have an account? <a href="{{ route('register') }}">Register</a> </p>
+
+            <div class="demo-user mt-3">
+                <h6> Demo Credentials: </h6>
+                <hr>
+                <p><b>Admin:</b> admin@qtecsolution.net </p>
+                <p><b>Password:</b> 12345678 </p>
+                <hr>
+                <p><b>User:</b> demo@qtecsolution.net </p>
+                <p><b>Password:</b> 12345678 </p>
+            </div>
 
 
         </div>

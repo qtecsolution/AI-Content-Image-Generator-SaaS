@@ -72,6 +72,13 @@ class UserDocumentController extends Controller
         try {
             $input = $request->except('_token');
             $input['user_id'] = Auth::user()->id;
+            $titleText = $request->title??'';
+            if(!isset($request->title) && isset($request->short_description)){
+                $titleText = substr($request->short_description, 0, 200);
+            }elseif(!isset($request->title) && isset($request->description)){
+                $titleText = substr($request->description, 0, 200);
+            }
+            $input['title'] = $titleText;
             UserDocument::create($input);
             myAlert('success', 'Content Saved successfully.');
             return back();
@@ -111,6 +118,13 @@ class UserDocumentController extends Controller
             $data = UserDocument::findOrFail($id);
             DB::beginTransaction();
             $input = $request->except(['_token']);
+            $titleText = $request->title??'';
+            if(!isset($request->title) && isset($request->short_description)){
+                $titleText = substr($request->short_description, 0, 200);
+            }elseif(!isset($request->title) && isset($request->description)){
+                $titleText = substr($request->description, 0, 200);
+            }
+            $input['title'] = $titleText;
             $data->update($input);
             DB::commit();
             myAlert('success', 'Content Updated successfully.');

@@ -70,7 +70,7 @@
 
                 <div class="header-right">
                     <ul class="desk-menu d-none d-xl-flex">
-                        <li><a href="{{route('login')}}" class="primarybtn-landing ">Get started ___ it’s free</a></li>
+                        <li><a href="{{route('register')}}" class="primarybtn-landing ">{{Auth::check()?'Dashboard':'Get started ___ it’s free'}} </a></li>
                     </ul>
                 </div>
             </div>
@@ -360,6 +360,11 @@
         });
 
         var swiper = new Swiper(".mySwiper", {
+            pagination: {
+                el: ".swiper-pagination",
+                dynamicBullets: true,
+                clickable:true
+            },
             breakpoints: {
                 768: {
                     slidesPerView: 2,
@@ -367,10 +372,6 @@
                 },
                 992: {
                     slidesPerView: 3,
-                    spaceBetween: 40,
-                },
-                1200: {
-                    slidesPerView: 4,
                     spaceBetween: 40,
                 },
 

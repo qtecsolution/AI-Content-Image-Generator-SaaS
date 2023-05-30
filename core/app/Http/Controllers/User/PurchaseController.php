@@ -254,9 +254,10 @@ class PurchaseController extends Controller
     {
         $plan = Plan::where('id', $request->plan)->firstOrFail();
         $phone = $request->phone ?? "018";
-        $url = 'https://sandbox.aamarpay.com/request.php';
+       // $url = 'https://sandbox.aamarpay.com/request.php';
+        $url = 'https://secure.aamarpay.com/request.php';
         $fields = [
-            'store_id' => 'aamarpaytest',
+            'store_id' => readConfig('AAMARPAY_STORE'),
             'amount' => $request->price, //transaction amount
             'payment_type' => 'VISA', //no need to change
             'currency' => 'USD',  //currenct will be USD/BDT
@@ -271,7 +272,7 @@ class PurchaseController extends Controller
             'opt_a' => $plan->id,  //optional paramter
             'opt_b' => $request->type,
             'opt_c' => Auth::user()->id,
-            'signature_key' => 'dbb74894e82415a2f7ff0ec3a97e4183'
+            'signature_key' => readConfig('AAMARPAY_KEY')
         ];
 
         $fields_string = http_build_query($fields);
@@ -291,7 +292,7 @@ class PurchaseController extends Controller
     function redirect_to_merchant($url)
     {
 
-?>
+        ?>
         <html xmlns="http://www.w3.org/1999/xhtml">
 
         <head>
@@ -304,12 +305,12 @@ class PurchaseController extends Controller
 
         <body onLoad="closethisasap();">
 
-            <form name="redirectpost" method="post" action="<?php echo 'https://sandbox.aamarpay.com/' . $url; ?>"></form>
-            <!-- for live url https://secure.aamarpay.com -->
+        <form name="redirectpost" method="post" action="<?php echo 'https://secure.aamarpay.com/' . $url; ?>"></form>
+        <!-- for live url https://secure.aamarpay.com -->
         </body>
 
         </html>
-<?php
+        <?php
         exit;
     }
     // Aamar Pay success
@@ -385,7 +386,6 @@ class PurchaseController extends Controller
                     $expense->order_id = $order->id;
                     $expense->plan_id = $plan->id;
                     $expense->word_count = $plan->word_count * $months;
-                    $expense->document_count = $plan->document_count * $months;
                     $expense->image_count = $plan->image_count * $months;
                     $expense->activated_at = Carbon::now();
                     $expense->expire_at =  Carbon::now()->addDay($totalDays);
@@ -423,8 +423,8 @@ class PurchaseController extends Controller
     {
 
         $user = Auth::user();
-        $plan = Plan::where('id', $user->plan_id)->first();
         $expense = PlanExpense::where('id', $user->plan_expense_id)->first();
+        $plan = $expense->plan;
         $order = Order::where('id', $expense->order_id)->first();
         return view('user.purchase.userExpense', compact('plan', 'expense', 'order'));
     }

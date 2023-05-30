@@ -49,12 +49,12 @@
                                         <div class="pricing-card-header">
                                             <span class="name">{{ $item->name }}</span>
                                             <span class="price">
-                                                <span class="currency">{{ readConfig('currency_sambol') }}</span>
+                                                <span class="currency">{{ readConfig('currency_symbol') }}</span>
                                                 <span class="number">{{ $item->price }}</span>
                                                 <span class="plane-time">/mo</span>
                                             </span>
                                             <small
-                                                class="text-gray">{{ readConfig('currency_sambol') }}{{ $item->yearly_price }}/year</small>
+                                                class="text-gray">{{ readConfig('currency_symbol') }}{{ $item->yearly_price }}/year</small>
 
                                         </div>
 

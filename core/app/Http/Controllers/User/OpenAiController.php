@@ -26,9 +26,9 @@ class OpenAiController extends Controller
             return redirect()->route('user.purchase');
         }
         if (isset($request->case)) {
-            $defaultCase = UseCase::where('id', $request->case)->latest();
+            $defaultCase = UseCase::where('id', $request->case);
         } else {
-            $defaultCase = UseCase::latest();
+            $defaultCase = UseCase::orderBy('id','ASC');
         }
         $cases = UseCase::where('is_published', 1);
         if(!in_array("0",showBalance()->templates)){
@@ -41,7 +41,6 @@ class OpenAiController extends Controller
             return redirect()->route('user.purchase');
         }
         $cases = $cases->pluck('title', 'id');
-
         $languages = Language::where('status', 1)->pluck('language', 'language');
         return view('user.openAi.content', compact('cases', 'request', 'languages', 'defaultCase'));
     }
@@ -74,21 +73,56 @@ class OpenAiController extends Controller
             $temp = floatval($request->temp ?? 0.7);
 
             $plan = Plan::where('id', auth()->user()->plan_id)->first();
-            $max_tokens = ($plan->max_words < (int)$request->max_words) ? $plan->max_words : (int)$request->max_words;
+            $max_tokens = ((int)$plan->max_words < (int)$request->max_words) ? (int)$plan->max_words : (int)$request->max_words;
             $model = readConfig('open_ai_model');
+            $max_results = (int)$request->quantity;
             // Open AI API call
             $result = OpenAI::completions()->create([
                 'model' => $model,
                 'prompt' => $prompt,
                 'temperature' => $temp,
                 'max_tokens' => $max_tokens,
-                'n' => (int)$request->quantity
+                'n' => $max_results
             ]);
-            $content =  $result['choices'][0]['text'] ?? '';
-            $wordCount = str_word_count($content) ?? 0;
-            $charCount = strlen($content) ?? 0;
+            $text = '';
+            $counter = 1;
+            if (isset($result['choices'])) {
+                if ($model != 'gpt-3.5-turbo' && $model != 'gpt-4' && $model != 'gpt-4-32k') {
+                    if (count($result['choices']) > 1) {
+                        foreach ($result['choices'] as $value) {
+                            $text .= '('.$counter . '). ' . ltrim($value['text']) . "\r\n\r\n\r\n";
+                            $counter++;
+                        }
+                    } else {
+                        $text = $result['choices'][0]['text'];
+                    }
+                } else {
+                    if (count($result['choices']) > 1) {
+                        foreach ($result['choices'] as $value) {
+                            $text .= $counter . '. ' . trim($value['message']['content']) . "\r\n\r\n\r\n";
+                            $counter++;
+                        }
+                    } else {
+                        $text = ltrim($result['choices'][0]['message']['content']);
+                    }
+                }
+            }else{
+                if (isset($result['error']['message'])) {
+                    $message = $result['error']['message'];
+                } else {
+                    $message = __('There is an issue with your openai account');
+                }
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Something went wrong',
+                    'error' => $message,
+                ], 400);
+            }
+            //$tokens = $result['usage']['completion_tokens'];
+            $wordCount = str_word_count($text) ?? 0;
+            $charCount = strlen($text) ?? 0;
             // null space to br
-            $content = preg_replace('/([^>\r\n]?)(\r\n|\n\r|\r|\n)/', '$1<br>$2', $content);
+            $content = preg_replace('/([^>\r\n]?)(\r\n|\n\r|\r|\n)/', '$1<br>$2', $text);
             //remove all leading <br> tags
             $pattern = '/^(' . preg_quote('<br>', '/') . ')+/';
             $content = preg_replace($pattern, '',  $content);
@@ -98,8 +132,14 @@ class OpenAiController extends Controller
                 'characters' => $charCount
             ];
             // Content history create
+            $titleText = $request->title??'';
+            if(!isset($request->title) && isset($request->short_description)){
+                $titleText = substr($request->short_description, 0, 200);
+            }elseif(!isset($request->title) && isset($request->description)){
+                $titleText = substr($request->description, 0, 200);
+            }
             ContentHistory::create([
-                'title' => $request->title ?? '',
+                'title' => $titleText,
                 'short_description' => $request->short_description ?? '',
                 'description' => $request->description ?? '',
                 'temperature' => $temp,
@@ -117,7 +157,6 @@ class OpenAiController extends Controller
                 'message' => 'Something went wrong',
                 'error' => $errorMessage,
             ], 400);
-            return response()->json($results, 200);
         }
     }
     // View for generate image
@@ -341,7 +380,7 @@ class OpenAiController extends Controller
         try {
 
             $plan = Plan::where('id', auth()->user()->plan_id)->first();
-            $max_tokens = $plan->max_words;
+            $max_tokens = (int)$plan->max_words;
             // Open AI API call
             $result = OpenAI::chat()->create([
                 'model' => 'gpt-3.5-turbo',
@@ -430,7 +469,7 @@ class OpenAiController extends Controller
         try {
 
             $plan = Plan::where('id', auth()->user()->plan_id)->first();
-            $max_tokens = $plan->max_words;
+            $max_tokens = (int)$plan->max_words;
             // Open AI API call
             $result = OpenAI::chat()->create([
                 'model' => 'gpt-3.5-turbo',
@@ -450,8 +489,9 @@ class OpenAiController extends Controller
                 'chat_response' => $content,
                 'user_id' => Auth::user()->id
             ]);
-            $wordCount = str_word_count($content) ?? 0;
-            balanceDeduction('word',$wordCount);
+            //$wordCount = str_word_count($content) ?? 0;
+            $tokens = $result['usage']['total_tokens']??0;
+            balanceDeduction('word',$tokens);
 
             $results = [
                 'content' => $content,

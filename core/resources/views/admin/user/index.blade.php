@@ -90,7 +90,7 @@
 
             processing: true,
             serverSide: true,
-            ordering: true,
+            ordering: false,
             ajax: {
                 url: "{{ route('users.all') }}"
             },

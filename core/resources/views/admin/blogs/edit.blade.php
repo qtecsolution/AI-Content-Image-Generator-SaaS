@@ -112,11 +112,7 @@
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <label for="category_id" class="form-label">Category</label>
-                                                {!! Form::select('category_id', $category, $data->category_id ?? '', [
-                                                    'class' => 'w-100 nice-select',
-                                                    'placeholder' => '-select category-',
-                                                    'required',
-                                                ]) !!}
+                                                {!! Form::select('category_id', $category, $data->category_id??'', ['class' => 'w-100 nice-select','placeholder'=>'-select category-','required']) !!}
                                                 @error('category_id')
                                                     <div class="text-danger">
                                                         {{ $message }}
@@ -156,9 +152,7 @@
                                     <div class="col-12">
                                         <div class="form-group">
                                             <label for="is_published" class="form-label col-md-12"> Status : </label>
-                                            {!! Form::select('is_published', [1 => 'Published', 2 => 'Draft'], $data->is_published, [
-                                                'class' => 'nice-select',
-                                            ]) !!}
+                                            {!! Form::select('is_published', [1=>'Published',2=>'Draft'], $data->is_published, ['class'=>'nice-select']) !!}
                                         </div>
                                     </div>
                                     <div class="generate-btn-wrapper">

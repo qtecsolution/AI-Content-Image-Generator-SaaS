@@ -19,18 +19,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- SUMMERNOTE CS  -->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-
     <!-- MAIN CSS  -->
-    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}?v=1">
-    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}?v=1">
-    <link rel="stylesheet" href="{{ asset('assets/css/utilities.css') }}?v=1">
-
+    <link rel="stylesheet" href="{{ asset('assets/css/style.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/utilities.css') }}">
 
     @if (readConfig('pwa_active') == 'yes')
         @laravelPWA
     @endif
-
-
 </head>
 
 <body>
@@ -202,7 +198,7 @@
                                             class="menu-item {{ menuActive(['image.create']) ? 'active' : '' }}">New
                                             Image</a>
                                         <a href="{{ route('image.variation') }}"
-                                            class="menu-item {{ menuActive(['image.variation']) ? 'active' : '' }}">Image
+                                            class="menu-item d-none {{ menuActive(['image.variation']) ? 'active' : '' }}">Image
                                             Variation</a>
                                         <a href="{{ route('image.all') }}"
                                             class="menu-item {{ menuActive(['image.all']) ? 'active' : '' }}">All
@@ -233,14 +229,32 @@
                                             </clipPath>
                                         </defs>
                                     </svg>
-
-
                                 </span>
                                 <span class="fz-16">Purchase Plan</span>
                             </a>
                         </div>
+                    @if(Auth::user()->type=='user')
+                        <!-- Transaction    -->
+                        <div class="single-item">
+                            <a href="{{ route('user.transactions') }}"
+                                class="sidebar-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['user.transactions','user.transactions.details']) ? 'active' : '' }}">
+                                <span class="icon">
+                                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.54883 10.8418H17.5488" stroke="#475467" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2.54883 5.8418H17.5488" stroke="#475467" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2.54883 15.8418H17.5488" stroke="#475467" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                <span class="fz-16">Transactions</span>
+                            </a>
+                        </div>
+                        @endif
                         @if(Auth::user()->type=='admin')
-                        <hr>
+                        <hr class="m-0">
                         <!-- admin dashboard    -->
                             <div class="single-item">
                                 <a href="{{ route('dashboard') }}"
@@ -382,7 +396,7 @@
                                 </div>
                             </div>
 
-                            <!-- Finincial  -->
+                            <!-- Financial  -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button
@@ -640,7 +654,7 @@
             </ul>
         </nav>
     </header>
-    @if(menuActive('home') == false)
+    @if(!menuActive('home'))
     <nav aria-label="breadcrumb " class="ai-breadcrumb">
         <ol class="breadcrumb m-0 fz-12  font-500">
             <li class="breadcrumb-item"><a href="{{ route('home') }}">Home</a></li>
@@ -822,7 +836,7 @@
                                             class="menu-item {{ menuActive(['image.create']) ? 'active' : '' }}">New
                                             Image</a>
                                         <a href="{{ route('image.variation') }}"
-                                            class="menu-item {{ menuActive(['image.variation']) ? 'active' : '' }}">Image
+                                            class="menu-item d-none {{ menuActive(['image.variation']) ? 'active' : '' }}">Image
                                             Variation</a>
                                         <a href="{{ route('image.all') }}"
                                             class="menu-item {{ menuActive(['image.all']) ? 'active' : '' }}">All
@@ -859,8 +873,28 @@
                                 <span class="fz-16">Purchase Plan</span>
                             </a>
                         </div>
+                    @if(Auth::user()->type=='user')
+                        <!-- Transaction    -->
+                            <div class="single-item">
+                                <a href="{{ route('user.transactions') }}"
+                                   class="sidebar-link gray-800 d-flex align-items-center fz-14 {{ menuActive(['user.transactions','user.transactions.details']) ? 'active' : '' }}">
+                                <span class="icon">
+                                    <svg width="21" height="21" viewBox="0 0 21 21" fill="none"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.54883 10.8418H17.5488" stroke="#475467" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2.54883 5.8418H17.5488" stroke="#475467" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round" />
+                                        <path d="M2.54883 15.8418H17.5488" stroke="#475467" stroke-width="2"
+                                              stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                </span>
+                                    <span class="fz-16">Transactions</span>
+                                </a>
+                            </div>
+                        @endif
                         @if(Auth::user()->type=='admin')
-                        <hr>
+                        <hr class="m-0">
                         <!-- admin dashboard    -->
                             <div class="single-item">
                                 <a href="{{ route('dashboard') }}"
@@ -1228,16 +1262,16 @@
     const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
     const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 </script>
-@include('sweetalert::alert')
-@include('layouts.delete')
-@yield('script')
-@include('layouts.modal')
-<!--Start of Tawk.to Script-->
-@if (readConfig('tawk_to') == 'yes')
-    @if(menuActive(['chat.create','content.*', 'contents.*', 'content-history.*','code.*'])==false)
-        @include('layouts.tawk_to')
+    @include('sweetalert::alert')
+    @include('layouts.delete')
+    @yield('script')
+    @include('layouts.modal')
+    <!--Start of Tawk.to Script-->
+    @if(readConfig('tawk_to') == 'yes' && isset(showBalance()->support_enabled) && showBalance()->support_enabled==1)
+        @if(menuActive(['chat.create','content.*', 'contents.*', 'content-history.*','code.*'])==false)
+            @include('layouts.tawk_to')
+        @endif
     @endif
-@endif
-<!--End of Tawk.to Script-->
+    <!--End of Tawk.to Script-->
 
 </body>

@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <form method="POST" action="{{ route('register') }}" class="authentication-form needs-validation" novalidate>
+    <form method="POST" action="{{ route('register') }}" class="authentication-form needs-validation mb-5" novalidate>
         @csrf
 
         <div class="authentication-form-header">

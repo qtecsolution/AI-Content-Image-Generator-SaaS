@@ -150,7 +150,7 @@
         </div> -->
        
 
-        <div class="modal-body">
+        <div class="modal-body text-center">
           <span>
             <svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="4" y="4" width="48" height="48" rx="24" fill="#FEE4E2"/>
@@ -160,8 +160,8 @@
           </span>
           
           <div class="delete-info">
-            <h3 class="delete-title"> Delete blog post</h3>
-            <p class="delete-text">Are you sure you want to delete this post? This action cannot be undone.</p>
+            <h3 class="delete-title"> Delete</h3>
+            <p class="delete-text">Are you sure you want to delete it? This action cannot be undone.</p>
           </div>
 
           <div class="d-flex gap-2 w-100">
