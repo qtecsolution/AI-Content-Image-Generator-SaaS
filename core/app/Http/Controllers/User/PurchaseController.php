@@ -268,7 +268,7 @@ class PurchaseController extends Controller
             'desc' => 'Payment for AI',
             'success_url' => route('aamarpay.success'), //your success route
             'fail_url' => route('aamarpay.fail'), //your fail route
-            'cancel_url' => route('aamarpay.fail'), //your cancel url
+            'cancel_url' => route('plan.purchase',$plan->id).'?type='.$request->type, //your cancel url
             'opt_a' => $plan->id,  //optional paramter
             'opt_b' => $request->type,
             'opt_c' => Auth::user()->id,
