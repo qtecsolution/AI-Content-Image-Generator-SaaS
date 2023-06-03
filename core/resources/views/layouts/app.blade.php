@@ -450,6 +450,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="single-item">
+                                <a href="{{ route('manage-coupon.index') }}"
+                                    class="sidebar-link gray-800 d-flex align-items-center fz-14 {{ menuActive('manage-coupon.*') ? 'active' : '' }}">
+                                    <span class="icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M15.8333 2.5H4.16667C3.24619 2.5 2.5 3.24619 2.5 4.16667V15.8333C2.5 16.7538 3.24619 17.5 4.16667 17.5H15.8333C16.7538 17.5 17.5 16.7538 17.5 15.8333V4.16667C17.5 3.24619 16.7538 2.5 15.8333 2.5Z"
+                                                stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2.5 7.5H17.5" stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M7.5 17.5V7.5" stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span class="fz-16">Coupon</span>
+                                </a>
+                            </div>
                             <!-- forntend  -->
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
@@ -1089,6 +1106,23 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="single-item">
+                                <a href="{{ route('manage-coupon.index') }}"
+                                    class="sidebar-link gray-800 d-flex align-items-center fz-14 {{ menuActive('manage-coupon.*') ? 'active' : '' }}">
+                                    <span class="icon">
+                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                d="M15.8333 2.5H4.16667C3.24619 2.5 2.5 3.24619 2.5 4.16667V15.8333C2.5 16.7538 3.24619 17.5 4.16667 17.5H15.8333C16.7538 17.5 17.5 16.7538 17.5 15.8333V4.16667C17.5 3.24619 16.7538 2.5 15.8333 2.5Z"
+                                                stroke="#475467" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M2.5 7.5H17.5" stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                            <path d="M7.5 17.5V7.5" stroke="#475467" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round" />
+                                        </svg>
+                                    </span>
+                                    <span class="fz-16">Coupon</span>
+                                </a>
                             </div>
                             <!-- forntend  -->
                             <div class="accordion-item">

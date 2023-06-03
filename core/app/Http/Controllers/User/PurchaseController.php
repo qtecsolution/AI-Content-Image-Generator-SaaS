@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Coupon;
 use App\Models\Order;
 use App\Models\Plan;
 use App\Models\PlanExpense;
@@ -62,7 +63,9 @@ class PurchaseController extends Controller
         $plan = Plan::where('id', $request->plan_id)->first();
         $user = Auth::user();
         $type = $request->type == 2 ? 2 : 1;
-        return view('user.purchase.bank', compact('plan', 'user', 'type'));
+        $price = $request->price;
+        $couponId = $request->coupon_id;
+        return view('user.purchase.bank', compact('plan', 'user', 'type','price','couponId'));
     }
 
     public function purchaseDone(Request $request)
@@ -80,6 +83,16 @@ class PurchaseController extends Controller
         $plan = Plan::where('id', $request->plan_id)->first();
         $orderInformationUpdate = false;
         $price = $request->type == 2 ? $plan->yearly_price : $plan->price;
+        $discountCode = '';
+        $discountAmount = '';
+        if(isset($request->coupon_id) && $request->coupon_id != ''){
+            $couponCheck = $this->couponQuickCheck($request->coupon_id,$price);
+            if($couponCheck){
+                $price -= $couponCheck->discount;
+                $discountCode = $couponCheck->code;
+                $discountAmount = $couponCheck->discount;
+            }
+        }
         if ($price <= 0) {
             $oldPurchase = PlanExpense::where(['user_id' => $user->id, 'plan_id' => $plan->id])->where('activated_at', '<=', now())
                 ->where(function ($query) {
@@ -112,6 +125,12 @@ class PurchaseController extends Controller
             }
             if (isset($request->stripeToken) && $request->stripeToken !== '') {
                 $order->payment_id = $request->stripeToken;
+            }
+            if($discountCode != ''){
+                $order->discount_code = $discountCode;
+            }
+            if($discountAmount != ''){
+                $order->discount_amount = $discountAmount;
             }
             $order->save();
 
@@ -178,7 +197,7 @@ class PurchaseController extends Controller
                 $orderInformationUpdate = false;
 
                 toast('Plan is successfully subscribed  Wating for approvel', 'success');
-                return redirect()->route('plan.expense', $order->id);
+                return redirect()->route('user.transactions.details', $order->id);
             } else {
                 //it's free
                 $orderInformationUpdate = true;
@@ -268,7 +287,7 @@ class PurchaseController extends Controller
             'desc' => 'Payment for AI',
             'success_url' => route('aamarpay.success'), //your success route
             'fail_url' => route('aamarpay.fail'), //your fail route
-            'cancel_url' => route('plan.purchase',$plan->id).'?type='.$request->type, //your cancel url
+            'cancel_url' =>  route('plan.purchase',$plan->id).'?type='.$request->type, //your cancel url
             'opt_a' => $plan->id,  //optional paramter
             'opt_b' => $request->type,
             'opt_c' => Auth::user()->id,
@@ -448,5 +467,81 @@ class PurchaseController extends Controller
         $plan = Plan::where('id', $order->plan_id)->first();
         $expense = PlanExpense::where('order_id', $order->id)->first();
         return view('user.purchase.transactionDetails', compact('plan', 'expense', 'order'));
+    }
+    public function copuonValidation(Request $request)
+    {
+        $code = $request->code??'';
+        $price = $request->price??0;
+        $coupon = Coupon::where('code',$code)
+        ->where('is_published',1)
+        ->whereDate('start_date', '<=', date('Y-m-d'))
+        ->where(function ($query) {
+            $query->whereNull('end_date')
+                ->orWhere('end_date', '>=', date('Y-m-d'));
+        })->first();
+        if($price == 0){
+            return response()->json('Total amount 0',403);
+        }
+        if($coupon == ''){
+            return response()->json('Coupon not found',404);
+        }else{
+            if($coupon->user_id!=''){
+                if($coupon->user_id != Auth::user()->id){
+                    return response()->json('Unauthorized coupon',403);
+                }
+            }
+            // check min purchase
+            if($coupon->min_purchase !='' && $coupon->min_purchase > $price){
+                return response()->json('Minimum purchase amount: '.readConfig('currency_symbol').$coupon->min_purchase ,403);
+            }
+            if($coupon->type==1){
+                $discount = $coupon->discount_value;
+            }else{
+                $discount = number_format(($price/100)*$coupon->discount_value,2);
+                if($coupon->max_discount != '' && $coupon->max_discount < $discount){
+                    $discount = $coupon->max_discount;
+                }
+            }
+            $coupon->discount = $discount;
+
+            return response()->json($coupon, 200);
+        }
+    }
+    public static function couponQuickCheck($id,$price)
+    {
+        $coupon = Coupon::where('id',$id)
+        ->where('is_published',1)
+        ->whereDate('start_date', '<=', date('Y-m-d'))
+        ->where(function ($query) {
+            $query->whereNull('end_date')
+                ->orWhere('end_date', '>=', date('Y-m-d'));
+        })->first();
+        if($price == 0){
+            return false;
+        }
+        if($coupon == ''){
+            return false;
+        }else{
+            if($coupon->user_id!=''){
+                if($coupon->user_id != Auth::user()->id){
+                    return false;
+                }
+            }
+            // check min purchase
+            if($coupon->min_purchase !='' && $coupon->min_purchase > $price){
+                return false;
+            }
+            if($coupon->type==1){
+                $discount = $coupon->discount_value;
+            }else{
+                $discount = number_format(($price/100)*$coupon->discount_value,2);
+                if($coupon->max_discount != '' && $coupon->max_discount < $discount){
+                    $discount = $coupon->max_discount;
+                }
+            }
+            $coupon->discount = $discount;
+
+            return $coupon;
+        }
     }
 }

@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth'],'prefix'=>'user','namespace' => 'User'], 
     Route::get('paypal/pay/cancle/{id}', 'PurchaseController@payCancle')->name('paypal.pay.error');
 
     Route::get('aamarpay/process', 'PurchaseController@aamarpayProcess')->name('aamarpay.process');
+    Route::post('/coupon-validation', 'PurchaseController@copuonValidation')->name('coupon.validation');
     
     Route::get('/plan/purchase', 'PurchaseController@userPurchase')->name('user.purchase');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
@@ -151,5 +152,7 @@ Route::group(['middleware' => ['auth', 'admin'],'prefix'=>'admin','namespace' =>
     Route::get('pages/content/edit/{id}', 'PageController@contentEdit')->name('pages.content.edit');
     Route::post('pages/content/update', 'PageController@contentUpdate')->name('pages.content.update');
     Route::get('pages/content/delete/{id}', 'PageController@contentDestroy')->name('pages.content.destroy');
+    //Coupon
+    Route::resource('/manage-coupon', 'CouponController');
 
 });

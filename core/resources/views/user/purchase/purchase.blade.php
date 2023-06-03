@@ -109,11 +109,8 @@
                                                         </div>
                                                     </div>
                                                     <div class='row '>
-                                                        <div class='col-md-12 error form-group mt-4 d-none'>
-                                                            <div class='alert-danger alert'>Please correct the
-                                                                errors and
-                                                                try
-                                                                again.
+                                                        <div class='col-md-12 error form-group d-none'>
+                                                            <div class='text-danger'>Please use correct information
                                                             </div>
                                                         </div>
                                                     </div>
@@ -212,6 +209,7 @@
                                 <input type="hidden" id="plan_id" name="plan_id" value="{{ $plan->id }}">
                                 <input type="hidden" id="paymentMethod" name="paymentMethod" value="">
                                 <input type="hidden" id="paymentAmount" name="paymentAmount" value="{{ $price }}">
+                                <input type="hidden" id="haveCoupon" name="coupon_id" value="">
                                 <input type="hidden" id="paymentType" name="type" value="{{ request()->input('type') == 2 ? 2 : 1 }}">
                                 <input type="hidden" id="paymentID" name="payment_id" value="">
                                 <input type="hidden" id="value_1" name="value_1" value="">
@@ -257,6 +255,15 @@
                 </div>
 
                 <div class="col-12 col-lg-4 p-2 d-flex flex-column justify-content-start">
+                    <div class="coupon my-3">
+                        <h5 class="coupon-title">Have a coupon?</h5>
+                        <div class="input-group mt-1">
+                            <input type="text" class="form-control" id="coupon-code" placeholder="Write down your coupon code">
+                            <button class="btn btn-outline-secondary " type="button" id="coupon-apply" onclick="couponValidation('{{route('coupon.validation')}}')">Apply</button>
+                        </div>
+                        <p class="text-danger" id="coupon-error" style="display: none"> Invalid Coupon </p>
+                        <p class="text-success" id="coupon-success"  style="display: none"> Successfully added </p>
+                    </div>
                     <div class="card border-0 shadow-sm">
 
                         <div class="card-header">
@@ -306,6 +313,31 @@
 
                                 </div>
                             </div>
+                            <div class="row my-3 coupon-applied" style="display: none">
+                                <div class="col">
+                                    <span>Coupon discount (<span id="applied-code"></span>)</span>
+                                </div>
+                                <div class="col-auto">
+                                    <span class=" checkout-month d-inline-block">
+                                       - <span>{{ readConfig('currency_symbol') }}</span><span id="coupon-amount"></span>
+                                    </span>
+
+
+                                </div>
+                            </div>
+                            <div class="row coupon-applied" style="display: none">
+                                <hr>
+                                <div class="col">
+                                    <span>Grand Total</span>
+                                </div>
+                                <div class="col-auto">
+                                    <span class=" checkout-month d-inline-block">
+                                        <span>{{ readConfig('currency_symbol') }}</span><span class="grand-total"></span>
+                                    </span>
+
+
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -318,10 +350,11 @@
                     </div>
 
                     <div class="px-2 mb-2">
+                        <input type="hidden" id="payable-price" value="{{ $price }}">
                         <button type="button" onclick="checkOut()" name="submit"
                             class="gradient-btn mt-2">
                             <span class=" checkout-month d-inline-block">
-                                Pay {{ readConfig('currency_symbol') }}{{ $price }}
+                                Pay {{ readConfig('currency_symbol') }}<span class="grand-total">{{ $price }}</span>
                             </span>
 
                         </button>
@@ -339,6 +372,33 @@
 @endsection
 @section('script')
     <script>
+        function couponValidation(url){
+            let price = parseInt("{{ $price }}");
+            $('#coupon-error').hide();
+            $('#coupon-success').hide();
+            let code = $('#coupon-code').val();
+            if(code == ''){
+                $('#coupon-error').html('Write your code!')
+                $('#coupon-error').show()
+            }else{
+                $.post(url,{code,price},function(result,status){
+                    console.log(result);
+                    $('#coupon-success').show();
+                    $('#applied-code').html(result.code);
+                    $('#coupon-amount').html(result.discount);
+                    let total = price - parseFloat(result.discount);
+
+                    $('.grand-total').html(total);
+                    $('#haveCoupon').val(result.id);
+                    $('#payable-price').val(total);
+                    $('.coupon-applied').show();
+                }).fail(function(jqXHR, textStatus, errorThrown) {
+                    let error = jqXHR.responseText.replace(/"/g, '');
+                    $('#coupon-error').html(error);
+                    $('#coupon-error').show();
+                });
+            }
+        }
         function checkOut() {
 
             var methods = 'others'
@@ -389,8 +449,9 @@
             "use strict"
 
             function paypalPayment() {
+                let  price = $('#payable-price').val();
                 $('#paymentMethod').val('paypal');
-                $('#paymentAmount').val({{ $price }});
+                $('#paymentAmount').val(price);
                 $('#paymentID').val('');
                 $('#value_1').val('');
                 $('#order_payment_done').submit();
@@ -401,8 +462,9 @@
 
     <script>
         function aamarPay(){
-            var type = $('#paymentType').val();
-            window.location.href = "{{route('aamarpay.process').'?plan='.$plan->id}}&price={{$price}}&type="+type;
+            let type = $('#paymentType').val();
+            let  price = $('#payable-price').val();
+            window.location.href = "{{route('aamarpay.process').'?plan='.$plan->id}}"+`&price=${price}}&type=${type}`;
         }
     </script>
 
@@ -412,10 +474,11 @@
 
             function bankPayment() {
 
-                var planId = $('#plan_id').val();
-                var type = $('#paymentType').val();
-                // var formData = $('#order_payment_done').serialize();
-                var url = "{{ route('checkout.bank') }}" + `?plan_id=${planId}&type=${type}` ;
+                let planId = $('#plan_id').val();
+                let type = $('#paymentType').val();
+                let  price = $('#payable-price').val();
+                let  coupon = $('#haveCoupon').val();
+                let url = "{{ route('checkout.bank') }}" + `?plan_id=${planId}&type=${type}&price=${price}&coupon_id=${coupon}` ;
                 forModal(url, 'Bank Transfer');
             }
         </script>
@@ -430,7 +493,7 @@
             "use strict"
 
             function stripPaymnet() {
-                var price = "{{ $price }}";
+                let  price = $('#payable-price').val();
                 // e.preventDefault();
                 $('#paymentMethod').val('stripe');
                 $('#paymentAmount').val(price);
@@ -471,18 +534,17 @@
             "use strict"
 
             function razorPaymnet(e) {
-
+                let  price = $('#payable-price').val();
                 $('#paymentMethod').val('razorpay');
-                $('#paymentAmount').val({{ $price }});
+                $('#paymentAmount').val(price);
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                var amount = parseInt("{{ $price }}") * 100;
                 var options = {
                     "key": "{{ readConfig('RAZORPAY_KEY') }}",
-                    "amount": amount, // 2000 paise = INR 20
+                    "amount": price * 100, // 2000 paise = INR 20
                     "currency": "USD",
                     "name": "{{ $plan->name }}",
                     "description": "Payment",

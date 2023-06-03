@@ -40,6 +40,10 @@
                                         <li>Date: {{ dateTimeFormat($order->created_at) }}</li>
                                         <li>Invoice: {{ $order->invoice }}</li>
                                         <li>Payment Type: {{ $order->type==2?'Yearly':'Monthly' }} </li>
+                                        <li>Total Amount: {{readConfig('currency_symbol')}}{{ $order->total+$order->discount_amount }} </li>
+                                        @if($order->discount_amount>0)
+                                        <li>Discount Amount: {{readConfig('currency_symbol')}}{{ $order->discount_amount }} (Coupon: {{$order->discount_code}}) </li>
+                                        @endif
                                         <li>Paid Amount: {{readConfig('currency_symbol')}} {{ $order->total }} </li>
                                         <li>Payment Method: {{ $order->payment_method }}</li>
                                         @if($order->other != '')

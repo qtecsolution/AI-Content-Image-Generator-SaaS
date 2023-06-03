@@ -2,10 +2,11 @@
     <form action="{{ route('plan.purchase.store') }}" method="post" id="order_payment_done" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="plan_id" value="{{ $plan->id }}">
-        <input type="hidden" id="paymentMethod" name="paymentMethod" value="bank">
-        <input type="hidden" id="paymentType" name="type" value="{{$type}}">
-        <input type="hidden" id="paymentAmount" name="paymentAmount" value="{{ $type == 2 ? $plan->yearly_price : $plan->price}}">
-        <input type="hidden" id="paymentTID" name="paymentTID" value="">
+        <input type="hidden" name="paymentMethod" value="bank">
+        <input type="hidden" name="type" value="{{$type}}">
+        <input type="hidden"  name="paymentAmount" value="{{ $price}}">
+        <input type="hidden" name="coupon_id" value="{{$couponId??''}}">
+        <input type="hidden" name="paymentTID" value="">
         <p class="mb-3">{{ readConfig('about_bank') }}</p>
         <ul class="list-group">
             <li class="list-group-item">Bank Name: {{ readConfig('bank_name') }}</li>
@@ -14,7 +15,7 @@
             <li class="list-group-item">Account Number: {{ readConfig('account_number') }}</li>
             <li class="list-group-item">Swift Code: {{ readConfig('swift_code') }}</li>
             <li class="list-group-item">Routing Number: {{ readConfig('routing_number') }}</li>
-            <li class="list-group-item">Payable Amount: {{readConfig('currency_symbol')}}{{ $type == 2 ? $plan->yearly_price : $plan->price}} </li>
+            <li class="list-group-item">Payable Amount: {{readConfig('currency_symbol')}}{{ $price}} </li>
         </ul>
 
         <div class="form-group mt-2 mb-2">
