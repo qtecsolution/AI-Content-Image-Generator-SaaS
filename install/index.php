@@ -52,6 +52,16 @@ if (readEnv("INSTALLED") == 1 || readEnv("INSTALLED") == '"1"') {
 	//echo $root_url;
 	exit;
 }
+function dbCheck($servername, $username, $password, $dbname){
+	try {
+		$conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
+		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		return "success";
+	} catch(PDOException $e) {
+		return "DB Connection failed: " . $e->getMessage();
+	}
+
+}
 function envSetup($allData)
 {
 	try {
@@ -70,10 +80,14 @@ function envSetup($allData)
 			}
 			if ($key == 'url') {
 				writeEnv("APP_URL", $value);
+				$pattern = '/^(?:https?:\/\/)?(?:[-A-Za-z0-9]+\.)+[A-Za-z]{2,}$/';
+				if(preg_match($pattern, $value)){
+					writeEnv("APP_ENV", "production");
+				}
+				
 			}
 			if ($key == 'app_name') {
 				writeEnv("APP_NAME", $value);
-				writeEnv("APP_ENV", "production");
 				writeConfig("name", $value);
 				writeConfig("type_name", $value);
 				writeConfig("demo", false);
@@ -174,49 +188,8 @@ function getWebURL()
 	}
 	return $base_url;
 }
-function curlContent($add)
-{
-	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_AUTOREFERER, TRUE);
-	curl_setopt($ch, CURLOPT_HEADER, 0);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	curl_setopt($ch, CURLOPT_URL, $add);
-	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, TRUE);
-	$res = curl_exec($ch);
-	curl_close($ch);
-	return $res;
-}
-function getStatus($arr)
-{
-	$url = 'https://license.qtecsolution.net/api';
-	$arr['product'] = 'creaify';
-	$call = $url . "?" . http_build_query($arr);
-	return curlContent($call);
-}
-function sendAcknoledgement($val)
-{
-	$call = 'https://license.qtecsolution.net/done/' . $val->installcode;
-	return curlContent($call);
-}
-function replaceData($val, $arr)
-{
-	foreach ($arr as $key => $value) {
-		$val = str_replace('{{' . $key . '}}', $value, $val);
-	}
-	return $val;
-}
-function setDataValue($val, $loc)
-{
-	$file = fopen($loc, 'w');
-	fwrite($file, $val);
-	fclose($file);
-}
-function sysInstall($sr, $pt)
-{
-	$pt['key'] = base64_encode(random_bytes(32));
-	setDataValue(replaceData($sr->data->body, $pt), $sr->data->location);
-	return true;
-}
+
+
 function importDatabase($pt)
 {
 	$db = new PDO("mysql:host=$pt[db_host];dbname=$pt[db_name]", $pt['db_user'], $pt['db_pass']);
@@ -348,26 +321,37 @@ $folderPermissions = [
 										$apiResponse = makeAPICall($purchase_code, $url);
 
 										if ($apiResponse['status'] === 200) {
-											if (!importDatabase($alldata)) {
-												echo "<h3 class='text-danger'>EasyInstaller Unable to install your system. Please Check Your Database Credentials!<h3>";
-											} else {
-												if (!envSetup($alldata)) {
-													echo "<h3 class='text-danger'>An unexpected error occurred with the installation. Please Check Your All files & try again.<h3>";
-												} else {
-													echo '<h2 class="text-success text-uppercase mb-5">Your system has been installed successfully!</h2>';
-													if (setAdminEmail($alldata)) {
-														echo '<p class="text-success warning">Admin credential has been set successfully!</p>';
-													} else {
-														echo '<p class="text-warning warning">EasyInstaller unable to set the email address of admin.</p>';
-													}
-													echo '<div class="warning">
-												<p class="text-warning lead my-3">Please change the admin password as soon as possible.</p>
-												</div> <br>';
-													echo '
+											// DB name, DB user check
+											$dbCheckResponse = dbCheck($db_host,$db_user,$db_pass,$db_name);
+											if($dbCheckResponse!='success'){
+												echo "<h4 class='text-danger'>Installer Unable to install your system. Please Check Your Database Credentials!</h4>";
+												echo "<p class='text-warning warning'>".$dbCheckResponse."</p>";
+												echo '
 												<div class="warning">
-												<a href="' . getWebURL() . '" class="theme-button choto">Go to website</a>
-												<a href="' . getWebURL() . '/home" class="theme-button choto">Go to Admin Panel</a>
+												<a href="?action=info" class="theme-button choto">Go Back</a>
 												</div>';
+											}else{
+												if (!importDatabase($alldata)) {
+													echo "<h3 class='text-danger'>Installer Unable to install your system. Please Check Your Database Credentials!<h3>";
+												} else {
+													if (!envSetup($alldata)) {
+														echo "<h3 class='text-danger'>An unexpected error occurred with the installation. Please Check Your All files & try again.<h3>";
+													} else {
+														echo '<h2 class="text-success text-uppercase mb-5">Your system has been installed successfully!</h2>';
+														if (setAdminEmail($alldata)) {
+															echo '<p class="text-success warning">Admin credential has been set successfully!</p>';
+														} else {
+															echo '<p class="text-warning warning">Installer unable to set the email address of admin.</p>';
+														}
+														echo '<div class="warning">
+													<p class="text-warning lead my-3">Please change the admin password as soon as possible.</p>
+													</div> <br>';
+														echo '
+													<div class="warning">
+													<a href="' . getWebURL() . '" class="theme-button choto">Go to website</a>
+													<a href="' . getWebURL() . '/home" class="theme-button choto">Go to Admin Panel</a>
+													</div>';
+													}
 												}
 											}
 										} elseif ($apiResponse['status'] === 400) {
@@ -759,7 +743,7 @@ $folderPermissions = [
 	</div>
 	<footer class="section-bg py-3 text-center">
 		<div class="container">
-			<p class="m-0 footer-text">&copy;<?php echo Date('Y') ?> - All Right Reserved by Crafy</p>
+			<p class="m-0 footer-text">&copy;<?php echo Date('Y') ?> - All Rights Reserved by Creaify</p>
 		</div>
 	</footer>
 	<style>

@@ -468,7 +468,7 @@ class PurchaseController extends Controller
         $expense = PlanExpense::where('order_id', $order->id)->first();
         return view('user.purchase.transactionDetails', compact('plan', 'expense', 'order'));
     }
-    public function copuonValidation(Request $request)
+    public function couponValidation(Request $request)
     {
         $code = $request->code??'';
         $price = $request->price??0;

@@ -3,7 +3,7 @@
         @csrf
 
         <div class="form-group mb-3">
-            <label  class="form-label"> @translate(Page Title) <span class="text-danger">*</span></label>
+            <label  class="form-label">@translate(Page Title) <span class="text-danger">*</span></label>
             <input class="form-control custom-input" placeholder="@translate(Page Title)" type="text"  name="title" required>
         </div>
 
@@ -21,9 +21,9 @@
             <label class="form-label">@translate(Meta Description)</label>
             <textarea class="form-control custom-input" name="meta_desc" maxlength="200" placeholder="@translate(Meta Description write)"></textarea>
         </div>
-        
 
-        
+
+
         <div class="generate-btn-wrapper">
             <button type="submit" class="generate-btn px-4">@translate(Create)</button>
          </div>

@@ -75,9 +75,9 @@
 
             <div class="demo-user mt-3">
                 <h6> Demo Credentials: </h6>
-                <hr>
-                <p><b>Admin:</b> admin@qtecsolution.net </p>
-                <p><b>Password:</b> 12345678 </p>
+{{--                <hr>--}}
+{{--                <p><b>Admin:</b> admin@qtecsolution.net </p>--}}
+{{--                <p><b>Password:</b> 12345678 </p>--}}
                 <hr>
                 <p><b>User:</b> demo@qtecsolution.net </p>
                 <p><b>Password:</b> 12345678 </p>

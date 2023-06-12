@@ -83,8 +83,8 @@ Route::group(['middleware' => ['auth'],'prefix'=>'user','namespace' => 'User'], 
     Route::get('paypal/pay/cancle/{id}', 'PurchaseController@payCancle')->name('paypal.pay.error');
 
     Route::get('aamarpay/process', 'PurchaseController@aamarpayProcess')->name('aamarpay.process');
-    Route::post('/coupon-validation', 'PurchaseController@copuonValidation')->name('coupon.validation');
-    
+    Route::post('/coupon-validation', 'PurchaseController@couponValidation')->name('coupon.validation');
+
     Route::get('/plan/purchase', 'PurchaseController@userPurchase')->name('user.purchase');
     Route::get('/plan/purchase/{id}', 'PurchaseController@purchase')->name('plan.purchase');
     Route::get('/plan/expense', 'PurchaseController@userexpense')->name('plan.userexpense');

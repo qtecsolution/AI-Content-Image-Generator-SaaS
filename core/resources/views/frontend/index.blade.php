@@ -300,8 +300,8 @@
                             Preferred Package</h3>
                     </div>
                     <div class="col-md-12 text-center">
-                        <label> <input class="pricing_status" type="radio" value="1" name="pricing_status" checked> Monthly </label>
-                        <label> <input class="pricing_status" type="radio" value="2" name="pricing_status"> Yearly </label>
+                        <label> <input class="pricing_status" type="radio" value="1" name="pricing_status" onclick="changePriceType(1)" checked> Monthly </label>
+                        <label> <input class="pricing_status" type="radio" value="2" name="pricing_status" onclick="changePriceType(2)"> Yearly </label>
                     </div>
                 </div>
             </div>
@@ -320,10 +320,14 @@
                                 <span class="name">{{$item->name}}</span>
                                 <span class="price">
                                     <span class="currency">{{readConfig('currency_symbol')}}</span>
-                                    <span class="number">{{$item->price}}</span>
-                                    <span class="plane-time">/mo</span>
+                                    <span class="number monthly_price">{{$item->price}}</span>
+                                    <span class="number yearly_price" style="display: none">{{$item->yearly_price}}</span>
+                                    <span class="plane-time {{$item->price == 0 ?'': 'type-text'}}">/mo</span>
                                 </span>
-                                <small class="text-gray {{$item->price == 0 ? 'visibility-hidden':''}}">{{readConfig('currency_symbol')}}{{$item->yearly_price }}/year</small>
+                                <small class="text-gray {{$item->price == 0 ? 'visibility-hidden':''}}">
+                                    {{readConfig('currency_symbol')}}<span class="number monthly_price">{{$item->yearly_price}}</span><span class="number yearly_price" style="display: none">{{$item->price}}</span><span class="plane-time type-text-small">/year</span>
+                                </small>
+
                             </div>
 
                             <div class="pricing-card-body">
@@ -470,6 +474,37 @@
                 url += '?type='+type;
             }
             window.location.href = url;
+        }
+        function changePriceType(type){
+            const yearly = document.querySelectorAll('.yearly_price');
+            const monthly = document.querySelectorAll('.monthly_price');
+            var typeTextElement = document.querySelectorAll('.type-text');
+            var typeTextSmallElement = document.querySelectorAll('.type-text-small');
+            let typeText = '/year';
+            let typeTextSmall = '/mo';
+            if(type==1){
+                for (let i = 0; i < yearly.length; i++) {
+                    yearly[i].style.display = 'none';
+                }
+                for (let i = 0; i < monthly.length; i++) {
+                    monthly[i].style.display = 'inline';
+                }
+                typeText = '/mo';
+                typeTextSmall = '/year';
+            }else{
+                for (let i = 0; i < yearly.length; i++) {
+                    yearly[i].style.display = 'inline';
+                }
+                for (let i = 0; i < monthly.length; i++) {
+                    monthly[i].style.display = 'none';
+                }
+            }
+            for (let i = 0; i < typeTextElement.length; i++) {
+                typeTextElement[i].innerHTML = typeText;
+            }
+            for (let i = 0; i < typeTextSmallElement.length; i++) {
+                typeTextSmallElement[i].innerHTML = typeTextSmall;
+            }
         }
     </script>
 @endsection
