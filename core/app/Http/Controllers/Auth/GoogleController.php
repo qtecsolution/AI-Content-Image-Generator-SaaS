@@ -64,7 +64,8 @@ class GoogleController extends Controller
             }
 
         } catch (Exception $e) {
-            dd($e->getMessage());
+            alert($e->getMessage());
+            return redirect()->intended('home');
         }
     }
 }
