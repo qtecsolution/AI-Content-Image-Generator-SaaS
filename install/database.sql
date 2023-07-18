@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 03, 2023 at 09:17 AM
+-- Generation Time: Jun 15, 2023 at 11:58 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `creaify_db_test`
+-- Database: `creaify_test`
 --
 
 -- --------------------------------------------------------
@@ -112,6 +112,28 @@ CREATE TABLE `content_histories` (
   `generated_content` longtext NOT NULL,
   `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `type` enum('content','code') NOT NULL DEFAULT 'content',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `coupons`
+--
+
+CREATE TABLE `coupons` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  `min_purchase` int(11) NOT NULL,
+  `max_discount` int(11) DEFAULT NULL,
+  `type` tinyint(4) NOT NULL DEFAULT 1,
+  `discount_value` int(11) NOT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `is_published` tinyint(4) NOT NULL,
+  `user_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -263,7 +285,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2023_03_01_172546_create_blogs_table', 1),
 (18, '2023_03_02_122318_create_faqs_table', 1),
 (19, '2023_03_06_190539_create_languages_table', 1),
-(20, '2023_04_10_150053_create_ai_chat_histories_table', 2);
+(20, '2023_04_10_150053_create_ai_chat_histories_table', 2),
+(21, '2023_05_07_125835_create_coupons_table', 3);
 
 -- --------------------------------------------------------
 
@@ -295,50 +318,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`id`, `invoice`, `user_id`, `plan_id`, `is_paid`, `total`, `payment_method`, `payment_id`, `type`, `other`, `name`, `email`, `phone`, `address`, `created_at`, `updated_at`) VALUES
-(1, '1680945910-11514', 1, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Admin', 'admin@gmail.com', NULL, NULL, '2023-04-08 09:25:10', '2023-04-08 09:25:10'),
-(2, '1681119922-44057', 2, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Rhona French', 'zubilub@mailinator.com', NULL, NULL, '2023-04-10 09:45:22', '2023-04-10 09:45:22'),
-(3, '1681120618-10084', 3, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Ria Berg', 'luri@mailinator.com', NULL, NULL, '2023-04-10 09:56:58', '2023-04-10 09:56:58'),
-(4, '1681183597-17080', 1, 2, 0, 5.00, 'bank', NULL, 1, NULL, NULL, NULL, NULL, NULL, '2023-04-11 14:26:37', '2023-04-11 14:26:37'),
-(5, '1681185011-25832', 1, 2, 1, 5.00, 'bank', NULL, 1, NULL, NULL, NULL, NULL, NULL, '2023-04-11 14:50:11', '2023-04-11 14:50:17'),
-(6, '1681197401-58264', 4, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, '2023-04-11 18:16:41', '2023-04-11 18:16:41'),
-(7, '1682575728-31946', 5, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'kawsar ahmed', 'kawsar.qtec@gmail.com', NULL, '', '2023-04-27 17:08:48', '2023-04-27 17:08:48'),
-(8, '1682589428-16748', 6, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Md Likhon Uz Zaman', 'likhon.qtec@gmail.com', NULL, '', '2023-04-27 20:57:08', '2023-04-27 20:57:08'),
-(9, '1682594328-42800', 7, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'NM Babor', 'nmbabor50@gmail.com', NULL, '', '2023-04-27 22:18:48', '2023-04-27 22:18:48'),
-(10, '1682692198-12476', 8, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'MD LIKHON UZ ZAMAN', 'm.likhonzaman2@gmail.com', NULL, '', '2023-04-29 01:29:58', '2023-04-29 01:29:58'),
-(11, '1682693035-19265', 8, 2, 1, 5.00, 'aamarpay', 'AAM1682693038672822', 1, NULL, 'MD LIKHON UZ ZAMAN', 'm.likhonzaman2@gmail.com', NULL, '', '2023-04-29 01:44:08', '2023-04-29 01:44:08'),
-(12, '1682833942-75259', 10, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'nTech Bangla', 'ntechbangla21@gmail.com', NULL, '', '2023-04-30 16:52:22', '2023-04-30 16:52:22'),
-(13, '1682856987-96269', 11, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Demo User', 'demo@qtecsolution.net', NULL, '', '2023-04-30 23:16:27', '2023-04-30 23:16:27'),
-(14, '1683118528-93130', 1, 3, 1, 10.00, 'aamarpay', 'AAM1683118529672451', 1, NULL, 'Admin', 'admin@qtecsolution.net', '01811951215', '', '2023-05-03 23:55:33', '2023-05-03 23:55:33'),
-(15, '1683193176-68603', 11, 2, 1, 5.00, 'aamarpay', 'AAM1683193179104672', 1, NULL, 'Demo User', 'demo@qtecsolution.net', NULL, '', '2023-05-04 19:40:09', '2023-05-04 19:40:09'),
-(16, '1683358165-48441', 13, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Music Bay TV', 'musicbay.tv@gmail.com', NULL, '', '2023-05-06 17:29:25', '2023-05-06 17:29:25'),
-(17, '1683909050-51858', 14, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Silver Shine', 'buzzard351@gmail.com', NULL, '', '2023-05-13 02:30:50', '2023-05-13 02:30:50'),
-(18, '1683909569-18811', 15, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Buffy Mcpherson', 'kytol@fakemail.com', NULL, '', '2023-05-13 02:39:29', '2023-05-13 02:39:29'),
-(19, '1683909640-72121', 16, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Yardley Bentley', 'vuqek@mailinator.com', NULL, '', '2023-05-13 02:40:40', '2023-05-13 02:40:40'),
-(20, '1683909869-55335', 17, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Uriel Dominguez', 'dymefylezy@fakemail.com', NULL, '', '2023-05-13 02:44:29', '2023-05-13 02:44:29'),
-(21, '1683910050-47002', 18, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Nishan Paul', 'nishanpaul12011996se@gmail.com', NULL, '', '2023-05-13 02:47:30', '2023-05-13 02:47:30'),
-(22, '1683910103-16088', 19, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'hello', 'okthanks@wel.come', NULL, '', '2023-05-13 02:48:23', '2023-05-13 02:48:23'),
-(23, '1683911775-48353', 20, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'sohag hossen', 'sohaghossen217@gmail.com', NULL, '', '2023-05-13 03:16:15', '2023-05-13 03:16:15'),
-(24, '1683911914-36271', 21, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Morshed Islam', 'morshedislam20@gmail.com', NULL, '', '2023-05-13 03:18:34', '2023-05-13 03:18:34'),
-(25, '1683912850-29175', 22, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'md al emran eman', 'emon199227@gmail.com', NULL, '', '2023-05-13 03:34:10', '2023-05-13 03:34:10'),
-(26, '1683913032-92526', 23, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'tester', 'test@test.com', NULL, '', '2023-05-13 03:37:12', '2023-05-13 03:37:12'),
-(27, '1683913275-12634', 24, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Creative Mind', 'hdnatok02@gmail.com', NULL, '', '2023-05-13 03:41:15', '2023-05-13 03:41:15'),
-(28, '1683913426-75995', 25, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Mohammad Repon', 'md.repon56655@gmail.com', NULL, '', '2023-05-13 03:43:46', '2023-05-13 03:43:46'),
-(29, '1683914669-81822', 26, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Mofazzul', 'mofazzulmd@gmail.com', NULL, '', '2023-05-13 04:04:29', '2023-05-13 04:04:29'),
-(30, '1683918084-57094', 27, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'MD Kashfin', 'xkashfin@gmail.com', NULL, '', '2023-05-13 05:01:24', '2023-05-13 05:01:24'),
-(31, '1683918232-51846', 28, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'MD AKASH AHMED', 'akash.pst11@gmail.com', NULL, '', '2023-05-13 05:03:52', '2023-05-13 05:03:52'),
-(32, '1683922253-33107', 29, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Tarek Greeens', 'tarekgreens20@gmail.com', NULL, '', '2023-05-13 06:10:53', '2023-05-13 06:10:53'),
-(33, '1683937677-65483', 30, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Mohammad Asif', 'kmasif25@gmail.com', NULL, '', '2023-05-13 10:27:57', '2023-05-13 10:27:57'),
-(34, '1683945008-83788', 31, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Pascale Foreman', 'jwyzbdcxmw@bugfoo.com', NULL, '', '2023-05-13 12:30:08', '2023-05-13 12:30:08'),
-(35, '1683945157-63585', 32, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Md Mahbub Alam', 'mahubtuto@gmail.com', NULL, '', '2023-05-13 12:32:37', '2023-05-13 12:32:37'),
-(36, '1683972407-64760', 33, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Bx', 'bxf89881@nezid.com', NULL, '', '2023-05-13 20:06:47', '2023-05-13 20:06:47'),
-(37, '1683975605-32859', 34, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Mazharul Islam Sumon', 'miconnect94@gmail.com', NULL, '', '2023-05-13 21:00:05', '2023-05-13 21:00:05'),
-(38, '1684045497-48548', 35, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Solaiman Badshah', 'imnmbabor@gmail.com', NULL, '', '2023-05-14 16:24:57', '2023-05-14 16:24:57'),
-(39, '1684131768-57959', 36, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'milon Mahmod', 'bd.milonmahmod@gmail.com', NULL, '', '2023-05-15 16:22:48', '2023-05-15 16:22:48'),
-(40, '1684304362-23896', 37, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Md. Asaduzzaman', 'asd.qtec@gmail.com', NULL, '', '2023-05-17 16:19:22', '2023-05-17 16:19:22'),
-(41, '1684521534-12651', 38, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'choto vaia', 'chotovaia@gmail.com', NULL, '', '2023-05-20 04:38:54', '2023-05-20 04:38:54'),
-(42, '1684690099-28203', 1, 2, 1, 5.00, 'stripe', 'tok_1NAG3KHkdL4grcnR6zjetsYn', 1, NULL, 'Admin', 'admin@qtecsolution.net', '01811951215', '', '2023-05-22 03:28:19', '2023-05-22 03:28:20'),
-(43, '1684874964-97694', 39, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Mh Zoy', 'mhjoy547@gmail.com', NULL, '', '2023-05-24 06:49:24', '2023-05-24 06:49:24'),
-(44, '1685270486-10481', 7, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'NM Babor', 'nmbabor50@gmail.com', NULL, '', '2023-05-28 20:41:26', '2023-05-28 20:41:26');
+(1, '1686823062-11864', 1, 1, 1, 0.00, 'Free', NULL, 1, NULL, 'Admin', 'admin@gmail.com', '01811951215', '', '2023-06-15 09:57:42', '2023-06-15 09:57:42');
 
 -- --------------------------------------------------------
 
@@ -510,49 +490,7 @@ CREATE TABLE `plan_expenses` (
 --
 
 INSERT INTO `plan_expenses` (`id`, `user_id`, `order_id`, `plan_id`, `word_count`, `current_word_count`, `document_count`, `current_document_count`, `image_count`, `current_image_count`, `type`, `activated_at`, `expire_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 1, 200, 100, 10, 10, 5, 5, 1, '2023-04-08 15:25:10', '2023-05-08 15:25:10', '2023-04-08 09:25:10', '2023-04-11 14:26:21'),
-(2, 2, 2, 1, 200, 100, 10, 1, 5, 0, 1, '2023-04-10 15:45:22', '2023-05-10 15:45:22', '2023-04-10 09:45:22', '2023-04-10 09:47:24'),
-(3, 3, 3, 1, 200, 100, 10, 0, 5, 0, 1, '2023-04-10 15:56:58', '2023-05-10 15:56:58', '2023-04-10 09:56:58', '2023-04-10 22:37:07'),
-(4, 1, 5, 2, 400, 253, 150, 0, 20, 2, 1, '2023-04-11 09:50:17', '2023-05-11 09:50:17', '2023-04-11 14:50:17', '2023-04-26 16:36:38'),
-(5, 4, 6, 1, 200, 100, 10, 0, 5, 0, 1, '2023-04-11 13:16:41', '2023-05-11 13:16:41', '2023-04-11 18:16:41', '2023-04-11 18:16:57'),
-(6, 5, 7, 1, 200, 100, 10, 0, 5, 0, 1, '2023-04-27 12:08:48', '2023-05-27 12:08:48', '2023-04-27 17:08:48', '2023-04-27 17:08:48'),
-(7, 6, 8, 1, 200, 100, 10, 1, 5, 0, 1, '2023-04-27 15:57:08', '2023-05-27 15:57:08', '2023-04-27 20:57:08', '2023-04-30 17:20:04'),
-(8, 7, 9, 1, 200, 100, 10, 0, 5, 0, 1, '2023-04-27 17:18:48', '2023-05-27 17:18:48', '2023-04-27 22:18:48', '2023-04-27 22:18:48'),
-(9, 8, 10, 1, 200, 100, 10, 0, 5, 0, 1, '2023-04-28 20:29:58', '2023-05-28 20:29:58', '2023-04-29 01:29:58', '2023-04-29 01:29:58'),
-(10, 8, 11, 2, 400, 300, 160, 0, 25, 0, 1, '2023-04-28 20:44:08', '2023-06-27 20:44:08', '2023-04-29 01:44:08', '2023-04-29 01:53:10'),
-(11, 10, 12, 1, 200, 100, 10, 1, 5, 0, 1, '2023-04-30 11:52:22', '2023-05-30 11:52:22', '2023-04-30 16:52:22', '2023-04-30 16:53:22'),
-(12, 11, 13, 1, 200, 100, 10, 0, 5, 0, 1, '2023-04-30 18:16:27', '2023-05-30 18:16:27', '2023-04-30 23:16:27', '2023-04-30 23:16:27'),
-(13, 1, 14, 3, 30147, 3854, 0, 0, 58, 20, 1, '2023-05-03 18:55:33', '2023-07-02 18:55:33', '2023-05-03 23:55:33', '2023-05-22 03:26:27'),
-(14, 11, 15, 2, 10100, 518, 0, 0, 25, 4, 1, '2023-05-04 15:40:09', '2023-07-03 15:40:09', '2023-05-04 19:40:09', '2023-05-23 04:51:39'),
-(15, 13, 16, 1, 2000, 417, 0, 0, 5, 4, 1, '2023-05-06 13:29:25', '2023-06-05 13:29:25', '2023-05-06 17:29:25', '2023-05-06 18:50:04'),
-(16, 14, 17, 1, 2000, 0, 0, 0, 5, 2, 1, '2023-05-12 22:30:50', '2023-06-11 22:30:50', '2023-05-13 02:30:50', '2023-05-13 02:31:54'),
-(17, 15, 18, 1, 2000, 45, 0, 0, 5, 5, 1, '2023-05-12 22:39:29', '2023-06-11 22:39:29', '2023-05-13 02:39:29', '2023-05-13 02:43:58'),
-(18, 16, 19, 1, 2000, 141, 0, 0, 5, 0, 1, '2023-05-12 22:40:40', '2023-06-11 22:40:40', '2023-05-13 02:40:40', '2023-05-13 02:42:12'),
-(19, 17, 20, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-12 22:44:29', '2023-06-11 22:44:29', '2023-05-13 02:44:29', '2023-05-13 02:44:29'),
-(20, 18, 21, 1, 2000, 0, 0, 0, 5, 1, 1, '2023-05-12 22:47:30', '2023-06-11 22:47:30', '2023-05-13 02:47:30', '2023-05-13 02:49:27'),
-(21, 19, 22, 1, 2000, 53, 0, 0, 5, 0, 1, '2023-05-12 22:48:23', '2023-06-11 22:48:23', '2023-05-13 02:48:23', '2023-05-13 02:50:03'),
-(22, 20, 23, 1, 2000, 62, 0, 0, 5, 0, 1, '2023-05-12 23:16:15', '2023-06-11 23:16:15', '2023-05-13 03:16:15', '2023-05-13 03:18:05'),
-(23, 21, 24, 1, 2000, 100, 0, 0, 5, 0, 1, '2023-05-12 23:18:34', '2023-06-11 23:18:34', '2023-05-13 03:18:34', '2023-05-13 03:21:05'),
-(24, 22, 25, 1, 2000, 187, 0, 0, 5, 4, 1, '2023-05-12 23:34:10', '2023-06-11 23:34:10', '2023-05-13 03:34:10', '2023-05-13 03:55:15'),
-(25, 23, 26, 1, 2000, 129, 0, 0, 5, 2, 1, '2023-05-12 23:37:12', '2023-06-11 23:37:12', '2023-05-13 03:37:12', '2023-05-13 03:40:58'),
-(26, 24, 27, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-12 23:41:15', '2023-06-11 23:41:15', '2023-05-13 03:41:15', '2023-05-13 03:41:15'),
-(27, 25, 28, 1, 2000, 70, 0, 0, 5, 0, 1, '2023-05-12 23:43:46', '2023-06-11 23:43:46', '2023-05-13 03:43:46', '2023-05-13 03:45:23'),
-(28, 26, 29, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-13 00:04:29', '2023-06-12 00:04:29', '2023-05-13 04:04:29', '2023-05-13 04:04:29'),
-(29, 27, 30, 1, 2000, 0, 0, 0, 5, 1, 1, '2023-05-13 01:01:24', '2023-06-12 01:01:24', '2023-05-13 05:01:24', '2023-05-13 05:03:06'),
-(30, 28, 31, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-13 01:03:52', '2023-06-12 01:03:52', '2023-05-13 05:03:52', '2023-05-13 05:03:52'),
-(31, 29, 32, 1, 2000, 435, 0, 0, 5, 3, 1, '2023-05-13 02:10:53', '2023-06-12 02:10:53', '2023-05-13 06:10:53', '2023-05-13 06:17:35'),
-(32, 30, 33, 1, 2000, 154, 0, 0, 5, 0, 1, '2023-05-13 06:27:57', '2023-06-12 06:27:57', '2023-05-13 10:27:57', '2023-05-13 10:29:55'),
-(33, 31, 34, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-13 08:30:08', '2023-06-12 08:30:08', '2023-05-13 12:30:08', '2023-05-13 12:30:08'),
-(34, 32, 35, 1, 2000, 0, 0, 0, 5, 2, 1, '2023-05-13 08:32:37', '2023-06-12 08:32:37', '2023-05-13 12:32:37', '2023-05-13 12:35:37'),
-(35, 33, 36, 1, 2000, 0, 0, 0, 5, 5, 1, '2023-05-13 16:06:47', '2023-06-12 16:06:47', '2023-05-13 20:06:47', '2023-05-13 20:11:26'),
-(36, 34, 37, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-13 17:00:05', '2023-06-12 17:00:05', '2023-05-13 21:00:05', '2023-05-13 21:00:05'),
-(37, 35, 38, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-14 12:24:57', '2023-06-13 12:24:57', '2023-05-14 16:24:57', '2023-05-14 16:24:57'),
-(38, 36, 39, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-15 12:22:48', '2023-06-14 12:22:48', '2023-05-15 16:22:48', '2023-05-15 16:22:48'),
-(39, 37, 40, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-17 12:19:22', '2023-06-16 12:19:22', '2023-05-17 16:19:22', '2023-05-17 16:19:22'),
-(40, 38, 41, 1, 2000, 82, 0, 0, 5, 0, 1, '2023-05-20 00:38:54', '2023-06-19 00:38:54', '2023-05-20 04:38:54', '2023-05-20 04:40:29'),
-(41, 1, 42, 2, 36293, 0, 0, 0, 58, 0, 1, '2023-05-21 23:28:20', '2023-08-19 23:28:20', '2023-05-22 03:28:20', '2023-05-22 03:28:20'),
-(42, 39, 43, 1, 2000, 0, 0, 0, 5, 1, 1, '2023-05-24 02:49:24', '2023-06-23 02:49:24', '2023-05-24 06:49:24', '2023-05-24 06:50:01'),
-(43, 7, 44, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-05-28 16:41:26', '2023-06-27 16:41:26', '2023-05-28 20:41:26', '2023-05-28 20:41:26');
+(1, 1, 1, 1, 2000, 0, 0, 0, 5, 0, 1, '2023-06-15 15:57:42', '2023-07-15 15:57:42', '2023-06-15 09:57:42', '2023-06-15 09:57:42');
 
 -- --------------------------------------------------------
 
@@ -585,44 +523,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `address`, `avatar`, `type`, `plan_id`, `order_id`, `google_id`, `plan_expense_id`, `password`, `pass_changed`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'admin@gmail.com', '01811951215', NULL, 'assets/uploads/user/2023/04/11/admin9853.png', 'admin', 2, NULL, NULL, 41, '$2y$10$ujzSLRmvNgBL1L.sDiSP1e3ew7YqtuxqkDM/Y1dCnZlNwT0UrhAMO', 1, NULL, 'xlSLyKzT2yYZgQ51yHDS7ltvKsmTxPwlkV2BnWdeZ2GCcBZOytbWVoruhpKU', '2023-04-08 09:23:34', '2023-05-22 03:28:20'),
-(2, 'Rhona French', 'zubilub@mailinator.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 2, '$2y$10$ELM1fN0y6ahxJNXtSK0EGuaXaGTEjT2YWu95026C6Fn1LEDcBWzS.', 0, NULL, NULL, '2023-04-10 09:45:22', '2023-04-10 09:45:22'),
-(3, 'Ria Berg', 'luri@mailinator.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 3, '$2y$10$59XXoeOLgStspvf3eA7qzug2UiaoVod.kAOI1QfagaPZMaBB.Necq', 0, NULL, NULL, '2023-04-10 09:56:58', '2023-04-10 09:56:58'),
-(4, 'Likhon Uz Zaman', 'likhonuzzamanapon02@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 5, '$2y$10$Ub9KI.e8bR/ZxhtrDJmVOu1GviP6oiqwCPC51nXDPYUAuZMTRT/IO', 0, NULL, NULL, '2023-04-11 18:16:40', '2023-04-11 18:16:41'),
-(5, 'kawsar ahmed', 'kawsar.qtec@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '118151146567838160319', 6, '$2y$10$PC25r2z.Unb03tAXutGGf.PD6m.IyE/nsKkIU4FGRIBjrgvmxUCy2', 0, NULL, NULL, '2023-04-27 17:02:39', '2023-04-27 17:08:48'),
-(6, 'Md Likhon Uz Zaman', 'likhon.qtec@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '101538057543828608657', 7, '$2y$10$LgqlpZu9syYYHViAwLVaFeEFzn1O8PfysLIR7l23ehsTDKCSOlVki', 0, NULL, NULL, '2023-04-27 20:56:57', '2023-04-27 20:57:08'),
-(7, 'NM Babor', 'nmbabor50@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '100381050673462921866', 43, '$2y$10$nYEeSXGLCvV95cHig09utOIg.D9FqJe5MFDxghvBfhrC2ihwOaDcu', 0, NULL, '2lNh2ahtn0CTpWNsaMM7jpI8s2s9eJ0IUQiOQ2FptBzDiEvuswg4rdWsYQNG', '2023-04-27 22:18:47', '2023-05-28 20:41:26'),
-(8, 'MD LIKHON UZ ZAMAN', 'm.likhonzaman2@gmail.com', NULL, NULL, NULL, 'user', 2, NULL, NULL, 10, '$2y$10$6DGro96dZh132YFMqJNZcONKskA6pGvqi9b75A0b6reCVVM/V9mxO', 0, NULL, NULL, '2023-04-29 01:29:43', '2023-04-29 01:44:08'),
-(10, 'nTech Bangla', 'ntechbangla21@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '100739619824964249400', 11, '$2y$10$nP/lzCBeXT0IedRq7Dir6.x3JfwYUAXGtkdIqPYV4RhktDF3yyl/a', 0, NULL, NULL, '2023-04-30 16:52:20', '2023-04-30 16:52:22'),
-(11, 'Demo User', 'demo@qtecsolution.net', NULL, NULL, NULL, 'user', 2, NULL, NULL, 14, '$2y$10$A0bzXWysiWoqkJptHcafgOlN5nXY9brK2.a8zWlSU2Qb2dWX4mT/a', 0, NULL, NULL, '2023-04-30 23:16:25', '2023-05-04 19:40:09'),
-(12, 'Mosharrof rubel', 'mrubel.ad@gmail.com', NULL, NULL, NULL, 'user', NULL, NULL, NULL, NULL, '$2y$10$Cu9KAS94g9JT3.fYVYAcd.JT4gjZE0yzJN9bflMd696FFSOwVHj96', 0, NULL, NULL, '2023-05-04 19:35:24', '2023-05-04 19:35:24'),
-(13, 'Music Bay TV', 'musicbay.tv@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '102211343919335574510', 15, '$2y$10$MI3rimj1nVZ/xhjSo67Gzuw6sqcTRO2JMaaAbVv.l8MuNu/SFcLeW', 0, NULL, NULL, '2023-05-06 17:29:24', '2023-05-06 17:29:25'),
-(14, 'Silver Shine', 'buzzard351@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '104384014516279271548', 16, '$2y$10$jnEkTd1O3zTgBtmcSqdE2.tew3U1gdFuuyw88qEJVODEns8GmBv9m', 0, NULL, NULL, '2023-05-13 02:30:49', '2023-05-13 02:30:50'),
-(15, 'Buffy Mcpherson', 'kytol@fakemail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 17, '$2y$10$Pxak.cBGlYkXhYxLMAoRKeQXNwSWwXQ.L3gx7ycxT0v.tL0ko6PjK', 0, NULL, NULL, '2023-05-13 02:39:26', '2023-05-13 02:39:29'),
-(16, 'Yardley Bentley', 'vuqek@mailinator.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 18, '$2y$10$BFwddB7End16eiKgsgzC4uteTp314RUmriZ91kRKR5T5QUr9RuOE2', 0, NULL, NULL, '2023-05-13 02:40:36', '2023-05-13 02:40:40'),
-(17, 'Uriel Dominguez', 'dymefylezy@fakemail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 19, '$2y$10$ztHYRfNcOjlOjV.oUj.HsephdLFfSNY000LTKPbM738V8MvBkfBhu', 0, NULL, NULL, '2023-05-13 02:44:28', '2023-05-13 02:44:29'),
-(18, 'Nishan Paul', 'nishanpaul12011996se@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 20, '$2y$10$/seN3TWUuA0kLr4bIPX3rewypTcaFZu4cxn9qf.pD4TT1zrI6RZAy', 0, NULL, NULL, '2023-05-13 02:47:26', '2023-05-13 02:47:30'),
-(19, 'hello', 'okthanks@wel.come', NULL, NULL, NULL, 'user', 1, NULL, NULL, 21, '$2y$10$gM1wVqmppZjqCOpGMzeUseBdtLg3X0FylbBrYWXk88Fiyma87arPq', 0, NULL, NULL, '2023-05-13 02:48:21', '2023-05-13 02:48:23'),
-(20, 'sohag hossen', 'sohaghossen217@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '102310350908646309057', 22, '$2y$10$BnGQ2fRUwVBVyVcQ/pM0Jet8OnMm08L2yNf/yI4vVzPL9xnY/qQt.', 0, NULL, NULL, '2023-05-13 03:16:13', '2023-05-13 03:16:15'),
-(21, 'Morshed Islam', 'morshedislam20@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '100641607615718279669', 23, '$2y$10$Uu7lM0fqUwoNVNbLA9.0YO79obNPVQy8M93bjYZk.5rWkelxTi96G', 0, NULL, NULL, '2023-05-13 03:18:32', '2023-05-13 03:18:34'),
-(22, 'md al emran eman', 'emon199227@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 24, '$2y$10$EhvbTN.wv/0upN6ISkUFIenWwFAK9OQ7HaFs1Znti.d9Fd3h3dWWS', 0, NULL, NULL, '2023-05-13 03:34:07', '2023-05-13 03:34:10'),
-(23, 'tester', 'test@test.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 25, '$2y$10$Sx2ypDXmxFs9D28UjgMSKOR9I5QfnWtcs4rej3QLsa31N6dVIpUM2', 0, NULL, NULL, '2023-05-13 03:37:09', '2023-05-13 03:37:12'),
-(24, 'Creative Mind', 'hdnatok02@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '106070047087018795566', 26, '$2y$10$ZyAYoxVxMSdixhwGPmNVBeLXThWTDIQ3dSlTQfgau/uDd0Ar9gV02', 0, NULL, NULL, '2023-05-13 03:41:13', '2023-05-13 03:41:15'),
-(25, 'Mohammad Repon', 'md.repon56655@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '101497292402015689061', 27, '$2y$10$zS83ZeCWLcWcokR0G47CSOla5n7iMM9xDUJdPk4B/DqMX2jKi/MoO', 0, NULL, NULL, '2023-05-13 03:43:33', '2023-05-13 03:43:46'),
-(26, 'Mofazzul', 'mofazzulmd@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 28, '$2y$10$0/KzpFZzj8Ye4bCUyi1U5eMH8EJPkCr0K3usK6/5XGByPuKfYkzE6', 0, NULL, NULL, '2023-05-13 04:04:27', '2023-05-13 04:04:29'),
-(27, 'MD Kashfin', 'xkashfin@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '102986867813261803781', 29, '$2y$10$nMk.SvkSRb1RhN4Mjf8e8OZCFyXSt8kjhUMW1Z1d15Vqqwn.odA7m', 0, NULL, NULL, '2023-05-13 05:01:22', '2023-05-13 05:01:24'),
-(28, 'MD AKASH AHMED', 'akash.pst11@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 30, '$2y$10$HebuarwsY/2mnkvfRaW8F.1/0DjexOTrZ5KfOlzY.qf1JrFSoq4Ca', 0, NULL, NULL, '2023-05-13 05:03:50', '2023-05-13 05:03:52'),
-(29, 'Tarek Greeens', 'tarekgreens20@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '114712711879632312663', 31, '$2y$10$eyZFWx23gfrcoKE8jEAdF./A3nm5Qc2K9bsmPArzqYtFL6S/6gWXC', 0, NULL, NULL, '2023-05-13 06:10:52', '2023-05-13 06:10:53'),
-(30, 'Mohammad Asif', 'kmasif25@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 32, '$2y$10$mkQMp.I8onGl5NeedOpxf.Y4X9b4uW21H9Bt1UjswN.J9SYBet0.K', 0, NULL, NULL, '2023-05-13 10:27:56', '2023-05-13 10:27:58'),
-(31, 'Pascale Foreman', 'jwyzbdcxmw@bugfoo.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 33, '$2y$10$Su4zJsYSD03LUMDv/lGL0u2RHcKbv/mtG4iTK.E./szATQM3QU/46', 0, NULL, NULL, '2023-05-13 12:30:05', '2023-05-13 12:30:08'),
-(32, 'Md Mahbub Alam', 'mahubtuto@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '103132460540772863833', 34, '$2y$10$JYse.ovVWiIt2r81k9P9VOawMUqgI2NacDZNi3u61b6uAW3PJi9/C', 0, NULL, NULL, '2023-05-13 12:32:35', '2023-05-13 12:32:37'),
-(33, 'Bx', 'bxf89881@nezid.com', NULL, NULL, NULL, 'user', 1, NULL, NULL, 35, '$2y$10$ZK2LlOWwazw6zM5YdC94Q.xot39cogXSekcBLQoxCCFZvVrCP4fyu', 0, NULL, NULL, '2023-05-13 20:06:42', '2023-05-13 20:06:47'),
-(34, 'Mazharul Islam Sumon', 'miconnect94@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '109640075420014052035', 36, '$2y$10$kfk7f3UaUXDsSCyvVseEAeQv12lGveZHBOSvrxgo8/E2NR6oWzf4W', 0, NULL, NULL, '2023-05-13 21:00:00', '2023-05-13 21:00:05'),
-(35, 'Solaiman Badshah', 'imnmbabor@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '117685134469161041673', 37, '$2y$10$0CXvbjOWPrmnsRHGVTuuW.I2anBJ0pa2FXdqthm8ZGdr2QAZN88C6', 0, NULL, NULL, '2023-05-14 16:24:51', '2023-05-14 16:24:57'),
-(36, 'milon Mahmod', 'bd.milonmahmod@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '108407947919326343454', 38, '$2y$10$BdfNFYjU3PqAzr82cp3UHeTwwMDJ5Ae5XlmO0Y.wEp/q0uXTPflL2', 0, NULL, NULL, '2023-05-15 16:22:45', '2023-05-15 16:22:48'),
-(37, 'Md. Asaduzzaman', 'asd.qtec@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '102961428911210522493', 39, '$2y$10$m2jEb26ICkq5ZiTHblTqtuZMgZ8cg12QpuQifWzkUkI8ff/SZhVbe', 1, NULL, NULL, '2023-05-17 16:19:20', '2023-05-17 16:20:32'),
-(38, 'choto vaia', 'chotovaia@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '113723707540574113142', 40, '$2y$10$PiTQ2NoSv7Q6WToNViCqZOKDxGTfk5M.uioo1CMv1krX9pWcwE5Py', 0, NULL, NULL, '2023-05-20 04:38:52', '2023-05-20 04:38:54'),
-(39, 'Mh Zoy', 'mhjoy547@gmail.com', NULL, NULL, NULL, 'user', 1, NULL, '113821905064025699964', 42, '$2y$10$U0xjnk3VilKxZG4SSr.Kl.JzLgxNyB73vZ0F/7e00zqVqlcnyzr2y', 0, NULL, NULL, '2023-05-24 06:49:22', '2023-05-24 06:49:24');
+(1, 'Admin', 'admin@gmail.com', '01811951215', NULL, 'assets/uploads/user/2023/04/11/admin9853.png', 'admin', 1, NULL, NULL, 1, '$2y$10$iMR5f7RSUFWJHh95UZU87eg.QvJF3r8N1ojAdOIcOHWUx7qkdDMdu', 1, NULL, 's27vZWLYLCaO8g4ovL0ddJbJyLB79eIGfJv1dQtmZSwedYNEp8hweCWAdgbD', '2023-04-08 09:23:34', '2023-06-15 09:57:42');
 
 -- --------------------------------------------------------
 
@@ -794,6 +695,13 @@ ALTER TABLE `content_histories`
   ADD KEY `content_histories_user_id_foreign` (`user_id`);
 
 --
+-- Indexes for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `coupons_user_id_foreign` (`user_id`);
+
+--
 -- Indexes for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -936,6 +844,12 @@ ALTER TABLE `content_histories`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `coupons`
+--
+ALTER TABLE `coupons`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
@@ -963,13 +877,13 @@ ALTER TABLE `languages`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -999,13 +913,13 @@ ALTER TABLE `plans`
 -- AUTO_INCREMENT for table `plan_expenses`
 --
 ALTER TABLE `plan_expenses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `user_documents`
@@ -1053,6 +967,12 @@ ALTER TABLE `blog_categories`
 --
 ALTER TABLE `content_histories`
   ADD CONSTRAINT `content_histories_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `coupons`
+--
+ALTER TABLE `coupons`
+  ADD CONSTRAINT `coupons_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `faqs`
