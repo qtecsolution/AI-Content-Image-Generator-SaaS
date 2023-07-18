@@ -135,9 +135,9 @@ function showBalance()
             $restImage = $expense->image_count - $expense->current_image_count;
             $restWord = $expense->word_count - $expense->current_word_count;
             //remaining days
-            $activeDate = Carbon::parse($expense->activated_at);
+            $today = Carbon::parse(date("Y-m-d"));
             $expireDate = Carbon::parse($expense->expire_at);
-            $remainingDays = $activeDate->diffInDays($expireDate);
+            $remainingDays = $expireDate->diffInDays($today);
             // templates type
             $templates = explode(',',$expense->plan->templates);
             return (object) [
