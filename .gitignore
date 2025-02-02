@@ -4,9 +4,9 @@
 /public/hot
 /public/storage
 /storage/*.key
-core/vendor
-.env
+/vendor
 .composer.lock
+.env
 .env.backup
 .env.production
 Homestead.json
@@ -18,3 +18,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+composer.lock

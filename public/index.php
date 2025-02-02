@@ -1,6 +1,4 @@
 <?php
-// Installed check
-require __DIR__.'/install/check.php';
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
@@ -17,7 +15,7 @@ define('LARAVEL_START', microtime(true));
 |
 */
 
-if (file_exists($maintenance = __DIR__.'/core/storage/framework/maintenance.php')) {
+if (file_exists($maintenance = __DIR__.'/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
 
@@ -32,7 +30,7 @@ if (file_exists($maintenance = __DIR__.'/core/storage/framework/maintenance.php'
 |
 */
 
-require __DIR__.'/core/vendor/autoload.php';
+require __DIR__.'/../vendor/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +43,7 @@ require __DIR__.'/core/vendor/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/core/bootstrap/app.php';
+$app = require_once __DIR__.'/../bootstrap/app.php';
 
 $kernel = $app->make(Kernel::class);
 

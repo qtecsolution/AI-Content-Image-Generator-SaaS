@@ -44,7 +44,7 @@ function fileUpload($file, $folder, $name = null)
     $imageName = Str::slug($name) . rand(0, 9999) . '.' . $file->extension();
     $path = 'assets/uploads/' . $folder . date('/Y/m/d');
     if (!File::exists($path)) {
-        File::makeDirectory($path, 0777, true,true);
+        File::makeDirectory($path, 0777, true, true);
     }
     $file->move($path, $imageName);
     return $path . '/' . $imageName;
@@ -124,14 +124,14 @@ function dateTimeFormat($data)
 function showBalance()
 {
     $user = Auth::user();
-    if(isset($user->plan_expense_id)){
+    if (isset($user->plan_expense_id)) {
         $expense = PlanExpense::where('id', $user->plan_expense_id)
-             ->where('activated_at', '<=', now())
-             ->where(function ($query) {
-                 $query->whereNull('expire_at')
-                     ->orWhere('expire_at', '>', now());
-             })->where('user_id', $user->id)->first();
-        if($expense != ''){
+            ->where('activated_at', '<=', now())
+            ->where(function ($query) {
+                $query->whereNull('expire_at')
+                    ->orWhere('expire_at', '>', now());
+            })->where('user_id', $user->id)->first();
+        if ($expense != '') {
             $restImage = $expense->image_count - $expense->current_image_count;
             $restWord = $expense->word_count - $expense->current_word_count;
             //remaining days
@@ -139,26 +139,26 @@ function showBalance()
             $expireDate = Carbon::parse($expense->expire_at);
             $remainingDays = $expireDate->diffInDays($today);
             // templates type
-            $templates = explode(',',$expense->plan->templates);
+            $templates = explode(',', $expense->plan->templates);
             return (object) [
-                'image'=> $restImage,
-                'max_words'=> $expense->plan->max_words,
-                'word_count'=> $restWord,
-                'remaining_days'=>$remainingDays,
+                'image' => $restImage,
+                'max_words' => $expense->plan->max_words,
+                'word_count' => $restWord,
+                'remaining_days' => $remainingDays,
                 'templates' =>  $templates,
-                'code_generate_enabled'=>$expense->plan->code_generate_enabled,
-                'chat_enabled'=>$expense->plan->chat_enabled,
-                'support_enabled'=>$expense->plan->support_enabled,
+                'code_generate_enabled' => $expense->plan->code_generate_enabled,
+                'chat_enabled' => $expense->plan->chat_enabled,
+                'support_enabled' => $expense->plan->support_enabled,
             ];
-        }else{
+        } else {
             return "";
         }
-    }else{
+    } else {
         return "";
     }
 }
 
-function balanceDeduction($type, $n=1)
+function balanceDeduction($type, $n = 1)
 {
     // call_api,document,image
     $status = false;
@@ -238,94 +238,97 @@ function translate($data)
 }
 function menuActive($data)
 {
-    if(!is_array($data)){
+    if (!is_array($data)) {
         $data = explode(', ', $data);
     }
-    foreach($data as $value){
-        if(request()->routeIs($value)){
+    foreach ($data as $value) {
+        if (request()->routeIs($value)) {
             return true;
         }
     }
     return false;
 }
-function freePlan(){
-   return Plan::where('price','<=', 0)->first();
+function freePlan()
+{
+    return Plan::where('price', '<=', 0)->first();
 }
-function demoPlan(){
-    if(readConfig('demo')){
+function demoPlan()
+{
+    if (readConfig('demo')) {
         return (object) [
-            'max_words'=> 200,
-            'image'=> 5,
-            'word_count'=> 500,
+            'max_words' => 200,
+            'image' => 5,
+            'word_count' => 500,
         ];
-    }else{
+    } else {
         return "";
     }
 }
-function iconGenerate($photo){
+function iconGenerate($photo)
+{
     $path = 'assets/uploads/pwaIcons';
     if (!File::exists($path)) {
         File::makeDirectory($path, 0755, true, true);
     }
 
-    $img= Image::make($photo);
-    $img->resize(512,512);
-    $img->save($path.'/icon-512x512.png');
-    $img->resize(384,384);
-    $img->save($path.'/icon-384x384.png');
-    $img->resize(192,192);
-    $img->save($path.'/icon-192x192.png');
-    $img->resize(152,152);
-    $img->save($path.'/icon-152x152.png');
-    $img->resize(144,144);
-    $img->save($path.'/icon-144x144.png');
-    $img->resize(128,128);
-    $img->save($path.'/icon-128x128.png');
-    $img->resize(96,96);
-    $img->save($path.'/icon-96x96.png');
-    $img->resize(72,72);
-    $img->save($path.'/icon-72x72.png');
+    $img = Image::make($photo);
+    $img->resize(512, 512);
+    $img->save($path . '/icon-512x512.png');
+    $img->resize(384, 384);
+    $img->save($path . '/icon-384x384.png');
+    $img->resize(192, 192);
+    $img->save($path . '/icon-192x192.png');
+    $img->resize(152, 152);
+    $img->save($path . '/icon-152x152.png');
+    $img->resize(144, 144);
+    $img->save($path . '/icon-144x144.png');
+    $img->resize(128, 128);
+    $img->save($path . '/icon-128x128.png');
+    $img->resize(96, 96);
+    $img->save($path . '/icon-96x96.png');
+    $img->resize(72, 72);
+    $img->save($path . '/icon-72x72.png');
 
     $white = 'assets/images/default/white.png';
     $splash = Image::make($white);
     $splash->insert($photo, 'center');
-    $splash->resize(2048,2732);
-    $splash->save($path."/splash-2048x2732.png");
-    $splash->resize(1668,2388);
-    $splash->save($path."/splash-1668x2388.png");
-    $splash->resize(1668,2224);
-    $splash->save($path."/splash-1668x2224.png");
-    $splash->resize(1668,2224);
-    $splash->save($path."/splash-1668x2224.png");
-    $splash->resize(1536,2048);
-    $splash->save($path."/splash-1536x2048.png");
-    $splash->resize(1242,2688);
-    $splash->save($path."/splash-1242x2688.png");
-    $splash->resize(1242,2208);
-    $splash->save($path."/splash-1242x2208.png");
-    $splash->resize(1125,2436);
-    $splash->save($path."/splash-1125x2436.png");
-    $splash->resize(828,1792);
-    $splash->save($path."/splash-828x1792.png");
-    $splash->resize(750,1334);
-    $splash->save($path."/splash-750x1334.png");
-    $splash->resize(640,1136);
-    $splash->save($path."/splash-640x1136.png");
+    $splash->resize(2048, 2732);
+    $splash->save($path . "/splash-2048x2732.png");
+    $splash->resize(1668, 2388);
+    $splash->save($path . "/splash-1668x2388.png");
+    $splash->resize(1668, 2224);
+    $splash->save($path . "/splash-1668x2224.png");
+    $splash->resize(1668, 2224);
+    $splash->save($path . "/splash-1668x2224.png");
+    $splash->resize(1536, 2048);
+    $splash->save($path . "/splash-1536x2048.png");
+    $splash->resize(1242, 2688);
+    $splash->save($path . "/splash-1242x2688.png");
+    $splash->resize(1242, 2208);
+    $splash->save($path . "/splash-1242x2208.png");
+    $splash->resize(1125, 2436);
+    $splash->save($path . "/splash-1125x2436.png");
+    $splash->resize(828, 1792);
+    $splash->save($path . "/splash-828x1792.png");
+    $splash->resize(750, 1334);
+    $splash->save($path . "/splash-750x1334.png");
+    $splash->resize(640, 1136);
+    $splash->save($path . "/splash-640x1136.png");
     return "Yes";
 }
 function footerBlog()
 {
-    $blogs = Blog::where('is_published',true)->take(3)->get();
+    $blogs = Blog::where('is_published', true)->take(3)->get();
     return $blogs;
 }
 
 
 function pages()
 {
-    return Page::where('active',true)->get();
+    return Page::where('active', true)->get();
 }
 
 function footerUseCase()
 {
-    return UseCase::where('is_published',1)->limit(3)->get();
+    return UseCase::where('is_published', 1)->limit(3)->get();
 }
