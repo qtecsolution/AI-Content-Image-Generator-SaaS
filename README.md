@@ -4,7 +4,7 @@
 </a>
 </p>
 
-<h1>Creaify - AI Writer</h1>
+<h1>AI Content Image Generator</h1>
 
 <div style="display: flex;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/170px-Laravel.svg.png" width="50px" height="50px" alt="Laravel" class="icon">
@@ -17,9 +17,9 @@
  <h2>Installation</h2>
 <ol>
     <li>Clone the repository:</li>
-    <code>git clone https://github.com/qtecsolution/creaify.git</code>
+    <code>git clone https://github.com/qtecsolution/ai-content-image-generator.git</code>
     <li>Navigate to the project directory:</li>
-    <code>cd creaify</code>
+    <code>cd ai-content-image-generator</code>
     <li>Install the dependencies:</li>
     <code>composer install</code>
     <li>Create a copy of the .env.example file and rename it to .env. Update the necessary configuration variables such as database connection details.</li>
@@ -37,7 +37,7 @@
 
 
 <h2>License</h2>
-<p>The creaify project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.</p>
+<p>The ai-content-image-generator project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.</p>
 <p>Please refer to the LICENSE file for more details.</p>
 
 
