@@ -74,6 +74,10 @@ cd ai-content-image-generator
 make setup
 ```
 
+
+The application should now be accessible at [http://localhost](http://localhost).
+
+
 #### Available Docker Commands
 
 - **Manage Container**
@@ -117,8 +121,6 @@ make migrate-fresh-seed
 ```bash
 make setup-env
 ```
-
-The application should now be accessible at [http://localhost](http://localhost).
 
 ---
 
