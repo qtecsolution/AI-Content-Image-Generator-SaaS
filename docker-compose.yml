@@ -1,0 +1,59 @@
+version: "3.8"
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: creaify-app
+        container_name: creaify-app
+        restart: unless-stopped
+        working_dir: /var/www
+        volumes:
+            - .:/var/www
+            - ./docker-compose/php/local.ini:/usr/local/etc/php/conf.d/local.ini # PHP config if needed
+        networks:
+            - creaify-network
+        depends_on:
+            - db
+        environment:
+            SERVICE_NAME: app
+            SERVICE_TAGS: dev
+
+    db:
+        image: mysql:8.0
+        container_name: creaify-db
+        restart: unless-stopped
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: creaify_db
+            MYSQL_USER: user
+            MYSQL_PASSWORD: pass
+        ports:
+            - "3306:3306"
+        volumes:
+            - db-data:/var/lib/mysql
+        networks:
+            - creaify-network
+
+    nginx:
+        image: nginx:alpine
+        container_name: creaify-nginx
+        restart: unless-stopped
+        ports:
+            - "80:80" # HTTP port
+            # - "443:443" # Uncomment this for HTTPS (SSL) support
+        volumes:
+            - .:/var/www:cached
+            - ./docker-compose/nginx:/etc/nginx/conf.d
+        depends_on:
+            - app
+        networks:
+            - creaify-network
+
+networks:
+    creaify-network:
+        driver: bridge
+
+volumes:
+    db-data:
