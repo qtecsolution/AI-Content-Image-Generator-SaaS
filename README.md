@@ -4,7 +4,7 @@
 </a>
 </p>
 
-<h1>AI Content Image Generator</h1>
+<h1>AI Content Image Generator SAAS</h1>
 
 <div style="display: flex;">
     <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/170px-Laravel.svg.png" width="50px" height="50px" alt="Laravel" class="icon">
@@ -16,7 +16,7 @@
 
 <h2>Installation</h2>
 
-Welcome to the setup guide for the **AI Content Image Generator**. This document provides comprehensive steps to install, configure, and run the project in your local environment, using both Docker and a native setup. Follow these instructions to ensure proper configuration.
+Welcome to the setup guide for the **AI Content Image Generator SAAS**. This document provides comprehensive steps to install, configure, and run the project in your local environment, using both Docker and a native setup. Follow these instructions to ensure proper configuration.
 
 ## Prerequisites
 
@@ -61,11 +61,11 @@ This guide covers two setup methods:
 #### 1. Clone the Repository
 
 ```bash
-git clone ai-content-image-generator.git
+git clone https://github.com/qtecsolution/ai-content-image-generator-saas.git
 ```
 
 ```bash
-cd ai-content-image-generator
+cd ai-content-image-generator-saas
 ```
 
 #### 2. Initialize the Project
@@ -129,11 +129,11 @@ make setup-env
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/qtecsolution/ai-content-image-generator.git
+git clone https://github.com/qtecsolution/ai-content-image-generator-saas.git
 ```
 
 ```bash
-cd ai-content-image-generator
+cd ai-content-image-generator-saas
 ```
 
 #### 2. Install PHP Dependencies
@@ -229,7 +229,7 @@ Your application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8
 
 
 <h2>License</h2>
-<p>The ai-content-image-generator project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.</p>
+<p>The ai-content-image-generator-saas project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.</p>
 <p>Please refer to the LICENSE file for more details.</p>
 
 
