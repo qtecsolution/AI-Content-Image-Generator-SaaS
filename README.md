@@ -35,7 +35,7 @@ An advanced AI-powered SaaS platform that enables users to generate high-quality
 - **Tawk.to Chat Integration** – Real-time customer support and live chat to improve user experience.  
 - **Progressive Web App (PWA)** – Fast, responsive, and installable on any device for a seamless experience.  
 
-<h2>Installation</h2>
+## 📦 Installation
 
 Welcome to the setup guide for the **AI Content Image Generator SAAS**. This document provides comprehensive steps to install, configure, and run the project in your local environment, using both Docker and a native setup. Follow these instructions to ensure proper configuration.
 
