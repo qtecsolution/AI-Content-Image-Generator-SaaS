@@ -39,7 +39,7 @@ An advanced AI-powered SaaS platform that enables users to generate high-quality
 
 Welcome to the setup guide for the **AI Content Image Generator SAAS**. This document provides comprehensive steps to install, configure, and run the project in your local environment, using both Docker and a native setup. Follow these instructions to ensure proper configuration.
 
-## Prerequisites
+## 📝 Prerequisites
 
 Please ensure you have the following installed on your system:
 
@@ -49,7 +49,7 @@ Please ensure you have the following installed on your system:
 - **MySQL** (version 8.0 or compatible, e.g., MariaDB)
 - **Git**
 
-## Server Requirements
+## 📈 Server Requirements
 
 This application requires a server with the following specifications:
 
@@ -69,15 +69,14 @@ This application requires a server with the following specifications:
 
 
 
-## Setup Options
+## ⚙️ Setup Options
 
 This guide covers two setup methods:
 1. **Using Docker**
 2. **Setting Up Locally (Without Docker)**
 
 
-
-### Setup with Docker
+### 🐳 Setup with Docker
 
 #### 1. Clone the Repository
 
@@ -145,7 +144,7 @@ make setup-env
 
 ---
 
-### Setup Without Docker
+### 🚀 Setup Without Docker
 
 #### 1. Clone the Repository
 
@@ -238,19 +237,19 @@ php artisan serve
 Your application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 
-## Additional Information
+## 🛠️ Additional Information
 
 - **Seeding**: The database seeder is configured to populate initial data. Run `php artisan migrate --seed` to use it.
 - **Environment Variables**: Ensure all necessary environment variables are set in the `.env` file.
 - **Database Configuration**: The application is configured for MySQL by default. Update the `.env` file as needed for other database connections.
 
+## 🤝 Contributing
 
-<h2>Contributing</h2>
-<p>This is an open source project and contributions are welcome. If you are interested in contributing, please fork the repository and submit a pull request with your changes. The project maintainers will review and merge your changes accordingly.</p>
+This is an open source project and contributions are welcome. If you are interested in contributing, please fork the repository and submit a pull request with your changes. The project maintainers will review and merge your changes accordingly.
 
+## 📝 License
 
-<h2>License</h2>
-<p>The ai-content-image-generator-saas project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.</p>
-<p>Please refer to the LICENSE file for more details.</p>
+The ai-content-image-generator-saas project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.
 
+Please refer to the LICENSE file for more details.
 
