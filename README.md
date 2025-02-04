@@ -1,6 +1,6 @@
 <p align="center">
 <a href="https://qtecsolution.com/" target="_blank">
-<img src="https://media.licdn.com/dms/image/C510BAQFPADB5GnQEZA/company-logo_200_200/0/1574759253542?e=2147483647&v=beta&t=1cYJ8BJV-mUnLBZlKJEVApQXBj32T6bT2alRbuT_xrw" width="200" alt="qtec Logo">
+<img src="https://media.licdn.com/dms/image/v2/D560BAQF3dxUm8HaPCA/company-logo_200_200/company-logo_200_200/0/1719916555172/qtec_solution_logo?e=2147483647&v=beta&t=sUjh-Wi-jC6AbHvc1xHyIjsI5uhBp698Lt06Vu9JaOE" width="200" alt="qtec Logo">
 </a>
 </p>
 
