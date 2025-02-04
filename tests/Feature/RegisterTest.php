@@ -7,7 +7,7 @@ use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class RegisterControllerTest extends TestCase
+class RegisterTest extends TestCase
 {
     use RefreshDatabase;
 
