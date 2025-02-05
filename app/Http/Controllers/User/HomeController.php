@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Order;
 use App\Models\UseCase;
 use App\Models\UseCaseCategory;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -31,25 +29,25 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         $cases = UseCase::where('is_published', 1)->where('is_popular', 1);
         $noPlan = 0;
-        if(showBalance()==''){
+        if (showBalance() == '') {
             $noPlan = 1;
-        }elseif(!in_array("0",showBalance()->templates)){
-            $cases = $cases->whereIn('type',showBalance()->templates);
+        } elseif (!in_array("0", showBalance()->templates)) {
+            $cases = $cases->whereIn('type', showBalance()->templates);
         }
         $cases = $cases->get();
-        
-        return view('user.home', compact('cases','noPlan'));
+
+        return view('user.home', compact('cases', 'noPlan'));
     }
-    
+
 
     public function profile()
     {
         $user = User::findOrFail(Auth::user()->id);
         return view('user.profile.profile', compact('user'));
     }
+
     public function profileUpdate(Request $request)
     {
         $id = Auth::user()->id;
@@ -75,6 +73,7 @@ class HomeController extends Controller
             return back();
         }
     }
+    
     public function password()
     {
         $user = User::findOrFail(Auth::user()->id);
@@ -88,16 +87,14 @@ class HomeController extends Controller
         ]);
         $user = auth()->user();
         // Check if the current password matches the user's password
-        if($user->google_id=='' || $user->pass_changed == 1){
-            if($request->current_password==''){
+        if ($user->google_id == '' || $user->pass_changed == 1) {
+            if ($request->current_password == '') {
                 return redirect()->back()->withErrors(['current_password' => 'The current password is empty.']);
             }
             if (!Hash::check($request->current_password, $user->password)) {
                 return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
             }
         }
-        
-
 
         try {
             // Update the user's password
@@ -113,16 +110,17 @@ class HomeController extends Controller
         }
     }
 
-    public function templates(Request $request){
+    public function templates(Request $request)
+    {
         $allData  = UseCase::where('is_published', 1);
-        if(request()->input('cat') != null){
-             $category = UseCaseCategory::where('slug',request()->input('cat'))->firstOrFail();
-             $allData = $allData->where('use_case_category_id',$category->id);
+        if (request()->input('cat') != null) {
+            $category = UseCaseCategory::where('slug', request()->input('cat'))->firstOrFail();
+            $allData = $allData->where('use_case_category_id', $category->id);
         }
         $allData = $allData->get();
         $categories = UseCaseCategory::where('is_published', 1)->get();
-        $types = [1=>'Basic',2=>'Standard',3=>'Professional'];
-        $templates = showBalance()->templates;
-        return view('user.templates.index', compact('allData','categories','templates','types'));
+        $types = [1 => 'Basic', 2 => 'Standard', 3 => 'Professional'];
+        $templates = showBalance()->templates ?? [];
+        return view('user.templates.index', compact('allData', 'categories', 'templates', 'types'));
     }
 }
