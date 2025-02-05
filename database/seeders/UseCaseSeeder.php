@@ -14,18 +14,16 @@ class UseCaseSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('use_case_categories')->insert([
-            ['name' => 'Professional Services', 'slug' => 'professional-services', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Blog', 'slug' => 'blog', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Email', 'slug' => 'email', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Social Media', 'slug' => 'social-media', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Content', 'slug' => 'content', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Other', 'slug' => 'other', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Website', 'slug' => 'website', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Video', 'slug' => 'video', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Educational', 'slug' => 'educational', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-            ['name' => 'Tools', 'slug' => 'tools', 'is_published' => 1, 'created_at' => now(), 'updated_at' => now()],
-        ]);
+        DB::statement("INSERT INTO `use_case_categories` (`id`, `name`, `slug`, `is_published`, `created_at`, `updated_at`) VALUES
+                (2, 'Blog', 'blog', 1, '2023-04-08 09:45:43', '2023-04-08 09:45:43'),
+                (3, 'Email', 'email', 1, '2023-04-08 09:45:47', '2023-04-08 09:45:47'),
+                (4, 'Social Media', 'social-media', 1, '2023-04-11 15:46:54', '2023-04-11 15:46:54'),
+                (5, 'Content', 'content', 1, '2023-04-11 15:56:49', '2023-04-11 15:56:49'),
+                (6, 'Other', 'other', 1, '2023-04-11 16:03:44', '2023-04-11 16:03:44'),
+                (7, 'Website', 'website', 1, '2023-04-11 16:17:38', '2023-04-11 16:17:38'),
+                (8, 'Video', 'video', 1, '2023-04-11 16:24:09', '2023-04-11 16:24:09'),
+                (9, 'Educational', 'educational', 1, '2023-11-10 12:50:11', '2023-11-10 17:42:48'),
+                (10, 'Tools', 'tools', 1, '2023-11-10 17:43:41', '2023-11-10 17:43:41');");
 
         DB::statement("INSERT INTO `use_cases` (`id`, `title`, `icon`, `details`, `prompt`, `use_case_category_id`, `is_popular`, `title_label`, `short_description_label`, `description_label`, `title_placeholder`, `short_description_placeholder`, `description_placeholder`, `type`, `is_published`, `created_at`, `updated_at`) VALUES
                 (2, 'Blog Conclusion', 'assets/uploads/useCase/2023/04/11/blog-conclusion8563.png', 'Your blog content should conclude with a captivating paragraph.', 'I\'m writing a blog on [title]. In short The blog is about[description]. Suggest me a conlcusion for this blog?', 2, 1, 'Blog Title', '', 'Blog Description', 'Write your blog title here', 'Write short description here', 'Describe your blog post', 2, 1, '2023-04-08 10:08:06', '2023-04-17 20:48:36'),
