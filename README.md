@@ -29,7 +29,9 @@ An advanced AI-powered SaaS platform that enables users to generate high-quality
 - **Tawk.to Chat Integration** – Real-time customer support and live chat to improve user experience.  
 - **Progressive Web App (PWA)** – Fast, responsive, and installable on any device for a seamless experience.  
 ## 🎥 Demo
+You can browse the live demo of the AI Content & Image Generator SaaS at the following link:
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-%230077B5?style=for-the-badge&logo=google-chrome&logoColor=white)](https://aicontentpro.qtecsolution.com/)
 ### AI Content Generator:
 
 <img src="./public/assets/images/landing/preview-editor.png" width="900px" />
