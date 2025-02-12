@@ -53,21 +53,22 @@ Please ensure you have the following installed on your system:
 - **npm**
 - **MySQL** (version 8.0 or compatible, e.g., MariaDB)
 - **Git**
+- **XAMPP** or **WAMP** (optional, for an all-in-one local server environment)
 
 ## 📈 Server Requirements
 
 This application requires a server with the following specifications:
 
 - **PHP** (version 8.2 or higher) with the extensions:
-  - BCMath
-  - Ctype
-  - Fileinfo
-  - JSON
-  - Mbstring
-  - PDO
-  - GD
-  - Zip
-  - PDO MySQL
+    - BCMath
+    - Ctype
+    - Fileinfo
+    - JSON
+    - Mbstring
+    - PDO
+    - GD
+    - Zip
+    - PDO MySQL
 - **MySQL** (version 8.0) or **MariaDB**
 - **Composer**
 - **Web Server**: Apache or Nginx
