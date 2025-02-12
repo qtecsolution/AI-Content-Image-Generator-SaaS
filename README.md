@@ -38,8 +38,6 @@ An advanced AI-powered SaaS platform that enables users to generate high-quality
 
 <img src="./public/assets/images/landing/generate2.svg" width="915px" />
 
-
-
 ## 📦 Installation
 
 Welcome to the setup guide for the **AI Content Image Generator SAAS**. This document provides comprehensive steps to install, configure, and run the project in your local environment, using both Docker and a native setup. Follow these instructions to ensure proper configuration.
@@ -118,6 +116,10 @@ php artisan key:generate
 
 #### 5. Configure Database
 
+You can configure the database using either the MySQL client or phpMyAdmin.
+
+**Using MySQL Client:**
+
 1. **Access MySQL**:
 
     ```bash
@@ -127,13 +129,13 @@ php artisan key:generate
 2. **Create Database**:
 
     ```sql
-    CREATE DATABASE creaify_db;
+    CREATE DATABASE {db_name};
     ```
 
 3. **Grant User Permissions**:
 
     ```sql
-    GRANT ALL ON creaify_db.* TO '{your_username}'@'localhost' IDENTIFIED BY '{your_password}';
+    GRANT ALL ON {db_name}.* TO '{your_username}'@'localhost' IDENTIFIED BY '{your_password}';
     ```
 
 4. **Apply Changes and Exit**:
@@ -149,7 +151,34 @@ php artisan key:generate
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-    DB_DATABASE=creaify_db
+    DB_DATABASE={db_name}
+    DB_USERNAME={your_username}
+    DB_PASSWORD={your_password}
+    ```
+
+**Using phpMyAdmin:**
+
+1. **Access phpMyAdmin** and log in with your credentials.
+
+2. **Create Database**:
+    - Go to the "Databases" tab.
+    - Enter `{db_name}` in the "Create database" field.
+    - Click "Create".
+    3. **Create User and Grant Permissions (If Needed)**:
+        - You can either use the root user or create a new user.
+        - To create a new user, go to the "User accounts" tab.
+        - Click "Add user account".
+        - Fill in the "User name" and "Password" fields.
+        - Under "Database for user", select "Create database with same name and grant all privileges".
+        - Click "Go".
+
+4. **Update `.env` Database Settings**:
+
+    ```plaintext
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE={db_name}
     DB_USERNAME={your_username}
     DB_PASSWORD={your_password}
     ```
@@ -240,9 +269,12 @@ Access the application at [http://localhost](http://localhost).
 
 ## 🛠️ Additional Information
 
-- **Seeding**: The database seeder is configured to populate initial data. Run `php artisan migrate --seed` to use it.
+- **Seeding**: The database seeder is configured to populate initial data. Run `php artisan migrate --seed` to use it. After running the seeder, you can log in as an admin using the following credentials:
+    - **Email**: demo@qtecsolution.net
+    - **Password**: 12345678
 - **Environment Variables**: Ensure all necessary environment variables are set in the `.env` file.
 - **Database Configuration**: The application is configured for MySQL by default. Update the `.env` file as needed for other database connections.
+- **OpenAI API Key**: To use AI features, you need to add an OpenAI API key. Go to **Settings**, click **Open AI Setup**, and then submit your API key.
 
 ## 🤝 Contributing
 
