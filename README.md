@@ -1,9 +1,3 @@
-<p align="center">
-<a href="https://qtecsolution.com/" target="_blank">
-<img src="https://media.licdn.com/dms/image/v2/D560BAQF3dxUm8HaPCA/company-logo_200_200/company-logo_200_200/0/1719916555172/qtec_solution_logo?e=2147483647&v=beta&t=sUjh-Wi-jC6AbHvc1xHyIjsI5uhBp698Lt06Vu9JaOE" width="200" alt="qtec Logo">
-</a>
-</p>
-
 # 🚀 AI Content & Image Generator SaaS  
 
 <div style="display: flex;">
@@ -34,6 +28,17 @@ An advanced AI-powered SaaS platform that enables users to generate high-quality
 ### 🔥 Additional Features  
 - **Tawk.to Chat Integration** – Real-time customer support and live chat to improve user experience.  
 - **Progressive Web App (PWA)** – Fast, responsive, and installable on any device for a seamless experience.  
+## 🎥 Demo
+
+### AI Content Generator:
+
+<img src="./public/assets/images/landing/preview-editor.png" width="900px" />
+
+### AI Image Generator:
+
+<img src="./public/assets/images/landing/generate2.svg" width="915px" />
+
+
 
 ## 📦 Installation
 
@@ -68,92 +73,22 @@ This application requires a server with the following specifications:
 - **Web Server**: Apache or Nginx
 
 
-
 ## ⚙️ Setup Options
 
 This guide covers two setup methods:
-1. **Using Docker**
-2. **Setting Up Locally (Without Docker)**
-
-
-### 🐳 Setup with Docker
-
-#### 1. Clone the Repository
-
-```bash
-git clone https://github.com/qtecsolution/ai-content-image-generator-saas.git
-```
-
-```bash
-cd ai-content-image-generator-saas
-```
-
-#### 2. Initialize the Project
-
-```bash
-make setup
-```
-
-
-The application should now be accessible at [http://localhost](http://localhost).
-
-
-#### Available Docker Commands
-
-- **Manage Container**
-
-```bash
-make docker-up
-```
-```bash
-make docker-down
-```
-
-- **Install Dependencies**
-
-```bash
-make composer-install
-```
-```bash
-make composer-update
-```
-
-- **Set File Permissions**
-
-```bash
-make set-permissions
-```
-
-- **Generate Application Key**
-
-```bash
-make generate-key
-```
-
-- **Run Migrations and Seed the Database**
-
-```bash
-make migrate-fresh-seed
-```
-
-- **Setup Environment File**
-
-```bash
-make setup-env
-```
-
----
+1. **Setting Up Locally (Without Docker)**
+2. **Using Docker**
 
 ### 🚀 Setup Without Docker
 
 #### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/qtecsolution/ai-content-image-generator-saas.git
+git clone https://github.com/qtecsolution/AI-Content-Image-Generator-SaaS.git
 ```
 
 ```bash
-cd ai-content-image-generator-saas
+cd AI-Content-Image-Generator-SaaS
 ```
 
 #### 2. Install PHP Dependencies
@@ -236,6 +171,71 @@ php artisan serve
 
 Your application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
+### 🐳 Setup with Docker
+
+#### 1. Clone the Repository
+
+```bash
+git clone https://github.com/qtecsolution/AI-Content-Image-Generator-SaaS.git
+cd AI-Content-Image-Generator-SaaS
+```
+
+#### 2. Initialize the Project with Docker Compose
+
+```bash
+docker-compose up -d
+```
+
+#### 3. Initialize the Project with `Make` Command
+
+- **Setup Project**
+
+```bash
+make setup
+```
+This single command sets up and runs the project.
+
+
+- **Additional Commands**
+
+```bash
+make docker-up
+make docker-down
+```
+
+- Install Dependencies
+
+```bash
+make composer-install
+make composer-update
+```
+
+- Set File Permissions
+
+```bash
+make set-permissions
+```
+
+- Generate Application Key
+
+```bash
+make generate-key
+```
+
+- Run Migrations and Seed the Database
+
+```bash
+make migrate-fresh-seed
+```
+
+- Setup Environment File
+
+```bash
+make setup-env
+```
+
+Access the application at [http://localhost](http://localhost).
+
 
 ## 🛠️ Additional Information
 
@@ -245,11 +245,54 @@ Your application will be available at [http://127.0.0.1:8000](http://127.0.0.1:8
 
 ## 🤝 Contributing
 
-This is an open source project and contributions are welcome. If you are interested in contributing, please fork the repository and submit a pull request with your changes. The project maintainers will review and merge your changes accordingly.
+This is an open source project and contributions are welcome. If you are interested in contributing, please follow this steps:
+
+1. **Fork the Repository**:
+
+   - Fork the project on GitHub.
+
+2. **Create a Branch**:
+
+   - Create a new branch for your feature or bug fix.
+
+   ```bash
+   git checkout -b feature/your-feature-name
+
+   ```
+
+3. **Submit a Pull Request**:
+
+   - Open a pull request from your branch to the main repository. Provide a detailed description of your changes.
+
+   <b>Our Team will review and merge your request</b>
 
 ## 📝 License
 
-The ai-content-image-generator-saas project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.
+The AI Content Image Generator SaaS project is open source and available under the MIT License. You are free to use, modify, and distribute this codebase in accordance with the terms of the license.
 
 Please refer to the LICENSE file for more details.
+
+## Support
+
+If you encounter any issues or have questions, feel free to reach out through the following channels:
+
+- Open an issue on the [GitHub repository](https://github.com/qtecsolution/AI-Content-Image-Generator-SaaS).
+- **Call for Queries**: +8801313522828 (WhatsApp)
+- **Contact Form**: [Qtec Solution Contact Page](https://qtecsolution.com/contact-us)
+- **Email**: [info@qtecsolution.com](mailto:info@qtecsolution.com)
+
+
+
+## Follow Us on Social Media
+
+Stay updated with the latest news, updates, and releases:
+
+![Qtec Solution Limited.](https://raw.githubusercontent.com/qtecsolution/qtecsolution/refs/heads/main/QTEC-Solution-Limited.png) <br>
+[![View Portfolio](https://img.shields.io/badge/View%20Portfolio-%230077B5?style=for-the-badge&logo=portfolio&logoColor=white)](https://qtecsolution.com/Qtec-Solution-Limited-Portfolio.pdf)
+[![Facebook](https://img.shields.io/badge/Facebook-4267B2?style=for-the-badge&logo=facebook&logoColor=white)](https://www.facebook.com/QtecSolution/)
+[![Instagram](https://img.shields.io/badge/Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/qtecsolution/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/company/qtec-solution)
+[![X](https://img.shields.io/badge/X-000000?style=for-the-badge&logo=x&logoColor=white)](https://twitter.com/qtec_solution)
+[![YouTube](https://img.shields.io/badge/YouTube-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/channel/UCU17dPFVAL1ei24zxBPjV8w)
+[![Website](https://img.shields.io/badge/Website-000000?style=for-the-badge&logo=google-chrome&logoColor=white)](https://qtecsolution.com/)
 
