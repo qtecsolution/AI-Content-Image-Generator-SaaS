@@ -45,3 +45,15 @@
 .visibility-hidden{
     visibility: hidden;
 }
+
+.contributor {
+    background: linear-gradient(135deg, hsl(228, 100%, 80%) 0%, hsl(224, 79%, 33%) 100%);
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: center;
+}

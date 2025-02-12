@@ -34,6 +34,10 @@
 </head>
 
 <body class="body-landing">
+    <div class="contributor">
+        This is an open source project. To get the access <a href="https://qtecsolution.com/open-source-projects"
+            class="text-white"><u>visit here</u></a>.
+    </div>
     <div id="loader-wrapper">
         <div id="loader"></div>
         <div class="leader-section section-left"></div>
@@ -70,7 +74,9 @@
 
                 <div class="header-right">
                     <ul class="desk-menu d-none d-xl-flex">
-                        <li><a href="{{route('register')}}" class="primarybtn-landing ">{{Auth::check()?'Dashboard':'Get started ___ it’s free'}} </a></li>
+                        <li><a href="{{ route('register') }}"
+                                class="primarybtn-landing ">{{ Auth::check() ? 'Dashboard' : 'Get started ___ it’s free' }}
+                            </a></li>
                     </ul>
                 </div>
             </div>
@@ -207,7 +213,8 @@
                             <h5 class="footerlinks-title">Pages</h5>
                             <div class="footerlink">
                                 @foreach (pages() as $item)
-                                    <a href="{{ route('page', $item->slug) }}" class="link">{{ $item->title }}</a>
+                                    <a href="{{ route('page', $item->slug) }}"
+                                        class="link">{{ $item->title }}</a>
                                 @endforeach
 
                             </div>
@@ -303,11 +310,9 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M13.2849 15.5425L7.62804 9.88562L1.97118 15.5425L0.0855651 13.6569L5.74242 8L0.0855651
+                    <path d="M13.2849 15.5425L7.62804 9.88562L1.97118 15.5425L0.0855651 13.6569L5.74242 8L0.0855651
                     2.34315L1.97118 0.457528L7.62804 6.11438L13.2849 0.457527L15.1705 2.34315L9.51366 8L15.1705 13.6569L13.2849
-                    15.5425Z"
-                        fill="#718096" />
+                    15.5425Z" fill="#718096" />
                 </svg>
 
             </button>
@@ -363,7 +368,7 @@
             pagination: {
                 el: ".swiper-pagination",
                 dynamicBullets: true,
-                clickable:true
+                clickable: true
             },
             breakpoints: {
                 768: {
