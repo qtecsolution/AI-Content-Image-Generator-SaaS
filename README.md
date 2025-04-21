@@ -1,13 +1,5 @@
 # 🚀 AI Content & Image Generator SaaS  
 
-<div style="display: flex;">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/170px-Laravel.svg.png" width="50px" height="50px" alt="Laravel" class="icon">
-    <img src="https://w7.pngwing.com/pngs/187/112/png-transparent-responsive-web-design-html-computer-icons-css3-world-wide-web-consortium-css-angle-text-rectangle-thumbnail.png" width="50px" height="50px" alt="html" class="icon">
-    <img src="https://img2.freepng.fr/20180816/rcw/kisspng-cascading-style-sheets-logo-clip-art-css3-html-5b7617f67bd3d6.3499284915344660385072.jpg" width="50px" height="50px" alt="CSS" class="icon">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/800px-JavaScript-logo.png" alt="JavaScript" width="50px" height="50px" class="icon">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b2/Bootstrap_logo.svg/2560px-Bootstrap_logo.svg.png" width="50px" height="50px"  alt="Bootstrap" class="icon">
-</div>
-
 An advanced AI-powered SaaS platform that enables users to generate high-quality content, create stunning AI-generated images, and interact with an intelligent chatbot. The platform also supports AI-driven code generation and dynamic use case templates, making it a versatile tool for various industries. Integrated with multiple payment gateways and offering a seamless user experience through PWA and live chat support.
 
 ## ✨ Features  
